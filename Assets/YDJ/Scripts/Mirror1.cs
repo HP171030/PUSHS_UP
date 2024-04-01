@@ -1,44 +1,39 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Mirror1 : MonoBehaviour
 {
-
-    private Vector3 spawnPosition;
-    [SerializeField] Transform spawnMirror;
-    [SerializeField] float DistanceX;
-
-
-
-
-    void Update()
-    {
-        Vector3 newPosition = transform.position;
-        newPosition.x += DistanceX;
-        spawnMirror.position = newPosition;
-    }
+    [SerializeField] Transform spawnMirror; // 거울 위치
+    [SerializeField] float moveDuration; // 이동하는데 걸리는 시간
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Obstacle")) // 충돌한 오브젝트의 태그가 "Obstacle"인 경우에만 실행
+        if (other.CompareTag("Obstacle"))
         {
-            RemoveObstacle(other.gameObject);
+            MoveObstacle(other.gameObject.transform);
         }
     }
 
-    void RemoveObstacle(GameObject obstacle)
+    void MoveObstacle(Transform obstacleTransform)
     {
-        // 장애물 제거
-        Destroy(obstacle);
-        // 다른 플레이어가 있는 땅에 장애물을 다시 소환
-        RespawnObstacle(obstacle);
+        StartCoroutine(MoveObstacleCoroutine(obstacleTransform));
     }
 
-    void RespawnObstacle(GameObject obstacle)
+    IEnumerator MoveObstacleCoroutine(Transform obstacleTransform)
     {
-        spawnPosition = spawnMirror.position;
-        // 장애물을 초기 위치에 다시 생성
-        Instantiate(obstacle, spawnPosition, Quaternion.identity);
+        Vector3 startPosition = obstacleTransform.position;
+        Vector3 targetPosition = spawnMirror.position; // 목표 위치는 거울의 위치로 설정
+
+        float elapsedTime = 0f;
+        while (elapsedTime < moveDuration)
+        {
+            float t = elapsedTime / moveDuration;
+            obstacleTransform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // 장애물 이동이 완료되면 장애물을 제거
+        Destroy(obstacleTransform.gameObject);
     }
 }

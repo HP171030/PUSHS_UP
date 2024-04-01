@@ -92,6 +92,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "PovSwich",
+            "id": "100db1d2-b06f-4c9c-956d-0a122732f5bb",
+            "actions": [
+                {
+                    "name": "Change",
+                    "type": "Button",
+                    "id": "4afb459a-ce7c-48b3-add6-d813b4c7c936",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "69c3fa17-9515-43b2-9399-f0cc32ff509a",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Change",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
