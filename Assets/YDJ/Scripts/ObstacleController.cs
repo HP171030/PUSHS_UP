@@ -2,36 +2,38 @@ using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
 {
-    public float moveSpeed = 5f; // 이동 속도
+    public float moveSpeed = 1.0f;
+    public float moveDistance = 3.0f;
+    private Vector3 initialPosition;
+    private Vector3 targetPosition;
 
-    private Rigidbody rb;
-
-
-
+    private bool isMoving = false;
 
     void Start()
     {
-
-
-
-        rb = GetComponent<Rigidbody>();
-
-
+        initialPosition = transform.position;
+        targetPosition = initialPosition + Vector3.up * moveDistance;
     }
 
     void Update()
     {
-        // 입력 처리
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        Vector3 moveDirection = new Vector3(horizontal, 0f, vertical).normalized;
+        if (isMoving)
+        {
+            float step = moveSpeed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
 
-        // 플레이어 이동
-        Vector3 move = transform.TransformDirection(moveDirection) * moveSpeed * Time.deltaTime;
-        transform.Translate(move, Space.World);
-
-
+            if (transform.position == targetPosition)
+            {
+                // 이동이 완료되면 원래 위치로 재설정하고 이동 상태를 중지합니다.
+                isMoving = false;
+                transform.position = initialPosition;
+            }
+        }
     }
 
-
+    public void MoveUp()
+    {
+        // 이동을 시작하기 위해 호출될 메서드입니다.
+        isMoving = true;
+    }
 }
