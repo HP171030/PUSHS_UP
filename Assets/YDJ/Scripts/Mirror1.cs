@@ -1,39 +1,53 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Mirror1 : MonoBehaviour
 {
-    [SerializeField] Transform spawnMirror; // 거울 위치
-    [SerializeField] float moveDuration; // 이동하는데 걸리는 시간
+    [SerializeField] Transform mirror2; // 미러2의 위치를 참조하는 변수
+    [SerializeField] float zOffset; // Z 위치를 조절할 오프셋 변수
+    [SerializeField] float delay; // 장애물 제거 후 재생성까지의 대기 시간
+
+    Collider collider; // 장애물의 콜라이더 컴포넌트 참조
+
+    void Update()
+    {
+        // 거울1 거울2 위치 동기화
+        Vector3 newPosition = transform.position;
+        newPosition.z += zOffset;
+        mirror2.position = newPosition;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Obstacle"))
+        if (other.CompareTag("Obstacle")) // 충돌한 오브젝트의 태그가 "Obstacle"인 경우에만 실행
         {
-            MoveObstacle(other.gameObject.transform);
+            // 미러1에서 장애물이 떨어졌을 때 이벤트 호출
+            MirrorEvent.ObstacleDropped(other.gameObject);
+
+            collider = other.GetComponent<Collider>(); // 충돌한 오브젝트의 콜라이더 참조
+            StartCoroutine(RemoveObstacleDelayed(other.gameObject)); // 지정된 시간 후에 장애물 제거
         }
     }
 
-    void MoveObstacle(Transform obstacleTransform)
+    IEnumerator RemoveObstacleDelayed(GameObject obstacle)
     {
-        StartCoroutine(MoveObstacleCoroutine(obstacleTransform));
+        Destroy(collider); // 장애물의 콜라이더 제거
+        yield return new WaitForSeconds(delay); // 지정된 시간(초)만큼 대기
+
+        RespawnObstacle(obstacle);
+        //RemoveObstacle(obstacle); // 장애물 제거 함수 호출
     }
 
-    IEnumerator MoveObstacleCoroutine(Transform obstacleTransform)
+    //void RemoveObstacle(GameObject obstacle)
+    //{
+    //    Destroy(obstacle); // 충돌한 장애물 제거
+    //    RespawnObstacle(obstacle); // 장애물 콜라이더를 다시 생성하기 위해 함수 호출
+    //}
+
+    void RespawnObstacle(GameObject obstacle)
     {
-        Vector3 startPosition = obstacleTransform.position;
-        Vector3 targetPosition = spawnMirror.position; // 목표 위치는 거울의 위치로 설정
-
-        float elapsedTime = 0f;
-        while (elapsedTime < moveDuration)
-        {
-            float t = elapsedTime / moveDuration;
-            obstacleTransform.position = Vector3.Lerp(startPosition, targetPosition, t);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        // 장애물 이동이 완료되면 장애물을 제거
-        Destroy(obstacleTransform.gameObject);
+        obstacle.transform.position = mirror2.position; // 미러2 위치로 장애물 이동
+        collider = obstacle.AddComponent<BoxCollider>(); // 박스 콜라이더를 추가하여 활성화
     }
 }
