@@ -7,6 +7,7 @@ public class Mirror1 : MonoBehaviour
 
     private Vector3 spawnPosition;
     [SerializeField] Transform spawnMirror;
+    [SerializeField] float DistanceX;
 
 
 
@@ -14,7 +15,7 @@ public class Mirror1 : MonoBehaviour
     void Update()
     {
         Vector3 newPosition = transform.position;
-        newPosition.x += 13f;
+        newPosition.x += DistanceX;
         spawnMirror.position = newPosition;
     }
 
