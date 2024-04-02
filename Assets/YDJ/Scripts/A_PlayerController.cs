@@ -18,12 +18,23 @@ public class A_PlayerController : MonoBehaviour
     [Header("Configs")]
     [SerializeField] Animator animator;
     [SerializeField] Rigidbody rb;
-
     [SerializeField] CameraSwitch cameraSwitch;
+    [SerializeField] Holder holder;
+
+    [Header("Property")]
+    [SerializeField] GameObject holderPoint;
+
+
+
     Transform obstacle;
     RaycastHit otherObs;
 
     RaycastHit grabHit;
+
+    bool isVerticalWall = true;
+
+    [SerializeField] float distanceFromPlayer;
+
     private void FixedUpdate()
     {
         OffPull();
@@ -31,10 +42,16 @@ public class A_PlayerController : MonoBehaviour
 
     }
 
+
+    private SphereCollider sphereCollider; // 필드 선언
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        sphereCollider = holder.GetComponent<SphereCollider>(); // Start 메서드에서 초기화
+
 
     }
     private void OnMove(InputValue value)
@@ -44,6 +61,17 @@ public class A_PlayerController : MonoBehaviour
         {
             Vector2 input = value.Get<Vector2>();
             moveDir = new Vector3(input.x, 0, input.y);
+
+            //거울 설치 방향 조정
+            if(input.x == 1)
+            {
+                isVerticalWall = false;
+            }
+            else if(input.y == 1)
+            {
+                isVerticalWall = true;
+            }
+
         }
 
     }
@@ -283,6 +311,135 @@ public class A_PlayerController : MonoBehaviour
                 animator.SetBool("Push", false);
             }
             Debug.Log("무브");
+        }
+    }
+
+
+    //private void OnHold(InputValue value)
+    //{
+
+    //    if (sphereCollider != null)
+    //    {
+    //        sphereCollider.enabled = true;
+
+    //        if (holder.AbleHold)
+    //        {
+    //            Hold();
+    //            sphereCollider.enabled = false;
+    //        }
+
+
+
+
+
+    //    }
+
+    //}
+
+    //private void Hold()
+    //{
+    //    Debug.Log("잡음");
+    //    sphereCollider.enabled = false;
+    //}
+
+
+    public bool mirrorHolding = false; // 거울이 있는지 확인하는 플래그
+
+    private void OnHold(InputValue value)
+    {
+        if (!mirrorHolding) // 거울이 확인되지 않았을 때
+        {
+            Hold();
+        }
+        //거울 놓기
+        else if(mirrorHolding)
+        {
+            UnHold();
+        }
+    }
+
+    private void Hold()
+    {
+        Debug.Log("잡기 시도");
+        GameObject mirrorObject = holder.GrabMirror();
+
+        if (mirrorObject != null)
+        {
+            Debug.Log("잡았음");
+            // 거울 오브젝트를 홀더 포인트의 자식으로 설정합니다.
+            mirrorObject.transform.parent = holderPoint.transform;
+            // 거울의 로컬 포지션을 (0, 0, 0)으로 설정하여 정확한 위치에 배치합니다.
+            mirrorObject.transform.localPosition = Vector3.zero;
+            mirrorObject.transform.localRotation = Quaternion.Euler(90, 0, 0);
+
+            mirrorHolding = true;
+        }
+        else
+        {
+            Debug.Log("못잡았음");
+            mirrorHolding = false;
+        }
+    }
+
+    private void UnHold()
+    {
+        Debug.Log("거울 놓기");
+        mirrorHolding = false;
+
+        // 거울을 홀더 포인트에서 떼어냅니다.
+        GameObject mirrorObject = holder.GetMirror();
+
+
+        if (mirrorObject != null )
+        {
+            mirrorObject.transform.parent = null; // 부모 설정을 해제하여 자식에서 빼냅니다.
+            if (holder.WallLader()) //벽에 거울을 놓는다면
+            {
+
+
+
+                if (isVerticalWall) // 위 아래 벽에 거울을 놓는다면
+                {
+                    // 위 아래 벽에 맞게 회전 각도를 설정합니다.
+                    mirrorObject.transform.localRotation = Quaternion.Euler(90, 0, 0);
+                    Vector3 mirrorPosition = holderPoint.transform.position;
+                    // 거울의 위치를 홀더 포인트의 위치로 설정합니다.
+                    mirrorObject.transform.position = mirrorPosition;
+                }
+                else // 왼쪽 오른쪽 벽에 거울을 놓는다면
+                {
+                    // 왼쪽 오른쪽 벽에 맞게 회전 각도를 설정합니다.
+                    mirrorObject.transform.localRotation = Quaternion.Euler(0, 0, 90);
+                    Vector3 mirrorPosition = holderPoint.transform.position;
+                    // 거울의 위치를 홀더 포인트의 위치로 설정합니다.
+                }
+
+
+                ////왼쪽 오른쪽 벽
+                //mirrorObject.transform.localRotation = Quaternion.Euler( 0, 0, 90);
+                //Vector3 mirrorPosition = holderPoint.transform.position;
+
+                ////앞뒤 벽
+                //if ()
+                //{
+                //    mirrorObject.transform.localRotation = Quaternion.Euler(90, 0, 0);
+                //    Vector3 mirrorPosition = holderPoint.transform.position;
+                //}
+                //Vector3 mirrorPosition = transform.position + transform.forward * distanceFromPlayer; // 플레이어 앞에 일정한 거리만큼 떨어진 위치
+                //mirrorObject.transform.position = mirrorPosition;
+            }
+
+
+            else // 바닥에 거울을 놓는다면
+            {
+                mirrorObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                Vector3 mirrorPosition = transform.position + transform.forward * distanceFromPlayer; // 플레이어 앞에 일정한 거리만큼 떨어진 위치
+                mirrorObject.transform.position = mirrorPosition;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("잡은 오브젝트가 유효하지 않습니다.");
         }
     }
 }
