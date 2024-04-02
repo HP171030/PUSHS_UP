@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera cam1;
     [SerializeField] CinemachineVirtualCamera cam2;
     [SerializeField] bool OnPlayer1On;
+    [SerializeField] LayerMask obstacleLayer;
+    [SerializeField] LayerMask wall;
 
 
     Transform obstacle;
@@ -57,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
             if ( Physics.Raycast(transform.position, transform.forward, out grabHit, 1f) )
             {
-                if ( grabHit.collider.gameObject.CompareTag("Obstacle") )
+                if (obstacleLayer.Contain(grabHit.collider.gameObject.layer))
                 {
                     animator.SetBool("Pull", true);
                     Debug.Log("잡음");
@@ -87,6 +89,7 @@ public class PlayerController : MonoBehaviour
     {
         if ( !moveOn && !grabOn )
         {
+           
             animator.SetFloat("MoveSpeed", moveDir.magnitude);
             if ( Mathf.Abs(moveDir.x) != 0 && Mathf.Abs(moveDir.z) != 0 )
             {
@@ -109,6 +112,15 @@ public class PlayerController : MonoBehaviour
             if ( grabHit.collider != null )
             {
                 Vector3 grabDir = ( grabHit.collider.gameObject.transform.position - transform.position ).normalized;
+                if(Physics.Raycast(transform.position,-transform.forward,out RaycastHit hit, 1.5f) )
+                {
+                    if ( hit.collider != null )
+                    {
+                        Debug.Log("뒤에 벽잇음 ");
+                        moveOn = false;
+                        return;
+                    }
+                }
                 moveOn = true;
                 if ( grabDir.x > 0.9f && moveDir.x < 0f )
                 {
@@ -164,7 +176,10 @@ public class PlayerController : MonoBehaviour
     private IEnumerator PullRoutine( Vector3 pullDir, bool X )
     {
 
-
+        if ( Physics.Raycast(transform.position, -transform.forward, 1f) )
+        {
+            yield break;
+        }
         Vector3 startPos = transform.position;
         Vector3 targetPos = pullDir;
         Vector3 grabStartPos = grabHit.collider.transform.position;
@@ -227,7 +242,8 @@ public class PlayerController : MonoBehaviour
         Vector3 PreMoveDir = moveDir;
         if ( Physics.Raycast(transform.position, moveDirValue, out hit, 1f) )
         {
-            if ( hit.collider.CompareTag("Obstacle") )
+           
+            if (obstacleLayer.Contain(hit.collider.gameObject.layer))
             {
 
                 obstacle = hit.transform;
@@ -236,23 +252,25 @@ public class PlayerController : MonoBehaviour
 
                 float time = 0;
 
-                if ( Physics.Raycast(obstacle.position, moveDirValue, out otherObs, 1f) )
+                
+                if ( Physics.Raycast(obstacle.position, moveDirValue, out otherObs, 1.4f)  )
                 {
-                    if ( otherObs.collider.CompareTag("Obstacle") )
-                    {
+                   
+                     if (obstacleLayer.Contain(otherObs.collider.gameObject.layer) || wall.Contain(otherObs.collider.gameObject.layer))
+                     {
+                         Debug.Log("방해물이든 벽이든");
+                         moveOn = false;
+                         if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
+                         {
+                             animator.SetBool("Push", false);
+                         }
 
-                        moveOn = false;
-                        if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
-                        {
-                            animator.SetBool("Push", false);
-                        }
-
-                    }
+                     }
                     else
                     {
                         List<RaycastHit> pushHitArray = new List<RaycastHit>(Physics.RaycastAll(hit.collider.transform.position, hit.collider.transform.up, 10f));
 
-                        pushHitArray.Add(hit);
+                        
 
                         foreach ( RaycastHit hits in pushHitArray )
                         {
@@ -285,7 +303,7 @@ public class PlayerController : MonoBehaviour
                 {
                     List<RaycastHit> pushHitArray = new List<RaycastHit>(Physics.RaycastAll(hit.collider.transform.position, hit.collider.transform.up, 10f));
 
-                    pushHitArray.Add(hit);
+                    
 
                     foreach ( RaycastHit hits in pushHitArray )
                     {
@@ -318,10 +336,14 @@ public class PlayerController : MonoBehaviour
                 }
 
             }
-
-
-
-
+            else if (wall.Contain(hit.collider.gameObject.layer)) 
+            {
+                Debug.Log("앞에 벽");
+                    moveOn = false;
+                    yield return null;
+                
+            }
+                
         }
         else
         {
