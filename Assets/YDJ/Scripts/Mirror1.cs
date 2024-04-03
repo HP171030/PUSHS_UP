@@ -7,8 +7,7 @@ public class Mirror1 : MonoBehaviour
     [SerializeField] Transform mirror2; // 미러2의 위치를 참조하는 변수
     [SerializeField] float zOffset; // Z 위치를 조절할 오프셋 변수
     [SerializeField] float delay; // 장애물 제거 후 재생성까지의 대기 시간
-
-    Collider collider; // 장애물의 콜라이더 컴포넌트 참조
+    new Collider collider; // 장애물의 콜라이더 컴포넌트 참조
 
     void Update()
     {
