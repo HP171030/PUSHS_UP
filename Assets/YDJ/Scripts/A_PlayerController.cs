@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -24,7 +25,8 @@ public class A_PlayerController : MonoBehaviour
     [Header("Property")]
     [SerializeField] GameObject holderPoint;
 
-
+    private bool wallMirrorChecker;
+    public bool WallMirrorChecker { get { return wallMirrorChecker; } }
 
     Transform obstacle;
     RaycastHit otherObs;
@@ -181,6 +183,7 @@ public class A_PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward);
         if (obstacle != null && otherObs.point != null)
             Gizmos.DrawLine(obstacle.position, otherObs.point);
     }
@@ -219,6 +222,7 @@ public class A_PlayerController : MonoBehaviour
 
         Debug.Log("무브온펄스");
     }
+    
     private IEnumerator MoveRoutine(Vector3 moveDirValue)
     {
         Vector3 targetPos = transform.position + moveDirValue * moveDistance;
@@ -227,6 +231,7 @@ public class A_PlayerController : MonoBehaviour
         Vector3 PreMoveDir = moveDir;
         if (Physics.Raycast(transform.position, moveDirValue, out hit, 1f))
         {
+            Debug.Log(hit.collider.gameObject.name);
             if (hit.collider.CompareTag("Obstacle"))
             {
                 obstacle = hit.transform;
@@ -366,6 +371,7 @@ public class A_PlayerController : MonoBehaviour
         if (mirrorObject != null)
         {
             Debug.Log("잡았음");
+            wallMirrorChecker = false;
             // 거울 오브젝트를 홀더 포인트의 자식으로 설정합니다.
             mirrorObject.transform.parent = holderPoint.transform;
             // 거울의 로컬 포지션을 (0, 0, 0)으로 설정하여 정확한 위치에 배치합니다.
@@ -395,7 +401,7 @@ public class A_PlayerController : MonoBehaviour
             mirrorObject.transform.parent = null; // 부모 설정을 해제하여 자식에서 빼냅니다.
             if (holder.WallLader()) //벽에 거울을 놓는다면
             {
-
+                wallMirrorChecker = true;
 
 
                 if (isVerticalWall) // 위 아래 벽에 거울을 놓는다면
