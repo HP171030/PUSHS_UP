@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
 public class Player2Controller : MonoBehaviour
 {
     private Vector3 moveDir;
 
     bool moveOn;
-    bool grabOn;
     [Header("Player")]
     [SerializeField] float moveDistance;
     [SerializeField] float moveSpeed;
@@ -18,19 +16,42 @@ public class Player2Controller : MonoBehaviour
     [Header("Configs")]
     [SerializeField] Animator animator;
     [SerializeField] Rigidbody rb;
+    [SerializeField] LayerMask obstacleLayer;
+    [SerializeField] LayerMask obstacleUpperLayer;
+    [SerializeField] LayerMask wall;
+    [SerializeField] public bool onGround;
+    [SerializeField] public bool onClimb;
+    [SerializeField] public bool ontheBox;
+    [SerializeField] public bool downingBox;
 
     [SerializeField] CameraSwitch cameraSwitch;
-    Transform obstacle;
-    RaycastHit otherObs;
 
-    RaycastHit grabHit;
+
+    RaycastHit BoomableHit;
+
+
     private void FixedUpdate()
     {
-        OffPull();
-        MoveFunc();
-
+        if(onGround&&!downingBox)
+            MoveFunc();
+        
     }
-
+    private void OnTriggerStay( Collider other )
+    {
+        if ( obstacleUpperLayer.Contain(other.gameObject.layer) )
+        {
+           
+            ontheBox = true;
+        }
+    }
+    public IEnumerator DownAnim()
+    {
+        downingBox = true;
+        animator.SetFloat("MoveSpeed", 0f);
+        animator.Play("Jumping Down");
+        yield return new WaitForSeconds(0.8f);
+        downingBox = false;
+    }
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -48,53 +69,36 @@ public class Player2Controller : MonoBehaviour
 
     }
 
-    public void OnPull(InputValue value)
+    public void OnBoom( InputValue value )
     {
-        if (value.isPressed)
+        if ( value.isPressed&&!cameraSwitch.IsPlayer1Active&&Manager.game.boomAction > 0)
         {
-            grabOn = true;
-            Debug.Log("잡기");
-            animator.SetTrigger("PullStart");
+            
+           
+           // animator.SetTrigger("Boom");
 
-            if (Physics.Raycast(transform.position, transform.forward, out grabHit, 1f))
+            if ( Physics.Raycast(transform.position, transform.forward, out BoomableHit, 1f) )
             {
-                if (grabHit.collider.gameObject.CompareTag("Obstacle"))
+                if ( obstacleLayer.Contain(BoomableHit.collider.gameObject.layer))
                 {
-                    animator.SetBool("Pull", true);
-                    Debug.Log("잡음");
+                    Destroy(BoomableHit.collider.gameObject );
+                    Manager.game.boomAction--;
 
                 }
-
             }
         }
-        else
-        {
-            grabOn = false;
-            Debug.Log("놓기");
-
-
-        }
-
-    }
-    public void OffPull()
-    {
-        if (!grabOn && !moveOn)
-        {
-            animator.SetBool("Pull", false);
-        }
-
     }
     public void MoveFunc()
     {
-        if (!moveOn && !grabOn)
+        if ( !moveOn)
         {
-            animator.SetFloat("MoveSpeed", moveDir.magnitude);
-            if (Mathf.Abs(moveDir.x) != 0 && Mathf.Abs(moveDir.z) != 0)
-            {
 
+            animator.SetFloat("MoveSpeed", moveDir.magnitude);
+            if ( Mathf.Abs(moveDir.x) != 0 && Mathf.Abs(moveDir.z) != 0 )
+            {
                 return;
             }
-            else if (!moveOn && moveDir.magnitude > 0)
+            else if ( !moveOn && moveDir.magnitude > 0 )
             {
                 moveOn = true;
 
@@ -103,194 +107,99 @@ public class Player2Controller : MonoBehaviour
                 transform.forward = moveDir;
 
             }
-
         }
-        else if (!moveOn && grabOn && moveDir.magnitude > 0)
-        {
-            if (grabHit.collider != null)
-            {
-                Vector3 grabDir = (grabHit.collider.gameObject.transform.position - transform.position).normalized;
-                moveOn = true;
-                if (grabDir.x > 0.9f && moveDir.x < 0f)
-                {
-
-                    bool X = true;
-                    StartCoroutine(PullRoutine(grabDir, X));
-                    Debug.Log($"{grabDir}떙겨x");
-                }
-                else if (grabDir.x < -0.9f && moveDir.x > 0f)
-                {
-                    bool X = true;
-                    StartCoroutine(PullRoutine(grabDir, X));
-                    Debug.Log($"{grabDir}떙겨x");
-                }
-                else if (grabDir.z > 0.9f && moveDir.z < 0f)
-                {
-                    bool X = false;
-                    StartCoroutine(PullRoutine(grabDir, X));
-                    Debug.Log($"{grabDir}떙겨z");
-                }
-                else if (grabDir.z < -0.9f && moveDir.z > 0f)
-                {
-                    bool X = false;
-                    StartCoroutine(PullRoutine(grabDir, X));
-                    Debug.Log($"{grabDir}떙겨z");
-                }
-                else
-                {
-                    Debug.Log("상정외 ");
-                    moveOn = false;
-                }
-
-            }
-
-
-        }
-
-
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        if (obstacle != null && otherObs.point != null)
-            Gizmos.DrawLine(obstacle.position, otherObs.point);
-    }
-    private IEnumerator PullRoutine(Vector3 pullDir, bool X)
-    {
-        Vector3 targetPos = pullDir;
-        Vector3 grabTargetPos = pullDir;
-        if (X)
-        {
-            targetPos = transform.position + new Vector3(-pullDir.x, 0, 0) * moveDistance;
-            grabTargetPos = grabHit.collider.transform.position + new Vector3(-pullDir.x, 0, 0) * moveDistance;
-        }
-        else if (!X)
-        {
-            targetPos = transform.position + new Vector3(0, 0, -pullDir.z) * moveDistance;
-            grabTargetPos = grabHit.collider.transform.position + new Vector3(0, 0, -pullDir.z) * moveDistance;
-        }
-        Vector3 startPos = transform.position;
-        Vector3 grabStartPos = grabHit.collider.transform.position;
-        float time = 0;
-        float targetTime = 2;
-        while (time < 2)
-        {
 
-            time += Time.deltaTime;
-            rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / targetTime));
-            grabHit.rigidbody.MovePosition(Vector3.Lerp(grabStartPos, grabTargetPos, time / targetTime));
-            if (time >= 2)
-                moveOn = false;
-
-
-            yield return null;
-        }
-
-
-
-        Debug.Log("무브온펄스");
-    }
-    private IEnumerator MoveRoutine(Vector3 moveDirValue)
+    private IEnumerator MoveRoutine( Vector3 moveDirValue )
     {
         Vector3 targetPos = transform.position + moveDirValue * moveDistance;
         Vector3 startPos = transform.position;
         RaycastHit hit;
         Vector3 PreMoveDir = moveDir;
-        if (Physics.Raycast(transform.position, moveDirValue, out hit, 1f))
+        if ( Physics.Raycast(transform.position, moveDirValue, out hit, 1f) )
         {
-            if (hit.collider.CompareTag("Obstacle"))
+            if ( !obstacleLayer.Contain(hit.collider.gameObject.layer) )
             {
+                Debug.Log(hit.collider.gameObject.name);
+                moveOn = false;
+                yield break;
+            }
+            else
+            {
+                RaycastHit [] raycastHits = Physics.RaycastAll(hit.collider.transform.position, hit.collider.transform.up, 3f);
 
-                obstacle = hit.transform;
-                Vector3 obsStartPos = obstacle.position;
-                Vector3 obsTargetPos = obstacle.position + moveDirValue * moveDistance;
-                Rigidbody obsRb = obstacle.GetComponent<Rigidbody>();
+
+                foreach ( RaycastHit other in raycastHits )
+                {
+                    if ( other.collider.gameObject != hit.collider.gameObject && !obstacleUpperLayer.Contain(other.collider.gameObject.layer) )
+                    {
+                        Debug.Log($"위에 장애물이 있습니다: {other.collider.gameObject.name}");
+                        moveOn = false;
+                        yield break;
+                    }
+
+                }
+
                 float time = 0;
 
-                if (Physics.Raycast(obstacle.position, moveDirValue, out otherObs, 1f))
+                Vector3 ClimbPos = hit.collider.transform.position + new Vector3(0, 2, 0);
+                hit.rigidbody.isKinematic = true;
+                onClimb = true;
+                animator.SetTrigger("ClimbStart");
+                while ( time < 1 )
                 {
-                    if (otherObs.collider.CompareTag("Obstacle"))
-                    {
-
-                        moveOn = false;
-                        if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
-                        {
-                            animator.SetBool("Push", false);
-                        }
-
-                    }
-                    else
-                    {
-                        while (time < 2)
-                        {
-                            animator.SetBool("Push", true);
-                            time += Time.deltaTime * moveSpeed;
-                            rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / 2));
-                            obsRb.MovePosition(Vector3.Lerp(obsStartPos, obsTargetPos, time / 2));
-                            yield return null;
-                        }
-                        moveOn = false;
-                        if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
-                        {
-                            animator.SetBool("Push", false);
-                        }
-
-                        Debug.Log("장애물도 같이 무브");
-                    }
-                }
-                else
-                {
-                    while (time < 2)
-                    {
-                        animator.SetBool("Push", true);
-                        time += Time.deltaTime * moveSpeed;
-                        rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / 2));
-                        obsRb.MovePosition(Vector3.Lerp(obsStartPos, obsTargetPos, time / 2));
-                        yield return null;
-
-
-
-                    }
-                    moveOn = false;
-                    if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
-                    {
-                        animator.SetBool("Push", false);
-                    }
-
-                    Debug.Log("장애물도 같이 무브");
+                    time += Time.deltaTime;
+                    rb.MovePosition(Vector3.Lerp(startPos, ClimbPos, time));
+                    yield return null;
                 }
 
+                hit.rigidbody.isKinematic = false;
+                moveOn = false;
+                onClimb = false;
             }
-
-
-
 
         }
         else
         {
-            float time = 0;
-            while (time < 1)
+            if ( Physics.Raycast(transform.position + transform.forward, -transform.up, out RaycastHit wallHit, 3f) )
             {
+                if ( wall.Contain(wallHit.collider.gameObject.layer) )
+                {
+                    transform.position = transform.position;
+                    Debug.Log("밑에 벽이 잇음");
+                    moveOn = false;
+                }
+                else
+                {
+                    float time = 0;
+                    while ( time < 1 )
+                    {
+                        if(Physics.Raycast(transform.position + transform.forward, -transform.up, out RaycastHit hitinfo, 3f))
+                        {
+                            if ( wall.Contain(hitinfo.collider.gameObject.layer) )
+                            {
+                                Debug.Log("걸어가는 중에 밑에 벽");
+                                transform.position = transform.position;
 
-                time += Time.deltaTime * moveSpeed;
-                rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
-                yield return null;
+                                moveOn = false;
+                                yield break;
+                            }  
+                        }
+                        time += Time.deltaTime * moveSpeed;
+                        rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
+                        yield return null;
+
+                    }
+                    moveOn = false;
+                }
             }
-            yield return null;
-            moveOn = false;
-            if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
+            else
             {
-                animator.SetBool("Push", false);
+               
+                moveOn = false;
             }
-
-            Debug.Log("무브");
+            
         }
-
-
-
-
     }
-
-
 }

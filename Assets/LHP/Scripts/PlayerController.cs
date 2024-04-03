@@ -17,12 +17,12 @@ public class PlayerController : MonoBehaviour
     [Header("Configs")]
     [SerializeField] Animator animator;
     [SerializeField] Rigidbody rb;
-    [SerializeField] CinemachineVirtualCamera cam1;
-    [SerializeField] CinemachineVirtualCamera cam2;
-    [SerializeField] bool OnPlayer1On;
     [SerializeField] LayerMask obstacleLayer;
     [SerializeField] LayerMask wall;
+    [SerializeField] LayerMask ground;
+    LayerMask layerMask;
 
+    [SerializeField] CameraSwitch cameraSwitch;
 
     Transform obstacle;
     RaycastHit otherObs;
@@ -39,19 +39,23 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+         layerMask = ~( 1 << LayerMask.NameToLayer("Ground") );
 
     }
     private void OnMove( InputValue value )
     {
-
+        if ( cameraSwitch.IsPlayer1Active )
+        {
         Vector2 input = value.Get<Vector2>();
         moveDir = new Vector3(input.x, 0, input.y);
 
+        }
+
     }
 
-    public void OnPull( InputValue value )
+    public void OnPull( InputValue value)
     {
-        if ( value.isPressed )
+        if ( value.isPressed &&cameraSwitch.IsPlayer1Active)
         {
             grabOn = true;
             Debug.Log("잡기");
@@ -161,18 +165,11 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void OnDrawGizmos()
+  /*  private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
-        if ( obstacle != null && otherObs.point != null )
-            // Gizmos.DrawLine(obstacle.position, otherObs.point);
-            if ( grabHit.collider != null )
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawLine(grabHit.collider.transform.position, new Vector3(0, 1, 0));
-
-            }
-    }
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(obstacle.position,obstacle.position + moveDir);
+    }*/
     private IEnumerator PullRoutine( Vector3 pullDir, bool X )
     {
 
@@ -242,8 +239,8 @@ public class PlayerController : MonoBehaviour
         Vector3 PreMoveDir = moveDir;
         if ( Physics.Raycast(transform.position, moveDirValue, out hit, 1f) )
         {
-           
-            if (obstacleLayer.Contain(hit.collider.gameObject.layer))
+
+            if ( obstacleLayer.Contain(hit.collider.gameObject.layer) )
             {
 
                 obstacle = hit.transform;
@@ -252,74 +249,40 @@ public class PlayerController : MonoBehaviour
 
                 float time = 0;
 
-                
-                if ( Physics.Raycast(obstacle.position, moveDirValue, out otherObs, 1.4f)  )
+                LayerMask layer = obstacleLayer | wall;
+                if ( Physics.BoxCast(obstacle.position,new Vector3 (0.5f, 0.5f, 0.5f), moveDirValue, out RaycastHit hitInfo, Quaternion.identity, 1f,layer))
                 {
-                   
-                     if (obstacleLayer.Contain(otherObs.collider.gameObject.layer) || wall.Contain(otherObs.collider.gameObject.layer))
-                     {
-                         Debug.Log("방해물이든 벽이든");
-                         moveOn = false;
-                         if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
-                         {
-                             animator.SetBool("Push", false);
-                         }
-
-                     }
-                    else
-                    {
-                        List<RaycastHit> pushHitArray = new List<RaycastHit>(Physics.RaycastAll(hit.collider.transform.position, hit.collider.transform.up, 10f));
-
-                        
-
-                        foreach ( RaycastHit hits in pushHitArray )
-                        {
-                            hits.collider.gameObject.transform.SetParent(hit.collider.transform, true);
-                            hits.rigidbody.isKinematic = true;
-                        }
-                        while ( time < 2 )
-                        {
-                            animator.SetBool("Push", true);
-                            time += Time.deltaTime * moveSpeed;
-                            rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / 2));
-                            hit.rigidbody.MovePosition(Vector3.Lerp(obsStartPos, obsTargetPos, time / 2));
-                            yield return null;
-                        }
+                        Debug.Log(hitInfo.collider.gameObject.name);
                         moveOn = false;
                         if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
                         {
                             animator.SetBool("Push", false);
                         }
-                        foreach ( RaycastHit hits in pushHitArray )
-                        {
-                            hits.collider.gameObject.transform.SetParent(null, true);
-                            hits.rigidbody.isKinematic = false;
-                        }
-
-                        Debug.Log("장애물도 같이 무브");
-                    }
                 }
                 else
                 {
-                    List<RaycastHit> pushHitArray = new List<RaycastHit>(Physics.RaycastAll(hit.collider.transform.position, hit.collider.transform.up, 10f));
-
-                    
-
+                    List<RaycastHit> pushHitArray = new List<RaycastHit>(Physics.RaycastAll(hit.collider.transform.position, hit.collider.transform.up, 10f,layer));
                     foreach ( RaycastHit hits in pushHitArray )
                     {
                         hits.collider.gameObject.transform.SetParent(hit.collider.transform, true);
                         hits.rigidbody.isKinematic = true;
+                        Debug.Log(hits.collider.gameObject.name);
                     }
                     while ( time < 2 )
                     {
+                        if ( Physics.Raycast(obstacle.position + new Vector3(0, 0.5f, 0), moveDirValue, out RaycastHit notThis, 1f, layer) && notThis.collider.gameObject != obstacle.gameObject )
+                        {
+                            
+                            Debug.Log("뒤에");
+                            moveOn = false;
+                            yield break;
+                        }
+                       
                         animator.SetBool("Push", true);
                         time += Time.deltaTime * moveSpeed;
                         rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / 2));
                         hit.rigidbody.MovePosition(Vector3.Lerp(obsStartPos, obsTargetPos, time / 2));
                         yield return null;
-
-
-
                     }
                     moveOn = false;
                     if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
@@ -353,6 +316,7 @@ public class PlayerController : MonoBehaviour
 
                 time += Time.deltaTime * moveSpeed;
                 rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
+               
                 yield return null;
             }
             yield return null;
@@ -362,7 +326,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("Push", false);
             }
 
-            Debug.Log("무브");
+           
         }
 
 
