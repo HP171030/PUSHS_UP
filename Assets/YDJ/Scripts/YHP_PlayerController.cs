@@ -1,15 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.HID;
-using UnityEngine.Windows;
+using Cinemachine;
+using System.Collections.Generic;
+using UnityEngine.WSA;
 
-public class A_PlayerController : MonoBehaviour
+public class YHP_PlayerController : MonoBehaviour
 {
-    private Vector3 moveDir;
+    public Vector3 moveDir;
 
     bool moveOn;
     bool grabOn;
@@ -20,27 +18,34 @@ public class A_PlayerController : MonoBehaviour
     [Header("Configs")]
     [SerializeField] Animator animator;
     [SerializeField] Rigidbody rb;
-    [SerializeField] CameraSwitch cameraSwitch;
+    [SerializeField] LayerMask obstacleLayer;
+    [SerializeField] LayerMask wall;
+    [SerializeField] LayerMask ground;
+    [SerializeField] public bool onIce = false;
     [SerializeField] Holder holder;
     [SerializeField] Mirror1 mirror1;
-    //[SerializeField] Obstacle obstacleScript;
+
+
+    LayerMask layerMask;
 
     [Header("Property")]
     [SerializeField] GameObject holderPoint;
+    [SerializeField] float distanceFromPlayer;
 
-    //public bool holdChecker;
+    [SerializeField] CameraSwitch cameraSwitch;
+
     public bool MirrorHolding { get { return mirrorHolding; } }
     public bool mirrorHolding = false; // 거울이 있는지 확인하는 플래그
+
+    public float mirror1WallAttachedDir;
+
+
+
 
     Transform obstacle;
     RaycastHit otherObs;
 
     RaycastHit grabHit;
-
-    public float mirror1WallAttachedDir;
-
-    [SerializeField] float distanceFromPlayer;
-
     private void FixedUpdate()
     {
         OffPull();
@@ -48,35 +53,19 @@ public class A_PlayerController : MonoBehaviour
 
     }
 
-
-
-
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-
+        layerMask = ~(1 << LayerMask.NameToLayer("Ground"));
 
     }
     private void OnMove(InputValue value)
     {
-
-        if (cameraSwitch.IsPlayer1Active)
+        if (cameraSwitch.IsPlayer1Active && !onIce)
         {
             Vector2 input = value.Get<Vector2>();
             moveDir = new Vector3(input.x, 0, input.y);
-
-            //거울 설치 방향 조정
-            //if(input.x == 1)
-            //{
-            //    isVerticalWall = false;
-            //}
-            //else if(input.y == 1)
-            //{
-            //    isVerticalWall = true;
-            //}
-
 
             if (input.x > 0) // 오른쪽으로 들어옴
             {
@@ -94,14 +83,13 @@ public class A_PlayerController : MonoBehaviour
             {
                 mirror1WallAttachedDir = 4;
             }
-
         }
 
     }
 
     public void OnPull(InputValue value)
     {
-        if (value.isPressed)
+        if (value.isPressed && cameraSwitch.IsPlayer1Active)
         {
             grabOn = true;
             Debug.Log("잡기");
@@ -109,7 +97,7 @@ public class A_PlayerController : MonoBehaviour
 
             if (Physics.Raycast(transform.position, transform.forward, out grabHit, 1f))
             {
-                if (grabHit.collider.gameObject.CompareTag("Obstacle"))
+                if (obstacleLayer.Contain(grabHit.collider.gameObject.layer))
                 {
                     animator.SetBool("Pull", true);
                     Debug.Log("잡음");
@@ -137,8 +125,9 @@ public class A_PlayerController : MonoBehaviour
     }
     public void MoveFunc()
     {
-        if (!moveOn && !grabOn)
+        if (!moveOn && !grabOn && !onIce)
         {
+
             animator.SetFloat("MoveSpeed", moveDir.magnitude);
             if (Mathf.Abs(moveDir.x) != 0 && Mathf.Abs(moveDir.z) != 0)
             {
@@ -161,6 +150,15 @@ public class A_PlayerController : MonoBehaviour
             if (grabHit.collider != null)
             {
                 Vector3 grabDir = (grabHit.collider.gameObject.transform.position - transform.position).normalized;
+                if (Physics.Raycast(transform.position, -transform.forward, out RaycastHit hit, 1.5f))
+                {
+                    if (hit.collider != null)
+                    {
+                        Debug.Log("뒤에 벽잇음 ");
+                        moveOn = false;
+                        return;
+                    }
+                }
                 moveOn = true;
                 if (grabDir.x > 0.9f && moveDir.x < 0f)
                 {
@@ -201,16 +199,21 @@ public class A_PlayerController : MonoBehaviour
 
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, transform.position + transform.forward);
-        if (obstacle != null && otherObs.point != null)
-            Gizmos.DrawLine(obstacle.position, otherObs.point);
-    }
+    /*  private void OnDrawGizmos()
+      {
+          Gizmos.color = Color.red;
+          Gizmos.DrawLine(obstacle.position,obstacle.position + moveDir);
+      }*/
     private IEnumerator PullRoutine(Vector3 pullDir, bool X)
     {
+
+        if (Physics.Raycast(transform.position, -transform.forward, 1f))
+        {
+            yield break;
+        }
+        Vector3 startPos = transform.position;
         Vector3 targetPos = pullDir;
+        Vector3 grabStartPos = grabHit.collider.transform.position;
         Vector3 grabTargetPos = pullDir;
         if (X)
         {
@@ -222,8 +225,19 @@ public class A_PlayerController : MonoBehaviour
             targetPos = transform.position + new Vector3(0, 0, -pullDir.z) * moveDistance;
             grabTargetPos = grabHit.collider.transform.position + new Vector3(0, 0, -pullDir.z) * moveDistance;
         }
-        Vector3 startPos = transform.position;
-        Vector3 grabStartPos = grabHit.collider.transform.position;
+
+
+        List<RaycastHit> hitArray = new List<RaycastHit>(Physics.RaycastAll(grabHit.collider.transform.position, grabHit.collider.transform.up, 10f));
+
+        hitArray.Add(grabHit);
+
+        foreach (RaycastHit hit in hitArray)
+        {
+            hit.collider.gameObject.transform.SetParent(grabHit.collider.transform, true);
+            hit.rigidbody.isKinematic = true;
+        }
+
+
         float time = 0;
         float targetTime = 2;
         while (time < 2)
@@ -232,114 +246,131 @@ public class A_PlayerController : MonoBehaviour
             time += Time.deltaTime;
             rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / targetTime));
             grabHit.rigidbody.MovePosition(Vector3.Lerp(grabStartPos, grabTargetPos, time / targetTime));
-            if (time >= 2)
-                moveOn = false;
-
-
             yield return null;
+
+
+            if (time >= 2)
+            {
+                foreach (RaycastHit hit in hitArray)
+                {
+                    hit.collider.gameObject.transform.SetParent(null, true);
+                    hit.rigidbody.isKinematic = false;
+                }
+                Manager.game.StepAction++;
+                moveOn = false;
+            }
+
+
+
+
         }
 
-
-
-        Debug.Log("무브온펄스");
     }
-
     private IEnumerator MoveRoutine(Vector3 moveDirValue)
     {
         Vector3 targetPos = transform.position + moveDirValue * moveDistance;
         Vector3 startPos = transform.position;
         RaycastHit hit;
         Vector3 PreMoveDir = moveDir;
-        if (Physics.Raycast(transform.position, moveDirValue, out hit, 1f))
+        LayerMask layer = obstacleLayer | wall;
+        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), moveDirValue, out hit, 1f, layer))
         {
-            Debug.Log(hit.collider.gameObject.name);
-            if (hit.collider.CompareTag("Obstacle"))
+
+            if (obstacleLayer.Contain(hit.collider.gameObject.layer))
             {
+                Debug.Log("asff");
                 obstacle = hit.transform;
                 Vector3 obsStartPos = obstacle.position;
                 Vector3 obsTargetPos = obstacle.position + moveDirValue * moveDistance;
-                Rigidbody obsRb = obstacle.GetComponent<Rigidbody>();
+
                 float time = 0;
 
-                if (obsRb != null) // Rigidbody가 null인지 확인합니다.
+
+                if (Physics.BoxCast(obstacle.position, new Vector3(0.5f, 0.5f, 0.5f), moveDirValue, out RaycastHit hitInfo, Quaternion.identity, 1f, layer))
                 {
-                    if (Physics.Raycast(obstacle.position, moveDirValue, out otherObs, 1f))
+                    Debug.Log(hitInfo.collider.gameObject.name);
+                    moveOn = false;
+                    if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
                     {
-                        if (otherObs.collider.CompareTag("Obstacle"))
-                        {
-                            moveOn = false;
-                            if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
-                            {
-                                animator.SetBool("Push", false);
-                            }
-                        }
-                        else
-                        {
-                            while (time < 2)
-                            {
-                                animator.SetBool("Push", true);
-                                time += Time.deltaTime * moveSpeed;
-                                rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / 2));
-                                if (obsRb != null) // 파괴되지 않았는지 다시 확인합니다.
-                                {
-                                    obsRb.MovePosition(Vector3.Lerp(obsStartPos, obsTargetPos, time / 2));
-                                }
-                                yield return null;
-                            }
-                            moveOn = false;
-                            if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
-                            {
-                                animator.SetBool("Push", false);
-                            }
-                            Debug.Log("장애물도 같이 무브");
-                        }
-                    }
-                    else
-                    {
-                        while (time < 2)
-                        {
-                            animator.SetBool("Push", true);
-                            time += Time.deltaTime * moveSpeed;
-                            rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / 2));
-                            if (obsRb != null) // 파괴되지 않았는지 다시 확인합니다.
-                            {
-                                obsRb.MovePosition(Vector3.Lerp(obsStartPos, obsTargetPos, time / 2));
-                            }
-                            yield return null;
-                        }
-                        moveOn = false;
-                        if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
-                        {
-                            animator.SetBool("Push", false);
-                        }
-                        Debug.Log("장애물도 같이 무브");
+                        animator.SetBool("Push", false);
                     }
                 }
                 else
                 {
-                    Debug.Log("Rigidbody가 파괴되었습니다.");
+                    List<RaycastHit> pushHitArray = new List<RaycastHit>(Physics.RaycastAll(hit.collider.transform.position, hit.collider.transform.up, 10f, layer));
+                    foreach (RaycastHit hits in pushHitArray)
+                    {
+                        hits.collider.gameObject.transform.SetParent(hit.collider.transform, true);
+                        hits.rigidbody.isKinematic = true;
+                        Debug.Log(hits.collider.gameObject.name);
+                    }
+                    while (time < 2)
+                    {
+                        if (Physics.Raycast(obstacle.position + new Vector3(0, 0.5f, 0), moveDirValue, out RaycastHit notThis, 1f, layer) && notThis.collider.gameObject != obstacle.gameObject)
+                        {
+
+                            Debug.Log("뒤에");
+                            moveOn = false;
+                            yield break;
+                        }
+
+                        animator.SetBool("Push", true);
+                        time += Time.deltaTime * moveSpeed;
+                        rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / 2));
+                        hit.rigidbody.MovePosition(Vector3.Lerp(obsStartPos, obsTargetPos, time / 2));
+                        yield return null;
+                    }
+                    Manager.game.StepAction++;
+                    moveOn = false;
+                    if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
+                    {
+                        animator.SetBool("Push", false);
+                    }
+                    foreach (RaycastHit hits in pushHitArray)
+                    {
+                        hits.collider.gameObject.transform.SetParent(null, true);
+                        hits.rigidbody.isKinematic = false;
+                    }
+
+                    Debug.Log("장애물도 같이 무브");
                 }
+
             }
+            else if (wall.Contain(hit.collider.gameObject.layer))
+            {
+                Debug.Log("앞에 벽");
+                moveOn = false;
+                yield return null;
+
+            }
+
         }
         else
         {
             float time = 0;
             while (time < 1)
             {
+
                 time += Time.deltaTime * moveSpeed;
                 rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
+
                 yield return null;
             }
             yield return null;
+            Manager.game.StepAction++;
             moveOn = false;
             if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
             {
                 animator.SetBool("Push", false);
             }
-            Debug.Log("무브");
-        }
-    }
 
+
+        }
+
+
+
+
+    }
 
     private void OnHold(InputValue value)
     {
@@ -455,3 +486,6 @@ public class A_PlayerController : MonoBehaviour
         }
     }
 }
+
+
+

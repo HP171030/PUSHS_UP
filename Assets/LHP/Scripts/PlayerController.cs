@@ -239,19 +239,20 @@ public class PlayerController : MonoBehaviour
         Vector3 startPos = transform.position;
         RaycastHit hit;
         Vector3 PreMoveDir = moveDir;
-        if ( Physics.Raycast(transform.position, moveDirValue, out hit, 1f) )
+        LayerMask layer = obstacleLayer | wall;
+        if ( Physics.Raycast(transform.position + new Vector3(0,0.5f,0), moveDirValue, out hit, 1f,layer) )
         {
 
             if ( obstacleLayer.Contain(hit.collider.gameObject.layer) )
             {
-
+                Debug.Log("asff");
                 obstacle = hit.transform;
                 Vector3 obsStartPos = obstacle.position;
                 Vector3 obsTargetPos = obstacle.position + moveDirValue * moveDistance;
 
                 float time = 0;
 
-                LayerMask layer = obstacleLayer | wall;
+                
                 if ( Physics.BoxCast(obstacle.position,new Vector3 (0.5f, 0.5f, 0.5f), moveDirValue, out RaycastHit hitInfo, Quaternion.identity, 1f,layer))
                 {
                         Debug.Log(hitInfo.collider.gameObject.name);
