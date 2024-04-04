@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask obstacleLayer;
     [SerializeField] LayerMask wall;
     [SerializeField] LayerMask ground;
+    [SerializeField] LayerMask crystal;
     [SerializeField] public bool onIce = false;
     LayerMask layerMask;
 
@@ -166,11 +168,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-  /*  private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(obstacle.position,obstacle.position + moveDir);
-    }*/
     private IEnumerator PullRoutine( Vector3 pullDir, bool X )
     {
 
@@ -251,7 +248,7 @@ public class PlayerController : MonoBehaviour
 
                 float time = 0;
 
-                LayerMask layer = obstacleLayer | wall;
+                LayerMask layer = obstacleLayer | wall | crystal;
                 if ( Physics.BoxCast(obstacle.position,new Vector3 (0.5f, 0.5f, 0.5f), moveDirValue, out RaycastHit hitInfo, Quaternion.identity, 1f,layer))
                 {
                         Debug.Log(hitInfo.collider.gameObject.name);
@@ -261,8 +258,8 @@ public class PlayerController : MonoBehaviour
                             animator.SetBool("Push", false);
                         }
                 }
-                else
-                {
+                     else
+                   {
                     List<RaycastHit> pushHitArray = new List<RaycastHit>(Physics.RaycastAll(hit.collider.transform.position, hit.collider.transform.up, 10f,layer));
                     foreach ( RaycastHit hits in pushHitArray )
                     {
@@ -284,6 +281,7 @@ public class PlayerController : MonoBehaviour
                         time += Time.deltaTime * moveSpeed;
                         rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / 2));
                         hit.rigidbody.MovePosition(Vector3.Lerp(obsStartPos, obsTargetPos, time / 2));
+
                         yield return null;
                     }
                     Manager.game.StepAction++;
@@ -304,10 +302,29 @@ public class PlayerController : MonoBehaviour
             }
             else if (wall.Contain(hit.collider.gameObject.layer)) 
             {
-                Debug.Log("¾Õ¿¡ º®");
+                Debug.Log($"wall name is {hit.collider.gameObject.name}");
                     moveOn = false;
                     yield return null;
                 
+            }
+            else
+            {
+                float time = 0;
+                while ( time < 1 )
+                {
+
+                    time += Time.deltaTime * moveSpeed;
+                    rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
+
+                    yield return null;
+                }
+                yield return null;
+                Manager.game.StepAction++;
+                moveOn = false;
+                if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
+                {
+                    animator.SetBool("Push", false);
+                }
             }
                 
         }
@@ -319,7 +336,12 @@ public class PlayerController : MonoBehaviour
 
                 time += Time.deltaTime * moveSpeed;
                 rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
-               
+                if(Physics.Raycast(transform.position+new Vector3 (0,0.5f,0),transform.forward,out RaycastHit hitinfo, 1f) )
+                {
+                    moveOn = false;
+                    yield break;
+                }
+                
                 yield return null;
             }
             yield return null;

@@ -10,7 +10,7 @@ public class CameraSwitch : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera player2Camera;
 
     private bool isPlayer1Active = true;
-    public bool IsPlayer1Active {  get { return isPlayer1Active; } }
+    public bool IsPlayer1Active { get { return isPlayer1Active; } set { isPlayer1Active = value; } }
 
     void Start()
     {
