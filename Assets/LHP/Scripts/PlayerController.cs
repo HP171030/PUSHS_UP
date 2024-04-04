@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
-    private Vector3 moveDir;
+    public Vector3 moveDir;
 
-    bool moveOn;
+   public bool moveOn;
     bool grabOn;
     [Header("Player")]
     [SerializeField] float moveDistance;
@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask obstacleLayer;
     [SerializeField] LayerMask wall;
     [SerializeField] LayerMask ground;
+    [SerializeField] public bool onIce = false;
     LayerMask layerMask;
 
     [SerializeField] CameraSwitch cameraSwitch;
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnMove( InputValue value )
     {
-        if ( cameraSwitch.IsPlayer1Active )
+        if ( cameraSwitch.IsPlayer1Active &&!onIce )
         {
         Vector2 input = value.Get<Vector2>();
         moveDir = new Vector3(input.x, 0, input.y);
@@ -91,7 +92,7 @@ public class PlayerController : MonoBehaviour
     }
     public void MoveFunc()
     {
-        if ( !moveOn && !grabOn )
+        if ( !moveOn && !grabOn &&!onIce )
         {
            
             animator.SetFloat("MoveSpeed", moveDir.magnitude);
@@ -203,7 +204,7 @@ public class PlayerController : MonoBehaviour
             hit.rigidbody.isKinematic = true;
         }
 
-        Debug.Log(hitArray.Count);
+       
         float time = 0;
         float targetTime = 2;
         while ( time < 2 )
@@ -222,6 +223,7 @@ public class PlayerController : MonoBehaviour
                     hit.collider.gameObject.transform.SetParent(null, true);
                     hit.rigidbody.isKinematic = false;
                 }
+                Manager.game.StepAction++;
                 moveOn = false;
             }
 
@@ -284,6 +286,7 @@ public class PlayerController : MonoBehaviour
                         hit.rigidbody.MovePosition(Vector3.Lerp(obsStartPos, obsTargetPos, time / 2));
                         yield return null;
                     }
+                    Manager.game.StepAction++;
                     moveOn = false;
                     if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
                     {
@@ -320,6 +323,7 @@ public class PlayerController : MonoBehaviour
                 yield return null;
             }
             yield return null;
+            Manager.game.StepAction++;
             moveOn = false;
             if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
             {
