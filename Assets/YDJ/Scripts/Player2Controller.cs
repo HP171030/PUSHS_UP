@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class Player2Controller : MonoBehaviour
 {
-    private Vector3 moveDir;
+    public Vector3 moveDir;
 
     bool moveOn;
     [Header("Player")]
@@ -23,6 +23,7 @@ public class Player2Controller : MonoBehaviour
     [SerializeField] public bool onClimb;
     [SerializeField] public bool ontheBox;
     [SerializeField] public bool downingBox;
+    [SerializeField] public bool onIce = false;
 
     [SerializeField] CameraSwitch cameraSwitch;
 
@@ -61,7 +62,7 @@ public class Player2Controller : MonoBehaviour
     private void OnMove(InputValue value)
     {
 
-        if (!cameraSwitch.IsPlayer1Active)
+        if (!cameraSwitch.IsPlayer1Active && !onIce )
         {
             Vector2 input = value.Get<Vector2>();
             moveDir = new Vector3(input.x, 0, input.y);
@@ -90,7 +91,7 @@ public class Player2Controller : MonoBehaviour
     }
     public void MoveFunc()
     {
-        if ( !moveOn)
+        if ( !moveOn && !onIce )
         {
 
             animator.SetFloat("MoveSpeed", moveDir.magnitude);
@@ -117,7 +118,8 @@ public class Player2Controller : MonoBehaviour
         Vector3 startPos = transform.position;
         RaycastHit hit;
         Vector3 PreMoveDir = moveDir;
-        if ( Physics.Raycast(transform.position, moveDirValue, out hit, 1f) )
+        LayerMask layer = obstacleLayer | wall;
+        if ( Physics.BoxCast(transform.position+new Vector3(0,0.5f,0),new Vector3(0.1f,0.1f,0.1f), moveDirValue, out hit, Quaternion.identity,1f,layer) )
         {
             if ( !obstacleLayer.Contain(hit.collider.gameObject.layer) )
             {
@@ -153,8 +155,11 @@ public class Player2Controller : MonoBehaviour
                     rb.MovePosition(Vector3.Lerp(startPos, ClimbPos, time));
                     yield return null;
                 }
-
+                Manager.game.StepAction++;
                 hit.rigidbody.isKinematic = false;
+                animator.SetFloat("MoveSpeed", 0f);
+                yield return new WaitForSeconds(0.5f);
+                
                 moveOn = false;
                 onClimb = false;
             }
@@ -181,7 +186,7 @@ public class Player2Controller : MonoBehaviour
                             {
                                 Debug.Log("걸어가는 중에 밑에 벽");
                                 transform.position = transform.position;
-
+                                Manager.game.StepAction++;
                                 moveOn = false;
                                 yield break;
                             }  
@@ -191,6 +196,7 @@ public class Player2Controller : MonoBehaviour
                         yield return null;
 
                     }
+                    Manager.game.StepAction++;
                     moveOn = false;
                 }
             }

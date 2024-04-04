@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Obstacle
-  - Wall
+  - IceChunk
+  - ice
   layers:
   - Default
   - TransparentFX
@@ -17,7 +17,7 @@ TagManager:
   - Wall
   - ObsUpper
   - Ground
-  - 
+  - Ice
   - 
   - 
   - 
