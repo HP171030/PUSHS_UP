@@ -268,6 +268,29 @@ public class YHP_PlayerController : MonoBehaviour
     }
     private IEnumerator MoveRoutine(Vector3 moveDirValue)
     {
+        //if (rb == null)
+        //{
+        //    Debug.LogError("Rigidbody component is not assigned!");
+        //    yield break; // 메서드를 즉시 종료합니다.
+        //}
+
+        //if (obstacleLayer == null)
+        //{
+        //    Debug.LogError("Obstacle layer is not assigned!");
+        //    yield break;
+        //}
+        //if (!mirror1.obstacleChecker)
+        //{
+        //    Debug.LogError("obstacleChecker");
+        //    yield break;
+        //}
+
+        //if (mirror1.Mirror1InObstacleChecker)
+        //{
+        //    Debug.Log("obstacleChecker로 그만 움직임");
+        //    yield break;
+        //}
+
         Vector3 targetPos = transform.position + moveDirValue * moveDistance;
         Vector3 startPos = transform.position;
         RaycastHit hit;
@@ -275,6 +298,8 @@ public class YHP_PlayerController : MonoBehaviour
         LayerMask layer = obstacleLayer | wall;
         if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), moveDirValue, out hit, 1f, layer))
         {
+
+
 
             if (obstacleLayer.Contain(hit.collider.gameObject.layer))
             {
@@ -313,7 +338,7 @@ public class YHP_PlayerController : MonoBehaviour
                             moveOn = false;
                             yield break;
                         }
-
+                        Debug.Log("m");
                         animator.SetBool("Push", true);
                         time += Time.deltaTime * moveSpeed;
                         rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / 2));
