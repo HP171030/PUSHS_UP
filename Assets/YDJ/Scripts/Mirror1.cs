@@ -1,9 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEngine.SocialPlatforms;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using System.Drawing;
+
 
 public class Mirror1 : MonoBehaviour
 {
