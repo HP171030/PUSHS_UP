@@ -85,7 +85,7 @@ public class Mirror1 : MonoBehaviour
             newPosition.z += Mirror2OffsetX;
             newPosition.y = 0;
             mirror2.position = newPosition;
-            //obstacleChecker = false;
+            obstacleChecker = false;
         }
         else if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
@@ -102,6 +102,10 @@ public class Mirror1 : MonoBehaviour
             {
                 StartCoroutine(MirrorInObstacle(other.gameObject));
             }
+        }
+        else
+        {
+            obstacleChecker = false;
         }
 
 
