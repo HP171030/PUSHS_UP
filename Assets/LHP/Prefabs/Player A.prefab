@@ -297,8 +297,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400040, guid: b69174d668ba02d44b14a084b217670a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400040, guid: b69174d668ba02d44b14a084b217670a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400040, guid: b69174d668ba02d44b14a084b217670a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400040, guid: b69174d668ba02d44b14a084b217670a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.1
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 400040, guid: b69174d668ba02d44b14a084b217670a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -306,7 +318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400040, guid: b69174d668ba02d44b14a084b217670a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.71
+      value: 68
       objectReference: {fileID: 0}
     - target: {fileID: 400040, guid: b69174d668ba02d44b14a084b217670a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -461,8 +473,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e6eabb379772e44fb49fb9e7964bd15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDistance: 1.2
+  moveDir: {x: 0, y: 0, z: 0}
+  moveOn: 0
+  moveDistance: 2
   moveSpeed: 4
+  pullSpeed: 1
   animator: {fileID: 0}
   rb: {fileID: 0}
   obstacleLayer:
@@ -474,6 +489,10 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 512
+  crystal:
+    serializedVersion: 2
+    m_Bits: 2048
+  onIce: 0
   cameraSwitch: {fileID: 0}
 --- !u!114 &3240224069635942332
 MonoBehaviour:

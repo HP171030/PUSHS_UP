@@ -21,9 +21,14 @@ public class GroundChecker : MonoBehaviour
         {
            outGround = true;
             controller.onGround = true;
+           
             
             isDown = false;
 
+        }
+        else if ( ground.Contain(other.gameObject.layer) )
+        {
+            controller.ontheBox = false;
         }
     }
 
@@ -45,7 +50,7 @@ public class GroundChecker : MonoBehaviour
             if ( !controller.onClimb &&!isDown)
             {
                 isDown = true;
-                StartCoroutine(controller.DownAnim());
+             //   StartCoroutine(controller.DownAnim());
                 
             }
                 
