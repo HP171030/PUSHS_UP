@@ -315,7 +315,8 @@ public class PlayerController : MonoBehaviour
                 if ( Physics.BoxCast(obstacle.position,new Vector3 (0.5f, 0.5f, 0.5f), moveDirValue, out RaycastHit hitInfo, Quaternion.identity, 0.7f,layer))
                 {
                     Debug.Log($"뒤에 {hitInfo.collider.gameObject.name}가 있다");
-                        moveOn = false;
+                    animator.SetBool("Push", false);
+                    moveOn = false;
                     
                     //    hit.rigidbody.isKinematic = false;
                     if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
@@ -338,6 +339,7 @@ public class PlayerController : MonoBehaviour
                         {
                             
                             Debug.Log("뒤에");
+                            animator.SetBool("Push", false);
                             moveOn = false;
                             yield break;
                         }
@@ -352,7 +354,7 @@ public class PlayerController : MonoBehaviour
                     }
                     Manager.game.StepAction++;
                     moveOn = false;
-                    animator.SetBool("Push", false);
+                   
                     if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
                     {
                         animator.SetBool("Push", false);
