@@ -116,7 +116,7 @@ public class Mirror1 : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle") && !YDJ_PlayerController.mirrorHolding)
         {
             //Debug.Log("거울에 장애물 닿음");
             //obstacleChecker = true;

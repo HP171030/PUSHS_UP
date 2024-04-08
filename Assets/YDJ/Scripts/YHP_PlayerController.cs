@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using Cinemachine;
 using System.Collections.Generic;
 using UnityEngine.WSA;
+using Unity.VisualScripting;
 
 public class YHP_PlayerController : MonoBehaviour
 {
@@ -41,6 +42,8 @@ public class YHP_PlayerController : MonoBehaviour
 
     public bool wallMirrorBumpChecker;
     public bool WallMirrorBumpChecker { get { return wallMirrorBumpChecker; } }
+
+
 
     public float mirror1WallAttachedDir;
 
@@ -341,6 +344,12 @@ public class YHP_PlayerController : MonoBehaviour
                             moveOn = false;
                             yield break;
                         }
+                        if (mirrorHolding)
+                        {
+                            Debug.Log("거울 들고있어서 장애물 못밈");
+                            moveOn = false;
+                            yield break;
+                        }
                         //Debug.Log("m");
                         animator.SetBool("Push", true);
                         time += Time.deltaTime * moveSpeed;
@@ -375,9 +384,32 @@ public class YHP_PlayerController : MonoBehaviour
             else if (mirror.Contain(hit.collider.gameObject.layer))
             {
                 {
+                    if (mirror1.wallChecker)
+                    {
+                        float time = 0;
+                        while (time < 1)
+                        {
+
+                            time += Time.deltaTime * moveSpeed;
+                            rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
+
+                            yield return null;
+                        }
+                        yield return null;
+                        Manager.game.StepAction++;
+                        moveOn = false;
+                        if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
+                        {
+                            animator.SetBool("Push", false);
+                        }
+                        Debug.Log("벽거울이라 지나갈 수 있음");
+                    }
+                    else
+                    {
                         Debug.Log("앞에 거울");
-                    moveOn = false;
-                    yield return null;
+                        moveOn = false;
+                        yield return null;
+                    }
                 }
 
             }
@@ -414,7 +446,7 @@ public class YHP_PlayerController : MonoBehaviour
             Hold();
         }
         //거울 놓기
-        else if (mirrorHolding)
+        else if (mirrorHolding && !holder.FrontObstacleLader())
         {
             UnHold();
         }
