@@ -14,5 +14,5 @@ public class GameManager : MonoBehaviour
 
 
     public int boomAction { get { return boomCount; } set {  boomCount = value; Debug.Log(boomCount); } }
-    public int StepAction { get { return stepCount; } set { stepCount = value; Debug.Log(stepCount); stepUpdate?.Invoke(); } }
+    public int StepAction { get { return stepCount; } set { stepCount = value; stepUpdate?.Invoke(); } }
 }

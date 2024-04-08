@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DoorOpen : MonoBehaviour
@@ -11,17 +12,18 @@ public class DoorOpen : MonoBehaviour
     bool isNotOpen = false;
 
 
-    private void OnTriggerEnter( Collider other )
-    {
-        if ( player.Contain(other.gameObject.layer) && !isNotOpen)
-        {
-            particle.SetActive(true);
-            
-            isNotOpen = true;
-            StartCoroutine(OpenDoor());
-            
-        }
-    }
+      private void OnTriggerEnter( Collider other )
+       {
+           if ( player.Contain(other.gameObject.layer) && !isNotOpen)
+           {
+               particle.SetActive(true);
+
+               isNotOpen = true;
+               StartCoroutine(OpenDoor());
+
+           }
+       }
+    
     IEnumerator OpenDoor()
     {
         float time = 0;
