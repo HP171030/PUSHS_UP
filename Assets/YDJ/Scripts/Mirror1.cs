@@ -5,11 +5,18 @@ using System.Collections;
 public class Mirror1 : MonoBehaviour
 {
     [SerializeField] Transform mirror2; // 거울2의 Transform을 참조하는 변수
+
+    [Header("Property")]
     [SerializeField] float Mirror2OffsetX = 20f; // Y값 오프셋
     [SerializeField] float ObstacleOffsetY = -5f; // Y값 오프셋
     [SerializeField] float ObstacleOffsetX;
     [SerializeField] float ObstacleOffsetZ;
-    [SerializeField] float moveDuration = 2f; // 이동하는 시간
+    [SerializeField] float ObstacleInMinrrorCoroutineTime;
+
+    [Header("Config")]
+
+    //[SerializeField] WallCollider wallCollider;
+
 
     [SerializeField] GameObject Mirror1WallPoint;
     [SerializeField] YHP_PlayerController YDJ_PlayerController;
@@ -24,6 +31,12 @@ public class Mirror1 : MonoBehaviour
     public bool mirror1InObstacleChecker;
     public bool Mirror1InObstacleChecker { get { return mirror1InObstacleChecker; } }
 
+    public bool mirrorObstacleAttachedChecker = false;
+    public bool MirrorObstacleAttachedChecker { get { return mirrorObstacleAttachedChecker; } }
+
+    private bool IsWallExit = true;
+
+    //private bool wallMirrorAttachedChecker = false;
 
     private Vector3 forwardDirection;
 
@@ -71,14 +84,21 @@ public class Mirror1 : MonoBehaviour
             newPosition.z += Mirror2OffsetX;
             mirror2.position = newPosition;
         }
+        //else // 벽에 붙어있는 경우 거울2를 바로 앞 바닥에 위치시킵니다.
+        //{
+        //    Vector3 newPosition = transform.position;
+        //    newPosition.z += Mirror2OffsetX;
+        //    mirror2.position = newPosition;
+        //}
     }
 
     private void OnTriggerEnter(Collider other)
     {
-
+        // && IsWallExit
         if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
-            Debug.Log("벽에 닿음");
+
+            Debug.Log("벽에 닿음aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             wallChecker = true;
 
             Vector3 newPosition = transform.position;
@@ -86,35 +106,79 @@ public class Mirror1 : MonoBehaviour
             newPosition.y = 0;
             mirror2.position = newPosition;
             obstacleChecker = false;
+            IsWallExit = false;
         }
-        else if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
-        {
-            //if (Vector3.Distance(transform.position, other.transform.position) < 0.5f)
-            //{
-            //    Debug.Log("거울과 장애물의 거리가 1 미만입니다.");
-            //    return;
 
-            //}
-
-                Debug.Log("거울에 장애물 닿음");
-            //obstacleChecker = true;
-            if (!YDJ_PlayerController.MirrorHolding)
-            {
-                StartCoroutine(MirrorInObstacle(other.gameObject));
-            }
-        }
-        else
-        {
-            obstacleChecker = false;
-        }
 
 
 
     }
 
-
-    IEnumerator MirrorInObstacle(GameObject obstacle)
+    private void OnTriggerStay(Collider other)
     {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        {
+            //Debug.Log("거울에 장애물 닿음");
+            //obstacleChecker = true;
+            //if (!YDJ_PlayerController.MirrorHolding)
+            //mirrorObstacleAttachedChecker = true;
+
+            //&& wallCollider.WallMirrorAttachedChecker
+            //&& !YDJ_PlayerController.MirrorHolding
+            //if (wallChecker && mirrorObstacleAttachedChecker) //벽거울
+            //{
+            //    Debug.Log("벽거울");
+            //    StartCoroutine(MirrorInObstacleWall(other.gameObject));
+            //}
+            //else if (!wallChecker)
+            //{
+            //    Debug.Log("바닥거울");
+            //    StartCoroutine(MirrorInObstacleGround(other.gameObject));
+            //}
+            //Debug.Log("아무것도 안뜸");
+            //return;
+
+            //else
+            //{
+            //    obstacleChecker = false;
+            //    mirrorObstacleAttachedChecker = false;
+            //}
+            // && mirrorObstacleAttachedCheckerw
+            if (wallChecker) //벽거울
+            {
+                Debug.Log("벽거울");
+                if (YDJ_PlayerController.wallMirrorBumpChecker)
+                {
+                    Debug.Log("범프");
+                    StartCoroutine(MirrorInObstacleWall(other.gameObject));
+                }
+            }
+            else if (!wallChecker)
+            {
+                Debug.Log("바닥거울");
+                StartCoroutine(MirrorInObstacleGround(other.gameObject));
+            }
+            //else
+            //{
+            //    YDJ_PlayerController.wallMirrorBumpChecker = false;
+            //    obstacleChecker = false;
+            //    mirrorObstacleAttachedChecker = false;
+            //}
+            Debug.Log("아무것도 안뜸");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        IsWallExit = true;
+        obstacleChecker = false;
+        mirrorObstacleAttachedChecker = false;
+    }
+
+
+    IEnumerator MirrorInObstacleWall(GameObject obstacle) //장애물 들어갈때
+    {
+        Debug.Log("코루틴 들어감");
         Rigidbody obstacleRigidbody = obstacle.GetComponent<Rigidbody>();
         Collider obstacleCollider = obstacle.GetComponent<Collider>();
 
@@ -125,8 +189,8 @@ public class Mirror1 : MonoBehaviour
         //Vector3 startPosition = Mirror1WallPoint.transform.position;
         startPosition.y = 0;
 
-        if (wallChecker) // 벽 거울1
-        {
+
+        
             //gameObject.layer == LayerMask.NameToLayer("Wall")
             //Debug.Log("벽 거울1에 장애물 닿음");
             //CollisionManager collisionManager = GetComponent<CollisionManager>();
@@ -135,6 +199,8 @@ public class Mirror1 : MonoBehaviour
 
 
             //obstacleRigidbody.isKinematic = true;
+
+            Debug.Log("벽거울");
 
             if (forwardDirection.x > 0) // 오른쪽으로 들어옴
             {
@@ -161,50 +227,60 @@ public class Mirror1 : MonoBehaviour
             while (time < targetTime)
             {
                 time += Time.deltaTime;
-                Debug.Log($"obstacle in{obstacle.transform.position}");
+                //Debug.Log($"obstacle in{obstacle.transform.position}");
                 obstacle.transform.position = Vector3.Lerp(startPosition, endPosition, time / targetTime);
                 yield return null;
             }
 
-            yield return new WaitForSeconds(2f);
+
+            yield return new WaitForSeconds(ObstacleInMinrrorCoroutineTime);
 
             StartCoroutine(MirrorOutObstacle(obstacle));
-        }
+        
+
+    }
 
 
+    IEnumerator MirrorInObstacleGround(GameObject obstacle) //장애물 들어갈때
+    {
+        Debug.Log("코루틴 들어감");
+        Rigidbody obstacleRigidbody = obstacle.GetComponent<Rigidbody>();
+        Collider obstacleCollider = obstacle.GetComponent<Collider>();
 
+        Vector3 endPosition;
+        float time = 0;
+        float targetTime = 1f;
+        Vector3 startPosition = transform.position;
+        //Vector3 startPosition = Mirror1WallPoint.transform.position;
+        startPosition.y = 0;
 
-        else // 바닥 거울1
-        {
+        
+
+            Debug.Log("땅거울");
+
             endPosition = transform.position + new Vector3(0f, ObstacleOffsetY, 0f);
 
             while (time < targetTime)
             {
                 time += Time.deltaTime;
-                Debug.Log($"obstacle in{obstacle.transform.position}");
+                //Debug.Log($"obstacle in{obstacle.transform.position}");
                 obstacle.transform.position = Vector3.Lerp(startPosition, endPosition, time / targetTime);
                 yield return null;
             }
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(ObstacleInMinrrorCoroutineTime);
 
             StartCoroutine(MirrorOutObstacle(obstacle));
-        }
-
-
-
-
-
-
-
-
-
-
-
+        
     }
 
 
-    IEnumerator MirrorOutObstacle(GameObject obstacle)
+
+
+
+
+
+    IEnumerator MirrorOutObstacle(GameObject obstacle) // 장애물 나갈때
     {
         Vector3 endPosition = mirror2.position;
         float time = 0;
@@ -249,7 +325,7 @@ public class Mirror1 : MonoBehaviour
         while (time < targetTime)
         {
             time += Time.deltaTime;
-            Debug.Log($"obstacle out{obstacle.transform.position}");
+            //Debug.Log($"obstacle out{obstacle.transform.position}");
             obstacle.transform.position = Vector3.Lerp(startPosition, endPosition, time/targetTime);
             yield return null;
         }

@@ -21,9 +21,11 @@ public class YHP_PlayerController : MonoBehaviour
     [SerializeField] LayerMask obstacleLayer;
     [SerializeField] LayerMask wall;
     [SerializeField] LayerMask ground;
+    [SerializeField] LayerMask mirror;
     [SerializeField] public bool onIce = false;
     [SerializeField] Holder holder;
     [SerializeField] Mirror1 mirror1;
+
 
 
     LayerMask layerMask;
@@ -34,10 +36,15 @@ public class YHP_PlayerController : MonoBehaviour
 
     [SerializeField] CameraSwitch cameraSwitch;
 
-    public bool MirrorHolding { get { return mirrorHolding; } }
     public bool mirrorHolding = false; // 거울이 있는지 확인하는 플래그
+    public bool MirrorHolding { get { return mirrorHolding; } }
+
+    public bool wallMirrorBumpChecker;
+    public bool WallMirrorBumpChecker { get { return wallMirrorBumpChecker; } }
 
     public float mirror1WallAttachedDir;
+
+
 
 
 
@@ -268,37 +275,27 @@ public class YHP_PlayerController : MonoBehaviour
     }
     private IEnumerator MoveRoutine(Vector3 moveDirValue)
     {
-        //if (rb == null)
-        //{
-        //    Debug.LogError("Rigidbody component is not assigned!");
-        //    yield break; // 메서드를 즉시 종료합니다.
-        //}
-
-        //if (obstacleLayer == null)
-        //{
-        //    Debug.LogError("Obstacle layer is not assigned!");
-        //    yield break;
-        //}
-        //if (!mirror1.obstacleChecker)
-        //{
-        //    Debug.LogError("obstacleChecker");
-        //    yield break;
-        //}
-
-        //if (mirror1.Mirror1InObstacleChecker)
-        //{
-        //    Debug.Log("obstacleChecker로 그만 움직임");
-        //    yield break;
-        //}
 
         Vector3 targetPos = transform.position + moveDirValue * moveDistance;
         Vector3 startPos = transform.position;
         RaycastHit hit;
         Vector3 PreMoveDir = moveDir;
         LayerMask layer = obstacleLayer | wall;
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), moveDirValue, out hit, 1f, layer))
-        {
 
+
+        //비트 마스크로 미러홀딩이면 미러 할당 노할당 정하기
+        if (mirrorHolding)
+        {
+            mirror = 0;
+        }
+        else
+        {
+            mirror = 1 << 11;
+        }
+
+        //Debug.DrawLine(transform.position + new Vector3(0, 0.3f, 0), transform.position + new Vector3(0, 0.3f, 0) + moveDirValue * 1.2f, Color.red, 1f);
+        if ( Physics.Raycast(transform.position + new Vector3(0, 0.3f, 0), moveDirValue, out hit, 1.2f, layer | mirror))
+        {
 
 
             if (obstacleLayer.Contain(hit.collider.gameObject.layer))
@@ -313,12 +310,18 @@ public class YHP_PlayerController : MonoBehaviour
 
                 if (Physics.BoxCast(obstacle.position, new Vector3(0.5f, 0.5f, 0.5f), moveDirValue, out RaycastHit hitInfo, Quaternion.identity, 1f, layer))
                 {
-                    Debug.Log(hitInfo.collider.gameObject.name);
-                    moveOn = false;
-                    if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
+                    //if (!mirror1.mirrorObstacleAttachedChecker)
                     {
-                        animator.SetBool("Push", false);
+                        Debug.Log(hitInfo.collider.gameObject.name);
+                        moveOn = false;
+                        if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
+                        {
+                            animator.SetBool("Push", false);
+                        }
+                        wallMirrorBumpChecker = true;
+
                     }
+
                 }
                 else
                 {
@@ -338,7 +341,7 @@ public class YHP_PlayerController : MonoBehaviour
                             moveOn = false;
                             yield break;
                         }
-                        Debug.Log("m");
+                        //Debug.Log("m");
                         animator.SetBool("Push", true);
                         time += Time.deltaTime * moveSpeed;
                         rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / 2));
@@ -369,8 +372,17 @@ public class YHP_PlayerController : MonoBehaviour
 
             }
 
+            else if (mirror.Contain(hit.collider.gameObject.layer))
+            {
+                {
+                        Debug.Log("앞에 거울");
+                    moveOn = false;
+                    yield return null;
+                }
+
+            }
         }
-        else
+        else // 무브
         {
             float time = 0;
             while (time < 1)
@@ -378,7 +390,7 @@ public class YHP_PlayerController : MonoBehaviour
 
                 time += Time.deltaTime * moveSpeed;
                 rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
-
+               
                 yield return null;
             }
             yield return null;
@@ -388,14 +400,12 @@ public class YHP_PlayerController : MonoBehaviour
             {
                 animator.SetBool("Push", false);
             }
-
-
         }
 
-
-
-
     }
+
+
+
 
     private void OnHold(InputValue value)
     {
