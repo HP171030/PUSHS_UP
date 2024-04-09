@@ -70,4 +70,18 @@ public class Holder : MonoBehaviour
         return false;
     }
 
+    public bool FrontMirrorLader()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, range);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.gameObject.layer == LayerMask.NameToLayer("Mirror"))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

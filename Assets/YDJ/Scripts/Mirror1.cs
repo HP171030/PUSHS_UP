@@ -81,7 +81,7 @@ public class Mirror1 : MonoBehaviour
         if (!wallChecker)
         {
             Vector3 newPosition = transform.position;
-            newPosition.z += Mirror2OffsetX;
+            newPosition.x += Mirror2OffsetX;
             mirror2.position = newPosition;
         }
         //else // 벽에 붙어있는 경우 거울2를 바로 앞 바닥에 위치시킵니다.
@@ -102,12 +102,13 @@ public class Mirror1 : MonoBehaviour
             wallChecker = true;
 
             Vector3 newPosition = transform.position;
-            newPosition.z += Mirror2OffsetX;
+            newPosition.x += Mirror2OffsetX;
             newPosition.y = 0;
             mirror2.position = newPosition;
             obstacleChecker = false;
             IsWallExit = false;
         }
+
 
 
 

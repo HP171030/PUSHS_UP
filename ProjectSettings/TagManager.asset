@@ -6,6 +6,7 @@ TagManager:
   tags:
   - IceChunk
   - ice
+  - Mirror
   layers:
   - Default
   - TransparentFX
@@ -38,7 +39,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Mirror
   m_SortingLayers:
   - name: Default
     uniqueID: 0
