@@ -56,5 +56,18 @@ public class Holder : MonoBehaviour
         return false;
     }
 
+    public bool FrontObstacleLader()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, range);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }
