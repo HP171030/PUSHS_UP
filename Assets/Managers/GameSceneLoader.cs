@@ -6,11 +6,17 @@ using UnityEngine;
 
 public class GameSceneLoader : BaseScene
 {
-    [SerializeField] CinemachineVirtualCamera thisSceneCine;
+    [SerializeField] CinemachineVirtualCamera[] thisSceneCine;
+    [SerializeField] public int clearValue;
+    [SerializeField] public int switchCount;
+
     public override IEnumerator LoadingRoutine()
     {
+        Manager.game.doorSwitch = switchCount;
+        Manager.game.isEnter = false;
         Manager.game.boomAction = 3;
-        Manager.game.cine = thisSceneCine;
+        Manager.game.cines = thisSceneCine;
+       Manager.game.clearValue = clearValue;
         Manager.game.playerController = FindObjectOfType<PlayerController>();
         Manager.game.player2Controller = FindObjectOfType<Player2Controller>();
         yield return null;
@@ -18,7 +24,10 @@ public class GameSceneLoader : BaseScene
     }
     private void Start()
     {
-        Manager.game.cine = thisSceneCine;
+        Manager.game.doorSwitch = switchCount;
+        Manager.game.isEnter = false;
+        Manager.game.clearValue = clearValue;
+        Manager.game.cines = thisSceneCine;
         Manager.game.playerController = FindObjectOfType<PlayerController>();
         Manager.game.player2Controller = FindObjectOfType<Player2Controller>();
     }

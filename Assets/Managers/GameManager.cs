@@ -8,13 +8,15 @@ public class GameManager : MonoBehaviour
 {
     private int boomCount = 3;
     private int stepCount = 0;
+    public int doorSwitch;
 
-    public CinemachineVirtualCamera cine;
+    public CinemachineVirtualCamera[] cines;
     public PlayerController playerController;
     public Player2Controller player2Controller;
     public UnityAction stepUpdate;
 
-
+    public int clearValue;
+    public bool isEnter = false;
 
 
     public int boomAction { get { return boomCount; } set {  boomCount = value; Debug.Log(boomCount); } }
@@ -38,25 +40,29 @@ public class GameManager : MonoBehaviour
     }
     public void ShakeCam()
     {
-        if(cine != null )
+        if ( cines.Length > 0 )
         {
-            CinemachineBasicMultiChannelPerlin perlin = cine.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-            if ( perlin != null )
+            foreach ( CinemachineVirtualCamera c in cines )
             {
-                perlin.m_AmplitudeGain = 2;
-                perlin.m_FrequencyGain = 2;
-                StartCoroutine(DampenShake(perlin));
+                CinemachineBasicMultiChannelPerlin perlin = c.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+                if ( perlin != null )
+                {
+                    perlin.m_AmplitudeGain = 2;
+                    perlin.m_FrequencyGain = 2;
+                    StartCoroutine(DampenShake(perlin));
 
-            }
-            else
-            {
-                Debug.LogError("CinemachineBasicMultiChannelPerlin not found.");
+                }
+                else
+                {
+                    Debug.LogError("CinemachineBasicMultiChannelPerlin not found.");
+                }
             }
         }
         else
         {
             Debug.LogError("CinemachineVirtualCamera not assigned.");
         }
+        
     }
     private IEnumerator DampenShake( CinemachineBasicMultiChannelPerlin perlin )
     {

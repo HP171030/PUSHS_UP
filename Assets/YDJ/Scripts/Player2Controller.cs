@@ -135,12 +135,7 @@ public class Player2Controller : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(debugVec,1f);
 
-    }
     private IEnumerator MoveRoutine( Vector3 moveDirValue )
     {
         LayerMask layer = obstacleLayer | wall;
@@ -171,7 +166,7 @@ public class Player2Controller : MonoBehaviour
         
         if ( Physics.BoxCast(transform.position + new Vector3(0, 1f, 0), new Vector3(0.1f, 0.1f, 0.1f), moveDirValue, out hit, Quaternion.identity, 1f, layer) )
         {
-            if ( !obstacleLayer.Contain(hit.collider.gameObject.layer) )                                    //잘 안맞는 버그 있음 확인해볼것
+            if ( !obstacleLayer.Contain(hit.collider.gameObject.layer) )                                   
             {
                 Debug.Log("장애물이나 벽이 아님");
                 Debug.Log(hit.collider.gameObject.name);
@@ -180,7 +175,7 @@ public class Player2Controller : MonoBehaviour
             }
             else
             {
-                RaycastHit [] raycastHits = Physics.RaycastAll(hit.collider.transform.position, hit.collider.transform.up, 3f);
+                RaycastHit [] raycastHits = Physics.RaycastAll(hit.collider.transform.position, hit.collider.transform.up, 3f,obstacleLayer);
 
 
                 foreach ( RaycastHit other in raycastHits )
