@@ -21,7 +21,7 @@ public class CameraSwitch : MonoBehaviour
 
     private void OnChange(InputValue value)
     {
-        Debug.Log("카메라 스위치");
+   
         Change();
     }
 

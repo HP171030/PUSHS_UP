@@ -157,7 +157,7 @@ public class Player2Controller : MonoBehaviour
                     if (isBlank.Length == 0 )
                     {
                         targetPos = tileIns.middlePoint.position;
-                        Debug.Log(tileIns.gameObject.name);
+                       
                     }
                 }
 
@@ -265,6 +265,7 @@ public class Player2Controller : MonoBehaviour
                                             rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
                                             yield return null;
                                         }
+                                    Manager.game.StepAction++;
                                         moveOn = false;
                                     }
 
@@ -302,7 +303,7 @@ public class Player2Controller : MonoBehaviour
                                 rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
                                 yield return null;
                             }
-                            Debug.Log(isTile.collider.gameObject.name);
+                            Manager.game.StepAction++;
                             moveOn = false;
                             yield return null;
                         }
@@ -322,6 +323,7 @@ public class Player2Controller : MonoBehaviour
             else
             {
                 Debug.Log("없을수는 없어");
+                ontheBox = false;
                 moveOn = false;
             }
 
@@ -342,7 +344,9 @@ public class Player2Controller : MonoBehaviour
                 time += Time.deltaTime * moveSpeed;
                 rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
                 yield return null;
+
             }
+            Manager.game.StepAction++;
             moveOn = false;
         }
        
