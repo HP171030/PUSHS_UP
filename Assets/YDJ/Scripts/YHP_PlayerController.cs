@@ -276,6 +276,19 @@ public class YHP_PlayerController : MonoBehaviour
         }
 
     }
+
+    private IEnumerator BumpTimer()
+    {
+        Debug.Log("1초 지나면 범프폴스");
+         yield return new WaitForSeconds(3f);
+        wallMirrorBumpChecker = false;
+    }
+
+
+
+
+
+
     private IEnumerator MoveRoutine(Vector3 moveDirValue)
     {
 
@@ -322,6 +335,8 @@ public class YHP_PlayerController : MonoBehaviour
                             animator.SetBool("Push", false);
                         }
                         wallMirrorBumpChecker = true;
+                        StartCoroutine(BumpTimer());
+
 
                     }
 
