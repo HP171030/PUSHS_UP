@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
                 if (obstacleLayer.Contain(grabHit.collider.gameObject.layer))
                 {
                     animator.SetBool("Pull", true);
-                    Debug.Log("잡음");
+                    Debug.Log($"{grabHit.collider.name} 을 잡음");
 
                 }
 
@@ -170,6 +170,7 @@ public class PlayerController : MonoBehaviour
                 {
                     Debug.Log("상정외 ");
                     moveOn = false;
+                    pullOn = false;
                 }
 
             }
@@ -197,37 +198,54 @@ public class PlayerController : MonoBehaviour
  
         if ( X )
         {
-            Collider [] pullTarget = Physics.OverlapSphere(transform.position + new Vector3(-pullDir.x, 0, 0) * moveDistance, 1f, ground);
+            Collider [] pullTarget = Physics.OverlapSphere(transform.position - transform.forward*2 , 0.5f, ground|wall);
             Tile tile;
+            
             if ( pullTarget.Length > 0 )
             {
                 foreach ( Collider col in pullTarget )
                 {
+                    if ( wall.Contain(col.gameObject.layer) )
+                    {
+                        Debug.Log("뒤에 벽이");
+                        yield break;
+                    }
                     tile = col.gameObject.GetComponent<Tile>();
+                    
+                    Debug.Log($"뒤에 타일 이름은 {tile.name}");
                     targetPos = tile.middlePoint.position;
+                    debugVec = transform.position - transform.forward*2;
                 }
             }
         }
         else if ( !X )
         {
-            Collider [] pullTarget = Physics.OverlapSphere(transform.position + new Vector3(0, 0, -pullDir.z) * moveDistance, 1f, ground);
+            Collider [] pullTarget = Physics.OverlapSphere(transform.position - transform.forward*2, 0.5f, ground|wall);
             Tile tile;
             if ( pullTarget.Length > 0 )
             {
                 foreach ( Collider col in pullTarget )
                 {
+                    if ( wall.Contain(col.gameObject.layer) )
+                    {
+                        Debug.Log("뒤에 벽이");
+                        yield break;
+                    }
                     tile = col.gameObject.GetComponent<Tile>();
+                    Debug.Log($"뒤에 타일 이름은 {tile.name}");
                     targetPos = tile.middlePoint.position;
+                    debugVec = transform.position - transform.forward * 2;
                 } 
             }
         }
-        Collider [] grabPullTarget = Physics.OverlapSphere(transform.position, 1f, ground);
+        Collider [] grabPullTarget = Physics.OverlapSphere(transform.position, 0.5f, ground);
         Tile grabTile;
         if ( grabPullTarget.Length > 0 )
         {
             foreach ( Collider col in grabPullTarget )
             {
                 grabTile = col.gameObject.GetComponent<Tile>();
+              
                 grabTargetPos = grabTile.middlePoint.position;
             }
         }
@@ -271,40 +289,35 @@ public class PlayerController : MonoBehaviour
 
         }
         moveOn = false;
+        pullOn = false;
 
     }
     private void OnDrawGizmos()
     {
-        Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit hitInfo;
-
-        if ( Physics.Raycast(ray, out hitInfo, 1f) )
-        {
-            Gizmos.color = Color.red;
-        }
-        else
-        {
-            Gizmos.color = Color.yellow;
-        }
-
-        Gizmos.DrawRay(ray);
+        Gizmos.color = Color.red;
         if ( debugVec != null)
         Gizmos.DrawWireSphere(debugVec, 0.5f);
-        Gizmos.DrawWireCube(transform.position+new Vector3(0,1f,0) + moveDir, new Vector3(0.2f, 0.2f, 0.2f));
+       
     }
     private IEnumerator MoveRoutine( Vector3 moveDirValue )
     {
         LayerMask WandObslayer = obstacleLayer | wall;
         Vector3 targetPos = transform.position + moveDirValue * moveDistance;
+        debugVec = targetPos;
        Collider[] tiles =  Physics.OverlapSphere(targetPos, 0.5f, ground);
+        
         if ( tiles.Length > 0 )
         {
+            
             foreach ( Collider tile in tiles )
             {
+                
                 Tile tileIns = tile.GetComponent<Tile>();
+
                 if ( tileIns != null )
                 {
-                    Collider [] isBlank = Physics.OverlapSphere(tileIns.transform.position + new Vector3(0, 1f, 0), 0.5f, WandObslayer);
+                    Debug.Log($"True ,{tileIns.gameObject.name} ");
+                    Collider [] isBlank = Physics.OverlapSphere(tileIns.transform.position , 0.5f, WandObslayer);
                     
                     if ( isBlank.Length == 0 )
                     {
@@ -312,6 +325,10 @@ public class PlayerController : MonoBehaviour
                         debugVec = targetPos;
                         Debug.Log(tileIns.gameObject.name);
                     }
+                }
+                else
+                {
+                    Debug.Log("WhatThe");
                 }
 
             }
@@ -378,7 +395,7 @@ public class PlayerController : MonoBehaviour
                         time += Time.deltaTime * moveSpeed;
                         rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / 2));
                         hit.rigidbody.MovePosition(Vector3.Lerp(obsStartPos, obsTargetPos, time / 2));
-                        Debug.Log(hit.collider.gameObject.name);
+                       
 
                         yield return null;
                     }

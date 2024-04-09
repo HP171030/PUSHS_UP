@@ -21,11 +21,11 @@ public class CameraSwitch : MonoBehaviour
 
     private void OnChange(InputValue value)
     {
-   
+        if(!Manager.game.isEnter)
         Change();
     }
 
-    private void Change()
+    public void Change()
     {
 
         // 플레이어 1의 카메라가 활성화되어 있으면 플레이어 2의 카메라로 전환합니다.

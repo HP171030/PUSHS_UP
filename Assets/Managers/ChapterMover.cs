@@ -5,14 +5,30 @@ using UnityEngine;
 public class ChapterMover : MonoBehaviour
 {
    [SerializeField] LayerMask player;
-    [SerializeField] bool isEnter= false;
+    [SerializeField] CameraSwitch camSwitch;
+
+    private void Start()
+    {
+        camSwitch = FindObjectOfType<CameraSwitch>();
+    }
     private void OnTriggerEnter( Collider other )
     {
-        if ( !isEnter && player.Contain(other.gameObject.layer))
-
+        if (player.Contain(other.gameObject.layer) )
         {
-            int curSceneNum = Manager.scene.GetSceneNumber();
-            Manager.scene.LoadScene(curSceneNum + 1);
+            Destroy(other.gameObject);
+            if(Manager.game.clearValue > 1 )
+            {
+                camSwitch.Change();
+                Manager.game.clearValue--;
+                Manager.game.isEnter = true;
+            }
+            else
+            {
+                int curSceneNum = Manager.scene.GetSceneNumber();
+                Manager.scene.LoadScene(curSceneNum + 1);
+                Manager.game.isEnter = false;
+            }
+           
         }
     }
 }
