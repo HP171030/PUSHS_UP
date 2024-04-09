@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     private int stepCount = 0;
 
     public CinemachineVirtualCamera cine;
+    public PlayerController playerController;
+    public Player2Controller player2Controller;
     public UnityAction stepUpdate;
 
 
@@ -19,7 +21,21 @@ public class GameManager : MonoBehaviour
     public int StepAction { get { return stepCount; } set { stepCount = value; stepUpdate?.Invoke(); } }
 
 
+    public void PlayerControllStop()
+    {
+        Debug.Log("inputOff");
+        playerController.inputKey = false;
+        playerController.moveDir = Vector3.zero;
+        player2Controller.inputKey = false;
+        player2Controller.moveDir = Vector3.zero;
 
+    }
+    public void PlayerControllerOn()
+    {
+        Debug.Log("inputOn");
+        playerController.inputKey = true;
+        player2Controller.inputKey = true;  
+    }
     public void ShakeCam()
     {
         if(cine != null )

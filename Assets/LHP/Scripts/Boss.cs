@@ -12,6 +12,8 @@ public class Boss : MonoBehaviour
     protected int patternCount;
    protected bool onPattern = false;
 
+    [SerializeField] protected GameObject ObstacleInstance;
+
     [SerializeField] public LayerMask tile;
     [SerializeField] public LayerMask player;
     [SerializeField] public LayerMask obstacle;

@@ -11,12 +11,16 @@ public class GameSceneLoader : BaseScene
     {
         Manager.game.boomAction = 3;
         Manager.game.cine = thisSceneCine;
+        Manager.game.playerController = FindObjectOfType<PlayerController>();
+        Manager.game.player2Controller = FindObjectOfType<Player2Controller>();
         yield return null;
         
     }
     private void Start()
     {
         Manager.game.cine = thisSceneCine;
+        Manager.game.playerController = FindObjectOfType<PlayerController>();
+        Manager.game.player2Controller = FindObjectOfType<Player2Controller>();
     }
 
 }

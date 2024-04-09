@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 moveDir;
 
    public bool moveOn;
+    public bool inputKey = true;
     bool pullOn;
     bool grabOn;
     [Header("Player")]
@@ -48,11 +49,12 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
          layerMask = ~( 1 << LayerMask.NameToLayer("Ground") );
+        inputKey = true;
 
     }
     private void OnMove( InputValue value )
     {
-        if ( cameraSwitch.IsPlayer1Active &&!onIce )
+        if ( cameraSwitch.IsPlayer1Active &&!onIce &&inputKey)
         {
         Vector2 input = value.Get<Vector2>();
         moveDir = new Vector3(input.x, 0, input.y);

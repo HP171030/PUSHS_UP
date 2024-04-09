@@ -24,7 +24,8 @@ public class BossChap1 : Boss
     {
         base.Start();
         anim = GetComponent<Animator>();
-       
+        sweapAllTile = sweapTile.GetComponentsInChildren<Tile>();
+
     }
 
     protected override void Update()
@@ -106,10 +107,10 @@ public class BossChap1 : Boss
                     for ( int i = 0; i < fallingStoneCount; i++ )
                     {
 
-                        stoneFall [i] = Random.Range(0, 80);
-                        Debug.Log(stoneFall [i]);
+                        stoneFall [i] = Random.Range(0, sweapAllTile.Length);
+                      
                     }
-                    sweapAllTile = sweapTile.GetComponentsInChildren<Tile>();
+                    
                     patternCount = 10;
 
                     targetTile = true;
@@ -139,12 +140,16 @@ public class BossChap1 : Boss
     {
         if(patternCount <= 0 )
         {
+            
+            StartCoroutine(WaitPattern());
+
             Debug.Log("Action");
             alert = false;
             targetTile = false;
         anim.Play("RollingStone");
             curState = Pattern.Idle;
             onPattern = false;
+            
         }
 
     }
@@ -167,6 +172,7 @@ public class BossChap1 : Boss
     {
         if(patternCount <= 0 )
         {
+            StartCoroutine(WaitPattern());
             Debug.Log("Action");
             alert = false;
             targetTile = false;
@@ -196,10 +202,26 @@ public class BossChap1 : Boss
             onPattern = false;
         }
     }
+    public void CreateObstacle()
+    {
+        int [] obsCreate= new int [2];                              //배열 2개
+            for ( int i = 0; i < 2; i++ )
+            {
 
+            obsCreate [i] = Random.Range(0, sweapAllTile.Length);           //랜덤으로 배열 2개에 숫자 2개 할당
+               
+            }
+ for(int i = 0;i <  obsCreate.Length;i++)
+        {
+            Instantiate(ObstacleInstance, sweapAllTile [obsCreate [i]].middlePoint.position, Quaternion.identity);
+        }
+
+       
+    }
     public void Howling()
     {if(patternCount <= 0 )
         {
+            StartCoroutine(WaitPattern());
             Debug.Log("Action");
             alert = false;
             targetTile = false;
@@ -225,5 +247,13 @@ public class BossChap1 : Boss
             curState = Pattern.Idle;
             onPattern = false;
         }
+    }
+
+    public IEnumerator WaitPattern()
+    {
+        Manager.game.PlayerControllStop();
+        yield return new WaitForSeconds(2f);
+        Manager.game.PlayerControllerOn();
+        CreateObstacle();
     }
 }
