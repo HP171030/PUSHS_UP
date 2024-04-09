@@ -29,4 +29,25 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/GameScenes/Chapter1/StageBOSS.unity
     guid: 787ee90bdb0d7ad48b5f83934c7d536e
+  - enabled: 1
+    path: Assets/GameScenes/Chapter2/Stage1.unity
+    guid: ab15ef9ec1b8d5344a0080ce65491cac
+  - enabled: 1
+    path: Assets/GameScenes/Chapter2/Stage2.unity
+    guid: 1f71be737d9cb0544b1167b37b3ae9af
+  - enabled: 1
+    path: Assets/GameScenes/Chapter2/Stage3.unity
+    guid: ec74f274c2a6ee04b9cf04aa867b1f21
+  - enabled: 1
+    path: Assets/GameScenes/Chapter2/Stage4.unity
+    guid: 469b154802bc06b4da957ebea362c003
+  - enabled: 1
+    path: Assets/GameScenes/Chapter2/Stage5.unity
+    guid: c02ca5e53143c7e45bd3742056d263cf
+  - enabled: 1
+    path: Assets/GameScenes/Chapter2/Stage6.unity
+    guid: e3ab6dae4af688941aaeb26dfcaa44f2
+  - enabled: 1
+    path: Assets/GameScenes/Chapter2/Stage7.unity
+    guid: 2181a60ab97f96a4991bce149a9b9e1d
   m_configObjects: {}

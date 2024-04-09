@@ -11,7 +11,7 @@ public class IceChunkTrap : MonoBehaviour
     PlayerController controller;
     Player2Controller player2Controller;
     [SerializeField]LayerMask iceLayer;
-
+    [SerializeField] float slideSpeed;
     Vector3 playerMoveDir;
     bool onIce = false;
 
@@ -53,7 +53,7 @@ public class IceChunkTrap : MonoBehaviour
             {
                 yield return new WaitForFixedUpdate();
 
-                player.MovePosition(player.gameObject.transform.position + player.gameObject.transform.forward * 0.1f);
+                player.MovePosition(player.gameObject.transform.position + player.gameObject.transform.forward * slideSpeed/10);
                 if ( Physics.OverlapSphere(player.position, 1f, iceLayer).Length > 0 && !Physics.Raycast(player.position + new Vector3(0, 0.5f, 0), player.transform.forward, 1f) )
                 {
                     yield return null;
@@ -80,7 +80,7 @@ public class IceChunkTrap : MonoBehaviour
             {
                 yield return new WaitForFixedUpdate();
                 
-                player.MovePosition(player.gameObject.transform.position + player.gameObject.transform.forward * 0.1f);
+                player.MovePosition(player.gameObject.transform.position + player.gameObject.transform.forward * 0.1f * slideSpeed / 10);
                 if(Physics.OverlapSphere(player.position,1f,iceLayer).Length > 0 && !Physics.Raycast(player.position + new Vector3(0,0.5f,0),player.transform.forward,1f))
                 {
                     yield return null;
