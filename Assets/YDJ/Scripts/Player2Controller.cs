@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,7 +8,8 @@ public class Player2Controller : MonoBehaviour
 {
     public Vector3 moveDir;
 
-    bool moveOn;
+    public bool moveOn;
+    public bool inputKey;
     [Header("Player")]
     [SerializeField] float moveDistance;
     [SerializeField] float moveSpeed;
@@ -38,7 +40,7 @@ public class Player2Controller : MonoBehaviour
 
 
     RaycastHit BoomableHit;
-
+    
 
     private void FixedUpdate()
     {
@@ -74,12 +76,13 @@ public class Player2Controller : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        inputKey = true;
 
     }
     private void OnMove(InputValue value)
     {
 
-        if (!cameraSwitch.IsPlayer1Active && !onIce )
+        if (!cameraSwitch.IsPlayer1Active && !onIce&&inputKey )
         {
             Vector2 input = value.Get<Vector2>();
             moveDir = new Vector3(input.x, 0, input.y);
@@ -157,7 +160,7 @@ public class Player2Controller : MonoBehaviour
                     if (isBlank.Length == 0 )
                     {
                         targetPos = tileIns.middlePoint.position;
-                        Debug.Log(tileIns.gameObject.name);
+                       
                     }
                 }
 
@@ -265,6 +268,7 @@ public class Player2Controller : MonoBehaviour
                                             rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
                                             yield return null;
                                         }
+                                    Manager.game.StepAction++;
                                         moveOn = false;
                                     }
 
@@ -302,7 +306,7 @@ public class Player2Controller : MonoBehaviour
                                 rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
                                 yield return null;
                             }
-                            Debug.Log(isTile.collider.gameObject.name);
+                            Manager.game.StepAction++;
                             moveOn = false;
                             yield return null;
                         }
@@ -322,6 +326,7 @@ public class Player2Controller : MonoBehaviour
             else
             {
                 Debug.Log("없을수는 없어");
+                ontheBox = false;
                 moveOn = false;
             }
 
@@ -342,7 +347,9 @@ public class Player2Controller : MonoBehaviour
                 time += Time.deltaTime * moveSpeed;
                 rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
                 yield return null;
+
             }
+            Manager.game.StepAction++;
             moveOn = false;
         }
        

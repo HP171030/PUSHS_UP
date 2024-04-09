@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 moveDir;
 
    public bool moveOn;
+    public bool inputKey = true;
     bool pullOn;
     bool grabOn;
     [Header("Player")]
@@ -48,11 +49,12 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
          layerMask = ~( 1 << LayerMask.NameToLayer("Ground") );
+        inputKey = true;
 
     }
     private void OnMove( InputValue value )
     {
-        if ( cameraSwitch.IsPlayer1Active &&!onIce )
+        if ( cameraSwitch.IsPlayer1Active &&!onIce &&inputKey)
         {
         Vector2 input = value.Get<Vector2>();
         moveDir = new Vector3(input.x, 0, input.y);
@@ -191,15 +193,43 @@ public class PlayerController : MonoBehaviour
         Vector3 targetPos = pullDir;
         Vector3 grabStartPos = grabHit.collider.transform.position;
         Vector3 grabTargetPos = pullDir;
+
+ 
         if ( X )
         {
-            targetPos = transform.position + new Vector3(-pullDir.x, 0, 0) * moveDistance;
-            grabTargetPos = grabHit.collider.transform.position + new Vector3(-pullDir.x, 0, 0) * moveDistance;
+            Collider [] pullTarget = Physics.OverlapSphere(transform.position + new Vector3(-pullDir.x, 0, 0) * moveDistance, 1f, ground);
+            Tile tile;
+            if ( pullTarget.Length > 0 )
+            {
+                foreach ( Collider col in pullTarget )
+                {
+                    tile = col.gameObject.GetComponent<Tile>();
+                    targetPos = tile.middlePoint.position;
+                }
+            }
         }
         else if ( !X )
         {
-            targetPos = transform.position + new Vector3(0, 0, -pullDir.z) * moveDistance;
-            grabTargetPos = grabHit.collider.transform.position + new Vector3(0, 0, -pullDir.z) * moveDistance;
+            Collider [] pullTarget = Physics.OverlapSphere(transform.position + new Vector3(0, 0, -pullDir.z) * moveDistance, 1f, ground);
+            Tile tile;
+            if ( pullTarget.Length > 0 )
+            {
+                foreach ( Collider col in pullTarget )
+                {
+                    tile = col.gameObject.GetComponent<Tile>();
+                    targetPos = tile.middlePoint.position;
+                } 
+            }
+        }
+        Collider [] grabPullTarget = Physics.OverlapSphere(transform.position, 1f, ground);
+        Tile grabTile;
+        if ( grabPullTarget.Length > 0 )
+        {
+            foreach ( Collider col in grabPullTarget )
+            {
+                grabTile = col.gameObject.GetComponent<Tile>();
+                grabTargetPos = grabTile.middlePoint.position;
+            }
         }
 
 
