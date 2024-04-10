@@ -7,18 +7,18 @@ public class Mirror1 : MonoBehaviour
     [SerializeField] Transform mirror2; // 거울2의 Transform을 참조하는 변수
 
     [Header("Property")]
-    [SerializeField] float Mirror2OffsetX = 20f; // Y값 오프셋
+    [SerializeField] float Mirror2OffsetX = 41f; // Y값 오프셋
     [SerializeField] float ObstacleOffsetY = -5f; // Y값 오프셋
     [SerializeField] float ObstacleOffsetX;
     [SerializeField] float ObstacleOffsetZ;
     [SerializeField] float ObstacleInMinrrorCoroutineTime;
 
+
+
     [Header("Config")]
 
     //[SerializeField] WallCollider wallCollider;
 
-
-    [SerializeField] GameObject Mirror1WallPoint;
     [SerializeField] YHP_PlayerController YDJ_PlayerController;
     //[SerializeField] Obstacle obstacleScript;
 
@@ -27,6 +27,9 @@ public class Mirror1 : MonoBehaviour
 
     public bool obstacleChecker;
     public bool ObstacleChecker { get { return obstacleChecker; } }
+
+    public bool moveDisableChecker;
+    public bool MoveDisableChecker { get { return moveDisableChecker; } }
 
     public bool mirror1InObstacleChecker;
     public bool Mirror1InObstacleChecker { get { return mirror1InObstacleChecker; } }
@@ -81,7 +84,7 @@ public class Mirror1 : MonoBehaviour
         if (!wallChecker)
         {
             Vector3 newPosition = transform.position;
-            newPosition.z += Mirror2OffsetX;
+            newPosition.x += Mirror2OffsetX;
             mirror2.position = newPosition;
         }
         //else // 벽에 붙어있는 경우 거울2를 바로 앞 바닥에 위치시킵니다.
@@ -90,7 +93,18 @@ public class Mirror1 : MonoBehaviour
         //    newPosition.z += Mirror2OffsetX;
         //    mirror2.position = newPosition;
         //}
+
+        //if (!YDJ_PlayerController.mirrorHolding)
+        //{
+        //    // 레이어를 변경합니다.
+        //    gameObject.layer = 7;
+        //}
+        //else
+        //{
+        //    gameObject.layer = 31;
+        //}
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -102,12 +116,19 @@ public class Mirror1 : MonoBehaviour
             wallChecker = true;
 
             Vector3 newPosition = transform.position;
-            newPosition.z += Mirror2OffsetX;
+            newPosition.x += Mirror2OffsetX;
             newPosition.y = 0;
             mirror2.position = newPosition;
             obstacleChecker = false;
             IsWallExit = false;
         }
+        if(other.gameObject.CompareTag("MoveDisable"))
+        {
+
+            moveDisableChecker = true;
+            wallChecker = false;
+        }
+
 
 
 
@@ -173,6 +194,7 @@ public class Mirror1 : MonoBehaviour
         IsWallExit = true;
         obstacleChecker = false;
         mirrorObstacleAttachedChecker = false;
+        moveDisableChecker = false;
     }
 
 
