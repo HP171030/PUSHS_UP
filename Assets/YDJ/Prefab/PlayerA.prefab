@@ -1005,15 +1005,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400040, guid: b69174d668ba02d44b14a084b217670a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -33
+      value: -29.23338
       objectReference: {fileID: 0}
     - target: {fileID: 400040, guid: b69174d668ba02d44b14a084b217670a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.018974304
       objectReference: {fileID: 0}
     - target: {fileID: 400040, guid: b69174d668ba02d44b14a084b217670a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 42
+      value: 43.842594
       objectReference: {fileID: 0}
     - target: {fileID: 400040, guid: b69174d668ba02d44b14a084b217670a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1185,6 +1185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDir: {x: 0, y: 0, z: 0}
+  moveOn: 0
   inputKey: 1
   moveDistance: 2
   moveSpeed: 4
@@ -1207,13 +1208,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   onIce: 0
+  NonePlayer:
+    serializedVersion: 2
+    m_Bits: 2147485888
+  cameraSwitch: {fileID: 0}
   holder: {fileID: 8747661542293095590}
   mirror1: {fileID: 0}
   mirror1Image: {fileID: 0}
-  moveLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  cameraSwitch: {fileID: 0}
   holderPoint: {fileID: 7536203294138164099}
   distanceFromPlayer: 2
   wallMirrorOffset: -1

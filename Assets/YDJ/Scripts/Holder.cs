@@ -77,6 +77,7 @@ public class Holder : MonoBehaviour
         {
             if (collider.gameObject.layer == LayerMask.NameToLayer("Mirror"))
             {
+                Debug.Log("mirrorLader");
                 return true;
             }
         }

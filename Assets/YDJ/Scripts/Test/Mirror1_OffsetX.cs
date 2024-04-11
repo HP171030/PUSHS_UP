@@ -19,7 +19,7 @@ public class Mirror1_OffsetX : MonoBehaviour
 
     //[SerializeField] WallCollider wallCollider;
 
-    [SerializeField] TestController YDJ_PlayerController;
+    [SerializeField] New_PlayerController YDJ_PlayerController;
     //[SerializeField] Obstacle obstacleScript;
 
     public bool wallChecker;
@@ -138,7 +138,6 @@ public class Mirror1_OffsetX : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("---------------------------------------------");
         if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle") && !YDJ_PlayerController.mirrorHolding)
         {
             //Debug.Log("거울에 장애물 닿음");
