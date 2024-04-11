@@ -12,12 +12,14 @@ public class Manager : MonoBehaviour
     [SerializeField] PoolManager poolManager;
     [SerializeField] UIManager uIManager;
     [SerializeField] SoundManager soundManager;
+    [SerializeField] DataManager dataManager;
 
     public static GameManager game { get { return instance.gameManager; } }
     public static SceneManager scene { get { return instance.sceneManager; } }
     public static SoundManager sound { get { return instance.soundManager; } }
     public static UIManager ui { get { return instance.uIManager; } }
     public static PoolManager pool { get { return instance.poolManager; } }
+    public static DataManager data { get { return instance.dataManager; } }
     private void Awake()
     {
         if(instance == null )

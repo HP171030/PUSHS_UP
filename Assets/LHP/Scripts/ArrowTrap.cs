@@ -9,7 +9,7 @@ public class ArrowTrap : MonoBehaviour
     [SerializeField] GameObject arrow;
     [SerializeField] float distance;
     [SerializeField] float targetTime;
-    [SerializeField] Material mat;
+    [SerializeField] Renderer matRenderer;
     public bool inButton;
     bool startButton;
 
@@ -17,7 +17,7 @@ public class ArrowTrap : MonoBehaviour
     private void Start()
     {
         Manager.game.stepUpdate += StartRouine;
-        mat.color = Color.red;
+        matRenderer.material.color = Color.red;
     }
     private void OnTriggerEnter( Collider other )
     {
@@ -25,7 +25,7 @@ public class ArrowTrap : MonoBehaviour
 
         if ( player.Contain(other.gameObject.layer) )
         {
-            mat.color = Color.black;
+            matRenderer.material.color = Color.black;
             inButton = true;
         }
     }
@@ -50,7 +50,7 @@ public class ArrowTrap : MonoBehaviour
     {
         if ( player.Contain(other.gameObject.layer))
         {
-            mat.color = Color.red;
+            matRenderer.material.color = Color.red;
             Debug.Log("exit");
         }
     }
@@ -61,17 +61,21 @@ public class ArrowTrap : MonoBehaviour
         float time = 0;
         Vector3 startPos = arrow.transform.position;
         Vector3 targetPos = arrow.transform.position + arrow.transform.forward* distance;
-        if(Physics.BoxCast(arrow.transform.position,new Vector3(1,1,1)/2f, arrow.transform.forward,out RaycastHit player, Quaternion.identity, distance) )
-        { 
-            if ( this.player.Contain(player.collider.gameObject.layer) )
+        RaycastHit [] players = Physics.BoxCastAll(arrow.transform.position, new Vector3(1, 1, 1) / 2f, arrow.transform.forward);
+        
+            foreach(RaycastHit p in players )
+        {
+            if(player.Contain(p.collider.gameObject.layer))
             {
                 Debug.Log("화살에 맞음 GameOver");
             }
             else
             {
-                Debug.Log("none");
+                Debug.Log("안맞음");
             }
         }
+            
+        
         while ( time < targetTime )
         {
             time += Time.deltaTime;
