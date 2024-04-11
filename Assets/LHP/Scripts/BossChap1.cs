@@ -8,9 +8,9 @@ public class BossChap1 : Boss
     [SerializeField] GameObject stoneSpawner;
     [SerializeField] Transform [] stoneSpawnerChildren;
     Tile [] sweapAllTile;
+
    [SerializeField] GameObject sweapTile;
     [SerializeField] float spawnHeight;
-    Transform startSpawner;
     Transform getStartSpawner;
     [SerializeField] GameObject stonePrefab;
     [SerializeField] GameObject fallingStonePrefab;
@@ -25,6 +25,7 @@ public class BossChap1 : Boss
         base.Start();
         anim = GetComponent<Animator>();
         sweapAllTile = sweapTile.GetComponentsInChildren<Tile>();
+        
 
     }
 
@@ -202,22 +203,7 @@ public class BossChap1 : Boss
             onPattern = false;
         }
     }
-    public void CreateObstacle()
-    {
-        int [] obsCreate= new int [2];                              //배열 2개
-            for ( int i = 0; i < 2; i++ )
-            {
-
-            obsCreate [i] = Random.Range(0, sweapAllTile.Length);           //랜덤으로 배열 2개에 숫자 2개 할당
-               
-            }
- for(int i = 0;i <  obsCreate.Length;i++)
-        {
-            Instantiate(ObstacleInstance, sweapAllTile [obsCreate [i]].middlePoint.position, Quaternion.identity);
-        }
-
-       
-    }
+ 
     public void Howling()
     {if(patternCount <= 0 )
         {
@@ -249,11 +235,5 @@ public class BossChap1 : Boss
         }
     }
 
-    public IEnumerator WaitPattern()
-    {
-        Manager.game.PlayerControllStop();
-        yield return new WaitForSeconds(2f);
-        Manager.game.PlayerControllerOn();
-        CreateObstacle();
-    }
+
 }
