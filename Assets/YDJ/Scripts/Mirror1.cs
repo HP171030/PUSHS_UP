@@ -28,8 +28,8 @@ public class Mirror1 : MonoBehaviour
     public bool obstacleChecker;
     public bool ObstacleChecker { get { return obstacleChecker; } }
 
-    public bool moveDisableChecker;
-    public bool MoveDisableChecker { get { return moveDisableChecker; } }
+    //public bool moveDisableChecker;
+    //public bool MoveDisableChecker { get { return moveDisableChecker; } }
 
     public bool mirror1InObstacleChecker;
     public bool Mirror1InObstacleChecker { get { return mirror1InObstacleChecker; } }
@@ -122,12 +122,12 @@ public class Mirror1 : MonoBehaviour
             obstacleChecker = false;
             IsWallExit = false;
         }
-        if(other.gameObject.CompareTag("MoveDisable"))
-        {
+        //if(other.gameObject.CompareTag("MoveDisable"))
+        //{
 
-            moveDisableChecker = true;
-            wallChecker = false;
-        }
+        //    moveDisableChecker = true;
+        //    wallChecker = false;
+        //}
 
 
 
@@ -195,7 +195,7 @@ public class Mirror1 : MonoBehaviour
         IsWallExit = true;
         obstacleChecker = false;
         mirrorObstacleAttachedChecker = false;
-        moveDisableChecker = false;
+        //moveDisableChecker = false;
     }
 
 

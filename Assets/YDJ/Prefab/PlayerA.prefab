@@ -1102,9 +1102,6 @@ PrefabInstance:
       addedObject: {fileID: 4513225908704029411}
     - targetCorrespondingSourceObject: {fileID: 100040, guid: b69174d668ba02d44b14a084b217670a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3530610983725755415}
-    - targetCorrespondingSourceObject: {fileID: 100040, guid: b69174d668ba02d44b14a084b217670a, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8792600851279776242}
     - targetCorrespondingSourceObject: {fileID: 100040, guid: b69174d668ba02d44b14a084b217670a, type: 3}
       insertIndex: -1
@@ -1175,40 +1172,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &3530610983725755415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3092550884018470217}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e6eabb379772e44fb49fb9e7964bd15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveDir: {x: 0, y: 0, z: 0}
-  moveOn: 0
-  inputKey: 1
-  moveDistance: 2
-  moveSpeed: 4
-  pullSpeed: 1
-  animator: {fileID: 3092550884008972001}
-  rb: {fileID: 4513225908704029411}
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  wall:
-    serializedVersion: 2
-    m_Bits: 128
-  ground:
-    serializedVersion: 2
-    m_Bits: 512
-  crystal:
-    serializedVersion: 2
-    m_Bits: 2048
-  onIce: 0
-  cameraSwitch: {fileID: 0}
 --- !u!114 &8792600851279776242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1246,8 +1209,10 @@ MonoBehaviour:
   onIce: 0
   holder: {fileID: 8747661542293095590}
   mirror1: {fileID: 0}
-  mirror1Pos: {fileID: 0}
   mirror1Image: {fileID: 0}
+  moveLayer:
+    serializedVersion: 2
+    m_Bits: 0
   cameraSwitch: {fileID: 0}
   holderPoint: {fileID: 7536203294138164099}
   distanceFromPlayer: 2

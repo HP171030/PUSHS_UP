@@ -30,6 +30,7 @@ public class YHP_PlayerController : MonoBehaviour
     [SerializeField] Holder holder;
     [SerializeField] Mirror1 mirror1;
     [SerializeField] GameObject mirror1Image;
+    [SerializeField] LayerMask moveLayer;
 
     LayerMask layerMask;
 
@@ -591,7 +592,7 @@ public class YHP_PlayerController : MonoBehaviour
 
                 time += Time.deltaTime * moveSpeed;
                 rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
-                if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), transform.forward, out RaycastHit hitinfo, 1f))
+                if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), transform.forward, out RaycastHit hitinfo, 1f, moveLayer))
                 {
                     moveOn = false;
                     yield break;
@@ -670,7 +671,7 @@ public class YHP_PlayerController : MonoBehaviour
         {
 
 
-            if (holder.WallLader() && !mirror1.MoveDisableChecker) //벽에 거울을 놓는다면
+            if (holder.WallLader() && !holder.MoveDisableCheckerLader()) //벽에 거울을 놓는다면
             {
                 //holdChecker = false;
                 mirrorObject.transform.parent = null; // 부모 설정을 해제하여 자식에서 빼냅니다.
@@ -756,7 +757,7 @@ public class YHP_PlayerController : MonoBehaviour
                     Debug.Log("장애물이 앞에 있어 거울을 놓을 수 없습니다.");
                     return;
                 }
-                if (mirror1.MoveDisableChecker)
+                if (holder.MoveDisableCheckerLader())
                 {
                     mirror1.wallChecker = false;
                     Debug.Log("움직일 수 없는 장애물이 앞에 있어 거울을 놓을 수 없습니다.");

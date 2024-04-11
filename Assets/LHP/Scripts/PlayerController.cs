@@ -5,6 +5,7 @@ using Cinemachine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.InputSystem.HID;
 
 public class PlayerController : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask ground;
     [SerializeField] LayerMask crystal;
     [SerializeField] public bool onIce = false;
-    LayerMask layerMask;
+    [SerializeField] LayerMask moveLayer;
 
     [SerializeField] CameraSwitch cameraSwitch;
 
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-         layerMask = ~( 1 << LayerMask.NameToLayer("Ground") );
+   
         inputKey = true;
 
     }
@@ -295,35 +296,37 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
+
+        Gizmos.DrawWireCube(transform.position + new Vector3(0, 1f, 0) +  moveDir * 2f, new Vector3(0.2f, 0.2f, 0.2f));
         if ( debugVec != null)
         Gizmos.DrawWireSphere(debugVec, 0.5f);
        
     }
-    private IEnumerator MoveRoutine( Vector3 moveDirValue )
+    private IEnumerator MoveRoutine(Vector3 moveDirValue)
     {
         LayerMask WandObslayer = obstacleLayer | wall;
         Vector3 targetPos = transform.position + moveDirValue * moveDistance;
         debugVec = targetPos;
-       Collider[] tiles =  Physics.OverlapSphere(targetPos, 0.5f, ground);
-        
-        if ( tiles.Length > 0 )
+        Collider[] tiles = Physics.OverlapSphere(targetPos, 0.5f, ground);
+
+        if (tiles.Length > 0)
         {
-            
-            foreach ( Collider tile in tiles )
+
+            foreach (Collider tile in tiles)
             {
-                
+
                 Tile tileIns = tile.GetComponent<Tile>();
 
-                if ( tileIns != null )
+                if (tileIns != null)
                 {
                     Debug.Log($"True ,{tileIns.gameObject.name} ");
-                    Collider [] isBlank = Physics.OverlapSphere(tileIns.transform.position , 0.5f, WandObslayer);
-                    
-                    if ( isBlank.Length == 0 )
+                    Collider[] isBlank = Physics.OverlapSphere(tileIns.transform.position, 0.5f, WandObslayer);
+
+                    if (isBlank.Length == 0)
                     {
                         targetPos = tileIns.middlePoint.position;
                         debugVec = targetPos;
-                        Debug.Log(tileIns.gameObject.name);
+                        Debug.Log($"거울들었을때 안되니{tileIns.gameObject.name}");
                     }
                 }
                 else
@@ -336,9 +339,9 @@ public class PlayerController : MonoBehaviour
         Vector3 startPos = transform.position;
         RaycastHit hit;
         Vector3 PreMoveDir = moveDir;
-        if ( Physics.BoxCast(transform.position + new Vector3(0,1f,0),new Vector3(0.2f,0.2f,0.2f),moveDirValue*2f,out hit,Quaternion.identity,1f))
+        if (Physics.BoxCast(transform.position + new Vector3(0, 1f, 0), new Vector3(0.2f, 0.2f, 0.2f), moveDirValue * 2f, out hit, Quaternion.identity, 1f, wall|obstacleLayer))
         {
-
+            Debug.Log(hit.collider.name);
             if ( obstacleLayer.Contain(hit.collider.gameObject.layer) )
             {
                 Debug.Log("asff");
@@ -459,9 +462,11 @@ public class PlayerController : MonoBehaviour
 
                 time += Time.deltaTime * moveSpeed;
                 rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
-                if(Physics.Raycast(transform.position+new Vector3 (0,0.5f,0),transform.forward,out RaycastHit hitinfo, 1f) )
+                if(Physics.Raycast(transform.position+new Vector3 (0,0.5f,0),transform.forward,out RaycastHit hitinfo, 1f, moveLayer) )
                 {
                     moveOn = false;
+                    
+                    Debug.Log($"{hitinfo.collider.name} ");
                     yield break;
                 }
                 

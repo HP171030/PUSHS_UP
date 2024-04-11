@@ -84,4 +84,18 @@ public class Holder : MonoBehaviour
         return false;
     }
 
+    public bool MoveDisableCheckerLader()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, range);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.gameObject.CompareTag("MoveDisable"))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
