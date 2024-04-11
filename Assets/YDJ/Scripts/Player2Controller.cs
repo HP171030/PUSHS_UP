@@ -150,13 +150,24 @@ public class Player2Controller : MonoBehaviour
                 Tile tileIns = tile.GetComponent<Tile>();
                 if ( tileIns != null )
                 {
-                    Collider [] isBlank = Physics.OverlapSphere(tileIns.transform.position+ new Vector3(0,1f,0), 1f, layer);
+                    Collider [] isBlank = Physics.OverlapSphere(tileIns.middlePoint.transform.position+ new Vector3(0,1f,0), 0.1f, wall);
                     debugVec = tileIns.middlePoint.transform.position ;
                     if (isBlank.Length == 0 )
                     {
                         targetPos = tileIns.middlePoint.position;
                         Debug.Log($"앞에 {tileIns.gameObject.name}");
                        
+                    }
+                    else
+                    {
+                        foreach(Collider col in  isBlank )
+                        {
+                            Debug.Log($"앞에 장애물이 있어 { col.name}");
+                            transform.position = transform.position;
+                            moveOn = false;
+                            yield break;
+                        }
+                        
                     }
                 }
 

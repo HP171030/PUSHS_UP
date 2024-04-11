@@ -8,11 +8,11 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerController : MonoBehaviour
 {
-    public Vector3 moveDir;
+    public Vector3 moveDir = Vector3.zero;
 
-   public bool moveOn;
+    public bool moveOn;
     public bool inputKey = true;
-    bool pullOn;
+    bool pullOn = false;
     bool grabOn;
     [Header("Player")]
     [SerializeField] float moveDistance;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask ground;
     [SerializeField] LayerMask crystal;
     [SerializeField] public bool onIce = false;
-    LayerMask layerMask;
+    [SerializeField] LayerMask NonePlayer;
 
     [SerializeField] CameraSwitch cameraSwitch;
 
@@ -48,35 +48,35 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-         layerMask = ~( 1 << LayerMask.NameToLayer("Ground") );
+       
         inputKey = true;
 
     }
     private void OnMove( InputValue value )
     {
-        if ( cameraSwitch.IsPlayer1Active &&!onIce &&inputKey)
+        if ( cameraSwitch.IsPlayer1Active && !onIce && inputKey )
         {
-        Vector2 input = value.Get<Vector2>();
-        moveDir = new Vector3(input.x, 0, input.y);
+            Vector2 input = value.Get<Vector2>();
+            moveDir = new Vector3(input.x, 0, input.y);
 
         }
 
     }
-    
-    public void OnPull( InputValue value)
+
+    public void OnPull( InputValue value )
     {
-        if ( value.isPressed &&cameraSwitch.IsPlayer1Active)
+        if ( value.isPressed && cameraSwitch.IsPlayer1Active )
         {
             grabOn = true;
-            Debug.Log("Àâ±â");
+           
             animator.SetTrigger("PullStart");
 
             if ( Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.forward, out grabHit, 1.5f) )
             {
-                if (obstacleLayer.Contain(grabHit.collider.gameObject.layer))
+                if ( obstacleLayer.Contain(grabHit.collider.gameObject.layer) )
                 {
                     animator.SetBool("Pull", true);
-                    Debug.Log($"{grabHit.collider.name} À» ÀâÀ½");
+        
 
                 }
 
@@ -86,9 +86,9 @@ public class PlayerController : MonoBehaviour
         {
 
             grabOn = false;
-            if(!pullOn)
-            moveOn = false;
-            Debug.Log("³õ±â");
+            if ( !pullOn )
+                moveOn = false;
+          
 
 
         }
@@ -104,9 +104,9 @@ public class PlayerController : MonoBehaviour
     }
     public void MoveFunc()
     {
-        if ( !moveOn && !grabOn &&!onIce )
+        if ( !moveOn && !grabOn && !onIce )
         {
-           
+
             animator.SetFloat("MoveSpeed", moveDir.magnitude);
             if ( Mathf.Abs(moveDir.x) != 0 && Mathf.Abs(moveDir.z) != 0 )
             {
@@ -116,10 +116,8 @@ public class PlayerController : MonoBehaviour
             else if ( !moveOn && moveDir.magnitude > 0 )
             {
                 moveOn = true;
-
-                StartCoroutine(MoveRoutine(moveDir));
-
                 transform.forward = moveDir;
+                StartCoroutine(MoveRoutine(moveDir));
 
             }
 
@@ -129,46 +127,46 @@ public class PlayerController : MonoBehaviour
             pullOn = true;
             if ( grabHit.collider != null )
             {
-                Debug.Log($"ÀâÀ½ {grabHit.collider.gameObject.name}");
+               
                 Vector3 grabDir = ( grabHit.collider.gameObject.transform.position - transform.position ).normalized;
-                if(Physics.Raycast(transform.position + new Vector3(0,1,0),-transform.forward,out RaycastHit hit, 1.5f) )
+                if ( Physics.Raycast(transform.position + new Vector3(0, 1, 0), -transform.forward, out RaycastHit hit, 1.5f) )
                 {
                     if ( hit.collider != null )
                     {
-                        Debug.Log($"µÚ¿¡ º®ÀÕÀ½ {hit.collider.gameObject.name} ");
+                       
                         moveOn = false;
                         return;
                     }
                 }
-                
+
                 if ( grabDir.x > 0.9f && moveDir.x < 0f )
                 {
 
                     bool X = true;
                     StartCoroutine(PullRoutine(grabDir, X));
-                    Debug.Log($"{grabDir}‹¯°Üx");
+                  
                 }
                 else if ( grabDir.x < -0.9f && moveDir.x > 0f )
                 {
                     bool X = true;
                     StartCoroutine(PullRoutine(grabDir, X));
-                    Debug.Log($"{grabDir}‹¯°Üx");
+                  
                 }
                 else if ( grabDir.z > 0.9f && moveDir.z < 0f )
                 {
                     bool X = false;
                     StartCoroutine(PullRoutine(grabDir, X));
-                    Debug.Log($"{grabDir}‹¯°Üz");
+                   
                 }
                 else if ( grabDir.z < -0.9f && moveDir.z > 0f )
                 {
                     bool X = false;
                     StartCoroutine(PullRoutine(grabDir, X));
-                    Debug.Log($"{grabDir}‹¯°Üz");
+                  
                 }
                 else
                 {
-                    Debug.Log("»óÁ¤¿Ü ");
+                    
                     moveOn = false;
                     pullOn = false;
                 }
@@ -185,9 +183,9 @@ public class PlayerController : MonoBehaviour
     {
         moveOn = true;
         LayerMask backObsWall = wall | obstacleLayer;
-        if ( Physics.Raycast(transform.position, -transform.forward,out RaycastHit somethingBack, 1f,backObsWall) )
+        if ( Physics.Raycast(transform.position, -transform.forward, out RaycastHit somethingBack, 1f, backObsWall) )
         {
-            Debug.Log($"µÚ¿¡ ÀÕÀ½ {somethingBack.collider.gameObject.name}");
+            Debug.Log($"{somethingBack.collider.gameObject.name}");
             yield break;
         }
         Vector3 startPos = transform.position;
@@ -195,32 +193,38 @@ public class PlayerController : MonoBehaviour
         Vector3 grabStartPos = grabHit.collider.transform.position;
         Vector3 grabTargetPos = pullDir;
 
- 
+
         if ( X )
         {
-            Collider [] pullTarget = Physics.OverlapSphere(transform.position - transform.forward*2 , 0.5f, ground|wall);
+            Collider [] pullTarget = Physics.OverlapSphere(transform.position - transform.forward * 2, 0.5f, ground | wall);
             Tile tile;
-            
+
             if ( pullTarget.Length > 0 )
             {
                 foreach ( Collider col in pullTarget )
                 {
                     if ( wall.Contain(col.gameObject.layer) )
                     {
-                        Debug.Log("µÚ¿¡ º®ÀÌ");
+                      
+                        Debug.Log($"{col.name}");
+                        moveOn = false;
+                        pullOn = false;
                         yield break;
                     }
                     tile = col.gameObject.GetComponent<Tile>();
-                    
-                    Debug.Log($"µÚ¿¡ Å¸ÀÏ ÀÌ¸§Àº {tile.name}");
-                    targetPos = tile.middlePoint.position;
-                    debugVec = transform.position - transform.forward*2;
+                    if ( tile != null )
+                    {
+                        Debug.Log($" {tile.name}");
+                        targetPos = tile.middlePoint.position;
+                        debugVec = transform.position - transform.forward * 2;
+                    }
+
                 }
             }
         }
         else if ( !X )
         {
-            Collider [] pullTarget = Physics.OverlapSphere(transform.position - transform.forward*2, 0.5f, ground|wall);
+            Collider [] pullTarget = Physics.OverlapSphere(transform.position - transform.forward * 2, 0.5f, ground | wall);
             Tile tile;
             if ( pullTarget.Length > 0 )
             {
@@ -228,14 +232,14 @@ public class PlayerController : MonoBehaviour
                 {
                     if ( wall.Contain(col.gameObject.layer) )
                     {
-                        Debug.Log("µÚ¿¡ º®ÀÌ");
+                       
                         yield break;
                     }
                     tile = col.gameObject.GetComponent<Tile>();
-                    Debug.Log($"µÚ¿¡ Å¸ÀÏ ÀÌ¸§Àº {tile.name}");
+                   
                     targetPos = tile.middlePoint.position;
                     debugVec = transform.position - transform.forward * 2;
-                } 
+                }
             }
         }
         Collider [] grabPullTarget = Physics.OverlapSphere(transform.position, 0.5f, ground);
@@ -245,13 +249,15 @@ public class PlayerController : MonoBehaviour
             foreach ( Collider col in grabPullTarget )
             {
                 grabTile = col.gameObject.GetComponent<Tile>();
-              
-                grabTargetPos = grabTile.middlePoint.position;
+                if ( grabTile != null )
+                    grabTargetPos = grabTile.middlePoint.position;
+               
+
             }
         }
 
 
-        List<RaycastHit> hitArray = new List<RaycastHit>(Physics.RaycastAll(grabHit.collider.transform.position, grabHit.collider.transform.up, 10f,obstacleLayer));
+        List<RaycastHit> hitArray = new List<RaycastHit>(Physics.RaycastAll(grabHit.collider.transform.position, grabHit.collider.transform.up, 10f, obstacleLayer));
 
         hitArray.Add(grabHit);
 
@@ -261,9 +267,9 @@ public class PlayerController : MonoBehaviour
             hit.rigidbody.isKinematic = true;
         }
 
-       
+
         float time = 0;
-        
+
         while ( time < pullSpeed )
         {
 
@@ -272,7 +278,7 @@ public class PlayerController : MonoBehaviour
             grabHit.rigidbody.MovePosition(Vector3.Lerp(grabStartPos, grabTargetPos, time / pullSpeed));
             yield return null;
 
-           
+
             if ( time >= pullSpeed )
             {
                 foreach ( RaycastHit hit in hitArray )
@@ -281,7 +287,7 @@ public class PlayerController : MonoBehaviour
                     hit.rigidbody.isKinematic = false;
                 }
                 Manager.game.StepAction++;
-                
+
             }
 
 
@@ -295,193 +301,202 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        if ( debugVec != null)
-        Gizmos.DrawWireSphere(debugVec, 0.5f);
-       
+        if ( debugVec != null )
+            Gizmos.DrawWireSphere(debugVec, 0.5f);
+
     }
     private IEnumerator MoveRoutine( Vector3 moveDirValue )
     {
+        Vector3 startPos = transform.position;
+        Vector3 PreMoveDir = moveDir;
+
         LayerMask WandObslayer = obstacleLayer | wall;
-        Vector3 targetPos = transform.position + moveDirValue * moveDistance;
+        Vector3 targetPos = transform.position + moveDirValue *2 ;
         debugVec = targetPos;
-       Collider[] tiles =  Physics.OverlapSphere(targetPos, 0.5f, ground);
-        
+        Collider [] tiles = Physics.OverlapSphere(targetPos, 0.5f, ground);
+
         if ( tiles.Length > 0 )
         {
-            
+
             foreach ( Collider tile in tiles )
             {
-                
+
                 Tile tileIns = tile.GetComponent<Tile>();
 
                 if ( tileIns != null )
                 {
-                    Debug.Log($"True ,{tileIns.gameObject.name} ");
-                    Collider [] isBlank = Physics.OverlapSphere(tileIns.transform.position , 0.5f, WandObslayer);
-                    
+
+                    Collider [] isBlank = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0,1,0), 0.5f, WandObslayer);
+                    Debug.Log($"this is wall{isBlank.Length}");
                     if ( isBlank.Length == 0 )
                     {
+
                         targetPos = tileIns.middlePoint.position;
-                        debugVec = targetPos;
-                        Debug.Log(tileIns.gameObject.name);
+                     //   debugVec = targetPos;
+                        Debug.Log($"Perfect{tileIns.gameObject.name}");
+                        float time = 0;
+                        while ( time < 1 )
+                        {
+
+                            time += Time.deltaTime * moveSpeed;
+                            rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
+                            if ( Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), transform.forward, out RaycastHit hitinfo, 1f, NonePlayer) )
+                            {
+                                Debug.Log($"Someting {hitinfo.collider.name}");
+                                transform.position = startPos;
+
+                                moveOn = false;
+                                yield break;
+                            }
+                            else
+                            {
+                                Debug.Log("isNot    ;");
+                            }
+
+                            yield return null;
+                        }
+                        yield return null;
+                        Manager.game.StepAction++;
+                        moveOn = false;
+                        if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
+                        {
+                            animator.SetBool("Push", false);
+                        }
+                    }
+                    else
+                    {                                               // ìž¥ì• ë¬¼ì´ë‚˜ ë²½ì´ ìžˆëŠ” ê²½ìš°
+                        foreach ( Collider isCollider in isBlank )
+                        {
+                            Debug.Log($"{isCollider.name}ì´ ì•žì— ìžˆë‹¤");
+                            if ( obstacleLayer.Contain(isCollider.gameObject.layer) )
+                            {
+                                Debug.Log(isCollider.name);
+                                
+                                Vector3 obsStartPos = isCollider.gameObject.transform.position;
+                                Vector3 obsTargetPos = isCollider.gameObject.transform.position + moveDirValue * 2f;
+                                Collider [] colliders = Physics.OverlapSphere(obsTargetPos, 0.5f, ground);
+                                if ( colliders.Length > 0 )
+                                {
+                                    foreach ( Collider collider in colliders )
+                                    {
+
+                                        Tile obsTile = collider.GetComponent<Tile>();
+                                        if ( obsTile != null )
+                                        {
+                                            Debug.Log(obsTile.name);
+                                            obsTargetPos = obsTile.middlePoint.position;
+                                        }
+                                    }
+                                }
+
+                                float time = 0;
+
+                                LayerMask layer = obstacleLayer | wall | crystal;
+                                if ( Physics.BoxCast(isCollider.gameObject.transform.position, new Vector3(0.5f, 0.5f, 0.5f), moveDirValue, out RaycastHit hitInfo, Quaternion.identity, 0.7f, layer) )
+                                {
+                                    Debug.Log($" {hitInfo.collider.gameObject.name}");
+                                    animator.SetBool("Push", false);
+                                    moveOn = false;
+
+                                    //    hit.rigidbody.isKinematic = false;
+                                    if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
+                                    {
+                                        animator.SetBool("Push", false);
+                                    }
+                                }
+                                else
+                                {
+                                    List<RaycastHit> pushHitArray = new List<RaycastHit>(Physics.RaycastAll(isCollider.transform.position, isCollider.transform.up, 10f, obstacleLayer));
+                                    foreach ( RaycastHit hits in pushHitArray )
+                                    {
+                                        hits.collider.gameObject.transform.SetParent(isCollider.transform, true);
+                                        hits.rigidbody.isKinematic = true;
+                                        Debug.Log(hits.collider.gameObject.name);
+                                    }
+                                    while ( time < 2 )
+                                    {
+                                        if ( Physics.Raycast(isCollider.gameObject.transform.position + new Vector3(0, 0.5f, 0), moveDirValue, out RaycastHit notThis, 1f, layer) && notThis.collider.gameObject != isCollider.gameObject )
+                                        {
+
+
+                                            animator.SetBool("Push", false);
+                                            moveOn = false;
+                                            yield break;
+                                        }
+
+                                        animator.SetBool("Push", true);
+                                        time += Time.deltaTime * moveSpeed;
+                                        rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / 2));
+                                        isCollider.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(obsStartPos, obsTargetPos, time / 2));
+
+
+                                        yield return null;
+                                    }
+                                    Manager.game.StepAction++;
+                                    moveOn = false;
+
+                                    if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
+                                    {
+                                        animator.SetBool("Push", false);
+
+                                    }
+                                    foreach ( RaycastHit hits in pushHitArray )
+                                    {
+                                        hits.collider.gameObject.transform.SetParent(null, true);
+                                        //  hits.rigidbody.isKinematic = false;
+                                    }
+
+
+                                }
+                            }
+                            else if ( wall.Contain(isCollider.gameObject.layer) )
+                            {
+                                Debug.Log($"wall name is {isCollider.gameObject.name}");
+                                moveOn = false;
+                                yield return null;
+
+                            }
+                            else
+                            {
+                                float time = 0;
+                                while ( time < 1 )
+                                {
+                                    if ( Physics.Raycast(transform.position, transform.forward, out RaycastHit isWall, 0.2f, wall) )
+                                    {
+                                        Debug.Log($"wall {isWall}");
+                                        transform.position = startPos;
+                                        moveOn = false;
+                                        yield break;
+                                    }
+                                    time += Time.deltaTime * moveSpeed;
+                                    rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
+
+
+                                    yield return null;
+                                }
+                                yield return null;
+                                Manager.game.StepAction++;
+                                moveOn = false;
+                                if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
+                                {
+                                    animator.SetBool("Push", false);
+                                }
+                            }
+
+                        }
                     }
                 }
                 else
                 {
-                    Debug.Log("WhatThe");
-                }
-
-            }
-        }
-        Vector3 startPos = transform.position;
-        RaycastHit hit;
-        Vector3 PreMoveDir = moveDir;
-        if ( Physics.BoxCast(transform.position + new Vector3(0,1f,0),new Vector3(0.2f,0.2f,0.2f),moveDirValue*2f,out hit,Quaternion.identity,1f))
-        {
-
-            if ( obstacleLayer.Contain(hit.collider.gameObject.layer) )
-            {
-                Debug.Log("asff");
-                obstacle = hit.transform;
-                Vector3 obsStartPos = obstacle.position;
-                Vector3 obsTargetPos = obstacle.position + moveDirValue * moveDistance;
-                Collider[] colliders = Physics.OverlapSphere(obsTargetPos, 0.5f, ground);
-                if(colliders.Length > 0 )
-                {
-                    foreach(Collider collider in colliders)
-                    {
-                        Tile obsTile = collider.GetComponent<Tile>();
-                        obsTargetPos = obsTile.middlePoint.position;
-                        
-                    }
-                }
-
-                float time = 0;
-
-                LayerMask layer = obstacleLayer | wall | crystal;
-                if ( Physics.BoxCast(obstacle.position,new Vector3 (0.5f, 0.5f, 0.5f), moveDirValue, out RaycastHit hitInfo, Quaternion.identity, 0.7f,layer))
-                {
-                    Debug.Log($"µÚ¿¡ {hitInfo.collider.gameObject.name}°¡ ÀÖ´Ù");
-                    animator.SetBool("Push", false);
-                    moveOn = false;
-                    
-                    //    hit.rigidbody.isKinematic = false;
-                    if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
-                        {
-                            animator.SetBool("Push", false);
-                        }
-                }
-                     else
-                   {
-                    List<RaycastHit> pushHitArray = new List<RaycastHit>(Physics.RaycastAll(hit.collider.transform.position, hit.collider.transform.up, 10f,obstacleLayer));
-                    foreach ( RaycastHit hits in pushHitArray )
-                    {
-                        hits.collider.gameObject.transform.SetParent(hit.collider.transform, true);
-                        hits.rigidbody.isKinematic = true;
-                        Debug.Log(hits.collider.gameObject.name);
-                    }
-                    while ( time < 2 )
-                    {
-                        if ( Physics.Raycast(obstacle.position + new Vector3(0, 0.5f, 0), moveDirValue, out RaycastHit notThis, 1f, layer) && notThis.collider.gameObject != obstacle.gameObject )
-                        {
-                            
-                            Debug.Log("µÚ¿¡");
-                            animator.SetBool("Push", false);
-                            moveOn = false;
-                            yield break;
-                        }
-                       
-                        animator.SetBool("Push", true);
-                        time += Time.deltaTime * moveSpeed;
-                        rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / 2));
-                        hit.rigidbody.MovePosition(Vector3.Lerp(obsStartPos, obsTargetPos, time / 2));
-                       
-
-                        yield return null;
-                    }
-                    Manager.game.StepAction++;
-                    moveOn = false;
-                   
-                    if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
-                    {
-                        animator.SetBool("Push", false);
-
-                    }
-                    foreach ( RaycastHit hits in pushHitArray )
-                    {
-                        hits.collider.gameObject.transform.SetParent(null, true);
-                      //  hits.rigidbody.isKinematic = false;
-                    }
-
-                    Debug.Log("Àå¾Ö¹°µµ °°ÀÌ ¹«ºê");
-                }
-            }
-            else if (wall.Contain(hit.collider.gameObject.layer)) 
-            {
-                Debug.Log($"wall name is {hit.collider.gameObject.name}");
-                    moveOn = false;
                     yield return null;
-                
-            }
-            else
-            {
-                float time = 0;
-                while ( time < 1 )
-                {
-                    if(Physics.Raycast(transform.position,transform.forward,out RaycastHit isWall, 0.2f, wall) )
-                    {
-                        Debug.Log($"wall {isWall}");
-                        transform.position = transform.position;
-                        moveOn = false;
-                        yield break;
-                    }
-                    time += Time.deltaTime * moveSpeed;
-                    rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
                     
-                  
-                    yield return null;
                 }
-                yield return null;
-                Manager.game.StepAction++;
-                moveOn = false;
-                if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
-                {
-                    animator.SetBool("Push", false);
-                }
-            }
-                
-        }
-        else
-        {
-            float time = 0;
-            while ( time < 1 )
-            {
 
-                time += Time.deltaTime * moveSpeed;
-                rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
-                if(Physics.Raycast(transform.position+new Vector3 (0,0.5f,0),transform.forward,out RaycastHit hitinfo, 1f) )
-                {
-                    moveOn = false;
-                    yield break;
-                }
-                
-                yield return null;
             }
-            yield return null;
-            Manager.game.StepAction++;
-            moveOn = false;
-            if ( moveDir.magnitude < 1 || PreMoveDir != moveDir )
-            {
-                animator.SetBool("Push", false);
-            }
-
-           
         }
 
-
+        }
 
 
     }
 
-
-}

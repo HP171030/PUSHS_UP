@@ -25,7 +25,6 @@ public class YHP_PlayerController : MonoBehaviour
     [SerializeField] LayerMask ground;
     [SerializeField] LayerMask crystal;
     [SerializeField] LayerMask mirror;
-    [SerializeField] LayerMask crystal;
     [SerializeField] public bool onIce = false;
     [SerializeField] Holder holder;
     [SerializeField] Mirror1 mirror1;
@@ -240,18 +239,18 @@ public class YHP_PlayerController : MonoBehaviour
 
         }
 
-    
+
 
     /*  private void OnDrawGizmos()
       {
           Gizmos.color = Color.red;
           Gizmos.DrawLine(obstacle.position,obstacle.position + moveDir);
       }*/
-    private IEnumerator PullRoutine(Vector3 pullDir, bool X)
+    private IEnumerator PullRoutine( Vector3 pullDir, bool X )
     {
         moveOn = true;
         LayerMask backObsWall = wall | obstacleLayer;
-        if (Physics.Raycast(transform.position, -transform.forward, out RaycastHit somethingBack, 1f, backObsWall))
+        if ( Physics.Raycast(transform.position, -transform.forward, out RaycastHit somethingBack, 1f, backObsWall) )
         {
             Debug.Log($"뒤에 잇음 {somethingBack.collider.gameObject.name}");
             yield break;
@@ -262,16 +261,16 @@ public class YHP_PlayerController : MonoBehaviour
         Vector3 grabTargetPos = pullDir;
 
 
-        if (X)
+        if ( X )
         {
-            Collider[] pullTarget = Physics.OverlapSphere(transform.position - transform.forward * 2, 0.5f, ground | wall);
+            Collider [] pullTarget = Physics.OverlapSphere(transform.position - transform.forward * 2, 0.5f, ground | wall);
             Tile tile;
 
-            if (pullTarget.Length > 0)
+            if ( pullTarget.Length > 0 )
             {
-                foreach (Collider col in pullTarget)
+                foreach ( Collider col in pullTarget )
                 {
-                    if (wall.Contain(col.gameObject.layer))
+                    if ( wall.Contain(col.gameObject.layer) )
                     {
                         Debug.Log("뒤에 벽이");
                         yield break;
@@ -284,15 +283,15 @@ public class YHP_PlayerController : MonoBehaviour
                 }
             }
         }
-        else if (!X)
+        else if ( !X )
         {
-            Collider[] pullTarget = Physics.OverlapSphere(transform.position - transform.forward * 2, 0.5f, ground | wall);
+            Collider [] pullTarget = Physics.OverlapSphere(transform.position - transform.forward * 2, 0.5f, ground | wall);
             Tile tile;
-            if (pullTarget.Length > 0)
+            if ( pullTarget.Length > 0 )
             {
-                foreach (Collider col in pullTarget)
+                foreach ( Collider col in pullTarget )
                 {
-                    if (wall.Contain(col.gameObject.layer))
+                    if ( wall.Contain(col.gameObject.layer) )
                     {
                         Debug.Log("뒤에 벽이");
                         yield break;
@@ -304,11 +303,11 @@ public class YHP_PlayerController : MonoBehaviour
                 }
             }
         }
-        Collider[] grabPullTarget = Physics.OverlapSphere(transform.position, 0.5f, ground);
+        Collider [] grabPullTarget = Physics.OverlapSphere(transform.position, 0.5f, ground);
         Tile grabTile;
-        if (grabPullTarget.Length > 0)
+        if ( grabPullTarget.Length > 0 )
         {
-            foreach (Collider col in grabPullTarget)
+            foreach ( Collider col in grabPullTarget )
             {
                 grabTile = col.gameObject.GetComponent<Tile>();
 
@@ -321,7 +320,7 @@ public class YHP_PlayerController : MonoBehaviour
 
         hitArray.Add(grabHit);
 
-        foreach (RaycastHit hit in hitArray)
+        foreach ( RaycastHit hit in hitArray )
         {
             hit.collider.gameObject.transform.SetParent(grabHit.collider.transform, true);
             hit.rigidbody.isKinematic = true;
@@ -330,7 +329,7 @@ public class YHP_PlayerController : MonoBehaviour
 
         float time = 0;
 
-        while (time < pullSpeed)
+        while ( time < pullSpeed )
         {
 
             time += Time.deltaTime;
@@ -339,9 +338,9 @@ public class YHP_PlayerController : MonoBehaviour
             yield return null;
 
 
-            if (time >= pullSpeed)
+            if ( time >= pullSpeed )
             {
-                foreach (RaycastHit hit in hitArray)
+                foreach ( RaycastHit hit in hitArray )
                 {
                     hit.collider.gameObject.transform.SetParent(null, true);
                     hit.rigidbody.isKinematic = false;
@@ -349,6 +348,8 @@ public class YHP_PlayerController : MonoBehaviour
                 Manager.game.StepAction++;
 
             }
+        }
+    }
 
 
     private void OnDrawGizmos()
@@ -371,13 +372,6 @@ public class YHP_PlayerController : MonoBehaviour
         if (debugVec != null)
             Gizmos.DrawWireSphere(debugVec, 0.5f);
         Gizmos.DrawWireCube(transform.position + new Vector3(0, 1f, 0) + moveDir, new Vector3(0.2f, 0.2f, 0.2f));
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        if (debugVec != null)
-            Gizmos.DrawWireSphere(debugVec, 0.5f);
-
     }
 
     private IEnumerator BumpTimer()
@@ -451,8 +445,8 @@ public class YHP_PlayerController : MonoBehaviour
                     }
                 }
 
-                    }
-                }
+             
+                
 
                 float time = 0;
 
