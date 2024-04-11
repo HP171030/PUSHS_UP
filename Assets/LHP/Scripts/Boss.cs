@@ -11,6 +11,8 @@ public class Boss : MonoBehaviour
     public bool alert;
     protected int patternCount;
    protected bool onPattern = false;
+    protected Tile [] mapATiles;
+    [SerializeField] protected GameObject mapAtile;
 
     [SerializeField] protected GameObject ObstacleInstance;
 
@@ -21,6 +23,7 @@ public class Boss : MonoBehaviour
     {
         curState = Pattern.Idle;
         Manager.game.stepUpdate += StepCounter;
+        mapATiles = mapAtile.GetComponentsInChildren<Tile>();
     }
 
 
@@ -74,7 +77,11 @@ public class Boss : MonoBehaviour
                 tileRenderer.material.color = Color.Lerp(startColor, endColor, time / endTime);
                 yield return null;
                 if ( !alert )
+                {
+                    tileRenderer.material.color = Color.white;
                     yield break;
+                }
+                   
             }
             Color temp = startColor;
             startColor = endColor;
@@ -83,17 +90,41 @@ public class Boss : MonoBehaviour
             time = 0;
             yield return null;
         }
-        tileRenderer.material.color = Color.white;
+       
     }
     
     public void StepCounter()
     {
-        Debug.Log("StepCounting");
+        
         if ( patternCount > 0 )
         {
             patternCount--;
-            Debug.Log(patternCount);
+           
         }
   
+    }
+    public void CreateObstacle()
+    {
+        int [] obsCreate = new int [2];                              //배열 2개
+        for ( int i = 0; i < 2; i++ )
+        {
+
+            obsCreate [i] = Random.Range(0, mapATiles.Length);           //랜덤으로 배열 2개에 숫자 2개 할당
+
+        }
+        for ( int i = 0; i < obsCreate.Length; i++ )
+        {
+            Instantiate(ObstacleInstance, mapATiles [obsCreate [i]].middlePoint.position, Quaternion.identity);
+        }
+
+
+    }
+
+    public IEnumerator WaitPattern()
+    {
+        Manager.game.PlayerControllStop();
+        yield return new WaitForSeconds(2f);
+        Manager.game.PlayerControllerOn();
+        CreateObstacle();
     }
 }

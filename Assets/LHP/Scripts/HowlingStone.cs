@@ -7,13 +7,14 @@ public class HowlingStone : MonoBehaviour
     [SerializeField] LayerMask destroyStone;
     [SerializeField] LayerMask destroyObs;
     [SerializeField] ParticleSystem destroyEffect;
+    [SerializeField] Transform effectPos;
 
 
     private void OnCollisionEnter( Collision collision )
     {
         if ( destroyStone.Contain(collision.gameObject.layer) )            //¹æÇØ¹° ÆÄ±«
         {
-            Instantiate(destroyEffect, transform.position, Quaternion.identity);
+            Instantiate(destroyEffect, effectPos.position, Quaternion.identity);
             Destroy(gameObject);
             if ( destroyObs.Contain(collision.gameObject.layer) )
             {
