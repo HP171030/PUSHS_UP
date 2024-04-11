@@ -155,6 +155,7 @@ public class Player2Controller : MonoBehaviour
                     if (isBlank.Length == 0 )
                     {
                         targetPos = tileIns.middlePoint.position;
+                        Debug.Log($"¾Õ¿¡ {tileIns.gameObject.name}");
                        
                     }
                 }

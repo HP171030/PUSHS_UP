@@ -1,10 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Cinemachine;
 using System.Collections.Generic;
-using UnityEngine.WSA;
-using Unity.VisualScripting;
+
 
 public class YHP_PlayerController : MonoBehaviour
 {
@@ -18,8 +16,6 @@ public class YHP_PlayerController : MonoBehaviour
     [SerializeField] float moveDistance;
     [SerializeField] float moveSpeed;
     [SerializeField] float pullSpeed;
-    [SerializeField] float mirrorOffset; // 거울의 플레이어 쪽으로의 오프셋 값
-
 
     [Header("Configs")]
     [SerializeField] Animator animator;
@@ -29,21 +25,15 @@ public class YHP_PlayerController : MonoBehaviour
     [SerializeField] LayerMask ground;
     [SerializeField] LayerMask crystal;
     [SerializeField] LayerMask mirror;
+    [SerializeField] LayerMask crystal;
     [SerializeField] public bool onIce = false;
     [SerializeField] Holder holder;
     [SerializeField] Mirror1 mirror1;
     [SerializeField] GameObject mirror1Image;
 
-
-
     LayerMask layerMask;
 
-    [Header("Property")]
-    [SerializeField] GameObject holderPoint;
-    [SerializeField] float distanceFromPlayer;
-
     [SerializeField] CameraSwitch cameraSwitch;
-
 
     Transform obstacle;
     RaycastHit otherObs;
@@ -51,6 +41,16 @@ public class YHP_PlayerController : MonoBehaviour
     Vector3 debugVec;
 
     RaycastHit grabHit;
+
+
+
+    [Header("Property")]
+    [SerializeField] GameObject holderPoint;
+    [SerializeField] float distanceFromPlayer;
+    [SerializeField] float wallMirrorOffset;
+    [SerializeField] float unHoldwallMirrorOffset;
+
+
 
     public bool mirrorHolding = false; // 거울이 있는지 확인하는 플래그
     public bool MirrorHolding { get { return mirrorHolding; } }
@@ -64,10 +64,26 @@ public class YHP_PlayerController : MonoBehaviour
 
 
 
+
+
+
+
     private void FixedUpdate()
     {
         OffPull();
         MoveFunc();
+
+        //if(mirror1.WallChecker && mirrorHolding)
+        //{
+        //    Debug.Log("홀더포인트 멀리두기");
+        //    Vector3 mirrorPosition = transform.position + transform.forward * wallMirrorOffset;
+        //    holder.transform.position = mirrorPosition;
+        //}
+        //else
+        //{
+        //    Vector3 mirrorPosition = transform.position + transform.forward * distanceFromPlayer;
+        //    holder.transform.position = mirrorPosition;
+        //}
 
 
     }
@@ -78,6 +94,7 @@ public class YHP_PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         layerMask = ~(1 << LayerMask.NameToLayer("Ground"));
         inputKey = true;
+
 
     }
     private void OnMove(InputValue value)
@@ -145,82 +162,85 @@ public class YHP_PlayerController : MonoBehaviour
     }
     public void MoveFunc()
     {
-        if (!moveOn && !grabOn && !onIce)
-        {
 
+        // 거울을 들고 있는 경우에는 거울의 레이어를 포함하여 레이어마스크를 설정합니다.
+        LayerMask layerMask = mirrorHolding ? ~(1 << LayerMask.NameToLayer("Ground")) | mirror : ~(1 << LayerMask.NameToLayer("Ground"));
 
-            animator.SetFloat("MoveSpeed", moveDir.magnitude);
-            if (Mathf.Abs(moveDir.x) != 0 && Mathf.Abs(moveDir.z) != 0)
+            if (!moveOn && !grabOn && !onIce)
             {
 
-                return;
-            }
-            else if (!moveOn && moveDir.magnitude > 0)
-            {
-                moveOn = true;
-
-                StartCoroutine(MoveRoutine(moveDir));
-
-                transform.forward = moveDir;
-
-            }
-
-        }
-        else if (!moveOn && grabOn && moveDir.magnitude > 0)
-        {
-            pullOn = true;
-            if (grabHit.collider != null)
-            {
-                Debug.Log($"잡음 {grabHit.collider.gameObject.name}");
-                Vector3 grabDir = (grabHit.collider.gameObject.transform.position - transform.position).normalized;
-                if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), -transform.forward, out RaycastHit hit, 1.5f))
+                animator.SetFloat("MoveSpeed", moveDir.magnitude);
+                if (Mathf.Abs(moveDir.x) != 0 && Mathf.Abs(moveDir.z) != 0)
                 {
-                    if (hit.collider != null)
+
+                    return;
+                }
+                else if (!moveOn && moveDir.magnitude > 0)
+                {
+                    moveOn = true;
+
+                    StartCoroutine(MoveRoutine(moveDir));
+
+                    transform.forward = moveDir;
+
+                }
+
+            }
+            else if (!moveOn && grabOn && moveDir.magnitude > 0)
+            {
+                pullOn = true;
+                if (grabHit.collider != null)
+                {
+                    Debug.Log($"잡음 {grabHit.collider.gameObject.name}");
+                    Vector3 grabDir = (grabHit.collider.gameObject.transform.position - transform.position).normalized;
+                    if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), -transform.forward, out RaycastHit hit, 1.5f))
                     {
-                        Debug.Log($"뒤에 벽잇음 {hit.collider.gameObject.name} ");
-                        moveOn = false;
-                        return;
+                        if (hit.collider != null)
+                        {
+                            Debug.Log($"뒤에 벽잇음 {hit.collider.gameObject.name} ");
+                            moveOn = false;
+                            return;
+                        }
                     }
-                }
-                //moveOn = true;
-                if (grabDir.x > 0.9f && moveDir.x < 0f)
-                {
 
-                    bool X = true;
-                    StartCoroutine(PullRoutine(grabDir, X));
-                    Debug.Log($"{grabDir}떙겨x");
-                }
-                else if (grabDir.x < -0.9f && moveDir.x > 0f)
-                {
-                    bool X = true;
-                    StartCoroutine(PullRoutine(grabDir, X));
-                    Debug.Log($"{grabDir}떙겨x");
-                }
-                else if (grabDir.z > 0.9f && moveDir.z < 0f)
-                {
-                    bool X = false;
-                    StartCoroutine(PullRoutine(grabDir, X));
-                    Debug.Log($"{grabDir}떙겨z");
-                }
-                else if (grabDir.z < -0.9f && moveDir.z > 0f)
-                {
-                    bool X = false;
-                    StartCoroutine(PullRoutine(grabDir, X));
-                    Debug.Log($"{grabDir}떙겨z");
-                }
-                else
-                {
-                    Debug.Log("상정외 ");
-                    moveOn = false;
-                }
+                    if (grabDir.x > 0.9f && moveDir.x < 0f)
+                    {
 
+                        bool X = true;
+                        StartCoroutine(PullRoutine(grabDir, X));
+                        Debug.Log($"{grabDir}떙겨x");
+                    }
+                    else if (grabDir.x < -0.9f && moveDir.x > 0f)
+                    {
+                        bool X = true;
+                        StartCoroutine(PullRoutine(grabDir, X));
+                        Debug.Log($"{grabDir}떙겨x");
+                    }
+                    else if (grabDir.z > 0.9f && moveDir.z < 0f)
+                    {
+                        bool X = false;
+                        StartCoroutine(PullRoutine(grabDir, X));
+                        Debug.Log($"{grabDir}떙겨z");
+                    }
+                    else if (grabDir.z < -0.9f && moveDir.z > 0f)
+                    {
+                        bool X = false;
+                        StartCoroutine(PullRoutine(grabDir, X));
+                        Debug.Log($"{grabDir}떙겨z");
+                    }
+                    else
+                    {
+                        Debug.Log("상정외 ");
+                        moveOn = false;
+                        pullOn = false;
+                    }
+
+                }
             }
-
 
         }
 
-
-    }
+    
 
     /*  private void OnDrawGizmos()
       {
@@ -234,49 +254,68 @@ public class YHP_PlayerController : MonoBehaviour
         if (Physics.Raycast(transform.position, -transform.forward, out RaycastHit somethingBack, 1f, backObsWall))
         {
             Debug.Log($"뒤에 잇음 {somethingBack.collider.gameObject.name}");
-
             yield break;
         }
         Vector3 startPos = transform.position;
         Vector3 targetPos = pullDir;
         Vector3 grabStartPos = grabHit.collider.transform.position;
         Vector3 grabTargetPos = pullDir;
+
+
         if (X)
         {
-            Collider[] pullTarget = Physics.OverlapSphere(transform.position + new Vector3(-pullDir.x, 0, 0) * moveDistance, 1f, ground);
+            Collider[] pullTarget = Physics.OverlapSphere(transform.position - transform.forward * 2, 0.5f, ground | wall);
             Tile tile;
+
             if (pullTarget.Length > 0)
             {
                 foreach (Collider col in pullTarget)
                 {
+                    if (wall.Contain(col.gameObject.layer))
+                    {
+                        Debug.Log("뒤에 벽이");
+                        yield break;
+                    }
                     tile = col.gameObject.GetComponent<Tile>();
+
+                    Debug.Log($"뒤에 타일 이름은 {tile.name}");
                     targetPos = tile.middlePoint.position;
+                    debugVec = transform.position - transform.forward * 2;
                 }
             }
         }
         else if (!X)
         {
-            Collider[] pullTarget = Physics.OverlapSphere(transform.position + new Vector3(0, 0, -pullDir.z) * moveDistance, 1f, ground);
+            Collider[] pullTarget = Physics.OverlapSphere(transform.position - transform.forward * 2, 0.5f, ground | wall);
             Tile tile;
             if (pullTarget.Length > 0)
             {
                 foreach (Collider col in pullTarget)
                 {
+                    if (wall.Contain(col.gameObject.layer))
+                    {
+                        Debug.Log("뒤에 벽이");
+                        yield break;
+                    }
                     tile = col.gameObject.GetComponent<Tile>();
+                    Debug.Log($"뒤에 타일 이름은 {tile.name}");
                     targetPos = tile.middlePoint.position;
+                    debugVec = transform.position - transform.forward * 2;
                 }
             }
         }
-        Collider[] grabPullTarget = Physics.OverlapSphere(transform.position, 1f, ground);
+        Collider[] grabPullTarget = Physics.OverlapSphere(transform.position, 0.5f, ground);
         Tile grabTile;
         if (grabPullTarget.Length > 0)
         {
             foreach (Collider col in grabPullTarget)
             {
                 grabTile = col.gameObject.GetComponent<Tile>();
+
                 grabTargetPos = grabTile.middlePoint.position;
             }
         }
+
 
         List<RaycastHit> hitArray = new List<RaycastHit>(Physics.RaycastAll(grabHit.collider.transform.position, grabHit.collider.transform.up, 10f, obstacleLayer));
 
@@ -308,15 +347,8 @@ public class YHP_PlayerController : MonoBehaviour
                     hit.rigidbody.isKinematic = false;
                 }
                 Manager.game.StepAction++;
-                //moveOn = false;
+
             }
-
-
-
-
-        }
-        moveOn = false;
-    }
 
 
     private void OnDrawGizmos()
@@ -332,20 +364,26 @@ public class YHP_PlayerController : MonoBehaviour
         {
             Gizmos.color = Color.yellow;
         }
+        moveOn = false;
+        pullOn = false;
 
         Gizmos.DrawRay(ray);
         if (debugVec != null)
             Gizmos.DrawWireSphere(debugVec, 0.5f);
         Gizmos.DrawWireCube(transform.position + new Vector3(0, 1f, 0) + moveDir, new Vector3(0.2f, 0.2f, 0.2f));
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        if (debugVec != null)
+            Gizmos.DrawWireSphere(debugVec, 0.5f);
 
-
-
+    }
 
     private IEnumerator BumpTimer()
     {
-        Debug.Log("3초 지나면 범프폴스");
-         yield return new WaitForSeconds(3f);
+        Debug.Log("1초 지나면 범프폴스");
+         yield return new WaitForSeconds(2f);
         wallMirrorBumpChecker = false;
     }
 
@@ -356,25 +394,35 @@ public class YHP_PlayerController : MonoBehaviour
 
     private IEnumerator MoveRoutine(Vector3 moveDirValue)
     {
-        LayerMask WandObslayer = obstacleLayer | wall ;
+        LayerMask WandObslayer = obstacleLayer | wall | mirror;
         Vector3 targetPos = transform.position + moveDirValue * moveDistance;
+        debugVec = targetPos;
         Collider[] tiles = Physics.OverlapSphere(targetPos, 0.5f, ground);
+
+
         if (tiles.Length > 0)
         {
+
             foreach (Collider tile in tiles)
             {
+
                 Tile tileIns = tile.GetComponent<Tile>();
+
                 if (tileIns != null)
                 {
-                    Collider[] isBlank = Physics.OverlapSphere(tileIns.transform.position + new Vector3(0, 1f, 0), 0.5f, WandObslayer);
+                    Debug.Log($"True ,{tileIns.gameObject.name} ");
+                    Collider[] isBlank = Physics.OverlapSphere(tileIns.transform.position, 0.5f, WandObslayer);
 
-                    if (isBlank.Length == 0 )
+                    if (isBlank.Length == 0)
                     {
-                       
                         targetPos = tileIns.middlePoint.position;
                         debugVec = targetPos;
                         Debug.Log(tileIns.gameObject.name);
                     }
+                }
+                else
+                {
+                    Debug.Log("WhatThe");
                 }
 
             }
@@ -383,22 +431,10 @@ public class YHP_PlayerController : MonoBehaviour
         RaycastHit hit;
         Vector3 PreMoveDir = moveDir;
 
-        //비트 마스크로 미러홀딩이면 미러 할당 노할당 정하기
-        //if (mirrorHolding)
-        //{
-        //    mirror = 0;
-        //}
-        //else
-        //{
-        //    mirror = 1 << 31;
-        //}
-
-
         if (Physics.BoxCast(transform.position + new Vector3(0, 1f, 0), new Vector3(0.2f, 0.2f, 0.2f), moveDirValue * 2f, out hit, Quaternion.identity, 1f))
         {
 
-
-            if (obstacleLayer.Contain(hit.collider.gameObject.layer))
+            if (obstacleLayer.Contain(hit.collider.gameObject.layer) && !mirrorHolding)
             {
                 Debug.Log("asff");
                 obstacle = hit.transform;
@@ -411,6 +447,9 @@ public class YHP_PlayerController : MonoBehaviour
                     {
                         Tile obsTile = collider.GetComponent<Tile>();
                         obsTargetPos = obsTile.middlePoint.position;
+
+                    }
+                }
 
                     }
                 }
@@ -456,7 +495,7 @@ public class YHP_PlayerController : MonoBehaviour
                         time += Time.deltaTime * moveSpeed;
                         rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / 2));
                         hit.rigidbody.MovePosition(Vector3.Lerp(obsStartPos, obsTargetPos, time / 2));
-                        Debug.Log(hit.collider.gameObject.name);
+
 
                         yield return null;
                     }
@@ -477,14 +516,45 @@ public class YHP_PlayerController : MonoBehaviour
                     Debug.Log("장애물도 같이 무브");
                 }
             }
+
+            else if (obstacleLayer.Contain(hit.collider.gameObject.layer) && mirrorHolding)
+            {
+                Debug.Log("거울을 들고 장애물을 밀 수 없습니다.");
+                moveOn = false;
+                yield return null;
+            }
+            else if (holder.FrontMirrorLader() && !mirrorHolding && !mirror1.WallChecker)
+            {
+                Debug.Log("거울을 밟고 갈 수 없습니다.FrontMirrorLader");
+                moveOn = false;
+                yield return null;
+            }
+            else if (holder.FrontObstacleLader() && mirrorHolding)
+            {
+                Debug.Log("거울을 들고 장애물을 밀 수 없습니다. FrontObstacleLader");
+                moveOn = false;
+                yield return null;
+            }
             else if (wall.Contain(hit.collider.gameObject.layer))
             {
-                Debug.Log("벽이라 못지나감");
+                Debug.Log($"wall name is {hit.collider.gameObject.name}");
                 moveOn = false;
                 yield return null;
 
             }
 
+            else if (mirror.Contain(hit.collider.gameObject.layer) && !mirrorHolding && !mirror1.WallChecker)
+            {
+                Debug.Log($"거울이 앞에 있어서 이동할 수 없습니다.");
+                moveOn = false;
+                yield return null;
+            }
+            //else if (obstacleLayer.Contain(hit.collider.gameObject.layer) && mirrorHolding)
+            //{
+            //    Debug.Log($"거울을 들고 장애물을 밀 수 없습니다");
+            //    moveOn = false;
+            //    yield return null;
+            //}
             else
             {
                 float time = 0;
@@ -512,17 +582,8 @@ public class YHP_PlayerController : MonoBehaviour
                 }
             }
 
-            //else if (mirror.Contain(hit.collider.gameObject.layer) && !mirrorHolding && !mirror1.wallChecker)
-            //{
-            //    Debug.Log("바닥 거울로 못지나감");
-            //    moveOn = false;
-            //    yield return null;
-
-            //}
-
         }
-
-        else // 무브
+        else
         {
             float time = 0;
             while (time < 1)
@@ -586,6 +647,11 @@ public class YHP_PlayerController : MonoBehaviour
             mirrorObject.transform.localRotation = Quaternion.Euler(90, 0, 0);
 
             mirrorHolding = true;
+
+            mirror1Image.transform.localPosition = Vector3.zero;
+            Vector3 newPosition = mirror1Image.transform.localPosition;
+            newPosition.y += wallMirrorOffset;
+            mirror1Image.transform.localPosition = newPosition;
         }
         else
         {
@@ -596,55 +662,87 @@ public class YHP_PlayerController : MonoBehaviour
 
     private void UnHold()
     {
-        Debug.Log("거울 놓기");
+
         GameObject mirrorObject = holder.GetMirror();
 
 
         if (mirrorObject != null)
         {
-            mirrorHolding = false;
 
-            if (holder.WallLader()) //벽에 거울을 놓는다면
+
+            if (holder.WallLader() && !mirror1.MoveDisableChecker) //벽에 거울을 놓는다면
             {
                 //holdChecker = false;
                 mirrorObject.transform.parent = null; // 부모 설정을 해제하여 자식에서 빼냅니다.
+
 
                 switch (mirror1WallAttachedDir)
                 {
                     case 1: // 오른쪽으로 들어옴
                         //mirrorObject.transform.localRotation = Quaternion.Euler(0, 0, 90);
                         mirrorObject.transform.forward = Vector3.right;
+
+                        //newmirror1ImegePosition.y -= wallMirrorOffset;
+                        Debug.Log("오른쪽으로 둠");
                         break;
                     case 2: // 왼쪽으로 들어옴
                         //mirrorObject.transform.localRotation = Quaternion.Euler(0, 0, -90);
                         mirrorObject.transform.forward = Vector3.left;
+                        //newmirror1ImegePosition.y += wallMirrorOffset;
+                        Debug.Log("왼쪽으로 둠");
 
                         break;
                     case 3: // 위로 들어옴
                         //mirrorObject.transform.localRotation = Quaternion.Euler(90, 0, 0);
                         mirrorObject.transform.forward = Vector3.up;
+                        //newmirror1ImegePosition.x -= wallMirrorOffset;
+                        Debug.Log("위로 둠");
 
                         break;
                     case 4: // 아래로 들어옴
                         //mirrorObject.transform.localRotation = Quaternion.Euler(-90, 0, 0);
                         mirrorObject.transform.forward = Vector3.down;
+                        //newmirror1ImegePosition.x += wallMirrorOffset;
+                        Debug.Log("아래로 둠");
 
                         break;
                     default: // 그 외의 경우
                         Debug.LogError("거울 설치방향 예외!");
                         break;
                 }
-                // 거울 위치를 조정하여 플레이어 쪽에 더 가깝게 배치합니다.
-                Vector3 mirrorPosition = transform.position + transform.forward * mirrorOffset;
-                mirrorObject.transform.position = mirrorPosition;
 
+                mirrorHolding = false;
                 Vector3 forwardDirection = mirrorObject.transform.forward;
                 mirrorObject.transform.forward = forwardDirection;
                 mirror1.SetForwardDirection(forwardDirection); // forwardDirection 값을 Mirror1 스크립트에 전달합니다.
 
+
+
+                // 거울을 벽에 놓을 때 mirror1Image를 플립합니다.
+                if (mirror1WallAttachedDir == 1) // 오른쪽
+                {
+                    Vector3 newPosition = mirror1Image.transform.localPosition;
+                    newPosition.y -= unHoldwallMirrorOffset;
+                    mirror1Image.transform.localPosition = newPosition;
+
+                    //Vector3 newPosition1 = mirror1Image.transform.localPosition;
+                    //newPosition1.y -= unHoldwallMirrorOffset;
+                    //mirror1.transform.localPosition = newPosition1;
+                }
+                else if (mirror1WallAttachedDir == 2) // 왼쪽
+                {
+                    Vector3 newPosition = mirror1Image.transform.localPosition;
+                    newPosition.y -= unHoldwallMirrorOffset;
+                    mirror1Image.transform.localPosition = newPosition;
+
+                    //Vector3 newPosition1 = mirror1Image.transform.localPosition;
+                    //newPosition1.y -= unHoldwallMirrorOffset;
+                    //mirror1.transform.localPosition = newPosition1;
+                }
+
                 // 결과 출력
                 Debug.Log($"mirrorObject.transform.forward: {forwardDirection}");
-
+                Debug.Log("거울 벽에 놓기");
                 //Debug.Log($"mirrorObject.transform.forward{mirrorObject.transform.forward}");
             }
 
@@ -658,13 +756,27 @@ public class YHP_PlayerController : MonoBehaviour
                     Debug.Log("장애물이 앞에 있어 거울을 놓을 수 없습니다.");
                     return;
                 }
+                if (mirror1.MoveDisableChecker)
+                {
+                    mirror1.wallChecker = false;
+                    Debug.Log("움직일 수 없는 장애물이 앞에 있어 거울을 놓을 수 없습니다.");
+                    return;
+                }
+
+
 
                 // 거울을 바닥에 놓습니다.
                 mirrorObject.transform.parent = null; // 부모 설정을 해제하여 자식에서 빼냅니다.
                 mirrorObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
                 Vector3 mirrorPosition = transform.position + transform.forward * distanceFromPlayer;
                 mirrorObject.transform.position = mirrorPosition;
+                mirrorHolding = false;
+                mirror1Image.transform.localPosition = Vector3.zero;
                 mirror1.wallChecker = false;
+
+
+
+                Debug.Log("거울 바닥에 놓기");
             }
 
         }
