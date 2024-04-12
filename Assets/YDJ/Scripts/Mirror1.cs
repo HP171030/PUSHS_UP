@@ -138,12 +138,12 @@ public class Mirror1 : MonoBehaviour
 
     }
 
-    private IEnumerator AlreadyMap2ObstacleTimer()
-    {
-        Debug.Log("1초 지나면 AlreadyMap2ObstacleTimer폴스");
-        yield return new WaitForSeconds(1f);
-        YDJ_PlayerController.AlreadyMap2Obstacle = false;
-    }
+    //private IEnumerator AlreadyMap2ObstacleTimer()
+    //{
+    //    Debug.Log("1초 지나면 AlreadyMap2ObstacleTimer폴스");
+    //    yield return new WaitForSeconds(1f);
+    //    YDJ_PlayerController.AlreadyMap2Obstacle = false;
+    //}
 
     private void OnTriggerStay(Collider other)
     {
@@ -153,11 +153,11 @@ public class Mirror1 : MonoBehaviour
             {
                 Debug.Log("벽거울에 닿음");
 
-                if (mirror2.obstacleChecker)
-                {
-                    YDJ_PlayerController.AlreadyMap2Obstacle = true;
-                    AlreadyMap2ObstacleTimer();
-                }
+                //if (mirror2.obstacleChecker)
+                //{
+                //    YDJ_PlayerController.AlreadyMap2Obstacle = true;
+                //    //AlreadyMap2ObstacleTimer();
+                //}
 
                 if (YDJ_PlayerController.wallMirrorBumpChecker)
                 {

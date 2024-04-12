@@ -32,7 +32,7 @@ public class YHP_PlayerController : MonoBehaviour
     [SerializeField] Holder holder;
     [SerializeField] Mirror1 mirror1;
     [SerializeField] GameObject mirror1Image;
-    [SerializeField] Mirror2 mrror2;
+    [SerializeField] Mirror2 mirror2;
 
 
 
@@ -54,12 +54,12 @@ public class YHP_PlayerController : MonoBehaviour
     public bool wallMirrorBumpChecker;
     public bool WallMirrorBumpChecker { get { return wallMirrorBumpChecker; } }
 
-    public bool alreadyMap2Obstacle;
-    public bool AlreadyMap2Obstacle
-    {
-        get { return alreadyMap2Obstacle; }
-        set { alreadyMap2Obstacle = value; }
-    }
+    //public bool alreadyMap2Obstacle;
+    //public bool AlreadyMap2Obstacle
+    //{
+    //    get { return alreadyMap2Obstacle; }
+    //    set { alreadyMap2Obstacle = value; }
+    //}
 
     public float mirror1WallAttachedDir;
 
@@ -367,8 +367,13 @@ public class YHP_PlayerController : MonoBehaviour
         {
             
             Debug.Log($"{isCollider.name}이 앞에 있다");
-            if (obstacleLayer.Contain(isCollider.gameObject.layer) && !mirrorHolding && !alreadyMap2Obstacle)
+            if (obstacleLayer.Contain(isCollider.gameObject.layer) && !mirrorHolding )
             {
+                if((mirror1.WallChecker && mirror2.obstacleChecker&& mirror1.WallChecker))
+                {
+                    Debug.Log("장애물 못밀어");
+                    yield return null;
+                }
 
                 Debug.Log("장애물 밀기");
                 Debug.Log(isCollider.name);
@@ -401,11 +406,10 @@ public class YHP_PlayerController : MonoBehaviour
                         animator.SetBool("Push", false);
                     }
 
-                    if (!alreadyMap2Obstacle)
-                    {
+
                         wallMirrorBumpChecker = true;
                         StartCoroutine(BumpTimer());
-                    }
+                    
                 }
                 else
                 {

@@ -25,7 +25,7 @@ public class Mirror2 : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             obstacleChecker = false;
-            YHP_PlayerController.AlreadyMap2Obstacle = false;
+            //YHP_PlayerController.AlreadyMap2Obstacle = false;
         }
     }
 }
