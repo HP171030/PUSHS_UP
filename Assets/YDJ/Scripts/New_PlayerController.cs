@@ -303,7 +303,16 @@ public class New_PlayerController : MonoBehaviour
         Debug.Log("1초 지나면 범프폴스");
         yield return new WaitForSeconds(2f);
         wallMirrorBumpChecker = false;
-    }
+    }        //if (mirror1.wallChecker)
+        //{
+        //    mirror &= ~(1 << 31);
+        //}
+        //else
+        //{
+        //    mirror &= ~(30 << 1);
+        //}
+
+
 
 
     private IEnumerator MoveRoutine(Vector3 moveDirValue)
@@ -313,203 +322,187 @@ public class New_PlayerController : MonoBehaviour
         LayerMask WandObslayer = obstacleLayer | wall | mirror;
         Vector3 targetPos = transform.position + moveDirValue * 2;
         debugVec = targetPos;
+
+        // 1. 앞에 땅 충돌체가 없으면 이동 불가능
         Collider[] tiles = Physics.OverlapSphere(targetPos, 0.5f, ground);
-        if (tiles.Length > 0)
+        if (tiles.Length == 0)
+            yield break;
+
+        // 2. 앞에 땅 충돌체에 타일 컴포넌트가 없으면 이동 불가능
+        Tile tile = tiles[0].GetComponent<Tile>();
+        if (tile == null)
+            yield break;
+
+        // 3. 앞에 장애물을 확인
+        Collider[] isBlank = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0, 1, 0), 0.5f, WandObslayer);
+
+        // 3-1. 앞이 빈공간이라면
+        if (isBlank.Length == 0)
         {
-            foreach (Collider tile in tiles)
+            targetPos = tile.middlePoint.position;
+            float time = 0;
+            while (time < 1)
             {
-                Tile tileIns = tile.GetComponent<Tile>();
-                if (tileIns != null)
+                time += Time.deltaTime * moveSpeed;
+                rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
+                yield return null;
+            }
+            yield return null;
+            Manager.game.StepAction++;
+            moveOn = false;
+            yield break;
+        }
+
+        // 3-2. 장애물이나 벽이 있는 경우
+        foreach (Collider isCollider in isBlank)
+        {
+            Debug.Log($"{isCollider.name}이 앞에 있다");
+            if (obstacleLayer.Contain(isCollider.gameObject.layer) && !mirrorHolding)
+            {
+                Debug.Log(isCollider.name);
+
+                Vector3 obsStartPos = isCollider.gameObject.transform.position;
+                Vector3 obsTargetPos = isCollider.gameObject.transform.position + moveDirValue * 2f;
+                Collider[] colliders = Physics.OverlapSphere(obsTargetPos, 0.5f, ground);
+                if (colliders.Length > 0)
                 {
-                    Collider[] isBlank = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0, 1, 0), 0.5f, WandObslayer);
-                    Debug.Log($"this is wall{isBlank.Length}");
-                    if (isBlank.Length == 0)
+                    foreach (Collider collider in colliders)
                     {
-                        targetPos = tileIns.middlePoint.position;
-                        //   debugVec = targetPos;
-                        Debug.Log($"Perfect{tileIns.gameObject.name}");
-                        float time = 0;
-                        while (time < 1)
+                        Tile obsTile = collider.GetComponent<Tile>();
+                        if (obsTile != null)
                         {
-                            time += Time.deltaTime * moveSpeed;
-                            rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
-                            if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), transform.forward / 2, out RaycastHit hitinfo, 1f, NonePlayer))
-                            {
-                                Debug.Log($"Someting {hitinfo.collider.name}");
-                                transform.position = transform.position;
-                                moveOn = false;
-                                yield break;
-                            }
-                            else
-                            {
-                                Debug.Log("isNot    ;");
-                            }
-                            yield return null;
-                        }
-                        yield return null;
-                        Manager.game.StepAction++;
-                        moveOn = false;
-                        if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
-                        {
-                            animator.SetBool("Push", false);
-                        }
-                    }
-                    else
-                    {                                               // 장애물이나 벽이 있는 경우
-                        foreach (Collider isCollider in isBlank)
-                        {
-                            Debug.Log($"{isCollider.name}이 앞에 있다");
-                            if (obstacleLayer.Contain(isCollider.gameObject.layer) && !mirrorHolding)
-                            {
-                                Debug.Log(isCollider.name);
-
-                                Vector3 obsStartPos = isCollider.gameObject.transform.position;
-                                Vector3 obsTargetPos = isCollider.gameObject.transform.position + moveDirValue * 2f;
-                                Collider[] colliders = Physics.OverlapSphere(obsTargetPos, 0.5f, ground);
-                                if (colliders.Length > 0)
-                                {
-                                    foreach (Collider collider in colliders)
-                                    {
-                                        Tile obsTile = collider.GetComponent<Tile>();
-                                        if (obsTile != null)
-                                        {
-                                            Debug.Log(obsTile.name);
-                                            obsTargetPos = obsTile.middlePoint.position;
-                                        }
-                                    }
-                                }
-                                float time = 0;
-                                LayerMask layer = obstacleLayer | wall | crystal;
-                                if (Physics.BoxCast(isCollider.gameObject.transform.position, new Vector3(0.5f, 0.5f, 0.5f), moveDirValue, out RaycastHit hitInfo, Quaternion.identity, 0.7f, layer) && !MirrorHolding)
-                                {
-                                    Debug.Log($" {hitInfo.collider.gameObject.name}");
-                                    animator.SetBool("Push", false);
-                                    moveOn = false;
-                                    //    hit.rigidbody.isKinematic = false;
-                                    if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
-                                    {
-                                        animator.SetBool("Push", false);
-                                    }
-                                    wallMirrorBumpChecker = true;
-                                    StartCoroutine(BumpTimer());
-                                }
-                                else
-                                {
-                                    List<RaycastHit> pushHitArray = new List<RaycastHit>(Physics.RaycastAll(isCollider.transform.position, isCollider.transform.up, 10f, obstacleLayer));
-                                    foreach (RaycastHit hits in pushHitArray)
-                                    {
-                                        hits.collider.gameObject.transform.SetParent(isCollider.transform, true);
-                                        hits.rigidbody.isKinematic = true;
-                                        Debug.Log(hits.collider.gameObject.name);
-                                    }
-                                    while (time < 2)
-                                    {
-                                        if (Physics.Raycast(isCollider.gameObject.transform.position + new Vector3(0, 0.5f, 0), moveDirValue, out RaycastHit notThis, 1f, layer) && notThis.collider.gameObject != isCollider.gameObject)
-                                        {
-                                            animator.SetBool("Push", false);
-                                            moveOn = false;
-                                            yield break;
-                                        }
-                                        animator.SetBool("Push", true);
-                                        time += Time.deltaTime * moveSpeed;
-                                        rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / 2));
-                                        isCollider.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(obsStartPos, obsTargetPos, time / 2));
-                                        yield return null;
-                                    }
-                                    Manager.game.StepAction++;
-                                    moveOn = false;
-                                    if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
-                                    {
-                                        animator.SetBool("Push", false);
-                                    }
-                                    foreach (RaycastHit hits in pushHitArray)
-                                    {
-                                        hits.collider.gameObject.transform.SetParent(null, true);
-                                        //  hits.rigidbody.isKinematic = false;
-                                    }
-                                }
-                            }
-                            else if (wall.Contain(isCollider.gameObject.layer))
-                            {
-                                Debug.Log($"wall name is {isCollider.gameObject.name}");
-                                moveOn = false;
-                                yield return null;
-                            }
-                            else if (holder.FrontMirrorLader() && !mirrorHolding && !mirror1.WallChecker)
-                            {
-                                Debug.Log("거울을 밟고 갈 수 없습니다.FrontMirrorLader");
-                                moveOn = false;
-                                yield return null;
-                            }
-                            else if (holder.FrontObstacleLader() && mirrorHolding)
-                            {
-                                Debug.Log("거울을 들고 장애물을 밀 수 없습니다. FrontObstacleLader");
-                                moveOn = false;
-                                yield return null;
-                            }
-                            else if (wall.Contain(isCollider.gameObject.layer))
-                            {
-                                Debug.Log($"wall name is {isCollider.gameObject.name}");
-                                moveOn = false;
-                                yield return null;
-                            }
-
-                            else if (mirror.Contain(isCollider.gameObject.layer) && !mirrorHolding && !mirror1.WallChecker)
-                            {
-                                Debug.Log($"거울이 앞에 있어서 이동할 수 없습니다.");
-                                moveOn = false;
-                                yield return null;
-                            }
-                            else if (holder.WallLader() && mirrorHolding)
-                            {
-                                Debug.Log($"거울을 들고 벽 통과 못함");
-                                moveOn = false;
-                                yield return null;
-                            }
-                            else if (holder.MoveDisableCheckerLader() && mirrorHolding)
-                            {
-                                Debug.Log($"거울을 들고 움직일 수 없는 장애물 통과 못함");
-                                moveOn = false;
-                                yield return null;
-                            }
-                            //else if (obstacleLayer.Contain(hit.collider.gameObject.layer) && mirrorHolding)
-                            //{
-                            //    Debug.Log($"거울을 들고 장애물을 밀 수 없습니다");
-                            //    moveOn = false;
-                            //    yield return null;
-                            //}
-
-                            else
-                            {
-                                float time = 0;
-                                while (time < 1)
-                                {
-                                    if (Physics.Raycast(transform.position, transform.forward, out RaycastHit isWall, 0.2f, wall))
-                                    {
-                                        Debug.Log($"wall {isWall}");
-                                        transform.position = startPos;
-                                        moveOn = false;
-                                        yield break;
-                                    }
-                                    time += Time.deltaTime * moveSpeed;
-                                    rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
-                                    yield return null;
-                                }
-                                yield return null;
-                                Manager.game.StepAction++;
-                                moveOn = false;
-                                if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
-                                {
-                                    animator.SetBool("Push", false);
-                                }
-                            }
+                            Debug.Log(obsTile.name);
+                            obsTargetPos = obsTile.middlePoint.position;
                         }
                     }
                 }
+                float time = 0;
+                LayerMask layer = obstacleLayer | wall | crystal;
+                if (Physics.BoxCast(isCollider.gameObject.transform.position, new Vector3(0.5f, 0.5f, 0.5f), moveDirValue, out RaycastHit hitInfo, Quaternion.identity, 0.7f, layer) && !MirrorHolding)
+                {
+                    Debug.Log($" {hitInfo.collider.gameObject.name}");
+                    animator.SetBool("Push", false);
+                    moveOn = false;
+                    //    hit.rigidbody.isKinematic = false;
+                    if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
+                    {
+                        animator.SetBool("Push", false);
+                    }
+                    wallMirrorBumpChecker = true;
+                    StartCoroutine(BumpTimer());
+                }
                 else
                 {
-                    yield return null;
+                    List<RaycastHit> pushHitArray = new List<RaycastHit>(Physics.RaycastAll(isCollider.transform.position, isCollider.transform.up, 10f, obstacleLayer));
+                    foreach (RaycastHit hits in pushHitArray)
+                    {
+                        hits.collider.gameObject.transform.SetParent(isCollider.transform, true);
+                        hits.rigidbody.isKinematic = true;
+                        Debug.Log(hits.collider.gameObject.name);
+                    }
+                    while (time < 2)
+                    {
+                        if (Physics.Raycast(isCollider.gameObject.transform.position + new Vector3(0, 0.5f, 0), moveDirValue, out RaycastHit notThis, 1f, layer) && notThis.collider.gameObject != isCollider.gameObject)
+                        {
+                            animator.SetBool("Push", false);
+                            moveOn = false;
+                            yield break;
+                        }
+                        animator.SetBool("Push", true);
+                        time += Time.deltaTime * moveSpeed;
+                        rb.MovePosition(Vector3.Lerp(startPos, targetPos, time / 2));
+                        isCollider.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(obsStartPos, obsTargetPos, time / 2));
+                        yield return null;
+                    }
+                    Manager.game.StepAction++;
+                    moveOn = false;
+                    if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
+                    {
+                        animator.SetBool("Push", false);
+                    }
+                    foreach (RaycastHit hits in pushHitArray)
+                    {
+                        hits.collider.gameObject.transform.SetParent(null, true);
+                        //  hits.rigidbody.isKinematic = false;
+                    }
+                }
+            }
+            else if (wall.Contain(isCollider.gameObject.layer))
+            {
+                Debug.Log($"wall name is {isCollider.gameObject.name}");
+                moveOn = false;
+                yield return null;
+            }
+            else if (holder.FrontMirrorLader() && !mirrorHolding && !mirror1.WallChecker)
+            {
+                Debug.Log("거울을 밟고 갈 수 없습니다.FrontMirrorLader");
+                moveOn = false;
+                yield return null;
+            }
+            else if (holder.FrontObstacleLader() && mirrorHolding)
+            {
+                Debug.Log("거울을 들고 장애물을 밀 수 없습니다. FrontObstacleLader");
+                moveOn = false;
+                yield return null;
+            }
+            else if (wall.Contain(isCollider.gameObject.layer))
+            {
+                Debug.Log($"wall name is {isCollider.gameObject.name}");
+                moveOn = false;
+                yield return null;
+            }
 
+            else if (mirror.Contain(isCollider.gameObject.layer) && !mirrorHolding && !mirror1.WallChecker)
+            {
+                Debug.Log($"거울이 앞에 있어서 이동할 수 없습니다.");
+                moveOn = false;
+                yield return null;
+            }
+            else if (holder.WallLader() && mirrorHolding)
+            {
+                Debug.Log($"거울을 들고 벽 통과 못함");
+                moveOn = false;
+                yield return null;
+            }
+            else if (holder.MoveDisableCheckerLader() && mirrorHolding)
+            {
+                Debug.Log($"거울을 들고 움직일 수 없는 장애물 통과 못함");
+                moveOn = false;
+                yield return null;
+            }
+            //else if (obstacleLayer.Contain(hit.collider.gameObject.layer) && mirrorHolding)
+            //{
+            //    Debug.Log($"거울을 들고 장애물을 밀 수 없습니다");
+            //    moveOn = false;
+            //    yield return null;
+            //}
+
+            else
+            {
+                float time = 0;
+                bool hitWall = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0, 1, 0), 0.5f, wall).Length > 0;
+
+                while (time < 1)
+                {
+
+                    if (hitWall)
+                    {
+                        Debug.Log("Hit wall");
+                        transform.position = startPos;
+                        moveOn = false;
+                        yield break;
+                    }
+
+                    time += Time.deltaTime * moveSpeed;
+                    rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
+                    yield return null;
+                }
+
+                Manager.game.StepAction++;
+                moveOn = false;
+                if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
+                {
+                    animator.SetBool("Push", false);
                 }
             }
         }

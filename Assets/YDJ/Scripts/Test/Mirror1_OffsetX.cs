@@ -91,7 +91,7 @@ public class Mirror1_OffsetX : MonoBehaviour
         //{
         //    Vector3 newPosition = transform.position;
         //    newPosition.z += Mirror2OffsetX;
-        //    mirror2.position = newPosition;
+        //    mirror2Transform.position = newPosition;
         //}
 
         //if (!YDJ_PlayerController.mirrorHolding)

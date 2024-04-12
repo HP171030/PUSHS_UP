@@ -10,13 +10,13 @@ public class Holder : MonoBehaviour
 
 
 
-
     // 거울을 반환하는 메서드
     public GameObject GrabMirror()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
         foreach (Collider collider in colliders)
         {
+
             if (collider.gameObject.CompareTag("Mirror"))
             {
                 Debug.Log("거울 감지");
@@ -45,6 +45,7 @@ public class Holder : MonoBehaviour
     public bool WallLader()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
+
         foreach (Collider collider in colliders)
         {
             if (collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
