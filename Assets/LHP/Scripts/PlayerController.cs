@@ -348,11 +348,6 @@ public class PlayerController : MonoBehaviour
                                 moveOn = false;
                                 yield break;
                             }
-                            else
-                            {
-                                Debug.Log("isNot    ;");
-                            }
-
                             yield return null;
                         }
                         yield return null;

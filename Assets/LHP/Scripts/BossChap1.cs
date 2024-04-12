@@ -64,7 +64,7 @@ public class BossChap1 : Boss
                     {
 
                         Renderer tilesRend = tiles.collider.gameObject.GetComponent<Renderer>();
-                        StartCoroutine(AlertTime(tilesRend));
+                        StartCoroutine(AlertTile(tilesRend, Color.red,1));
                     }
                 }
 
@@ -89,7 +89,7 @@ public class BossChap1 : Boss
                 foreach(Tile tiles in sweapAllTile )
                 {
                     Renderer rend = tiles.GetComponent<Renderer>();
-                    StartCoroutine(AlertTime(rend));
+                    StartCoroutine(AlertTile(rend, Color.red, 1));
                 }
 
                 SweapMap();
@@ -127,7 +127,7 @@ public class BossChap1 : Boss
                 foreach(Tile tile in isTiles )
                 {
                     Renderer isFallRend = tile.GetComponent<Renderer>();
-                    StartCoroutine (AlertTime(isFallRend));
+                    StartCoroutine(AlertTile(isFallRend, Color.red, 1));
                 }
 
                 Howling();

@@ -44,7 +44,6 @@ public class Boss : MonoBehaviour
     {
         onPattern = true;
         yield return new WaitForSeconds(patternTime);
-       
         int patternRange = Random.Range(0, 3);
 
         switch ( patternRange )
@@ -52,24 +51,26 @@ public class Boss : MonoBehaviour
             case 0: curState = Pattern.Pattern1;
                
                 break;
-                case 1: curState = Pattern.Pattern2;
-                
-                break;
-            case 2: curState = Pattern.Pattern3;                    
+                case 1: curState = Pattern.Pattern2;             // 패턴 2 ,3 으로 바꿀것;
+                                                                 // 패턴 2 ,3 으로 바꿀것;
+                break;                                           // 패턴 2 ,3 으로 바꿀것;
+            case 2: curState = Pattern.Pattern3;                 // 패턴 2 ,3 으로 바꿀것;
                 
                 break;
 
         }
+       
     }
 
-    public IEnumerator AlertTime(Renderer tileRenderer)
+    public IEnumerator AlertTile(Renderer tileRenderer,Color color,float endTime)
     {
-      
+
+       
         float time = 0;
-        float endTime = 1;
+        
         Color startColor = Color.white;
-        Color endColor = Color.red;
-        while ( alert )
+        Color endColor = color;
+        while ( alert)
         {
             while ( time < endTime )
             {
@@ -86,9 +87,10 @@ public class Boss : MonoBehaviour
             Color temp = startColor;
             startColor = endColor;
             endColor = temp;
-
+           
             time = 0;
-            yield return null;
+           
+
         }
        
     }
