@@ -12,8 +12,9 @@ public class Mirror1 : MonoBehaviour
     [SerializeField] float ObstacleOffsetX;
     [SerializeField] float ObstacleOffsetZ;
     [SerializeField] float ObstacleInMinrrorCoroutineTime;
+    [SerializeField] float WallMirror2Offset;
 
-
+    [SerializeField] float ZOffset;
 
     [Header("Config")]
 
@@ -83,7 +84,7 @@ public class Mirror1 : MonoBehaviour
 
     void Update()
     {
-        if (!wallChecker)
+       if (!wallChecker)
         {
             Vector3 newPosition = transform.position;
             newPosition.x += Mirror2OffsetX;
@@ -118,24 +119,65 @@ public class Mirror1 : MonoBehaviour
             Debug.Log("벽에 닿음aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             wallChecker = true;
 
-            Vector3 newPosition = transform.position;
-            newPosition.x += Mirror2OffsetX;
-            newPosition.y = 0;
-            mirror2Transform.position = newPosition;
-            //obstacleChecker = false;
-            IsWallExit = false;
+
+            //if (YDJ_PlayerController.mirror1WallAttachedDir == 1 || YDJ_PlayerController.mirror1WallAttachedDir == 2) // 오른쪽 , 왼쪽
+            {
+                //switch (YDJ_PlayerController.Mirror1WallAttachedDir)
+                //{
+                //    case 1: // 오른쪽으로 들어옴
+
+                //        Vector3 Position = mirror2.transform.position;
+                //        Position.z += ZOffset;
+                //        mirror2.transform.localPosition = Position;
+                //        //newmirror1ImegePosition.y -= wallMirrorOffset;
+                //        break;
+                //    case 2: // 왼쪽으로 들어옴
+                //        mirror2.transform.forward = Vector3.left;
+                //        //newmirror1ImegePosition.y += wallMirrorOffset;
+                //        Debug.Log("왼쪽으로 둠");
+
+                //        break;
+                //    case 3: // 위로 들어옴
+                //        mirror2.transform.forward = Vector3.up;
+                //        //newmirror1ImegePosition.x -= wallMirrorOffset;
+                //        Debug.Log("위로 둠");
+
+                //        break;
+                //    case 4: // 아래로 들어옴
+                //        mirror2.transform.forward = Vector3.down;
+                //        //newmirror1ImegePosition.x += wallMirrorOffset;
+                //        Debug.Log("아래로 둠");
+
+                //        break;
+                //    default: // 그 외의 경우
+                //        Debug.LogError("거울 설치방향 예외!");
+                //        break;
+                //}
+
+
+                Vector3 newPosition = transform.position;
+                newPosition.x += Mirror2OffsetX -2;
+                newPosition.y = 0;
+                mirror2.transform.position = newPosition;
+
+
+
+                obstacleChecker = false;
+
+                IsWallExit = false;
+            }
+            if (other.gameObject.CompareTag("MoveDisable"))
+            {
+
+                moveDisableChecker = true;
+                wallChecker = false;
+            }
+
+
+
+
+
         }
-        if (other.gameObject.CompareTag("MoveDisable"))
-        {
-
-            moveDisableChecker = true;
-            wallChecker = false;
-        }
-
-
-
-
-
     }
 
     //private IEnumerator AlreadyMap2ObstacleTimer()
@@ -147,6 +189,11 @@ public class Mirror1 : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if(mirror2.ObstacleChecker) // 거울2에 장애물 있을 시 벽거울 작동안함
+        {
+            return;
+        }
+
         if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle") && !YDJ_PlayerController.mirrorHolding)
         {
             if (wallChecker) //벽거울

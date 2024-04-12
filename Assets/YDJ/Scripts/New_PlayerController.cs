@@ -30,8 +30,9 @@ public class New_PlayerController : MonoBehaviour
     [SerializeField] LayerMask NonePlayer;
     [SerializeField] CameraSwitch cameraSwitch;
     [SerializeField] Holder holder;
-    [SerializeField] Mirror1_OffsetX mirror1;
+    [SerializeField] Mirror1_OffestX mirror1;
     [SerializeField] GameObject mirror1Image;
+    [SerializeField] New_Mirror2 mirror2;
 
 
 
@@ -53,10 +54,15 @@ public class New_PlayerController : MonoBehaviour
     public bool wallMirrorBumpChecker;
     public bool WallMirrorBumpChecker { get { return wallMirrorBumpChecker; } }
 
+    //public bool alreadyMap2Obstacle;
+    //public bool AlreadyMap2Obstacle
+    //{
+    //    get { return alreadyMap2Obstacle; }
+    //    set { alreadyMap2Obstacle = value; }
+    //}
 
-
-    public float mirror1WallAttachedDir;
-
+    public int mirror1WallAttachedDir;
+    public int Mirror1WallAttachedDir { get { return mirror1WallAttachedDir; } }
 
     private void FixedUpdate()
     {
@@ -194,6 +200,9 @@ public class New_PlayerController : MonoBehaviour
     }
     private IEnumerator PullRoutine(Vector3 pullDir, bool X)
     {
+
+
+
         moveOn = true;
         LayerMask backObsWall = wall | obstacleLayer;
         if (Physics.Raycast(transform.position, -transform.forward, out RaycastHit somethingBack, 1f, backObsWall))
@@ -304,13 +313,13 @@ public class New_PlayerController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         wallMirrorBumpChecker = false;
     }        //if (mirror1.wallChecker)
-        //{
-        //    mirror &= ~(1 << 31);
-        //}
-        //else
-        //{
-        //    mirror &= ~(30 << 1);
-        //}
+             //{
+             //    mirror &= ~(1 << 31);
+             //}
+             //else
+             //{
+             //    mirror &= ~(30 << 1);
+             //}
 
 
 
@@ -356,9 +365,18 @@ public class New_PlayerController : MonoBehaviour
         // 3-2. 장애물이나 벽이 있는 경우
         foreach (Collider isCollider in isBlank)
         {
+            //if ((mirror1.WallChecker && mirror2.obstacleChecker && mirror1.WallChecker))
+            //{
+            //    Debug.Log("장애물 못밀어");
+            //    yield return null;
+            //}
+
             Debug.Log($"{isCollider.name}이 앞에 있다");
             if (obstacleLayer.Contain(isCollider.gameObject.layer) && !mirrorHolding)
             {
+
+
+                Debug.Log("장애물 밀기");
                 Debug.Log(isCollider.name);
 
                 Vector3 obsStartPos = isCollider.gameObject.transform.position;
@@ -388,8 +406,11 @@ public class New_PlayerController : MonoBehaviour
                     {
                         animator.SetBool("Push", false);
                     }
+
+
                     wallMirrorBumpChecker = true;
                     StartCoroutine(BumpTimer());
+
                 }
                 else
                 {
@@ -470,6 +491,12 @@ public class New_PlayerController : MonoBehaviour
                 moveOn = false;
                 yield return null;
             }
+            else if (holder.FrontMirrorLader() && holder.FrontObstacleLader() && mirror2.ObstacleChecker)
+            {
+                Debug.Log($"이미 맵2에 장애물이 있어서 못밀어넣음");
+                moveOn = false;
+                yield return null;
+            }
             //else if (obstacleLayer.Contain(hit.collider.gameObject.layer) && mirrorHolding)
             //{
             //    Debug.Log($"거울을 들고 장애물을 밀 수 없습니다");
@@ -480,7 +507,7 @@ public class New_PlayerController : MonoBehaviour
             else
             {
                 float time = 0;
-                bool hitWall = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0, 1, 0), 0.5f, wall).Length > 0;
+                bool hitWall = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0, 0.5f, 0), 0.5f, wall).Length > 0;
 
                 while (time < 1)
                 {

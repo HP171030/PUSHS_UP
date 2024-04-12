@@ -27,7 +27,7 @@ public class TestController : MonoBehaviour
     [SerializeField] LayerMask crystal;
     [SerializeField] public bool onIce = false;
     [SerializeField] Holder holder;
-    [SerializeField] Mirror1_OffsetX mirror1;
+    [SerializeField] Mirror1 mirror1;
     [SerializeField] GameObject mirror1Image;
     [SerializeField] LayerMask moveLayer;
 
