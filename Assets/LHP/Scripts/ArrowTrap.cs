@@ -61,7 +61,7 @@ public class ArrowTrap : MonoBehaviour
         float time = 0;
         Vector3 startPos = arrow.transform.position;
         Vector3 targetPos = arrow.transform.position + arrow.transform.forward* distance;
-        RaycastHit [] players = Physics.BoxCastAll(arrow.transform.position, new Vector3(1, 1, 1) / 2f, arrow.transform.forward);
+        RaycastHit [] players = Physics.BoxCastAll(arrow.transform.position, new Vector3(1, 1, 1) / 2f, arrow.transform.forward,Quaternion.identity,distance,player);
         
             foreach(RaycastHit p in players )
         {
@@ -88,19 +88,11 @@ public class ArrowTrap : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        RaycastHit hit;
-        if ( Physics.BoxCast(arrow.transform.position, new Vector3(1, 1, 1) / 2f, arrow.transform.forward, out hit, Quaternion.identity, distance) )
-        {
-            // 충돌 지점까지의 선 그리기
-            Gizmos.DrawLine(arrow.transform.position, hit.point);
-            // 충돌한 지점에 큐브 형태의 기즈모 그리기
-            Gizmos.DrawWireCube(hit.point, Vector3.one);
-        }
-        else
-        {
-            // 박스 캐스트가 충돌하지 않았을 때, 예상되는 박스의 위치와 크기에 기즈모 그리기
-            Vector3 boxCenter = arrow.transform.position + arrow.transform.forward * distance;
-            Gizmos.DrawWireCube(boxCenter, new Vector3(1, 1, 1));
-        }
+        // 박스 캐스트가 충돌하지 않았을 때, 예상되는 박스의 위치와 크기에 기즈모 그리기
+        Vector3 boxCenter = arrow.transform.position + arrow.transform.forward * distance;
+        Gizmos.DrawLine(arrow.transform.position, arrow.transform.position + arrow.transform.forward * distance);
+        Gizmos.DrawWireCube(boxCenter, new Vector3(1, 1, 1));
+        return;
+
     }
 }
