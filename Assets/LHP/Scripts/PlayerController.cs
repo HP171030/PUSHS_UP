@@ -5,6 +5,7 @@ using Cinemachine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.InputSystem.HID;
 
 public class PlayerController : MonoBehaviour
 {
@@ -311,7 +312,7 @@ public class PlayerController : MonoBehaviour
             Gizmos.DrawWireSphere(debugVec, 0.5f);
 
     }
-    private IEnumerator MoveRoutine( Vector3 moveDirValue )
+    private IEnumerator MoveRoutine(Vector3 moveDirValue)
     {
         Vector3 startPos = transform.position;
         Vector3 PreMoveDir = moveDir;
@@ -329,7 +330,7 @@ public class PlayerController : MonoBehaviour
 
                 Tile tileIns = tile.GetComponent<Tile>();                                             //내 앞쪽 타일 : tileIns
 
-                if ( tileIns != null )
+                if (tileIns != null)
                 {
 
                     Collider [] isBlank = Physics.OverlapSphere(tileIns.middlePoint.position +new Vector3(0,1,0), 0.5f, WandObslayer);
