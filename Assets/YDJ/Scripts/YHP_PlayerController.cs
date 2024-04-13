@@ -372,7 +372,7 @@ public class YHP_PlayerController : MonoBehaviour
             //}
 
             Debug.Log($"{isCollider.name}이 앞에 있다");
-            if (obstacleLayer.Contain(isCollider.gameObject.layer) && !mirrorHolding )
+            if (obstacleLayer.Contain(isCollider.gameObject.layer) && !mirrorHolding)
             {
 
 
@@ -408,9 +408,9 @@ public class YHP_PlayerController : MonoBehaviour
                     }
 
 
-                        wallMirrorBumpChecker = true;
-                        StartCoroutine(BumpTimer());
-                    
+                    wallMirrorBumpChecker = true;
+                    StartCoroutine(BumpTimer());
+
                 }
                 else
                 {
@@ -479,6 +479,12 @@ public class YHP_PlayerController : MonoBehaviour
                 moveOn = false;
                 yield return null;
             }
+            else if (holder.FrontMirrorLader() && !mirrorHolding && !mirror1.WallChecker)
+            {
+                Debug.Log($"거울이 앞에 있어서 이동할 수 없습니다.");
+                moveOn = false;
+                yield return null;
+            }
             else if (holder.WallLader() && mirrorHolding)
             {
                 Debug.Log($"거울을 들고 벽 통과 못함");
@@ -507,7 +513,7 @@ public class YHP_PlayerController : MonoBehaviour
             else
             {
                 float time = 0;
-                bool hitWall = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0, 0.5f, 0), 0.7f, wall ).Length > 0;
+                bool hitWall = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0, 0.5f, 0), 0.5f, wall).Length > 0;
 
                 while (time < 1)
                 {
@@ -554,7 +560,7 @@ public class YHP_PlayerController : MonoBehaviour
         Debug.Log("잡기 시도");
         GameObject mirrorObject = holder.GrabMirror();
 
-        if (mirrorObject != null)
+        if (mirrorObject != null && !holder.FrontObstacleLader())
         {
             Debug.Log("잡았음");
             // 거울 오브젝트를 홀더 포인트의 자식으로 설정합니다.
@@ -661,17 +667,17 @@ public class YHP_PlayerController : MonoBehaviour
                 //}
 
                 // 결과 출력
-                Debug.Log($"mirrorObject.transform.forward: {forwardDirection}");
-                Debug.Log("거울 벽에 놓기");
+                //Debug.Log($"mirrorObject.transform.forward: {forwardDirection}");
+                //Debug.Log("거울 벽에 놓기");
                 //Debug.Log($"mirrorObject.transform.forward{mirrorObject.transform.forward}");
             }
 
 
-            else // 바닥에 거울을 놓는다면
+            else if(!mirror1.MoveDisableChecker) // 바닥에 거울을 놓는다면
             {
                 // 거울을 땅에 놓을 때 앞에 장애물이 있는지 확인하고, 있으면 거울을 놓지 않습니다.
 
-                if (mirror1.ObstacleChecker)
+                if (holder.FrontObstacleLader())
                 {
                     Debug.Log("장애물이 앞에 있어 거울을 놓을 수 없습니다.");
                     return;
