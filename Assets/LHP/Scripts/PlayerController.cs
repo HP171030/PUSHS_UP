@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     public bool moveOn;
     public bool inputKey = true;
+    bool onSpace = false;
     bool pullOn = false;
     bool grabOn;
     [Header("Player")]
@@ -85,11 +86,9 @@ public class PlayerController : MonoBehaviour
         else
         {
 
-            grabOn = false;
-            if ( !pullOn )
-                moveOn = false;
-          
+            Debug.Log("offPull");
 
+            grabOn = false;
 
         }
 
@@ -124,7 +123,7 @@ public class PlayerController : MonoBehaviour
         }
         else if ( !moveOn && grabOn && moveDir.magnitude > 0 )
         {
-            pullOn = true;
+           
             if ( grabHit.collider != null )
             {
                
@@ -169,11 +168,17 @@ public class PlayerController : MonoBehaviour
                     
                     moveOn = false;
                     pullOn = false;
+                    Debug.Log("elseGrab");
                 }
 
             }
 
 
+        }
+        else if (!moveOn&& !grabOn && !pullOn && moveDir.magnitude <= 0.1f )
+        {
+            
+            animator.SetBool("Pull", false);
         }
 
 
@@ -181,6 +186,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator PullRoutine( Vector3 pullDir, bool X )
     {
+        pullOn = true;
         moveOn = true;
         LayerMask backObsWall = wall | obstacleLayer;
         if ( Physics.Raycast(transform.position, -transform.forward, out RaycastHit somethingBack, 1f, backObsWall) )
@@ -313,7 +319,7 @@ public class PlayerController : MonoBehaviour
         LayerMask WandObslayer = obstacleLayer | wall;
         Vector3 targetPos = transform.position + moveDirValue *2 ;
         debugVec = targetPos;
-        Collider [] tiles = Physics.OverlapSphere(targetPos, 0.5f, ground);
+        Collider [] tiles = Physics.OverlapSphere(targetPos, 0.5f, ground);               
 
         if ( tiles.Length > 0 )
         {
@@ -321,19 +327,19 @@ public class PlayerController : MonoBehaviour
             foreach ( Collider tile in tiles )
             {
 
-                Tile tileIns = tile.GetComponent<Tile>();
+                Tile tileIns = tile.GetComponent<Tile>();                                             //내 앞쪽 타일 : tileIns
 
                 if ( tileIns != null )
                 {
 
-                    Collider [] isBlank = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0,1,0), 0.5f, WandObslayer);
-                    Debug.Log($"this is wall{isBlank.Length}");
+                    Collider [] isBlank = Physics.OverlapSphere(tileIns.middlePoint.position +new Vector3(0,1,0), 0.5f, WandObslayer);
+                   
                     if ( isBlank.Length == 0 )
                     {
-
+                        
                         targetPos = tileIns.middlePoint.position;
                      //   debugVec = targetPos;
-                        Debug.Log($"Perfect{tileIns.gameObject.name}");
+                       
                         float time = 0;
                         while ( time < 1 )
                         {
@@ -378,10 +384,16 @@ public class PlayerController : MonoBehaviour
                                         Tile obsTile = collider.GetComponent<Tile>();
                                         if ( obsTile != null )
                                         {
-                                            Debug.Log(obsTile.name);
+                                            Debug.Log($"obstacle foward is {obsTile.name}");
                                             obsTargetPos = obsTile.middlePoint.position;
                                         }
                                     }
+                                }
+                                else
+                                {
+                                    Debug.Log("obstacle foward is blocked");
+                                    moveOn = false;
+                                    break;
                                 }
 
                                 float time = 0;
@@ -483,6 +495,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("isNoneTile");
                     yield return null;
                     
                 }
