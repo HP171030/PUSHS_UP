@@ -54,7 +54,7 @@ public class Boss : MonoBehaviour
                 case 1: curState = Pattern.Pattern2;             // 패턴 2 ,3 으로 바꿀것;
                                                                  // 패턴 2 ,3 으로 바꿀것;
                 break;                                           // 패턴 2 ,3 으로 바꿀것;
-            case 2: curState = Pattern.Pattern3;                 // 패턴 2 ,3 으로 바꿀것;
+            case 2: curState = Pattern.Pattern3;                // 패턴 2 ,3 으로 바꿀것;
                 
                 break;
 
@@ -125,8 +125,10 @@ public class Boss : MonoBehaviour
     public IEnumerator WaitPattern()
     {
         Manager.game.PlayerControllStop();
+        
         yield return new WaitForSeconds(2f);
         Manager.game.PlayerControllerOn();
+        
         CreateObstacle();
     }
 }
