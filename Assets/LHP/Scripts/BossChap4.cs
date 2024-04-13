@@ -75,7 +75,7 @@ public class BossChap4 : Boss
 
                 if ( !targetTile )
                 {
-                    patternCount = 10;
+                    patternCount = pattern1Count;
                     targetTile = true;
 
                 }
@@ -94,19 +94,24 @@ public class BossChap4 : Boss
                 if ( !targetTile )
                 {
 
-                    patternCount = 10;
+                    patternCount = pattern2Count;
 
                     targetTile = true;
 
                 }
-               P2Colliders =  Physics.OverlapBox(mapMidPoint.position, new Vector3(7.5f, 1, 9), Quaternion.identity, tile);
-                
-                foreach(Collider col in P2Colliders )
+                P2Colliders = Physics.OverlapBox(mapMidPoint.position, new Vector3(7.5f, 1, 9), Quaternion.identity, tile);
+
+                if ( !isAlertP2 )
                 {
-                    Renderer renderers = col.GetComponent<Renderer>();
-                    if(renderers != null )
-                    StartCoroutine(AlertTile(renderers, Color.red, 1f));
+                    foreach ( Collider col in P2Colliders )
+                    {
+                        Renderer renderers = col.GetComponent<Renderer>();
+                        if ( renderers != null )
+                            StartCoroutine(AlertTile(renderers, Color.red, 1f));
+                    }
                 }
+                isAlertP2 = true;
+
 
                 Pattern2Attack();
 
@@ -121,32 +126,37 @@ public class BossChap4 : Boss
                 {
 
                     Debug.Log("pat3");
-                    patternCount = 10;
+                    patternCount = pattern3Count;
                     targetTile = true;
                     int safeAreaIndex = Random.Range(0, statues.Length);
                     safeAreas = Physics.OverlapBox(statues [safeAreaIndex].position, new Vector3(2, 1, 2), Quaternion.identity, tile);
                     shine.transform.position = statues [safeAreaIndex].position;
                 }
-                foreach(Collider col in safeAreas )
+                if (!isAlertP3 )
                 {
-                    Renderer renderers = col.GetComponent<Renderer>();
-                    Tile isNotAlert = col.GetComponent<Tile>();
-                    if( isNotAlert != null )
-                    isNotAlert.isTargetTile = true;
+                    foreach ( Collider col in safeAreas )
+                    {
+                        Renderer renderers = col.GetComponent<Renderer>();
+                        Tile isNotAlert = col.GetComponent<Tile>();
+                        if ( isNotAlert != null )
+                            isNotAlert.isTargetTile = true;
 
-                    if ( renderers != null )
+                        if ( renderers != null )
+                        {
+                            StartCoroutine(AlertTile(renderers, Color.yellow, 1f));
+                        }
+                    }
+                    foreach ( Tile tiles in AllTile )
                     {
-                        StartCoroutine(AlertTile(renderers, Color.yellow, 1f));
+                        if ( !tiles.isTargetTile )
+                        {
+                            Renderer rend = tiles.GetComponent<Renderer>();
+                            StartCoroutine(AlertTile(rend, Color.red, 1));
+                        }
                     }
                 }
-                foreach(Tile tiles in AllTile )
-                {
-                    if ( !tiles.isTargetTile )
-                    {
-                        Renderer rend = tiles.GetComponent<Renderer>();
-                        StartCoroutine(AlertTile(rend, Color.red, 1));
-                    }
-                }
+                isAlertP3 = true;
+                
                 Pattern3Attack();
 
                 break;
@@ -299,6 +309,7 @@ public class BossChap4 : Boss
                     }
             curState = Pattern.Idle;
             onPattern = false;
+            isAlertP2 = false;
         }
     }
     private void Pattern3Attack()
@@ -350,6 +361,7 @@ public class BossChap4 : Boss
             }
             curState = Pattern.Idle;
             onPattern = false;
+            isAlertP3 = false;
         }
     }
 }

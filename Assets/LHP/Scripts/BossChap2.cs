@@ -47,16 +47,21 @@ public class BossChap2 : Boss
 
                 if ( !targetTile )
                 {
-                    patternCount = 10;
+                    patternCount = pattern1Count;
                     targetTile = true;
                     
                 }
+                if ( !isAlertP1 )
+                {
                     foreach ( Tile tiles in frontRangeTile )
                     {
 
                         Renderer tilesRend = tiles.gameObject.GetComponent<Renderer>();
-                        StartCoroutine(AlertTile(tilesRend,Color.red, 1));
+                        StartCoroutine(AlertTile(tilesRend, Color.red, 1));
                     }
+                }
+                isAlertP1 = true;
+                    
 
 
                 FrontAttack();
@@ -71,8 +76,8 @@ public class BossChap2 : Boss
                 onPattern = true;
                 if ( !targetTile )
                 {
-                    patternCount = 10;
-             //       startRightAttack = stoneSpawnerChildren [RandomLocation];
+                    patternCount = pattern2Count;
+                    //       startRightAttack = stoneSpawnerChildren [RandomLocation];
 
                     tileAlert = Physics.BoxCastAll(startRightAttack.position, new Vector3(5, 1, 1), Vector3.back, Quaternion.identity, 15f, tile);
                     targetTile = true;
@@ -81,12 +86,18 @@ public class BossChap2 : Boss
                 }
                 if ( tileAlert.Length > 0 )
                 {
-                    foreach ( RaycastHit tiles in tileAlert )
+                    if ( !isAlertP2 )
                     {
+                        foreach ( RaycastHit tiles in tileAlert )
+                        {
 
-                        Renderer tilesRend = tiles.collider.gameObject.GetComponent<Renderer>();
-                        StartCoroutine(AlertTile(tilesRend,Color.red, 1));
+                            Renderer tilesRend = tiles.collider.gameObject.GetComponent<Renderer>();
+                            StartCoroutine(AlertTile(tilesRend, Color.red, 1));
+                        }
+
                     }
+                    isAlertP2 = true;
+                    
                 }
 
                 SideAttack();
@@ -109,23 +120,28 @@ public class BossChap2 : Boss
 
                     }
 
-                    patternCount = 10;
+                    patternCount = pattern3Count;
 
                     targetTile = true;
 
                 }
-                isTiles = new Tile [stoneFall.Length]; // tiles 배열 초기화
-
-                for ( int i = 0; i < isTiles.Length; i++ )
+                if (!isAlertP3 )
                 {
+                    isTiles = new Tile [stoneFall.Length]; // tiles 배열 초기화
 
-                    isTiles [i] = AllTile [stoneFall [i]];
+                    for ( int i = 0; i < isTiles.Length; i++ )
+                    {
+
+                        isTiles [i] = AllTile [stoneFall [i]];
+                    }
+                    foreach ( Tile tile in isTiles )
+                    {
+                        Renderer isFallRend = tile.GetComponent<Renderer>();
+                        StartCoroutine(AlertTile(isFallRend, Color.red, 1));
+                    }
                 }
-                foreach ( Tile tile in isTiles )
-                {
-                    Renderer isFallRend = tile.GetComponent<Renderer>();
-                    StartCoroutine(AlertTile(isFallRend,Color.red, 1    ));
-                }
+                isAlertP3 = true;
+                
 
                 Howling();
                 break;
@@ -147,6 +163,7 @@ public class BossChap2 : Boss
             anim.SetTrigger("Attack5");
             curState = Pattern.Idle;
             onPattern = false;
+            isAlertP1 = false;
             foreach ( Tile tiles in frontRangeTile )
             {
                 Transform tilePoint = tiles.middlePoint;
@@ -237,23 +254,9 @@ public class BossChap2 : Boss
        
         
         onPattern = false;
+        isAlertP2 = false;
     }
- /*   public void CreateObstacle()
-    {
-        int [] obsCreate = new int [2];                              //배열 2개
-        for ( int i = 0; i < 2; i++ )
-        {
 
-            obsCreate [i] = Random.Range(0, sweapAllTile.Length);           //랜덤으로 배열 2개에 숫자 2개 할당
-
-        }
-        for ( int i = 0; i < obsCreate.Length; i++ )
-        {
-            Instantiate(ObstacleInstance, sweapAllTile [obsCreate [i]].middlePoint.position, Quaternion.identity);
-        }
-
-
-    }*/
     public void Howling()
     {
         if ( patternCount <= 0 )
@@ -284,6 +287,7 @@ public class BossChap2 : Boss
             
             curState = Pattern.Idle;
             onPattern = false;
+            isAlertP3 = false;
         }
     }
 

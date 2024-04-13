@@ -66235,17 +66235,17 @@ MonoBehaviour:
   obstacle:
     serializedVersion: 2
     m_Bits: 64
+  pattern1Count: 10
+  pattern2Count: 10
+  pattern3Count: 10
   AllTile: []
   RowInExplode: []
-  renderers: []
   allTile: {fileID: 1458661800}
   explodeParent: {fileID: 1439087055}
   explodeRange: []
   pattern3RangeParent: {fileID: 855629477}
-  spawnHeight: 5
   pattern3Range: []
   pattern1Effect: {fileID: 5315808105417918804, guid: bfda1cfb683b16d478a8d98289486152, type: 3}
-  fallingthornsCount: 0
   debugVectors: []
   debugVector: {x: 0, y: 0, z: 0}
 --- !u!1001 &1727038472
