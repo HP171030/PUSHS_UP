@@ -882,6 +882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 282300181}
 --- !u!65 &45690402
 BoxCollider:
@@ -968,7 +969,7 @@ PrefabInstance:
       objectReference: {fileID: 1681338122}
     - target: {fileID: 1344927433959157852, guid: d6649e74f3dfa3c4a9abed1137984cf2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -29.398298
+      value: -30.25
       objectReference: {fileID: 0}
     - target: {fileID: 1344927433959157852, guid: d6649e74f3dfa3c4a9abed1137984cf2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -976,7 +977,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1344927433959157852, guid: d6649e74f3dfa3c4a9abed1137984cf2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.309479
+      value: -12.9863825
       objectReference: {fileID: 0}
     - target: {fileID: 1344927433959157852, guid: d6649e74f3dfa3c4a9abed1137984cf2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1662,6 +1663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 416711787}
 --- !u!65 &102931293
 BoxCollider:
@@ -3143,6 +3145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 1510005834}
 --- !u!65 &186545413
 BoxCollider:
@@ -5734,6 +5737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 131912499}
 --- !u!65 &402968046
 BoxCollider:
@@ -6042,6 +6046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 281253166}
 --- !u!65 &412897412
 BoxCollider:
@@ -9321,6 +9326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 638337310}
 --- !u!65 &484460323
 BoxCollider:
@@ -9647,6 +9653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 1707608934}
 --- !u!65 &495375550
 BoxCollider:
@@ -10130,6 +10137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 1119110156}
 --- !u!65 &500342967
 BoxCollider:
@@ -11234,6 +11242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 241850323}
 --- !u!65 &577571432
 BoxCollider:
@@ -12601,6 +12610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 465695286}
 --- !u!65 &694283649
 BoxCollider:
@@ -14153,6 +14163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 638144544}
 --- !u!65 &757327424
 BoxCollider:
@@ -14523,6 +14534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 323043131}
 --- !u!65 &764724015
 BoxCollider:
@@ -16314,6 +16326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 1311856147}
 --- !u!65 &886251280
 BoxCollider:
@@ -17352,6 +17365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 1343985412}
 --- !u!65 &959561677
 BoxCollider:
@@ -17516,7 +17530,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.57600427, y: 0, z: 0, w: 0.8174467}
-  m_LocalPosition: {x: -29.398298, y: 9.433164, z: -13.309479}
+  m_LocalPosition: {x: -30.25, y: 9.433164, z: -12.9863825}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17604,6 +17618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 526024207}
 --- !u!65 &972450441
 BoxCollider:
@@ -18221,6 +18236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 272128259}
 --- !u!65 &1007335726
 BoxCollider:
@@ -19941,6 +19957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 179373330}
 --- !u!65 &1121442203
 BoxCollider:
@@ -20734,7 +20751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3091212605045805670, guid: 6fb178b27ebcca0479402c23d8858ba1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -29.398298
+      value: -30.25
       objectReference: {fileID: 0}
     - target: {fileID: 3091212605045805670, guid: 6fb178b27ebcca0479402c23d8858ba1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -20742,7 +20759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3091212605045805670, guid: 6fb178b27ebcca0479402c23d8858ba1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.945097
+      value: -9.622
       objectReference: {fileID: 0}
     - target: {fileID: 3091212605045805670, guid: 6fb178b27ebcca0479402c23d8858ba1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20825,6 +20842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 1924859635}
 --- !u!65 &1178613891
 BoxCollider:
@@ -21896,6 +21914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 910695692}
 --- !u!65 &1244596550
 BoxCollider:
@@ -24565,6 +24584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 2130586309}
 --- !u!65 &1433799343
 BoxCollider:
@@ -25677,6 +25697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 1373659916}
 --- !u!65 &1531482606
 BoxCollider:
@@ -30909,6 +30930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 1413213031}
 --- !u!65 &1726776758
 BoxCollider:
@@ -32012,6 +32034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 1618923075}
 --- !u!65 &1811479749
 BoxCollider:
@@ -33125,6 +33148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 930396523}
 --- !u!65 &1882653503
 BoxCollider:
@@ -33518,6 +33542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 388201510}
 --- !u!65 &1919235850
 BoxCollider:
@@ -34633,6 +34658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 1776508462}
 --- !u!65 &2007289209
 BoxCollider:
@@ -35265,6 +35291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 559562992}
 --- !u!65 &2061272783
 BoxCollider:
@@ -36262,6 +36289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac0aa3a6a45a7429a418881c1fcb1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTargetTile: 0
   middlePoint: {fileID: 899034328}
 --- !u!65 &2123638191
 BoxCollider:
