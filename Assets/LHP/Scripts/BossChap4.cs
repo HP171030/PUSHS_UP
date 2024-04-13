@@ -6,7 +6,7 @@ public class BossChap4 : Boss
 {
     Animator anim;
 
-    Collider [] safeAreas = null;
+    [SerializeField] Collider [] safeAreas = null;
     [SerializeField] Tile [] AllTile;
 
     [SerializeField] Tile [] RowInExplode;
@@ -120,17 +120,13 @@ public class BossChap4 : Boss
                 if ( !targetTile )
                 {
 
-
+                    Debug.Log("pat3");
                     patternCount = 10;
                     targetTile = true;
                     int safeAreaIndex = Random.Range(0, statues.Length);
                     safeAreas = Physics.OverlapBox(statues [safeAreaIndex].position, new Vector3(2, 1, 2), Quaternion.identity, tile);
                     shine.transform.position = statues [safeAreaIndex].position;
                 }
-                
-              
-                
-              
                 foreach(Collider col in safeAreas )
                 {
                     Renderer renderers = col.GetComponent<Renderer>();
@@ -275,6 +271,7 @@ public class BossChap4 : Boss
         curState = Pattern.Idle;
         onPattern = false;
         alertBool = false;
+
     }
 
     private void Pattern2Attack()
