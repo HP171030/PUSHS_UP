@@ -9,7 +9,7 @@ public class Boss : MonoBehaviour
     public enum Pattern { Idle, Pattern1, Pattern2, Pattern3 }
     public Pattern curState;
     public bool alert;
-    protected int patternCount;
+     protected int patternCount;
    protected bool onPattern = false;
     protected Tile [] mapATiles;
     [SerializeField] protected GameObject mapAtile;
@@ -19,6 +19,14 @@ public class Boss : MonoBehaviour
     [SerializeField] public LayerMask tile;
     [SerializeField] public LayerMask player;
     [SerializeField] public LayerMask obstacle;
+
+    [SerializeField] public int pattern1Count;
+    [SerializeField] public int pattern2Count;
+    [SerializeField] public int pattern3Count;
+
+  protected bool isAlertP1 = false;
+  protected bool isAlertP2 = false;
+  protected bool isAlertP3 = false;
     protected virtual void Start()
     {
         curState = Pattern.Idle;

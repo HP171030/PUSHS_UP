@@ -67,7 +67,7 @@ public class BossChap3 : Boss
 
                 if ( !targetTile )
                 {
-                    patternCount = 10;
+                    patternCount = pattern1Count;
                     targetTile = true;
 
                 }
@@ -86,20 +86,24 @@ public class BossChap3 : Boss
                 if ( !targetTile )
                 {
                     
-                    patternCount = 10;
+                    patternCount = pattern2Count;
 
                     targetTile = true;
 
                 }
-                foreach ( Tile tiles in AllTile )
+                if ( !isAlertP2 )
                 {
-                    if (!tiles.isTargetTile )
+                    foreach ( Tile tiles in AllTile )
                     {
-                        Renderer rend = tiles.GetComponent<Renderer>();
-                        StartCoroutine(AlertTile(rend, Color.red, 1));
+                        if ( !tiles.isTargetTile )
+                        {
+                            Renderer rend = tiles.GetComponent<Renderer>();
+                            StartCoroutine(AlertTile(rend, Color.red, 1));
+                        }
+
                     }
-                    
                 }
+                isAlertP2 = true;
 
                 SweapMap();
 
@@ -114,9 +118,11 @@ public class BossChap3 : Boss
                 {
 
 
-                    patternCount = 10;
+                    patternCount = pattern3Count;
                     targetTile = true;
                 }
+                if(!isAlertP3 )
+                {
                 foreach( Transform tiles in pattern3Range )
                 {
                     Collider [] colliders = Physics.OverlapBox(tiles.position, new Vector3(2f, 1, 2f),Quaternion.identity,tile);
@@ -128,11 +134,14 @@ public class BossChap3 : Boss
                         Renderer thisRends = tile.GetComponent<Renderer>(); 
 
                       if ( thisRends != null )
-                          StartCoroutine(AlertTile(thisRends, Color.blue, 1));
+                          StartCoroutine(AlertTile(thisRends, Color.red, 1));
                   }
                  
                     
                 }
+
+                }
+                isAlertP3 = true;
 
                 Pattern3Attack();
 
@@ -302,6 +311,7 @@ public class BossChap3 : Boss
             }
             curState = Pattern.Idle;
             onPattern = false;
+            isAlertP2 = false;
         }
     }
     private void Pattern3Attack()
@@ -347,6 +357,7 @@ public class BossChap3 : Boss
             }
             curState = Pattern.Idle;
             onPattern = false;
+            isAlertP3 = false;
         }
     }
 }

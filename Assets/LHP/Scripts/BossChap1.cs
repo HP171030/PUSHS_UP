@@ -51,22 +51,27 @@ public class BossChap1 : Boss
                
                 if ( !targetTile )
                 {
-                    patternCount = 10;
+                    patternCount = pattern1Count;
                     getStartSpawner = stoneSpawnerChildren [RandomLocation];
 
                     tileAlert = Physics.BoxCastAll(getStartSpawner.position, new Vector3(1, 1, 1), Vector3.back,Quaternion.identity,15f,tile);
                     targetTile = true;
                     Debug.Log(tileAlert.Length);
                 }
-                if(tileAlert.Length > 0 )
+                if ( !isAlertP1 )
                 {
-                    foreach ( RaycastHit tiles in tileAlert )
+                    if ( tileAlert.Length > 0 )
                     {
+                        foreach ( RaycastHit tiles in tileAlert )
+                        {
 
-                        Renderer tilesRend = tiles.collider.gameObject.GetComponent<Renderer>();
-                        StartCoroutine(AlertTile(tilesRend, Color.red,1));
+                            Renderer tilesRend = tiles.collider.gameObject.GetComponent<Renderer>();
+                            StartCoroutine(AlertTile(tilesRend, Color.red, 1));
+                        }
                     }
                 }
+                isAlertP1 = true;
+                
 
                 RollingStone();
                 
@@ -81,16 +86,21 @@ public class BossChap1 : Boss
                 if ( !targetTile )
                 {
                     sweapAllTile = sweapTile.GetComponentsInChildren<Tile>();
-                    patternCount = 10;
+                    patternCount = pattern2Count;
 
                     targetTile = true;
 
                 }
-                foreach(Tile tiles in sweapAllTile )
+                if ( isAlertP2 )
                 {
-                    Renderer rend = tiles.GetComponent<Renderer>();
-                    StartCoroutine(AlertTile(rend, Color.red, 1));
+                    foreach ( Tile tiles in sweapAllTile )
+                    {
+                        Renderer rend = tiles.GetComponent<Renderer>();
+                        StartCoroutine(AlertTile(rend, Color.red, 1));
+                    }
                 }
+                isAlertP2 = true;
+              
 
                 SweapMap();
 
@@ -112,23 +122,28 @@ public class BossChap1 : Boss
                       
                     }
                     
-                    patternCount = 10;
+                    patternCount = pattern3Count;
 
                     targetTile = true;
 
                 }
-                isTiles = new Tile [stoneFall.Length]; // tiles 배열 초기화
-
-                for ( int i = 0; i < isTiles.Length; i++ )
+                if( isAlertP3 )
                 {
+                    isTiles = new Tile [stoneFall.Length]; // tiles 배열 초기화
 
-                    isTiles [i] = sweapAllTile [stoneFall[i]]; 
+                    for ( int i = 0; i < isTiles.Length; i++ )
+                    {
+
+                        isTiles [i] = sweapAllTile [stoneFall [i]];
+                    }
+                    foreach ( Tile tile in isTiles )
+                    {
+                        Renderer isFallRend = tile.GetComponent<Renderer>();
+                        StartCoroutine(AlertTile(isFallRend, Color.red, 1));
+                    }
+
                 }
-                foreach(Tile tile in isTiles )
-                {
-                    Renderer isFallRend = tile.GetComponent<Renderer>();
-                    StartCoroutine(AlertTile(isFallRend, Color.red, 1));
-                }
+                isAlertP3 = true;
 
                 Howling();
                 break;
@@ -150,6 +165,7 @@ public class BossChap1 : Boss
         anim.Play("RollingStone");
             curState = Pattern.Idle;
             onPattern = false;
+            isAlertP1 = false;
             
         }
 
@@ -201,6 +217,7 @@ public class BossChap1 : Boss
             }
             curState = Pattern.Idle;
             onPattern = false;
+            isAlertP2 = false;
         }
     }
  
@@ -232,6 +249,7 @@ public class BossChap1 : Boss
             }
             curState = Pattern.Idle;
             onPattern = false;
+            isAlertP3 = false;
         }
     }
 

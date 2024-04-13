@@ -22351,6 +22351,9 @@ MonoBehaviour:
   obstacle:
     serializedVersion: 2
     m_Bits: 64
+  pattern1Count: 10
+  pattern2Count: 10
+  pattern3Count: 10
   stoneSpawner: {fileID: 1086136705}
   stoneSpawnerChildren: []
   sweapTile: {fileID: 253695582}
