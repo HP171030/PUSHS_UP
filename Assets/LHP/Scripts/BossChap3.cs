@@ -15,22 +15,16 @@ public class BossChap3 : Boss
 
     [SerializeField] Tile [] RowInExplode;
 
-    [SerializeField]List<Renderer> renderers;
-
     [SerializeField] GameObject allTile;
     [SerializeField] Transform explodeParent;
     [SerializeField] Transform [] explodeRange;
     [SerializeField] GameObject pattern3RangeParent;
-    [SerializeField] float spawnHeight;
     [SerializeField] Transform [] pattern3Range;
 
     [SerializeField] ParticleSystem pattern1Effect;
     [SerializeField] Dictionary<int, bool> pattern1Bool;
 
     RaycastHit [] tileAlert = null;
-    int [] stoneFall;
-    Tile [] isTiles;
-    [SerializeField] int fallingthornsCount;
 
     bool targetTile = false;
     bool alertBool = false;
@@ -99,8 +93,12 @@ public class BossChap3 : Boss
                 }
                 foreach ( Tile tiles in AllTile )
                 {
-                    Renderer rend = tiles.GetComponent<Renderer>();
-                    StartCoroutine(AlertTile(rend, Color.red, 1));
+                    if (!tiles.isTargetTile )
+                    {
+                        Renderer rend = tiles.GetComponent<Renderer>();
+                        StartCoroutine(AlertTile(rend, Color.red, 1));
+                    }
+                    
                 }
 
                 SweapMap();

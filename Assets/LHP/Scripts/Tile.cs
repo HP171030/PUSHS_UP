@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
+    public bool isTargetTile = false;
    [SerializeField] public Transform middlePoint;
 }
