@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossChap1 : Boss
 {
-    Animator anim;
+    
     [SerializeField] GameObject stoneSpawner;
     [SerializeField] Transform [] stoneSpawnerChildren;
     Tile [] sweapAllTile;

@@ -8,7 +8,7 @@ using UnityEngine.InputSystem.HID;
 
 public class BossChap3 : Boss
 {
-    Animator anim;
+   
 
     bool isAlert;
     [SerializeField] Tile [] AllTile;

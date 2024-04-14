@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
+    public Animator anim;
     [SerializeField] float patternTime;
-    public enum Pattern { Idle, Pattern1, Pattern2, Pattern3 }
+    public enum Pattern { Idle, Pattern1, Pattern2, Pattern3 ,Dead }
     public Pattern curState;
     public bool alert;
      protected int patternCount;
@@ -32,12 +33,13 @@ public class Boss : MonoBehaviour
         curState = Pattern.Idle;
         Manager.game.stepUpdate += StepCounter;
         mapATiles = mapAtile.GetComponentsInChildren<Tile>();
+
     }
 
 
     protected virtual void Update()
     {
-
+       
        
     }
 
@@ -49,7 +51,13 @@ public class Boss : MonoBehaviour
     }
 
     IEnumerator PatternStart()
-    {
+    {if(curState == Pattern.Dead )
+        {
+
+            yield return null;
+        }
+        else
+        {
         onPattern = true;
         yield return new WaitForSeconds(patternTime);
         int patternRange = Random.Range(0, 3);
@@ -65,6 +73,8 @@ public class Boss : MonoBehaviour
             case 2: curState = Pattern.Pattern3;                // 패턴 2 ,3 으로 바꿀것;
                 
                 break;
+
+        }
 
         }
        
