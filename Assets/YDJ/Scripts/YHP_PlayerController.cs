@@ -25,6 +25,7 @@ public class YHP_PlayerController : MonoBehaviour
     [SerializeField] LayerMask wall;
     [SerializeField] LayerMask ground;
     [SerializeField] LayerMask mirror;
+    [SerializeField] LayerMask crystal;
     [SerializeField] public bool onIce = false;
     [SerializeField] LayerMask NonePlayer;
     [SerializeField] CameraSwitch cameraSwitch;
@@ -595,6 +596,7 @@ public class YHP_PlayerController : MonoBehaviour
 
             if (holder.WallLader() && !mirror1.MoveDisableChecker) //벽에 거울을 놓는다면
             {
+                Debug.Log("벽에 거울 놓기");
                 //holdChecker = false;
                 mirrorObject.transform.parent = null; // 부모 설정을 해제하여 자식에서 빼냅니다.
 
@@ -672,21 +674,21 @@ public class YHP_PlayerController : MonoBehaviour
             }
 
 
-            else if(!mirror1.MoveDisableChecker) // 바닥에 거울을 놓는다면
+            else if(!holder.MoveDisableCheckerLader()) // 바닥에 거울을 놓는다면
             {
                 // 거울을 땅에 놓을 때 앞에 장애물이 있는지 확인하고, 있으면 거울을 놓지 않습니다.
-
+                Debug.Log("바닥에 거울 놓기");
                 if (holder.FrontObstacleLader())
                 {
                     Debug.Log("장애물이 앞에 있어 거울을 놓을 수 없습니다.");
                     return;
                 }
-                if (holder.MoveDisableCheckerLader())
-                {
-                    mirror1.wallChecker = false;
-                    Debug.Log("움직일 수 없는 장애물이 앞에 있어 거울을 놓을 수 없습니다.");
-                    return;
-                }
+                //if (holder.MoveDisableCheckerLader())
+                //{
+                //    mirror1.wallChecker = false;
+                //    Debug.Log("움직일 수 없는 장애물이 앞에 있어 거울을 놓을 수 없습니다.");
+                //    return;
+                //}
 
 
 
