@@ -503,9 +503,15 @@ public class YHP_PlayerController : MonoBehaviour
                 moveOn = false;
                 yield return null;
             }
-            //else if (obstacleLayer.Contain(hit.collider.gameObject.layer) && mirrorHolding)
+            else if (holder.FrontMirrorLader() && holder.FrontObstacleLader() && mirror2.ObstacleChecker)
+            {
+                Debug.Log($"이미 맵2에 장애물이 있어서 못밀어넣음");
+                moveOn = false;
+                yield return null;
+            }
+            //else if (holder.MoveDisableCheckerLader())
             //{
-            //    Debug.Log($"거울을 들고 장애물을 밀 수 없습니다");
+            //    Debug.Log($"움직일 수 없는 장애물이 있어 못지나감");
             //    moveOn = false;
             //    yield return null;
             //}
