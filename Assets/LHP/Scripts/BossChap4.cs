@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossChap4 : Boss
 {
-    Animator anim;
+    
 
     [SerializeField] Collider [] safeAreas = null;
     [SerializeField] Tile [] AllTile;

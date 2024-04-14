@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossChap2 : Boss
 {
-    Animator anim;
+   
 
     Tile [] frontRangeTile;
     Tile [] AllTile;

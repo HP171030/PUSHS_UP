@@ -496,12 +496,15 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     Debug.Log("isNoneTile");
+                    moveOn = false;
                     yield return null;
                     
                 }
 
             }
         }
+        Debug.Log("isNone");
+        moveOn = false;
 
         }
 

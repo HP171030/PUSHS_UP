@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class DoorOpen : MonoBehaviour
 {
+    [SerializeField] Boss thisBoss;
+    [SerializeField] GameObject clearTile;
     [SerializeField]GameObject particle;
     [SerializeField] GameObject[] door;
     [SerializeField] LayerMask player;
@@ -23,6 +25,16 @@ public class DoorOpen : MonoBehaviour
             {
                 isNotOpen = true;
                 StartCoroutine(OpenDoor());
+                if (Manager.game.bossScene )
+                {
+                   
+                    thisBoss.curState = Boss.Pattern.Dead;
+                    if(clearTile != null )
+                    clearTile.SetActive(true);
+                    thisBoss.alert = false;
+                    thisBoss.anim.Play("Dead");
+                    StartCoroutine(BossDead());
+                }
             }
             else
             {
@@ -40,17 +52,27 @@ public class DoorOpen : MonoBehaviour
         foreach ( GameObject go in door )
         {
             float time = 0;
-            Vector3 startPos = go.transform.position;
-            Vector3 targetPos = go.transform.position - new Vector3(0, 5f, 0);
-            while ( time < openTime )
+            if ( go != null )
             {
-                time += Time.deltaTime;
-                go.transform.position = Vector3.Lerp(startPos, targetPos, time / openTime);
-                yield return null;
+                Vector3 startPos = go.transform.position;
+                Vector3 targetPos = go.transform.position - new Vector3(0, 10f, 0);
+                while ( time < openTime )
+                {
+                    time += Time.deltaTime;
+                    go.transform.position = Vector3.Lerp(startPos, targetPos, time / openTime);
+                    yield return null;
+                }
             }
+          
 
         }
         
            
+    }
+
+    IEnumerator BossDead()
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(thisBoss.gameObject);
     }
 }

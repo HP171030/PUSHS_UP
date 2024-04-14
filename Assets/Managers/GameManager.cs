@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private int boomCount = 3;
     private int stepCount = 0;
     public int doorSwitch;
+    public bool bossScene;
 
     public CinemachineVirtualCamera[] cines;
     public PlayerController playerController;
