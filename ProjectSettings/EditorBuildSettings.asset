@@ -26,7 +26,31 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/YDJ/Chapter2/Stage7.unity
     guid: 8c9dbd7e0eb0de34791516ed21c4972e
-  - enabled: 1
+  - enabled: 0
     path: Assets/YDJ/Chapter2/Chapter2/StageBoss.unity
     guid: babd246f76e407d43bc41a8989ec0da2
+  - enabled: 1
+    path: Assets/YDJ/Chapter1 Test/Stage01.unity
+    guid: f54769b3a7b7a044898c994ff1c3b2b9
+  - enabled: 1
+    path: Assets/YDJ/Chapter1 Test/Stage02.unity
+    guid: 378ed0f2cc885b140ab81a639c098db9
+  - enabled: 1
+    path: Assets/YDJ/Chapter1 Test/Stage03.unity
+    guid: 49bc570eb45831842bd516f996f2afca
+  - enabled: 1
+    path: Assets/YDJ/Chapter1 Test/Stage04.unity
+    guid: 287385371247b2040b5348361300398b
+  - enabled: 1
+    path: Assets/YDJ/Chapter1 Test/Stage05.unity
+    guid: 40e74107f88cbcc4c8d68ca14845ceac
+  - enabled: 1
+    path: Assets/YDJ/Chapter1 Test/Stage06.unity
+    guid: 36a6a43ad54fe8b448ab3ea64bf64e40
+  - enabled: 1
+    path: Assets/YDJ/Chapter1 Test/Stage07.unity
+    guid: 8e5f9a87c665397479b5f771802bf99d
+  - enabled: 1
+    path: Assets/YDJ/Chapter1 Test/StageBOSS.unity
+    guid: 9befd05b82092de43bb0922d752e84b5
   m_configObjects: {}
