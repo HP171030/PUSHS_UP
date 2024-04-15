@@ -18,7 +18,7 @@ public class GameSceneLoader : BaseScene
         Manager.game.boomAction = 3;
         Manager.game.cines = thisSceneCine;
        Manager.game.clearValue = clearValue;
-        Manager.game.playerController = FindObjectOfType<PlayerController>();
+        Manager.game.playerController = FindObjectOfType<YHP_PlayerController>();
         Manager.game.player2Controller = FindObjectOfType<Player2Controller>();
         Manager.game.bossScene = bossSceneloader;
         yield return null;
@@ -31,7 +31,7 @@ public class GameSceneLoader : BaseScene
         Manager.game.isEnter = false;
         Manager.game.clearValue = clearValue;
         Manager.game.cines = thisSceneCine;
-        Manager.game.playerController = FindObjectOfType<PlayerController>();
+        Manager.game.playerController = FindObjectOfType<YHP_PlayerController>();
         Manager.game.player2Controller = FindObjectOfType<Player2Controller>();
         Manager.game.bossScene = bossSceneloader;
     }
