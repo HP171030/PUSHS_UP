@@ -5,6 +5,11 @@ public class StepCountUI : MonoBehaviour
 {
     
     public Text stepText;
+    public Image strikethroughImage3;
+    public Image strikethroughImage2;
+    public Image strikethroughImage1;
+    public int MissionCount = 3;
+
 
     private void Start()
     {
@@ -14,10 +19,31 @@ public class StepCountUI : MonoBehaviour
         UpdateStepText();
     }
 
-    private void UpdateStepText()
+    public void UpdateStepText()
     {
-        // UI Text에 stepCount 값을 표시합니다.
         stepText.text = Manager.game.StepAction.ToString();
+
+        if (Manager.game.StepAction >= 50)
+        {
+            // 텍스트에 취소선 이미지를 표시합니다.
+            strikethroughImage3.gameObject.SetActive(true);
+            MissionCount = 2;
+        }
+
+        if (Manager.game.StepAction >= 100)
+        {
+            // 텍스트에 취소선 이미지를 표시합니다.
+            strikethroughImage2.gameObject.SetActive(true);
+            MissionCount = 1;
+        }
+
+        if (Manager.game.StepAction >= 150)
+        {
+            // 텍스트에 취소선 이미지를 표시합니다.
+            strikethroughImage1.gameObject.SetActive(true);
+            MissionCount = 1;
+        }
+
     }
 
     private void OnDestroy()
