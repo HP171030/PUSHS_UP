@@ -15,8 +15,8 @@ public class CameraSwitch : MonoBehaviour
     void Start()
     {
         // 초기에는 플레이어 1의 카메라가 활성화됩니다.
-        player1Camera.Priority = 10;
-        player2Camera.Priority = 0;
+        //player1Camera.Priority = 10;
+       // player2Camera.Priority = 0;
     }
 
     private void OnChange(InputValue value)
