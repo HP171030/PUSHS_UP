@@ -56,7 +56,7 @@ public class BossChap1 : Boss
 
                     tileAlert = Physics.BoxCastAll(getStartSpawner.position, new Vector3(1, 1, 1), Vector3.back,Quaternion.identity,15f,tile);
                     targetTile = true;
-                    Debug.Log(tileAlert.Length);
+                    
                 }
                 if ( !isAlertP1 )
                 {
@@ -179,7 +179,7 @@ public class BossChap1 : Boss
             Collider [] collider = Physics.OverlapSphere(onAttack.collider.transform.position + new Vector3(0, 1, 0), 1f, player);
             if(collider.Length > 0 )
             {
-                Debug.Log("GameOver");
+                Manager.game.GameOver();
             }
         }
         
@@ -204,7 +204,7 @@ public class BossChap1 : Boss
                     {
                         if ( player.Contain(col.gameObject.layer) )
                         {
-                            Debug.Log("GameOverOnSweap");
+                            Manager.game.GameOver();
                         }
                         else if(obstacle.Contain(col.gameObject.layer) )
                         {
@@ -241,7 +241,7 @@ public class BossChap1 : Boss
                     {
                         if ( player.Contain(col.gameObject.layer) )
                         {
-                            Debug.Log("GameOverOnSweap");
+                            Manager.game.GameOver();
                         }
                         
                     }

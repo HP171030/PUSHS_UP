@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Cinemachine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,18 +12,35 @@ public class GameManager : MonoBehaviour
     public int doorSwitch;
 
     public CinemachineVirtualCamera[] cines;
-    public PlayerController playerController;
+    public YHP_PlayerController playerController;
     public Player2Controller player2Controller;
     public UnityAction stepUpdate;
 
+    public Button restartButton;
+
     public int clearValue;
     public bool isEnter = false;
+
+    bool gameOver = false;
 
 
     public int boomAction { get { return boomCount; } set {  boomCount = value; Debug.Log(boomCount); } }
     public int StepAction { get { return stepCount; } set { stepCount = value; stepUpdate?.Invoke(); } }
 
+    public void GameOver()
+    {
+        PlayerControllStop();
+        gameOver = true;
+        StartCoroutine(gameOverRoutine());
+    }
 
+    IEnumerator gameOverRoutine()
+    {
+        player2Controller.animator.Play("GameOver");
+        yield return new WaitForSeconds(5f);
+        Time.timeScale = 0.01f;
+        restartButton.gameObject.SetActive(true);
+    }
     public void PlayerControllStop()
     {
         Debug.Log("inputOff");
@@ -34,9 +52,13 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerControllerOn()
     {
+        if ( !gameOver )
+        {
         Debug.Log("inputOn");
         playerController.inputKey = true;
         player2Controller.inputKey = true;  
+
+        }
     }
     public void ShakeCam()
     {

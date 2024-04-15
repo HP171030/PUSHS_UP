@@ -15,7 +15,7 @@ public class Player2Controller : MonoBehaviour
     [SerializeField] float moveSpeed;
 
     [Header("Configs")]
-    [SerializeField] Animator animator;
+    [SerializeField] public Animator animator;
     [SerializeField] Rigidbody rb;
     [SerializeField] LayerMask obstacleLayer;
     [SerializeField] LayerMask obstacleUpperLayer;

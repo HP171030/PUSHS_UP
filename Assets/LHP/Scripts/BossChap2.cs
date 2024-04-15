@@ -174,7 +174,7 @@ public class BossChap2 : Boss
                     {
                         if ( player.Contain(col.gameObject.layer) )
                         {
-                            Debug.Log("GameOverOnSweap");
+                            Manager.game.GameOver();
                         }
                         else if ( obstacle.Contain(col.gameObject.layer) )
                         {
@@ -232,7 +232,7 @@ public class BossChap2 : Boss
                 {
                     if ( player.Contain(Cplayer.gameObject.layer) )
                     {
-                        Debug.Log($"{ Cplayer.gameObject.name} is gameOver");
+                        Manager.game.GameOver();
                     }
                 }
             }
@@ -278,7 +278,7 @@ public class BossChap2 : Boss
                     {
                         if ( player.Contain(col.gameObject.layer) )
                         {
-                            Debug.Log("GameOverOnSweap");
+                            Manager.game.GameOver();
                         }
 
                     }

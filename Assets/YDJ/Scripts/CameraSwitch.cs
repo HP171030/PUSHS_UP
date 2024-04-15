@@ -21,7 +21,7 @@ public class CameraSwitch : MonoBehaviour
 
     private void OnChange(InputValue value)
     {
-        if(!Manager.game.isEnter)
+        if ( !Manager.game.isEnter && player2Camera.Follow !=null)
         Change();
     }
 

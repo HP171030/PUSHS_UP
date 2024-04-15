@@ -304,6 +304,10 @@ public class YHP_PlayerController : MonoBehaviour
         Gizmos.color = Color.red;
         if (debugVec != null)
             Gizmos.DrawWireSphere(debugVec, 0.5f);
+        else
+        {
+            Debug.Log("isnoneDebugVec");
+        }
     }
 
 
@@ -334,13 +338,25 @@ public class YHP_PlayerController : MonoBehaviour
 
         // 1. 앞에 땅 충돌체가 없으면 이동 불가능
         Collider[] tiles = Physics.OverlapSphere(targetPos, 0.5f, ground);
-        if (tiles.Length == 0)
-            yield break;
 
-        // 2. 앞에 땅 충돌체에 타일 컴포넌트가 없으면 이동 불가능
-        Tile tile = tiles[0].GetComponent<Tile>();
-        if (tile == null)
+        Tile isTile = null;
+        if (tiles.Length == 0 )
+        {
+            Debug.Log("isNotGround");
             yield break;
+        }
+        // 2. 앞에 땅 충돌체에 타일 컴포넌트가 없으면 이동 불가능
+        foreach(Collider tile in tiles)
+        {
+            Debug.Log($"the name is {tile}");
+            isTile = tile.GetComponent<Tile>();
+            if ( isTile == null )
+            {
+                Debug.Log("isnotTile");
+                moveOn = false;
+                yield return null;
+            }
+        }
 
         // 3. 앞에 장애물을 확인
         Collider[] isBlank = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0, 1, 0), 0.5f, WandObslayer);
@@ -348,20 +364,22 @@ public class YHP_PlayerController : MonoBehaviour
         // 3-1. 앞이 빈공간이라면
         if (isBlank.Length == 0)
         {
-            targetPos = tile.middlePoint.position;
+            targetPos = isTile.middlePoint.position;
             float time = 0;
             while (time < 1)
             {
                 time += Time.deltaTime * moveSpeed;
                 rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
+                
                 yield return null;
             }
-            yield return null;
+            
             Manager.game.StepAction++;
             moveOn = false;
             yield break;
         }
-
+        else
+        {
         // 3-2. 장애물이나 벽이 있는 경우
         foreach (Collider isCollider in isBlank)
         {
@@ -528,6 +546,7 @@ public class YHP_PlayerController : MonoBehaviour
 
                     time += Time.deltaTime * moveSpeed;
                     rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
+                    
                     yield return null;
                 }
 
@@ -540,6 +559,9 @@ public class YHP_PlayerController : MonoBehaviour
             }
         }
     }
+           
+        }
+
 
 
     private void OnHold(InputValue value)
