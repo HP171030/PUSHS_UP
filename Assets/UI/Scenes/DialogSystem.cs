@@ -149,9 +149,9 @@ public struct Speaker
 {
 	public	Image	spriteRenderer;		// 캐릭터 이미지 (청자/화자 알파값 제어)
 	public	Image			imageDialog;		// 대화창 Image UI
-	public	TextMeshProUGUI	textName;			// 현재 대사중인 캐릭터 이름 출력 Text UI
-	public	TextMeshProUGUI	textDialogue;		// 현재 대사 출력 Text UI
-	public	GameObject		objectArrow;		// 대사가 완료되었을 때 출력되는 커서 오브젝트
+	public	Text	textName;			// 현재 대사중인 캐릭터 이름 출력 Text UI
+	public	Text	textDialogue;		// 현재 대사 출력 Text UI
+	public	GameObject		objectArrow;        // 대사가 완료되었을 때 출력되는 커서 오브젝트
 }
 
 [System.Serializable]
