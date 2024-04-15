@@ -9,9 +9,20 @@ public class Mirror2 : MonoBehaviour
     public bool obstacleChecker;
     public bool ObstacleChecker { get { return obstacleChecker; } }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log($"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa{other.gameObject.tag}");
+    }
 
     private void OnTriggerStay(Collider other)
     {
+        Debug.Log($"fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff{other.gameObject.tag}");
+
+
+        if (other.gameObject.CompareTag("MoveDisable"))
+        {
+            Debug.Log(other.gameObject.tag);
+        }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle") || (other.gameObject.CompareTag("MoveDisable")))
         {
@@ -25,7 +36,7 @@ public class Mirror2 : MonoBehaviour
         //    obstacleChecker = true;
 
         //}
-        Debug.Log(other.gameObject.tag);
+
 
     }
 
