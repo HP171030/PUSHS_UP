@@ -6,10 +6,10 @@ using UnityEngine.InputSystem;
 
 public class CameraSwitch : MonoBehaviour
 {
-    [SerializeField] CinemachineVirtualCamera player1Camera;
-    [SerializeField] CinemachineVirtualCamera player2Camera;
+    [SerializeField] public CinemachineVirtualCamera player1Camera;
+    [SerializeField] public CinemachineVirtualCamera player2Camera;
 
-    private bool isPlayer1Active = true;
+    [SerializeField] private bool isPlayer1Active = true;
     public bool IsPlayer1Active { get { return isPlayer1Active; } set { isPlayer1Active = value; } }
 
     void Start()
@@ -23,6 +23,10 @@ public class CameraSwitch : MonoBehaviour
     {
         if ( !Manager.game.isEnter && player2Camera.Follow !=null)
         Change();
+        else
+        {
+            Debug.Log("isNotChange");
+        }
     }
 
     public void Change()

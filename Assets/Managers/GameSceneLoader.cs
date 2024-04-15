@@ -6,10 +6,11 @@ using UnityEngine;
 
 public class GameSceneLoader : BaseScene
 {
-    [SerializeField] CinemachineVirtualCamera[] thisSceneCine;
+    [SerializeField] protected CinemachineVirtualCamera[] thisSceneCine;
     [SerializeField] public int clearValue;
     [SerializeField] public int switchCount;
-    [SerializeField] bool bossSceneloader = false;
+    [SerializeField] protected bool bossSceneloader = false;
+    [SerializeField] protected CameraSwitch cam;
 
     public override IEnumerator LoadingRoutine()
     {
@@ -22,7 +23,12 @@ public class GameSceneLoader : BaseScene
         Manager.game.playerController = FindObjectOfType<YHP_PlayerController>();
         Manager.game.player2Controller = FindObjectOfType<Player2Controller>();
         Manager.game.bossScene = bossSceneloader;
+        cam = FindObjectOfType<CameraSwitch>();
+        cam.player1Camera = thisSceneCine [0];
+        if ( thisSceneCine [1] !=null )
+        cam.player2Camera = thisSceneCine [1];
         yield return null;
+        cam = Manager.game.player2Controller.cameraSwitch;
         
     }
     private void Start()
@@ -35,6 +41,10 @@ public class GameSceneLoader : BaseScene
         Manager.game.playerController = FindObjectOfType<YHP_PlayerController>();
         Manager.game.player2Controller = FindObjectOfType<Player2Controller>();
         Manager.game.bossScene = bossSceneloader;
+        cam = FindObjectOfType<CameraSwitch>();
+        cam.player1Camera = thisSceneCine [0];
+        if ( thisSceneCine [1] != null )
+            cam.player2Camera = thisSceneCine [1];
     }
 
 }

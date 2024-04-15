@@ -2062,7 +2062,6 @@ GameObject:
   - component: {fileID: 570681698171823275}
   - component: {fileID: 2840501337475086722}
   - component: {fileID: 7507945130400123264}
-  - component: {fileID: 5111354772928440867}
   m_Layer: 0
   m_Name: CharChange
   m_TagString: Untagged
@@ -2173,20 +2172,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5111354772928440867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5326726412743507280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b406aad561a30e42950b266cd944181, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player1Camera: {fileID: 0}
-  player2Camera: {fileID: 0}
 --- !u!1 &5370216969446297862
 GameObject:
   m_ObjectHideFlags: 0
@@ -5307,7 +5292,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6381e9a8908bcc4b8d67c51eeccee71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
   AttackText: {fileID: 7406101893403527666}
 --- !u!1 &8716865246435114149
 GameObject:
