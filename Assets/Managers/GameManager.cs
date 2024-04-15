@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public int doorSwitch;
 
     public CinemachineVirtualCamera[] cines;
-    public PlayerController playerController;
+    public YHP_PlayerController playerController;
     public Player2Controller player2Controller;
     public UnityAction stepUpdate;
 
