@@ -6,69 +6,84 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/YDJ/Chapter1 Test/Stage01.unity
-    guid: f54769b3a7b7a044898c994ff1c3b2b9
+    path: Assets/Complete/Chapter1/Stage01.unity
+    guid: 5b29754eb57ab804c9676353aabe7453
   - enabled: 1
-    path: Assets/YDJ/Chapter1 Test/Stage02.unity
-    guid: 378ed0f2cc885b140ab81a639c098db9
+    path: Assets/Complete/Chapter1/Stage02.unity
+    guid: d6676c9fcffa0384388c3f62849b9168
   - enabled: 1
-    path: Assets/YDJ/Chapter1 Test/Stage03.unity
-    guid: 49bc570eb45831842bd516f996f2afca
+    path: Assets/Complete/Chapter1/Stage03.unity
+    guid: 5bfd1a45becafbd4c94af33c55cb4c5c
   - enabled: 1
-    path: Assets/YDJ/Chapter1 Test/Stage04.unity
-    guid: 287385371247b2040b5348361300398b
+    path: Assets/Complete/Chapter1/Stage04.unity
+    guid: 1262ca74c9250184cb2343e710de2285
   - enabled: 1
-    path: Assets/YDJ/Chapter1 Test/Stage05.unity
-    guid: 40e74107f88cbcc4c8d68ca14845ceac
+    path: Assets/Complete/Chapter1/Stage05.unity
+    guid: 92583ac8143817242acb91d86837f334
   - enabled: 1
-    path: Assets/YDJ/Chapter1 Test/Stage06.unity
-    guid: 36a6a43ad54fe8b448ab3ea64bf64e40
+    path: Assets/Complete/Chapter1/Stage06.unity
+    guid: 1ec678dd4e61b5f4f843f74f7b94f108
   - enabled: 1
-    path: Assets/YDJ/Chapter1 Test/Stage07.unity
-    guid: 8e5f9a87c665397479b5f771802bf99d
+    path: Assets/Complete/Chapter1/Stage07.unity
+    guid: a06e938adbd7d56438bfc5ec135d83bd
   - enabled: 1
-    path: Assets/YDJ/Chapter1 Test/StageBOSS.unity
-    guid: 9befd05b82092de43bb0922d752e84b5
+    path: Assets/Complete/Chapter1/StageBOSS.unity
+    guid: 41a534a8d60053844b94efb86e360182
   - enabled: 1
-    path: Assets/YDJ/Chapter2/Stage1.unity
-    guid: 364f4ffba92347b4298db58ccabdd1ed
+    path: Assets/Complete/Chapter2/Stage1.unity
+    guid: 878afbba1bf592f48b0bd51f886e68bd
   - enabled: 1
-    path: Assets/YDJ/Chapter2/Stage2.unity
-    guid: 845870779cb68094091de37e1d8503df
+    path: Assets/Complete/Chapter2/Stage2.unity
+    guid: 65dc8021ef3b20143bfb8b3a60bb8da2
   - enabled: 1
-    path: Assets/YDJ/Chapter2/Stage3.unity
-    guid: 1d0719dfc8cfb9347a4e9e7232374a34
+    path: Assets/Complete/Chapter2/Stage3.unity
+    guid: 82ad52bae79d2b34da6240ec1be133e0
   - enabled: 1
-    path: Assets/YDJ/Chapter2/Stage4.unity
-    guid: 4ba2860201611d14bab3737c903e4be6
+    path: Assets/Complete/Chapter2/Stage4.unity
+    guid: b12625640da8688478fe300fc174d47f
   - enabled: 1
-    path: Assets/YDJ/Chapter2/Stage5.unity
-    guid: e34e99f7f1eb445478e96cfcd156041a
+    path: Assets/Complete/Chapter2/Stage5.unity
+    guid: 811fd12ae170e9c46b92715a3bc0d843
   - enabled: 1
-    path: Assets/YDJ/Chapter2/Stage6.unity
-    guid: c01be8107461ec54294e88f632517f2a
+    path: Assets/Complete/Chapter2/Stage6.unity
+    guid: 2072f894387e1654d9103366b388886c
   - enabled: 1
-    path: Assets/YDJ/Chapter2/Stage7.unity
-    guid: 8c9dbd7e0eb0de34791516ed21c4972e
+    path: Assets/Complete/Chapter2/Stage7.unity
+    guid: 87dfa27b9e547284fbd39ea25c7f288c
   - enabled: 1
-    path: Assets/YDJ/Chapter2/StageBoss.unity
-    guid: 92ccbf4f85105014ab993799533543e7
+    path: Assets/Complete/Chapter2/StageBoss.unity
+    guid: 687adcb026bf08e4d938bd4b15568153
   - enabled: 1
-    path: Assets/UI/Scenes/MainUI.unity
-    guid: 5e5ac5c5ec2660548921ca965dd6cf96
+    path: Assets/Complete/Chapter3/Stage1.unity
+    guid: 80dae62b0254df143902ae648e485295
   - enabled: 1
-    path: Assets/UI/Scenes/ChapterSelect.unity
-    guid: a6ecad32a77ca5747a690c0ea759c0e0
+    path: Assets/Complete/Chapter3/Stage2.unity
+    guid: 2b59ef2e7f6ded546bf9d8955c74ccaa
   - enabled: 1
-    path: Assets/UI/Scenes/Chapter01select.unity
-    guid: cc4545e3e040cfe40a498745862616e9
+    path: Assets/Complete/Chapter3/Stage3.unity
+    guid: 4581efb463a466d41aa91bb253387bf3
   - enabled: 1
-    path: Assets/UI/Scenes/Chapter02select.unity
-    guid: ce158cad085e91949a7d66dd8c51b863
+    path: Assets/Complete/Chapter3/Stage4.unity
+    guid: 8f5494fee01f7eb408edba66b33e986f
   - enabled: 1
-    path: Assets/UI/Scenes/Chapter03select.unity
-    guid: 728cbc40abe42ba488959418d9864d38
+    path: Assets/Complete/Chapter3/Stage5.unity
+    guid: 98d68eee54d00e04983b488a2620bc7d
   - enabled: 1
-    path: Assets/UI/Scenes/Chapter04select.unity
-    guid: 54cdbec8260909f4e8d249b89d8f2a70
+    path: Assets/Complete/Chapter3/Stage6.unity
+    guid: 0a76ea18bec7f984ab752359ca40d629
+  - enabled: 1
+    path: Assets/Complete/Chapter3/Stage7.unity
+    guid: da84bfaf3c756cc448375b52a888ba2e
+  - enabled: 1
+    path: Assets/Complete/Chapter3/StageBoss.unity
+    guid: a61045dc60a60f74a9ab222901228881
+  - enabled: 1
+    path: Assets/Complete/Chapter4/FinalBoss.unity
+    guid: c265a3a68ec726742b8331c938af0714
+  - enabled: 1
+    path: Assets/Complete/MainUI.unity
+    guid: 7b086b33b20a1e94a8bcdc87a540e200
+  - enabled: 1
+    path: Assets/Complete/StageUI.unity
+    guid: 372ba016f0efdbf489763618e5342034
   m_configObjects: {}

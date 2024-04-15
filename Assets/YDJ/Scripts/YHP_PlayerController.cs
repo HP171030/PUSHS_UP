@@ -392,9 +392,9 @@ public class YHP_PlayerController : MonoBehaviour
             Debug.Log($"{isCollider.name}이 앞에 있다");
             if (obstacleLayer.Contain(isCollider.gameObject.layer) && !mirrorHolding)
             {
+                    moveSpeed = 2;
 
-
-                Debug.Log("장애물 밀기");
+                    Debug.Log("장애물 밀기");
                 Debug.Log(isCollider.name);
 
                 Vector3 obsStartPos = isCollider.gameObject.transform.position;
@@ -419,7 +419,8 @@ public class YHP_PlayerController : MonoBehaviour
                     Debug.Log($" {hitInfo.collider.gameObject.name}");
                     animator.SetBool("Push", false);
                     moveOn = false;
-                    //    hit.rigidbody.isKinematic = false;
+                        //    hit.rigidbody.isKinematic = false;
+
                     if (moveDir.magnitude < 1 || PreMoveDir != moveDir)
                     {
                         animator.SetBool("Push", false);
@@ -462,10 +463,14 @@ public class YHP_PlayerController : MonoBehaviour
                     foreach (RaycastHit hits in pushHitArray)
                     {
                         hits.collider.gameObject.transform.SetParent(null, true);
-                        //  hits.rigidbody.isKinematic = false;
+                        
+
+                        hits.rigidbody.isKinematic = false;
+                            moveSpeed = 4;
                     }
                 }
-            }
+                    moveSpeed = 4;
+                }
             else if (wall.Contain(isCollider.gameObject.layer))
             {
                 Debug.Log($"wall name is {isCollider.gameObject.name}");

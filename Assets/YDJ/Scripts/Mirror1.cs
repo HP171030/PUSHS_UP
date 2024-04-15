@@ -305,9 +305,6 @@ public class Mirror1 : MonoBehaviour
         //collisionManager.IgnoreCollision("Obstacle", "Wall", false);
         //collisionManager.IgnoreCollision("Player", "Obstacle", false);
 
-
-        //obstacleRigidbody.isKinematic = true;
-
         Debug.Log("벽거울");
 
         //if (forwardDirection.x > 0) // 오른쪽으로 들어옴
@@ -355,6 +352,7 @@ public class Mirror1 : MonoBehaviour
         Debug.Log("코루틴 들어감");
         Rigidbody obstacleRigidbody = obstacle.GetComponent<Rigidbody>();
         Collider obstacleCollider = obstacle.GetComponent<Collider>();
+        obstacleRigidbody.isKinematic = false;
 
         Vector3 endPosition;
         float time = 0;
@@ -437,8 +435,11 @@ public class Mirror1 : MonoBehaviour
             //Debug.Log($"obstacle out{obstacle.transform.position}");
             obstacle.transform.position = Vector3.Lerp(startPosition, endPosition, time / targetTime);
             yield return null;
+            Rigidbody obstacleRigidbody = obstacle.GetComponent<Rigidbody>();
+            obstacleRigidbody.isKinematic = false;
         }
     }
+
 }
 
 
