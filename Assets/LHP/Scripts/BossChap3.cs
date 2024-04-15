@@ -257,7 +257,7 @@ public class BossChap3 : Boss
                         pattern1Bool [i] = true;
                         if ( player.Contain(isObj.gameObject.layer) )
                         {
-                            Debug.Log("GameOver");
+                            Manager.game.GameOver();
                         }
                         else if (obstacle.Contain(isObj.gameObject.layer) )
                         {
@@ -298,7 +298,7 @@ public class BossChap3 : Boss
                     {
                         if ( player.Contain(col.gameObject.layer) )
                         {
-                            Debug.Log("GameOverOnSweap");
+                            Manager.game.GameOver();
                         }
                         else if ( obstacle.Contain(col.gameObject.layer) )
                         {
@@ -340,7 +340,7 @@ public class BossChap3 : Boss
                         {
                             if ( player.Contain(col.gameObject.layer) )
                             {
-                                Debug.Log("GameOverOnPattern3");
+                                Manager.game.GameOver();
                             }
                             else if ( obstacle.Contain(col.gameObject.layer) )
                             {

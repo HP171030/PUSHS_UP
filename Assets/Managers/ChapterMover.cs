@@ -7,9 +7,14 @@ public class ChapterMover : MonoBehaviour
    [SerializeField] LayerMask player;
     [SerializeField] CameraSwitch camSwitch;
 
-    private void Start()
+    public void Start()
     {
         camSwitch = FindObjectOfType<CameraSwitch>();
+        int curSceneNum = Manager.scene.GetSceneNumber();
+        PlayerPrefs.SetInt("stageNumber"+ curSceneNum,2);
+        int SaveData = PlayerPrefs.GetInt("stageNumber" + curSceneNum);
+        print("아이고 난!" + SaveData);
+
     }
     private void OnTriggerEnter( Collider other )
     {
@@ -27,6 +32,7 @@ public class ChapterMover : MonoBehaviour
                 int curSceneNum = Manager.scene.GetSceneNumber();
                 Manager.scene.LoadScene(curSceneNum + 1);
                 Manager.game.isEnter = false;
+
             }
            
         }

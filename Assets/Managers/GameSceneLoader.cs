@@ -13,6 +13,7 @@ public class GameSceneLoader : BaseScene
 
     public override IEnumerator LoadingRoutine()
     {
+        Manager.game.StepAction = 0;
         Manager.game.doorSwitch = switchCount;
         Manager.game.isEnter = false;
         Manager.game.boomAction = 3;

@@ -33,7 +33,14 @@ public class SceneManager : MonoBehaviour
     {
         StartCoroutine(LoadingRoutine(sceneNum));
     }
-
+    public void RestartScene()
+    {
+        Debug.Log("Restart");
+       int thisScene = GetSceneNumber();
+        LoadScene(thisScene);
+        Time.timeScale = 1f;
+        Manager.ui.closeButton.CloseOnClick();
+    }
     IEnumerator LoadingRoutine( int sceneNum )
     {
         yield return FadeOut();
