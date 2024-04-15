@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 
 public class Mirror1 : MonoBehaviour
@@ -216,17 +217,27 @@ public class Mirror1 : MonoBehaviour
             }
             else if (!wallChecker)
             {
+                if(mirror2.ObstacleChecker)
+                {
+
+                    Debug.Log("Å¾½×±â");
+
+                    Rigidbody otherRigidbody = other.GetComponent<Rigidbody>();
+
+                        //other.gameObject.transform.SetParent(null, true);
+
+                        if (otherRigidbody != null)
+                            otherRigidbody.isKinematic = false;
+
+                }
+
                 Debug.Log("¹Ù´Ú°Å¿ï");
                 StartCoroutine(MirrorInObstacleGround(other.gameObject));
             }
-            //else
-            //{
-            //    YDJ_PlayerController.wallMirrorBumpChecker = false;
-            //    obstacleChecker = false;
-            //    mirrorObstacleAttachedChecker = false;
-            //}
+
             Debug.Log("¾Æ¹«°Íµµ ¾È¶ä");
-        }
+
+    }
 
 
 

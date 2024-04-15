@@ -9,40 +9,25 @@ public class Mirror2 : MonoBehaviour
     public bool obstacleChecker;
     public bool ObstacleChecker { get { return obstacleChecker; } }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log($"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa{other.gameObject.tag}");
-    }
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log($"fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff{other.gameObject.tag}");
 
 
-        if (other.gameObject.CompareTag("MoveDisable"))
-        {
-            Debug.Log(other.gameObject.tag);
-        }
-
-        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle") || (other.gameObject.CompareTag("MoveDisable")))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             Debug.Log("obstacleChecker = true;");
             obstacleChecker = true;
 
         }
-        //else if (other.gameObject.CompareTag("MoveDisable"))
-        //{
-        //    Debug.Log("MoveDisableMoveDisableMoveDisableMoveDisableMoveDisableMoveDisableMoveDisableMoveDisableMoveDisableMoveDisableMoveDisableMoveDisableMoveDisableMoveDisableMoveDisableMoveDisableMoveDisableMoveDisableMoveDisableMoveDisableMoveDisable");
-        //    obstacleChecker = true;
 
-        //}
 
 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle") || (other.gameObject.CompareTag("MoveDisable")))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             obstacleChecker = false;
             //YHP_PlayerController.AlreadyMap2Obstacle = false;
