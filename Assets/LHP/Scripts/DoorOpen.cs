@@ -11,6 +11,8 @@ public class DoorOpen : MonoBehaviour
     [SerializeField] GameObject[] door;
     [SerializeField] LayerMask player;
     [SerializeField] float openTime;
+
+    [SerializeField] AudioClip openSound;
     bool isNotOpen = false;
     bool isSwitching;
 
@@ -49,6 +51,7 @@ public class DoorOpen : MonoBehaviour
     
     IEnumerator OpenDoor()
     {
+        Manager.sound.PlaySFX(openSound);
         foreach ( GameObject go in door )
         {
             float time = 0;

@@ -20,6 +20,9 @@ public class BossChap1 : Boss
     [SerializeField] int fallingStoneCount;
 
     bool targetTile = false;
+
+
+
     protected override void Start()
     {
         base.Start();
@@ -156,7 +159,7 @@ public class BossChap1 : Boss
     {
         if(patternCount <= 0 )
         {
-            
+            Manager.sound.PlaySFX(bossAttack1);
             StartCoroutine(WaitPattern());
 
             Debug.Log("Action");
@@ -194,6 +197,7 @@ public class BossChap1 : Boss
             alert = false;
             targetTile = false;
             anim.Play("Sweap");
+            Manager.sound.PlaySFX(bossAttack2);
             foreach ( Tile tiles in sweapAllTile )
             {
                 Transform tilePoint = tiles.middlePoint;
@@ -229,8 +233,9 @@ public class BossChap1 : Boss
             alert = false;
             targetTile = false;
         anim.Play("Howling");
+            Manager.sound.PlaySFX(bossAttack3);
 
-            foreach(Tile tile in isTiles )
+            foreach (Tile tile in isTiles )
             {
                 Transform tilePoint = tile.middlePoint;
                 GameObject stone = Instantiate(fallingStonePrefab, tilePoint.position + new Vector3(0, spawnHeight, 0), Quaternion.identity);

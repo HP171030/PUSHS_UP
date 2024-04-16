@@ -176,7 +176,7 @@ public class BossChap3 : Boss
         {
 
             StartCoroutine(WaitPattern());
-
+            Manager.sound.PlaySFX(bossAttack1);
             Debug.Log("Action");
             alert = false;
             targetTile = false;
@@ -283,6 +283,7 @@ public class BossChap3 : Boss
         if ( patternCount <= 0 )
         {
             StartCoroutine(WaitPattern());
+            Manager.sound.PlaySFX(bossAttack2);
             Debug.Log("Action");
             alert = false;
             targetTile = false;
@@ -319,6 +320,7 @@ public class BossChap3 : Boss
         if ( patternCount <= 0 )
         {
             StartCoroutine(WaitPattern());
+            Manager.sound.PlaySFX(bossAttack3);
             Debug.Log("Action");
             alert = false;
             targetTile = false;

@@ -16,7 +16,7 @@ public class Boss : MonoBehaviour
     [SerializeField] protected GameObject mapAtile;
 
     [SerializeField] protected GameObject ObstacleInstance;
-
+    
     [SerializeField] public LayerMask tile;
     [SerializeField] public LayerMask player;
     [SerializeField] public LayerMask obstacle;
@@ -28,12 +28,22 @@ public class Boss : MonoBehaviour
   protected bool isAlertP1 = false;
   protected bool isAlertP2 = false;
   protected bool isAlertP3 = false;
+
+    [Header("Sound")]
+    [SerializeField] protected AudioClip bossBGM;
+
+    [SerializeField]protected AudioClip bossAttack1;
+    [SerializeField]protected AudioClip bossAttack2;
+    [SerializeField]protected AudioClip bossAttack3;
+    [SerializeField]protected AudioClip bossDead;
+
     protected virtual void Start()
     {
         curState = Pattern.Idle;
         Manager.game.stepUpdate += StepCounter;
         mapATiles = mapAtile.GetComponentsInChildren<Tile>();
-
+        Manager.sound.PlayBGM(bossBGM);
+        Debug.Log("onBGM");
     }
 
 
