@@ -68,6 +68,7 @@ public class BossChap3 : Boss
                 if ( !targetTile )
                 {
                     patternCount = pattern1Count;
+                    Manager.game.patternStep = pattern1Count;
                     targetTile = true;
 
                 }
@@ -87,6 +88,7 @@ public class BossChap3 : Boss
                 {
                     
                     patternCount = pattern2Count;
+                    Manager.game.patternStep = pattern2Count;
 
                     targetTile = true;
 
@@ -119,6 +121,7 @@ public class BossChap3 : Boss
 
 
                     patternCount = pattern3Count;
+                    Manager.game.patternStep = pattern3Count;
                     targetTile = true;
                 }
                 if(!isAlertP3 )

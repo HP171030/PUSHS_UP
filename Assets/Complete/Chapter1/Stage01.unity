@@ -7527,6 +7527,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 3671770068480024722, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.07
@@ -7566,6 +7570,105 @@ PrefabInstance:
     - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: dialogs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: dialogs.Array.data[0].name
+      value: SYSTEM
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: dialogs.Array.data[1].name
+      value: "\uC5D8\uB9AC\uC790\uBCA0\uC2A4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: dialogs.Array.data[2].name
+      value: "\uC5D8\uB9AC\uC790\uBCA0\uC2A4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: dialogs.Array.data[3].name
+      value: "\uC5D8\uB9AC\uC790\uBCA0\uC2A4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: dialogs.Array.data[4].name
+      value: "\uC5D8\uB9AC\uC790\uBCA0\uC2A4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: dialogs.Array.data[5].name
+      value: "\uC5D8\uB9AC\uC790\uBCA0\uC2A4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: dialogs.Array.data[0].dialogue
+      value: "\uD560\uC544\uBC84\uC9C0\uC758 \uB0A1\uC740 \uC218\uCCA9\uC5D0 \uC801\uD78C
+        \uBE44\uBC00\uC744 \uD30C\uD574\uCE58\uAE30\uC704\uD574 "
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: dialogs.Array.data[1].dialogue
+      value: "\uD30C\uB77C\uC624\uC758 \uBB34\uB364\uC744 \uD0D0\uD5D8\uD558\uB358
+        \uC8FC\uC778\uACF5\uC740, \uB0AF\uC120 \uACF5\uAC04\uC5D0 \uB5A8\uC5B4\uC9C4\uB2E4 "
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: dialogs.Array.data[2].dialogue
+      value: "\uC544\uC58F!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: dialogs.Array.data[3].dialogue
+      value: "\uC774\uACF3\uC740 \uC5B4\uB514\uC9C0?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: dialogs.Array.data[4].dialogue
+      value: "\uC774 \uD050\uBE0C\uB4E4\uC740 \uC6C0\uC9C1\uC77C \uC218 \uC788\uC744
+        \uAC83 \uAC19\uC544..!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: dialogs.Array.data[5].dialogue
+      value: "\uC6B0\uC120 \uD050\uBE0C\uB97C \uC62E\uACA8 \uCD9C\uAD6C\uB85C \uB098\uAC00\uBCF4\uC790"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: speakers.Array.data[0].textName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: speakers.Array.data[1].textName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: dialogs.Array.data[1].speakerIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: speakers.Array.data[0].imageDialog
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: speakers.Array.data[0].objectArrow
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: speakers.Array.data[1].imageDialog
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: speakers.Array.data[1].objectArrow
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: speakers.Array.data[0].textDialogue
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: speakers.Array.data[1].textDialogue
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: speakers.Array.data[0].spriteRenderer
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: speakers.Array.data[1].spriteRenderer
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

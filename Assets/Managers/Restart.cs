@@ -7,5 +7,7 @@ public class Restart : MonoBehaviour
     public void RestartFunc()
     {
         Manager.scene.RestartScene();
+        Manager.game.patternStep = 0;
+        Manager.game.stepUpdate();
     }
 }

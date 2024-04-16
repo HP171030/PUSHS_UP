@@ -11,6 +11,9 @@ public class GameSceneLoader : BaseScene
     [SerializeField] public int switchCount;
     [SerializeField] protected bool bossSceneloader = false;
     [SerializeField] protected CameraSwitch cam;
+    [SerializeField] GameObject CheckerBoss;
+    [SerializeField] protected bool MainScene = false;
+
 
     public override IEnumerator LoadingRoutine()
     {
@@ -25,6 +28,19 @@ public class GameSceneLoader : BaseScene
         Manager.game.playerController = FindObjectOfType<YHP_PlayerController>();
         Manager.game.player2Controller = FindObjectOfType<Player2Controller>();
         Manager.game.bossScene = bossSceneloader;
+
+        if ( MainScene )
+        {
+            Manager.ui.StageUi.SetActive(false);
+        }
+        else
+        {
+            Manager.ui.StageUi.SetActive(true) ;
+        }
+        Debug.Log(Manager.ui.bossStepChecker.name);
+        CheckerBoss = Manager.ui.bossStepChecker;
+
+
         cam = FindObjectOfType<CameraSwitch>();
        
         if ( thisSceneCine [0] != null )
@@ -39,6 +55,14 @@ public class GameSceneLoader : BaseScene
             Manager.game.player2Controller.cameraSwitch = cam;
 
        yield return null;
+        if( bossSceneloader )
+        {
+            CheckerBoss.SetActive(true);
+        }
+        else
+        {
+            CheckerBoss.SetActive(false);
+        }
 
     }
     private void Start()
@@ -63,7 +87,17 @@ public class GameSceneLoader : BaseScene
 
         if ( Manager.game.player2Controller != null )
             Manager.game.player2Controller.cameraSwitch = cam;
+        CheckerBoss = Manager.ui.bossStepChecker;
+        if ( bossSceneloader )
+        {
+            CheckerBoss.SetActive(true);
+        }
+        else
+        {
+            CheckerBoss.SetActive(false);
+        }
     }
+
 
 
 

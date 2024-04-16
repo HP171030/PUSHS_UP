@@ -48,6 +48,7 @@ public class BossChap2 : Boss
                 if ( !targetTile )
                 {
                     patternCount = pattern1Count;
+                    Manager.game.patternStep = pattern1Count;
                     targetTile = true;
                     
                 }
@@ -77,6 +78,7 @@ public class BossChap2 : Boss
                 if ( !targetTile )
                 {
                     patternCount = pattern2Count;
+                    Manager.game.patternStep = pattern2Count;
                     //       startRightAttack = stoneSpawnerChildren [RandomLocation];
 
                     tileAlert = Physics.BoxCastAll(startRightAttack.position, new Vector3(5, 1, 1), Vector3.back, Quaternion.identity, 15f, tile);
@@ -121,6 +123,7 @@ public class BossChap2 : Boss
                     }
 
                     patternCount = pattern3Count;
+                    Manager.game.patternStep = pattern3Count;
 
                     targetTile = true;
 

@@ -67,7 +67,7 @@ public class ArrowTrap : MonoBehaviour
         {
             if(player.Contain(p.collider.gameObject.layer))
             {
-                Debug.Log("화살에 맞음 GameOver");
+                Manager.game.GameOver();
             }
             else
             {

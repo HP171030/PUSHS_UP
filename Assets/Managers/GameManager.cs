@@ -9,8 +9,10 @@ public class GameManager : MonoBehaviour
 {
     private int boomCount = 3;
     private int stepCount = 0;
+    private int patternCounter = 0;
     public int doorSwitch;
     public bool bossScene;
+    public bool mainScene;
 
     public CinemachineVirtualCamera[] cines;
     public YHP_PlayerController playerController;
@@ -30,6 +32,8 @@ public class GameManager : MonoBehaviour
 
     public int boomAction { get { return boomCount; } set {  boomCount = value; Debug.Log(boomCount); } }
     public int StepAction { get { return stepCount; } set { stepCount = value; stepUpdate?.Invoke(); } }
+
+    public int patternStep { get { return patternCounter; } set { patternCounter = value;} }
 
     public void GameOver()
     {

@@ -428,9 +428,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorSwitch: 1
   bossScene: 0
+  mainScene: 0
   cines: []
   playerController: {fileID: 0}
   player2Controller: {fileID: 0}
+  player2DeadSound: {fileID: 0}
   restartButton: {fileID: 18715020529878642}
   clearValue: 1
   isEnter: 0
@@ -1287,6 +1289,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   closeButton: {fileID: 2053017967791998144}
+  bossStepChecker: {fileID: 5375282946805918372}
+  StageUi: {fileID: 3219476063979790619}
 --- !u!1001 &4482432021408454742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1411,6 +1415,10 @@ PrefabInstance:
       propertyPath: m_ControlPath
       value: <Keyboard>/w
       objectReference: {fileID: 0}
+    - target: {fileID: 3659467258498302704, guid: 07067957f8dd2814c920845405333d56, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4549909801227503373, guid: 07067957f8dd2814c920845405333d56, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1430,6 +1438,30 @@ PrefabInstance:
     - target: {fileID: 4622109482262322388, guid: 07067957f8dd2814c920845405333d56, type: 3}
       propertyPath: m_Colors.m_PressedColor.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832107629268717843, guid: 07067957f8dd2814c920845405333d56, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832107629268717843, guid: 07067957f8dd2814c920845405333d56, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832107629268717843, guid: 07067957f8dd2814c920845405333d56, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 385.40002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832107629268717843, guid: 07067957f8dd2814c920845405333d56, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 192.70001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832107629268717843, guid: 07067957f8dd2814c920845405333d56, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4929704612176175398, guid: 07067957f8dd2814c920845405333d56, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 18.100098
       objectReference: {fileID: 0}
     - target: {fileID: 5502575361464710400, guid: 07067957f8dd2814c920845405333d56, type: 3}
       propertyPath: m_ControlPath
@@ -1495,6 +1527,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -86.1
       objectReference: {fileID: 0}
+    - target: {fileID: 8407124776513434354, guid: 07067957f8dd2814c920845405333d56, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5111354772928440867, guid: 07067957f8dd2814c920845405333d56, type: 3}
     - {fileID: 7507945130400123264, guid: 07067957f8dd2814c920845405333d56, type: 3}
@@ -1531,6 +1567,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da449b620d0fa594fa01f8733cb14748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3219476063979790619 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1340151020084296013, guid: 07067957f8dd2814c920845405333d56, type: 3}
+  m_PrefabInstance: {fileID: 4482432021408454742}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3320023003734013996 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1164140338388131962, guid: 07067957f8dd2814c920845405333d56, type: 3}
@@ -1539,6 +1580,11 @@ GameObject:
 --- !u!224 &4358389394735816035 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 164610345735669045, guid: 07067957f8dd2814c920845405333d56, type: 3}
+  m_PrefabInstance: {fileID: 4482432021408454742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5375282946805918372 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8407124776513434354, guid: 07067957f8dd2814c920845405333d56, type: 3}
   m_PrefabInstance: {fileID: 4482432021408454742}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &5555870610999957208 stripped

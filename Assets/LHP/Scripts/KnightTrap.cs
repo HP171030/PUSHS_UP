@@ -25,7 +25,7 @@ public class KnightTrap : MonoBehaviour
             {
                 if ( player.Contain(hitInfo.collider.gameObject.layer) )
                 {
-                    Debug.Log("피격 - 게임오버");
+                    Manager.game.GameOver();
                 }
             }
         }

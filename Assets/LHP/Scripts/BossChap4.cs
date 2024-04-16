@@ -76,6 +76,7 @@ public class BossChap4 : Boss
                 if ( !targetTile )
                 {
                     patternCount = pattern1Count;
+                    Manager.game.patternStep = pattern1Count;
                     targetTile = true;
 
                 }
@@ -95,6 +96,7 @@ public class BossChap4 : Boss
                 {
 
                     patternCount = pattern2Count;
+                    Manager.game.patternStep = pattern2Count;
 
                     targetTile = true;
 
@@ -127,6 +129,7 @@ public class BossChap4 : Boss
 
                     Debug.Log("pat3");
                     patternCount = pattern3Count;
+                    Manager.game.patternStep = pattern3Count;
                     targetTile = true;
                     int safeAreaIndex = Random.Range(0, statues.Length);
                     safeAreas = Physics.OverlapBox(statues [safeAreaIndex].position, new Vector3(2, 1, 2), Quaternion.identity, tile);
@@ -175,7 +178,7 @@ public class BossChap4 : Boss
     }
     private void ExplodeAttack()
     {
-        if ( patternCount <= 0 )
+        if ( Manager.game.patternStep <= 0 )
         {
 
             StartCoroutine(WaitPattern());
