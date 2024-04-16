@@ -27,12 +27,14 @@ public class ChapterMover : MonoBehaviour
             Destroy(other.gameObject);
             if (Manager.game.clearValue > 1)
             {
+                Debug.Log("in1");
                 camSwitch.Change();
                 Manager.game.clearValue--;
                 Manager.game.isEnter = true;
             }
             else
             {
+                Debug.Log("inTat);");
                 // 씬 넘버 확인 및 저장
                 int curSceneNum = Manager.scene.GetSceneNumber();
 
