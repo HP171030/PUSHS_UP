@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17291898, g: 0.21610056, b: 0.29806814, a: 1}
+  m_IndirectSpecularColor: {r: 0.1729185, g: 0.21609974, b: 0.29806706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4985,11 +4985,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf8b7ded5c6511c49ae0240928b590c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &479386255 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3092550884018233641, guid: 3e6dfa4ed1fd9904e86c8ead7b803e35, type: 3}
-  m_PrefabInstance: {fileID: 479386253}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &480086744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6048,6 +6043,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1035616536882314814, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1936993916}
+    - target: {fileID: 1035616536882314814, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Change
+      objectReference: {fileID: 0}
     - target: {fileID: 3190664640453586970, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: m_Name
       value: Manager
@@ -6855,10 +6858,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44294728dd58ac8408b37b41a8ddb121, type: 3}
---- !u!4 &653435565 stripped
+--- !u!4 &655465653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2826644496431450126, guid: 44294728dd58ac8408b37b41a8ddb121, type: 3}
-  m_PrefabInstance: {fileID: 653435564}
+  m_PrefabInstance: {fileID: 655465652}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &664437993
 PrefabInstance:
@@ -27937,74 +27940,57 @@ Transform:
   - {fileID: 1789040868}
   - {fileID: 1059918418}
   - {fileID: 280183443}
-  - {fileID: 1514143506}
   - {fileID: 1138935569}
   - {fileID: 1772667687}
   - {fileID: 1354973349}
-  - {fileID: 950287370}
-  - {fileID: 1940601195}
   - {fileID: 2143867714}
   - {fileID: 15535198}
   - {fileID: 469370842}
   - {fileID: 1715292761}
   - {fileID: 1785902357}
   - {fileID: 1617919104}
-  - {fileID: 1696793390}
   - {fileID: 1502259508}
   - {fileID: 965108261}
   - {fileID: 2065681117}
   - {fileID: 393575436}
   - {fileID: 539494552}
-  - {fileID: 612160760}
   - {fileID: 2144500380}
   - {fileID: 1677361668}
   - {fileID: 970432760}
   - {fileID: 1163121875}
   - {fileID: 393312424}
-  - {fileID: 1206104733}
-  - {fileID: 438095004}
   - {fileID: 1632007878}
   - {fileID: 1896102088}
   - {fileID: 765331356}
   - {fileID: 1834884752}
-  - {fileID: 1852487992}
   - {fileID: 1500030755}
   - {fileID: 335784368}
   - {fileID: 1708969337}
-  - {fileID: 1018257561}
   - {fileID: 1437795000}
-  - {fileID: 161420843}
   - {fileID: 1204018921}
   - {fileID: 1475859355}
   - {fileID: 765345228}
   - {fileID: 1652921065}
   - {fileID: 2063420224}
-  - {fileID: 1741928459}
   - {fileID: 762074885}
   - {fileID: 307316287}
   - {fileID: 597148820}
-  - {fileID: 159936429}
   - {fileID: 1934199154}
   - {fileID: 1165918511}
   - {fileID: 1653151634}
-  - {fileID: 1508142056}
   - {fileID: 1112443378}
-  - {fileID: 210070181}
   - {fileID: 1352497516}
   - {fileID: 1349090053}
-  - {fileID: 221804451}
   - {fileID: 1055671570}
-  - {fileID: 605326367}
   - {fileID: 1560285585}
-  - {fileID: 653435565}
   - {fileID: 1201389347}
   - {fileID: 1140278086}
   - {fileID: 33509069}
   - {fileID: 1567071713}
   - {fileID: 1640805510}
-  - {fileID: 1278336866}
   - {fileID: 1604349069}
   - {fileID: 503595631}
+  - {fileID: 655465653}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1475859354
@@ -30206,7 +30192,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1111587323}
-  - {fileID: 1745889853}
   - {fileID: 1635316099}
   - {fileID: 57915826}
   - {fileID: 92055267}

@@ -32,7 +32,7 @@ public class Player2Controller : MonoBehaviour
     Vector3 debugVec;
     Vector3 debugVec2;
 
-    [SerializeField] CameraSwitch cameraSwitch;
+    [SerializeField] public CameraSwitch cameraSwitch;
 
 
 

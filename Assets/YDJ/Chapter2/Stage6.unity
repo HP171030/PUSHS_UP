@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17291898, g: 0.21610056, b: 0.29806814, a: 1}
+  m_IndirectSpecularColor: {r: 0.1729185, g: 0.21609974, b: 0.29806706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2030,7 +2030,7 @@ PrefabInstance:
     - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
       propertyPath: mirror2
       value: 
-      objectReference: {fileID: 185348468}
+      objectReference: {fileID: 0}
     - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
       propertyPath: Mirror2OffsetZ
       value: 100
@@ -2038,7 +2038,7 @@ PrefabInstance:
     - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
       propertyPath: mirror2Transform
       value: 
-      objectReference: {fileID: 185348469}
+      objectReference: {fileID: 0}
     - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
       propertyPath: YHP_PlayerController
       value: 
@@ -4364,8 +4364,6 @@ Transform:
   - {fileID: 232736586}
   - {fileID: 613789169}
   - {fileID: 616901742}
-  - {fileID: 371611852}
-  - {fileID: 1784659512}
   - {fileID: 892952113}
   - {fileID: 1477324215}
   - {fileID: 1450890577}
@@ -4389,12 +4387,12 @@ Transform:
   - {fileID: 94752024}
   - {fileID: 699484370}
   - {fileID: 34979097}
-  - {fileID: 1543432409}
   - {fileID: 469847411}
   - {fileID: 174269017}
   - {fileID: 1652778972}
   - {fileID: 388136093}
   - {fileID: 2100160543}
+  - {fileID: 1247510032}
   m_Father: {fileID: 1475371624}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &492267857
@@ -16620,6 +16618,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9322ba17e78749645b6bcde29e32d05d, type: 3}
+--- !u!4 &1247510032 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2600484640475071408, guid: 9322ba17e78749645b6bcde29e32d05d, type: 3}
+  m_PrefabInstance: {fileID: 1247510031}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1250933767 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4023261917270213476, guid: 7ecfc3a1f7a19af45851658e0601fc69, type: 3}
@@ -17117,7 +17120,6 @@ Transform:
   - {fileID: 1685790687}
   - {fileID: 1403254305}
   - {fileID: 1069815847}
-  - {fileID: 2108232082}
   - {fileID: 637358122}
   - {fileID: 138383973}
   - {fileID: 1250933767}
@@ -17126,7 +17128,6 @@ Transform:
   - {fileID: 232387959}
   - {fileID: 328841964}
   - {fileID: 1002684730}
-  - {fileID: 199687802}
   - {fileID: 293731326}
   - {fileID: 285683365}
   - {fileID: 1552782104}
@@ -25085,57 +25086,42 @@ Transform:
   - {fileID: 333141013}
   - {fileID: 1893792063}
   - {fileID: 734249007}
-  - {fileID: 369623694}
   - {fileID: 1505247945}
   - {fileID: 240122678}
   - {fileID: 1241562688}
-  - {fileID: 1549129574}
   - {fileID: 2087020733}
   - {fileID: 1509146398}
   - {fileID: 1468541298}
   - {fileID: 944969830}
-  - {fileID: 1179418593}
-  - {fileID: 2025773413}
-  - {fileID: 1210376733}
   - {fileID: 1720917571}
   - {fileID: 6800743}
   - {fileID: 1508714741}
-  - {fileID: 404148726}
   - {fileID: 672780658}
   - {fileID: 41641243}
-  - {fileID: 595347668}
   - {fileID: 1646936750}
   - {fileID: 2133507161}
   - {fileID: 2065385386}
   - {fileID: 857620779}
-  - {fileID: 1836981357}
   - {fileID: 2055194948}
   - {fileID: 1306572222}
   - {fileID: 672060936}
   - {fileID: 1565057064}
   - {fileID: 298384084}
-  - {fileID: 100092319}
   - {fileID: 1701773832}
   - {fileID: 682396682}
   - {fileID: 1453871228}
   - {fileID: 1665165068}
   - {fileID: 2049373471}
   - {fileID: 702215180}
-  - {fileID: 1164838511}
   - {fileID: 1848572468}
   - {fileID: 1874301718}
   - {fileID: 332391163}
   - {fileID: 1941641747}
-  - {fileID: 1778195629}
   - {fileID: 670793698}
-  - {fileID: 2017663726}
   - {fileID: 702965591}
-  - {fileID: 1215354638}
   - {fileID: 88823194}
   - {fileID: 1943290908}
   - {fileID: 2042828444}
-  - {fileID: 1217445066}
-  - {fileID: 450729631}
   - {fileID: 1520046313}
   - {fileID: 1135499666}
   - {fileID: 27944635}
@@ -25143,6 +25129,8 @@ Transform:
   - {fileID: 1321921761}
   - {fileID: 139022840}
   - {fileID: 688650296}
+  - {fileID: 199687802}
+  - {fileID: 1164838511}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1475895487
@@ -28373,7 +28361,7 @@ PrefabInstance:
     - target: {fileID: 8792600851279776242, guid: 3e6dfa4ed1fd9904e86c8ead7b803e35, type: 3}
       propertyPath: mirror2
       value: 
-      objectReference: {fileID: 185348468}
+      objectReference: {fileID: 0}
     - target: {fileID: 8792600851279776242, guid: 3e6dfa4ed1fd9904e86c8ead7b803e35, type: 3}
       propertyPath: cameraSwitch
       value: 
@@ -28398,11 +28386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf8b7ded5c6511c49ae0240928b590c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1881320294 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3092550884018233641, guid: 3e6dfa4ed1fd9904e86c8ead7b803e35, type: 3}
-  m_PrefabInstance: {fileID: 1881320292}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1893792062
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29953,6 +29936,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1035616536882314814, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1936993916}
+    - target: {fileID: 1035616536882314814, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Change
+      objectReference: {fileID: 0}
     - target: {fileID: 3190664640453586970, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: m_Name
       value: Manager

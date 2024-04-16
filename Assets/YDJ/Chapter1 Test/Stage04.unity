@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17291898, g: 0.21610056, b: 0.29806802, a: 1}
+  m_IndirectSpecularColor: {r: 0.17291854, g: 0.21609981, b: 0.29806712, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1274,7 +1274,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7f3366497708014db8915450080090a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  switch2pl: {fileID: 1782038865}
+  thisSceneCine:
+  - {fileID: 0}
+  - {fileID: 1263685653}
+  clearValue: 0
+  switchCount: 0
+  bossSceneloader: 0
+  cam: {fileID: 0}
 --- !u!1 &189922113
 GameObject:
   m_ObjectHideFlags: 0
@@ -3417,6 +3423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1Camera: {fileID: 0}
   player2Camera: {fileID: 0}
+  isPlayer1Active: 1
 --- !u!114 &425012294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3864,7 +3871,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0be1caf08be599543974be955ea91d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
   stepText: {fileID: 1323112868}
 --- !u!114 &431610792
 MonoBehaviour:
