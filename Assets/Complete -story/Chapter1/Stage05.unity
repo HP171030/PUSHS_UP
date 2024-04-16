@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17291854, g: 0.21609978, b: 0.29806712, a: 1}
+  m_IndirectSpecularColor: {r: 0.17291854, g: 0.21609981, b: 0.29806712, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3631,6 +3631,8 @@ MonoBehaviour:
   switchCount: 0
   bossSceneloader: 0
   cam: {fileID: 0}
+  CheckerBoss: {fileID: 0}
+  MainScene: 0
 --- !u!4 &516842607
 Transform:
   m_ObjectHideFlags: 0
@@ -12527,6 +12529,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: dialogs.Array.data[21].speakerIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640713708290817499, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
