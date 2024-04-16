@@ -8,6 +8,7 @@ public class HowlingStone : MonoBehaviour
     [SerializeField] LayerMask destroyObs;
     [SerializeField] ParticleSystem destroyEffect;
     [SerializeField] Transform effectPos;
+    [SerializeField] AudioClip destroyIce;
 
 
     private void OnCollisionEnter( Collision collision )
@@ -15,6 +16,7 @@ public class HowlingStone : MonoBehaviour
         if ( destroyStone.Contain(collision.gameObject.layer) )            //¹æÇØ¹° ÆÄ±«
         {
             Instantiate(destroyEffect, effectPos.position, Quaternion.identity);
+            Manager.sound.PlaySFX(destroyIce);
             Destroy(gameObject);
             if ( destroyObs.Contain(collision.gameObject.layer) )
             {

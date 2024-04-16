@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     public Player2Controller player2Controller;
     public UnityAction stepUpdate;
 
+
+    [SerializeField] AudioClip player2DeadSound;
+
     public Button restartButton;
 
     public int clearValue;
@@ -33,6 +36,7 @@ public class GameManager : MonoBehaviour
         PlayerControllStop();
         gameOver = true;
         StartCoroutine(gameOverRoutine());
+        Manager.sound.PlaySFX(player2DeadSound);
     }
 
     IEnumerator gameOverRoutine()

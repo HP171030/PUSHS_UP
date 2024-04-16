@@ -10,6 +10,7 @@ public class GameSceneLoaderOnly2Player : BaseScene
     [SerializeField] public int switchCount;
     [SerializeField] protected bool bossSceneloader = false;
     [SerializeField] protected CameraSwitch cam;
+   
 
 
     public override IEnumerator LoadingRoutine()
@@ -22,21 +23,29 @@ public class GameSceneLoaderOnly2Player : BaseScene
         Manager.game.clearValue = clearValue;
         Manager.game.playerController = FindObjectOfType<YHP_PlayerController>();
         Manager.game.player2Controller = FindObjectOfType<Player2Controller>();
+        
         Manager.game.bossScene = bossSceneloader;
         cam = FindObjectOfType<CameraSwitch>();
-        cam.player1Camera = thisSceneCine [0];
+        if ( thisSceneCine [0] != null )
+            cam.player1Camera = thisSceneCine [0];
         if ( thisSceneCine [1] != null )
             cam.player2Camera = thisSceneCine [1];
         yield return null;
 
         if ( thisSceneCine [0] == null )
         {
-            Manager.game.player2Controller.cameraSwitch.IsPlayer1Active = false;
+            cam.IsPlayer1Active = false;
 yield return null;
         }
+
+        Manager.game.player2Controller.cameraSwitch = cam;
             
     }
-  
+    private void Start()
+    {
+        cam = FindObjectOfType<CameraSwitch>();
+        cam.IsPlayer1Active = false;
+    }
 
 
 }

@@ -179,12 +179,13 @@ public class BossChap4 : Boss
         {
 
             StartCoroutine(WaitPattern());
-
+            Manager.sound.PlaySFX(bossAttack1);
             Debug.Log("Action");
             alert = false;
             targetTile = false;
             
             StartCoroutine(Pattern1Anim());
+
 
 
         }
@@ -289,6 +290,7 @@ public class BossChap4 : Boss
         if ( patternCount <= 0 )
         {
             StartCoroutine(WaitPattern());
+            Manager.sound.PlaySFX(bossAttack2);
             Debug.Log("Action");
             alert = false;
             targetTile = false;
@@ -320,6 +322,7 @@ public class BossChap4 : Boss
 
             shine.transform.position = new Vector3(0, 0, -10);
             StartCoroutine(WaitPattern());
+            Manager.sound.PlaySFX(bossAttack3);
             Debug.Log("Action");
             alert = false;
             targetTile = false;

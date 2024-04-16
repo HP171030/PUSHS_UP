@@ -34,7 +34,11 @@ public class Player2Controller : MonoBehaviour
 
     [SerializeField] public CameraSwitch cameraSwitch;
 
-
+    [Header("Sound")]
+    [SerializeField] AudioClip WalkSound;
+    [SerializeField] AudioClip cubeJumpSound;
+    [SerializeField] AudioClip jumpDownSound;
+    [SerializeField] AudioClip boomSound;
 
 
 
@@ -74,6 +78,8 @@ public class Player2Controller : MonoBehaviour
     }
     private void Start()
     {
+        
+        
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         inputKey = true;
@@ -81,7 +87,7 @@ public class Player2Controller : MonoBehaviour
     }
     private void OnMove(InputValue value)
     {
-
+       
         if (!cameraSwitch.IsPlayer1Active && !onIce&&inputKey )
         {
             Vector2 input = value.Get<Vector2>();
@@ -104,7 +110,7 @@ public class Player2Controller : MonoBehaviour
                 {
                     Destroy(BoomableHit.collider.gameObject );
                     Manager.game.boomAction--;
-
+                    Manager.sound.PlaySFX(boomSound);
                 }
             }
             else
@@ -207,6 +213,7 @@ public class Player2Controller : MonoBehaviour
                 hit.rigidbody.isKinematic = true;
                 onClimb = true;
                 animator.SetTrigger("ClimbStart");
+                Manager.sound.PlaySFX(cubeJumpSound);
                 while ( time < 1 )
                 {
                     time += Time.deltaTime;
@@ -269,7 +276,8 @@ public class Player2Controller : MonoBehaviour
                                     {
                                         Debug.Log(collider.gameObject.name);
                                         float time = 0;
-                                        while ( time < 1 )
+                                    Manager.sound.PlaySFX(WalkSound);
+                                    while ( time < 1 )
                                         {
                                             time += Time.deltaTime * moveSpeed;
                                             rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
@@ -313,6 +321,7 @@ public class Player2Controller : MonoBehaviour
                                 rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
                                 yield return null;
                             }
+                            Manager.sound.PlaySFX(jumpDownSound);
                             Manager.game.StepAction++;
                             moveOn = false;
                             yield return null;
@@ -335,6 +344,7 @@ public class Player2Controller : MonoBehaviour
                 Debug.Log("없을수는 없어");
                 ontheBox = false;
                 moveOn = false;
+                yield break;
             }
 
         }
@@ -356,6 +366,7 @@ public class Player2Controller : MonoBehaviour
                 yield return null;
 
             }
+            Manager.sound.PlaySFX(WalkSound);
             Manager.game.StepAction++;
             moveOn = false;
         }

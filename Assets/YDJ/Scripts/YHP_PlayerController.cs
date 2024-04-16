@@ -34,6 +34,14 @@ public class YHP_PlayerController : MonoBehaviour
     [SerializeField] GameObject mirror1Image;
     [SerializeField] Mirror2 mirror2;
 
+    [Header("Sound")]
+    [SerializeField] AudioClip WalkSound;
+    [SerializeField] AudioClip cubePullSound;
+    [SerializeField] AudioClip cubePushSound;
+    [SerializeField] AudioClip mirrorGrab;
+    [SerializeField] AudioClip mirrorDown;
+
+
 
 
     Transform obstacle;
@@ -71,6 +79,7 @@ public class YHP_PlayerController : MonoBehaviour
     }
     private void Start()
     {
+        
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
@@ -280,6 +289,7 @@ public class YHP_PlayerController : MonoBehaviour
             hit.rigidbody.isKinematic = true;
         }
         float time = 0;
+        Manager.sound.PlaySFX(cubePullSound);
         while (time < pullSpeed)
         {
             time += Time.deltaTime;
@@ -343,6 +353,7 @@ public class YHP_PlayerController : MonoBehaviour
         if (tiles.Length == 0 )
         {
             Debug.Log("isNotGround");
+            moveOn = false;
             yield break;
         }
         // 2. 앞에 땅 충돌체에 타일 컴포넌트가 없으면 이동 불가능
@@ -367,6 +378,7 @@ public class YHP_PlayerController : MonoBehaviour
 
                     targetPos = isTile.middlePoint.position;
                     float time = 0;
+                    Manager.sound.PlaySFX(WalkSound);
                     while ( time < 1 )
                     {
                         time += Time.deltaTime * moveSpeed;
@@ -441,7 +453,8 @@ public class YHP_PlayerController : MonoBehaviour
                         hits.rigidbody.isKinematic = true;
                         Debug.Log(hits.collider.gameObject.name);
                     }
-                    while (time < 2)
+                                Manager.sound.PlaySFX(cubePushSound);
+                                while (time < 2)
                     {
                         if (Physics.Raycast(isCollider.gameObject.transform.position + new Vector3(0, 0.5f, 0), moveDirValue, out RaycastHit notThis, 1f, layer) && notThis.collider.gameObject != isCollider.gameObject)
                         {
@@ -544,7 +557,7 @@ public class YHP_PlayerController : MonoBehaviour
                         {
                             float time = 0;
                             bool hitWall = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0, 0.5f, 0), 0.5f, wall).Length > 0;
-
+                            Manager.sound.PlaySFX(cubePushSound);
                             while ( time < 1 )
                             {
 
@@ -587,7 +600,7 @@ public class YHP_PlayerController : MonoBehaviour
             Hold();
         }
         //거울 놓기
-        else if (mirrorHolding && !holder.FrontObstacleLader())
+        else if (mirrorHolding && !holder.FrontObstacleLader() && !moveOn)
         {
             UnHold();
         }
@@ -601,6 +614,7 @@ public class YHP_PlayerController : MonoBehaviour
         if (mirrorObject != null && !holder.FrontObstacleLader())
         {
             Debug.Log("잡았음");
+            Manager.sound.PlaySFX(mirrorGrab);
             // 거울 오브젝트를 홀더 포인트의 자식으로 설정합니다.
             mirrorObject.transform.parent = holderPoint.transform;
             // 거울의 로컬 포지션을 (0, 0, 0)으로 설정하여 정확한 위치에 배치합니다.
@@ -673,7 +687,7 @@ public class YHP_PlayerController : MonoBehaviour
                         Debug.LogError("거울 설치방향 예외!");
                         break;
                 }
-
+                Manager.sound.PlaySFX(mirrorDown);
                 mirrorHolding = false;
                 Vector3 forwardDirection = mirrorObject.transform.forward;
                 mirrorObject.transform.forward = forwardDirection;
@@ -731,6 +745,7 @@ public class YHP_PlayerController : MonoBehaviour
 
 
                 // 거울을 바닥에 놓습니다.
+                Manager.sound.PlaySFX(mirrorDown);
                 mirrorObject.transform.parent = null; // 부모 설정을 해제하여 자식에서 빼냅니다.
                 mirrorObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
                 Vector3 mirrorPosition = transform.position + transform.forward * distanceFromPlayer;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ClickChcker : MonoBehaviour
 {
     
-    void Update()
+   /* void Update()
     {
         // 마우스 왼쪽 버튼 클릭 검출
         if ( Input.GetMouseButtonDown(0) )
@@ -22,6 +22,6 @@ public class ClickChcker : MonoBehaviour
             }
         }
     }
-
+   */
 
 }

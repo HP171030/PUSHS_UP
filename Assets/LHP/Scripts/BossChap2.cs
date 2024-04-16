@@ -156,7 +156,7 @@ public class BossChap2 : Boss
         {
 
             StartCoroutine(WaitPattern());
-
+            Manager.sound.PlaySFX(bossAttack1);
             Debug.Log("Action");
             alert = false;
             targetTile = false;
@@ -207,6 +207,7 @@ public class BossChap2 : Boss
     {
         
         StartCoroutine(WaitPattern());
+       
         curState = Pattern.Idle;
         anim.SetBool("Run Forward", true);
         float time = 0;
@@ -221,7 +222,8 @@ public class BossChap2 : Boss
         yield return new WaitForSeconds(0.7f);
         anim.SetBool("Run Forward", false);
         anim.SetTrigger("Attack1");
-        foreach(RaycastHit rayedTile in tileAlert )
+        Manager.sound.PlaySFX(bossAttack2);
+        foreach (RaycastHit rayedTile in tileAlert )
         {
             Tile tile = rayedTile.collider.gameObject.GetComponent<Tile>();
 
@@ -262,6 +264,7 @@ public class BossChap2 : Boss
         if ( patternCount <= 0 )
         {
             StartCoroutine(WaitPattern());
+            Manager.sound.PlaySFX(bossAttack3);
             Debug.Log("Action");
             alert = false;
             targetTile = false;
@@ -270,7 +273,8 @@ public class BossChap2 : Boss
             foreach ( Tile tile in isTiles )
             {
                 Transform tilePoint = tile.middlePoint;
-                GameObject stone = Instantiate(fallingIcePrefab, tilePoint.position + new Vector3(0, spawnHeight, 0), Quaternion.Euler(180,0,0));
+                int spawnRan = Random.Range(0, 4);
+                GameObject stone = Instantiate(fallingIcePrefab, tilePoint.position + new Vector3(0, spawnHeight+spawnRan, 0), Quaternion.Euler(180,0,0));
                 Collider [] colliders = Physics.OverlapSphere(tilePoint.gameObject.transform.position, 1f);
                 if ( colliders.Length > 0 )
                 {

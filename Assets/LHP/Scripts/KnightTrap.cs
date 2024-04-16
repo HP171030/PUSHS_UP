@@ -8,6 +8,7 @@ public class KnightTrap : MonoBehaviour
     bool onAttack = false;
     [SerializeField] LayerMask player;
     [SerializeField] Vector3 attackRange;
+    [SerializeField] AudioClip slash;
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -19,6 +20,7 @@ public class KnightTrap : MonoBehaviour
         {
             onAttack = true;
             animator.Play("Attack");
+            Manager.sound.PlaySFX(slash);
             if ( Physics.BoxCast(transform.position + new Vector3(0, 1f, 0),attackRange, transform.forward, out RaycastHit hitInfo, Quaternion.identity, 2f) )
             {
                 if ( player.Contain(hitInfo.collider.gameObject.layer) )
