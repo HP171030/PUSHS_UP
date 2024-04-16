@@ -22454,9 +22454,9 @@ MonoBehaviour:
   obstacle:
     serializedVersion: 2
     m_Bits: 64
-  pattern1Count: 300
-  pattern2Count: 300
-  pattern3Count: 300
+  pattern1Count: 20
+  pattern2Count: 20
+  pattern3Count: 20
   stoneSpawner: {fileID: 1086136705}
   stoneSpawnerChildren: []
   sweapTile: {fileID: 253695582}
@@ -24119,6 +24119,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 3606526856141110834, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3671770068480024722, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -24162,6 +24166,10 @@ PrefabInstance:
     - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017329034998197237, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_Text
+      value: "\uD30C\uB77C\uC624\uC758 \uBB34\uB364 BOSS"
       objectReference: {fileID: 0}
     - target: {fileID: 7466600861943777921, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: dialogs.Array.size

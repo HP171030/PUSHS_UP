@@ -23,21 +23,21 @@ public class StepCountUI : MonoBehaviour
     {
         stepText.text = Manager.game.StepAction.ToString();
 
-        if (Manager.game.StepAction >= 50)
+        if (Manager.game.StepAction >= 100)
         {
             // 텍스트에 취소선 이미지를 표시합니다.
             strikethroughImage3.gameObject.SetActive(true);
             MissionCount = 2;
         }
 
-        if (Manager.game.StepAction >= 100)
+        if (Manager.game.StepAction >= 150)
         {
             // 텍스트에 취소선 이미지를 표시합니다.
             strikethroughImage2.gameObject.SetActive(true);
             MissionCount = 1;
         }
 
-        if (Manager.game.StepAction >= 150)
+        if (Manager.game.StepAction >= 200)
         {
             // 텍스트에 취소선 이미지를 표시합니다.
             strikethroughImage1.gameObject.SetActive(true);
