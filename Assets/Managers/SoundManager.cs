@@ -18,14 +18,14 @@ public class SoundManager : MonoBehaviour
             bgmSource.Play();
         }
         bgmSource.clip = clip;
-        sfxSource.Play();
+        bgmSource.Play();
     }
 
     public void StopBGM()
     {
         if ( bgmSource.isPlaying == false )
             return;
-        sfxSource.Stop();
+        bgmSource.Stop();
     }
 
     public void PlaySFX(AudioClip clip )

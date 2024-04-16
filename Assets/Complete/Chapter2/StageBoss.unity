@@ -10275,6 +10275,11 @@ MonoBehaviour:
   pattern1Count: 20
   pattern2Count: 20
   pattern3Count: 20
+  bossBGM: {fileID: 8300000, guid: 7763c0ee03c49494c80d3bd6301fd4a4, type: 3}
+  bossAttack1: {fileID: 8300000, guid: 6551ffa0524aa6f4687488116ed4efa2, type: 3}
+  bossAttack2: {fileID: 8300000, guid: b11c43dd00afcd44d9478870cdfead93, type: 3}
+  bossAttack3: {fileID: 8300000, guid: 0672e8cee3f3b864181101c5084998bc, type: 3}
+  bossDead: {fileID: 0}
   allTile: {fileID: 1368891701}
   frontFourRowTile: {fileID: 1231486579}
   spawnHeight: 10

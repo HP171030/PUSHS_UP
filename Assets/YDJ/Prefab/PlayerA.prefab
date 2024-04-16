@@ -2143,6 +2143,11 @@ MonoBehaviour:
   mirror1: {fileID: 0}
   mirror1Image: {fileID: 0}
   mirror2: {fileID: 0}
+  WalkSound: {fileID: 8300000, guid: d349b36ad49ae2b4ea652b9562c3cca5, type: 3}
+  cubePullSound: {fileID: 8300000, guid: c5fe1f1d6bb993242bc3c5bc23fa6e47, type: 3}
+  cubePushSound: {fileID: 8300000, guid: 13171c673c1636347b842f923eb27b7f, type: 3}
+  mirrorGrab: {fileID: 8300000, guid: 239afe902f7209948b54b1f34ea482fd, type: 3}
+  mirrorDown: {fileID: 8300000, guid: fcb776e282df24e4287441c5a267d86c, type: 3}
   holderPoint: {fileID: 7536203294138164099}
   distanceFromPlayer: 2
   wallMirrorOffset: -3

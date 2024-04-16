@@ -25023,6 +25023,11 @@ MonoBehaviour:
   pattern1Count: 10
   pattern2Count: 10
   pattern3Count: 10
+  bossBGM: {fileID: 8300000, guid: 0837409fe82343a45b3a389c679403b4, type: 3}
+  bossAttack1: {fileID: 8300000, guid: f2ff40ee2fd93ff4995f63ae35010ce7, type: 3}
+  bossAttack2: {fileID: 8300000, guid: 99147cc233167ea44a7508e2d06eb443, type: 3}
+  bossAttack3: {fileID: 8300000, guid: feab2999447c9ce47b87ffc2b4d2b3b7, type: 3}
+  bossDead: {fileID: 0}
   stoneSpawner: {fileID: 1086136705}
   stoneSpawnerChildren: []
   sweapTile: {fileID: 253695582}

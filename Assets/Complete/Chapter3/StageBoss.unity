@@ -67601,6 +67601,11 @@ MonoBehaviour:
   pattern1Count: 20
   pattern2Count: 20
   pattern3Count: 20
+  bossBGM: {fileID: 8300000, guid: ed04987e600a399488e9a2052f1e420d, type: 3}
+  bossAttack1: {fileID: 8300000, guid: 0e918518b04167742b160a223f0be31b, type: 3}
+  bossAttack2: {fileID: 8300000, guid: 4755898b9379049409de4baf0a6d5935, type: 3}
+  bossAttack3: {fileID: 8300000, guid: be76b881a1977db43b1d3f5e95f65288, type: 3}
+  bossDead: {fileID: 0}
   AllTile: []
   RowInExplode: []
   allTile: {fileID: 1458661800}
