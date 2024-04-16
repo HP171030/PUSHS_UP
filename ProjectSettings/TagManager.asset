@@ -3,14 +3,25 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - IceChunk
+  - ice
+  - Mirror
+  - MoveDisable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
+  - Obstacle
+  - Wall
+  - ObsUpper
+  - Ground
+  - Ice
+  - Crystal
+  - Switch
   - 
   - 
   - 
@@ -29,14 +40,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Mirror
   m_SortingLayers:
   - name: Default
     uniqueID: 0
