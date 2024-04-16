@@ -589,7 +589,7 @@ public class YHP_PlayerController : MonoBehaviour
             Hold();
         }
         //거울 놓기
-        else if (mirrorHolding && !holder.FrontObstacleLader())
+        else if (mirrorHolding && !holder.FrontObstacleLader() && !moveOn)
         {
             UnHold();
         }
