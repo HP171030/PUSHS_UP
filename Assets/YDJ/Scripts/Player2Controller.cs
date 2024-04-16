@@ -74,6 +74,8 @@ public class Player2Controller : MonoBehaviour
     }
     private void Start()
     {
+        
+        
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         inputKey = true;
@@ -81,7 +83,7 @@ public class Player2Controller : MonoBehaviour
     }
     private void OnMove(InputValue value)
     {
-
+       
         if (!cameraSwitch.IsPlayer1Active && !onIce&&inputKey )
         {
             Vector2 input = value.Get<Vector2>();
@@ -335,6 +337,7 @@ public class Player2Controller : MonoBehaviour
                 Debug.Log("없을수는 없어");
                 ontheBox = false;
                 moveOn = false;
+                yield break;
             }
 
         }

@@ -14,6 +14,8 @@ public class GameSceneLoader : BaseScene
 
     public override IEnumerator LoadingRoutine()
     {
+        if(cam!= null)
+        cam.IsPlayer1Active = true;
         Manager.game.StepAction = 0;
         Manager.game.doorSwitch = switchCount;
         Manager.game.isEnter = false;
@@ -24,12 +26,20 @@ public class GameSceneLoader : BaseScene
         Manager.game.player2Controller = FindObjectOfType<Player2Controller>();
         Manager.game.bossScene = bossSceneloader;
         cam = FindObjectOfType<CameraSwitch>();
-        cam.player1Camera = thisSceneCine [0];
+       
+        if ( thisSceneCine [0] != null )
+            cam.player1Camera = thisSceneCine [0];
         if ( thisSceneCine [1] !=null )
         cam.player2Camera = thisSceneCine [1];
-        yield return null;
-        cam = Manager.game.player2Controller.cameraSwitch;
-        
+
+        if(Manager.game.playerController != null )
+        Manager.game.playerController.cameraSwitch = cam;
+
+        if(Manager.game.player2Controller != null )
+            Manager.game.player2Controller.cameraSwitch = cam;
+
+       yield return null;
+
     }
     private void Start()
     {
@@ -40,11 +50,21 @@ public class GameSceneLoader : BaseScene
         Manager.game.cines = thisSceneCine;
         Manager.game.playerController = FindObjectOfType<YHP_PlayerController>();
         Manager.game.player2Controller = FindObjectOfType<Player2Controller>();
+   
         Manager.game.bossScene = bossSceneloader;
         cam = FindObjectOfType<CameraSwitch>();
-        cam.player1Camera = thisSceneCine [0];
+        if ( thisSceneCine [0] != null )
+            cam.player1Camera = thisSceneCine [0];
         if ( thisSceneCine [1] != null )
             cam.player2Camera = thisSceneCine [1];
+
+        if ( Manager.game.playerController != null )
+            Manager.game.playerController.cameraSwitch = cam;
+
+        if ( Manager.game.player2Controller != null )
+            Manager.game.player2Controller.cameraSwitch = cam;
     }
+
+
 
 }

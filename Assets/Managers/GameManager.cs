@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public Player2Controller player2Controller;
     public UnityAction stepUpdate;
 
+
     public Button restartButton;
 
     public int clearValue;

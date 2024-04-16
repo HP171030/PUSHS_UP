@@ -71,6 +71,7 @@ public class YHP_PlayerController : MonoBehaviour
     }
     private void Start()
     {
+        
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
@@ -343,6 +344,7 @@ public class YHP_PlayerController : MonoBehaviour
         if (tiles.Length == 0 )
         {
             Debug.Log("isNotGround");
+            moveOn = false;
             yield break;
         }
         // 2. 앞에 땅 충돌체에 타일 컴포넌트가 없으면 이동 불가능

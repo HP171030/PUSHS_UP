@@ -50,12 +50,13 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-       
+        cameraSwitch = FindObjectOfType<CameraSwitch>();
         inputKey = true;
 
     }
     private void OnMove( InputValue value )
     {
+        Debug.Log("input");
         if ( cameraSwitch.IsPlayer1Active && !onIce && inputKey )
         {
             Vector2 input = value.Get<Vector2>();
@@ -303,6 +304,7 @@ public class PlayerController : MonoBehaviour
         }
         moveOn = false;
         pullOn = false;
+        moveSpeed = 4;
 
     }
     private void OnDrawGizmos()
