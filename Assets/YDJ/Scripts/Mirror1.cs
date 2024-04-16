@@ -253,15 +253,19 @@ public class Mirror1 : MonoBehaviour
 
                     break;
                 case 3: // À§·Î µé¾î¿È
-                    mirror2.transform.forward = Vector3.up;
-                    //newmirror1ImegePosition.x -= wallMirrorOffset;
-                    Debug.Log("À§·Î µÒ");
+                    newPosition = transform.position;
+                    newPosition.z += Mirror2OffsetZ;
+                    newPosition.z -= XOffset;
+                    newPosition.y = 0;
+                    mirror2.transform.position = newPosition;
 
                     break;
                 case 4: // ¾Æ·¡·Î µé¾î¿È
-                    mirror2.transform.forward = Vector3.down;
-                    //newmirror1ImegePosition.x += wallMirrorOffset;
-                    Debug.Log("¾Æ·¡·Î µÒ");
+                    newPosition = transform.position;
+                    newPosition.z += Mirror2OffsetZ;
+                    newPosition.z += XOffset;
+                    newPosition.y = 0;
+                    mirror2.transform.position = newPosition;
 
                     break;
                 default: // ±× ¿ÜÀÇ °æ¿ì
@@ -281,6 +285,14 @@ public class Mirror1 : MonoBehaviour
         mirrorObstacleAttachedChecker = false;
         moveDisableChecker = false;
         //wallChecker = false;
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        {
+
+            Debug.Log("º®¿¡¼­ ¶³¾îÁü");
+            wallChecker = false;
+
+        }
     }
 
 
