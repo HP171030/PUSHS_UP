@@ -28,6 +28,7 @@ public class Player2Controller : MonoBehaviour
     [SerializeField] public bool onIce = false;
     [SerializeField] LayerMask isNotplayerLayer;
     [SerializeField] RaycastHit debug;
+    [SerializeField] ScoreDown scoreDown;
 
     Vector3 debugVec;
     Vector3 debugVec2;
@@ -106,7 +107,7 @@ public class Player2Controller : MonoBehaviour
                 {
                     Destroy(BoomableHit.collider.gameObject );
                     Manager.game.boomAction--;
-
+                    scoreDown.DecreaseScore();
                 }
             }
             else

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17291854, g: 0.21609978, b: 0.29806712, a: 1}
+  m_IndirectSpecularColor: {r: 0.17291854, g: 0.21609981, b: 0.29806712, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6920,6 +6920,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mirror2
       objectReference: {fileID: 0}
+    - target: {fileID: 4335426040554672901, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
+      propertyPath: Mirror1
+      value: 
+      objectReference: {fileID: 1317978916}
+    - target: {fileID: 4335426040554672901, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
+      propertyPath: YHP_PlayerController
+      value: 
+      objectReference: {fileID: 67677051}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
