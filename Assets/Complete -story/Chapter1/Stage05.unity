@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17291898, g: 0.21610056, b: 0.29806802, a: 1}
+  m_IndirectSpecularColor: {r: 0.17291854, g: 0.21609978, b: 0.29806712, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12315,9 +12315,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 258738317925738291, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_Text
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1035616536882314814, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032346067183115762, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_Name
+      value: BoomCount
       objectReference: {fileID: 0}
     - target: {fileID: 3190664640453586970, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: m_Name

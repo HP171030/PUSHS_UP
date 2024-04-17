@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17291854, g: 0.21609981, b: 0.29806712, a: 1}
+  m_IndirectSpecularColor: {r: 0.17291854, g: 0.21609978, b: 0.29806712, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -299,6 +299,10 @@ PrefabInstance:
     - target: {fileID: 3091212605045378566, guid: 46d43f6cd82b5f842a88371b83537c3f, type: 3}
       propertyPath: m_Name
       value: PlayerB
+      objectReference: {fileID: 0}
+    - target: {fileID: 3091212605045378566, guid: 46d43f6cd82b5f842a88371b83537c3f, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3091212605045805670, guid: 46d43f6cd82b5f842a88371b83537c3f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3646,6 +3650,8 @@ MonoBehaviour:
   switchCount: 0
   bossSceneloader: 0
   cam: {fileID: 0}
+  CheckerBoss: {fileID: 0}
+  MainScene: 0
 --- !u!4 &516842607
 Transform:
   m_ObjectHideFlags: 0
@@ -12338,6 +12344,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   openTime: 0
+  openSound: {fileID: 0}
 --- !u!1001 &1576942595
 PrefabInstance:
   m_ObjectHideFlags: 0

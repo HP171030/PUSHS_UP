@@ -734,6 +734,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 100040, guid: b69174d668ba02d44b14a084b217670a, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 100042, guid: b69174d668ba02d44b14a084b217670a, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -1236,6 +1240,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4087
   scoreDown: {fileID: 5052229096420338632, guid: cc957fef587053044a0e041a71cf81bc, type: 3}
+  boomEffect: {fileID: 1960811480126827046, guid: 06800343d7c5dfa4c8063f5992643ac7, type: 3}
   cameraSwitch: {fileID: 4767512493712979189, guid: 1acf185048e58a74d854c10a6f58d492, type: 3}
   WalkSound: {fileID: 8300000, guid: d349b36ad49ae2b4ea652b9562c3cca5, type: 3}
   cubeJumpSound: {fileID: 8300000, guid: 6a8684e63d9fe0346b9dfbb0f62b5138, type: 3}

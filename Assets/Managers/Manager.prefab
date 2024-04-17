@@ -432,7 +432,7 @@ MonoBehaviour:
   cines: []
   playerController: {fileID: 0}
   player2Controller: {fileID: 0}
-  player2DeadSound: {fileID: 0}
+  player2DeadSound: {fileID: 8300000, guid: c5bb5d0c63b9ad944a014d32dac0a897, type: 3}
   restartButton: {fileID: 18715020529878642}
   clearValue: 1
   isEnter: 0
@@ -1291,6 +1291,9 @@ MonoBehaviour:
   closeButton: {fileID: 2053017967791998144}
   bossStepChecker: {fileID: 5375282946805918372}
   StageUi: {fileID: 3219476063979790619}
+  menuClose: {fileID: 3320023003734013996}
+  confirmClose: {fileID: 7005679573383384762}
+  canvas: {fileID: 6555492319976376887}
 --- !u!1001 &4482432021408454742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1403,6 +1406,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 241
       objectReference: {fileID: 0}
+    - target: {fileID: 2450129542308660644, guid: 07067957f8dd2814c920845405333d56, type: 3}
+      propertyPath: m_Name
+      value: BoomCount
+      objectReference: {fileID: 0}
     - target: {fileID: 2840501337475086722, guid: 07067957f8dd2814c920845405333d56, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1462,6 +1469,10 @@ PrefabInstance:
     - target: {fileID: 3659467258498302704, guid: 07067957f8dd2814c920845405333d56, type: 3}
       propertyPath: m_FontData.m_Alignment
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4441663096726880101, guid: 07067957f8dd2814c920845405333d56, type: 3}
+      propertyPath: m_Text
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4549909801227503373, guid: 07067957f8dd2814c920845405333d56, type: 3}
       propertyPath: m_Enabled
@@ -1712,6 +1723,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!223 &6555492319976376887 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7263467980214588001, guid: 07067957f8dd2814c920845405333d56, type: 3}
+  m_PrefabInstance: {fileID: 4482432021408454742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7005679573383384762 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6849377280626071276, guid: 07067957f8dd2814c920845405333d56, type: 3}
+  m_PrefabInstance: {fileID: 4482432021408454742}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7652648545968771762 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6054921895441320676, guid: 07067957f8dd2814c920845405333d56, type: 3}

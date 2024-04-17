@@ -557,7 +557,7 @@ public class YHP_PlayerController : MonoBehaviour
                         {
                             float time = 0;
                             bool hitWall = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0, 0.5f, 0), 0.5f, wall).Length > 0;
-                            Manager.sound.PlaySFX(cubePushSound);
+                            Manager.sound.PlaySFX(WalkSound);
                             while ( time < 1 )
                             {
 
@@ -595,6 +595,8 @@ public class YHP_PlayerController : MonoBehaviour
 
     private void OnHold(InputValue value)
     {
+        if( cameraSwitch.IsPlayer1Active )
+        {
         if (!mirrorHolding) // 거울이 확인되지 않았을 때
         {
             Hold();
@@ -603,6 +605,8 @@ public class YHP_PlayerController : MonoBehaviour
         else if (mirrorHolding && !holder.FrontObstacleLader() && !moveOn)
         {
             UnHold();
+        }
+
         }
     }
 

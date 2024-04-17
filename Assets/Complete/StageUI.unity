@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -474,6 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 7
 --- !u!1 &20801168
 GameObject:
@@ -837,6 +838,7 @@ GameObject:
   - component: {fileID: 60449642}
   - component: {fileID: 60449641}
   - component: {fileID: 60449640}
+  - component: {fileID: 60449643}
   m_Layer: 0
   m_Name: 28b
   m_TagString: Untagged
@@ -913,7 +915,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 60449641}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 60449643}
+        m_TargetAssemblyTypeName: SceneMover, Assembly-CSharp
+        m_MethodName: NextSceneWithNum
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &60449641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -952,6 +966,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 60449638}
   m_CullTransparentMesh: 1
+--- !u!114 &60449643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60449638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
+  sNumber: 15
 --- !u!1 &65924329
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,6 +1207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 18
 --- !u!1 &86832180
 GameObject:
@@ -1467,6 +1496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 4
 --- !u!1 &97630907
 GameObject:
@@ -1922,6 +1952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 19
 --- !u!1 &130179009
 GameObject:
@@ -4123,6 +4154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 24
 --- !u!1 &345504305
 GameObject:
@@ -6595,6 +6627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 2
 --- !u!1 &575454343
 GameObject:
@@ -7050,6 +7083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 5
 --- !u!1 &614998474
 GameObject:
@@ -7472,6 +7506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 25
 --- !u!1 &648225128
 GameObject:
@@ -7625,6 +7660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 12
 --- !u!1 &648933869
 GameObject:
@@ -7856,6 +7892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 21
 --- !u!1 &674515462
 GameObject:
@@ -8403,6 +8440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 0
 --- !u!1 &737902053
 GameObject:
@@ -8686,7 +8724,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 133.1
+  m_fontSize: 176.35
   m_fontSizeBase: 128.2
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -9011,6 +9049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 23
 --- !u!1 &824509690
 GameObject:
@@ -10780,6 +10819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 16
 --- !u!1 &982701529
 GameObject:
@@ -11008,6 +11048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 6
 --- !u!1 &991864309
 GameObject:
@@ -11243,7 +11284,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 133.4
+  m_fontSize: 175.4
   m_fontSizeBase: 128.2
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11880,6 +11921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 10
 --- !u!1 &1060495351
 GameObject:
@@ -12163,7 +12205,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 134.3
+  m_fontSize: 177.25
   m_fontSizeBase: 128.2
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13036,6 +13078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 13
 --- !u!1 &1190236187
 GameObject:
@@ -13623,6 +13666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 14
 --- !u!1 &1225220468
 GameObject:
@@ -14322,7 +14366,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 133.55
+  m_fontSize: 176.25
   m_fontSizeBase: 128.2
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -16206,6 +16250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 17
 --- !u!1 &1429068081
 GameObject:
@@ -16436,6 +16481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 8
 --- !u!1 &1430401942
 GameObject:
@@ -17542,6 +17588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 3
 --- !u!1 &1544781318
 GameObject:
@@ -17920,6 +17967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 22
 --- !u!1 &1567388678
 GameObject:
@@ -18073,6 +18121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 1
 --- !u!1 &1567838791
 GameObject:
@@ -18461,7 +18510,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 133.3
+  m_fontSize: 174.8
   m_fontSizeBase: 128.2
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -19181,7 +19230,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 133.1
+  m_fontSize: 176.35
   m_fontSizeBase: 128.2
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -19984,7 +20033,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 133.4
+  m_fontSize: 175.3
   m_fontSizeBase: 128.2
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -21163,6 +21212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 9
 --- !u!1 &1773519279
 GameObject:
@@ -22901,6 +22951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 11
 --- !u!1 &1963860183
 GameObject:
@@ -24144,7 +24195,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 133.5
+  m_fontSize: 175.05
   m_fontSizeBase: 128.2
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -24555,6 +24606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae5e7c6877539f4c80e498408b50a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiClose: {fileID: 0}
   sNumber: 20
 --- !u!1 &2125497592
 GameObject:

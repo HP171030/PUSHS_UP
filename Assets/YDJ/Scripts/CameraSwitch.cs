@@ -26,7 +26,7 @@ public class CameraSwitch : MonoBehaviour
     {
         if ( player2Camera.Follow != null&& !Manager.game.isEnter )
         {
-            Debug.Log(player2Camera.Follow);
+           
             Change();
         }
         else
@@ -46,8 +46,9 @@ public class CameraSwitch : MonoBehaviour
         else
         {
             // 플레이어 1의 카메라가 활성화되어 있으면 플레이어 2의 카메라로 전환합니다.
-            if ( isPlayer1Active )
+            if ( isPlayer1Active ) 
             {
+                Debug.Log("p2On");
                 OnChangePlayer?.Invoke();
                 player1Camera.Priority = 0;
                 player2Camera.Priority = 10;
@@ -56,11 +57,17 @@ public class CameraSwitch : MonoBehaviour
             // 그렇지 않으면 플레이어 1의 카메라로 전환합니다.
             else
             {
+                Debug.Log("p1On");
                 OnChangePlayer?.Invoke();
                 player1Camera.Priority = 10;
                 player2Camera.Priority = 0;
                 isPlayer1Active = true;
             }
+        }
+
+        if( player1Camera.Priority == 10 )
+        {
+            isPlayer1Active = true;
         }
         
     }

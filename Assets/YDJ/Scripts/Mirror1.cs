@@ -349,19 +349,9 @@ public class Mirror1 : MonoBehaviour
         //    obstacle.transform.position = Vector3.Lerp(startPosition, endPosition, time / targetTime);
         //    yield return null;
         //}
-        Vector3 startPos = obstacle.transform.position;
-        Vector3 endPos = transform.position;
-        float time = 0;
-        float targetTime = 1f;
-
-        while ( time < targetTime )
-        {
-            obstacle.transform.position = Vector3.Lerp(startPos, endPos, time / targetTime);
-            yield return null;
-        }
-        yield return new WaitForSeconds(ObstacleInMinrrorCoroutineTime);
-
-
+        obstacle.transform.position = mirror2.transform.position;
+        yield return null;
+        //yield return new WaitForSeconds(ObstacleInMinrrorCoroutineTime);
         StartCoroutine(MirrorOutObstacle(obstacle));
 
         //yield return new WaitForSeconds(ObstacleInMinrrorCoroutineTime);

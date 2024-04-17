@@ -8,7 +8,7 @@ public class GameSceneLoaderOnly2Player : BaseScene
     [SerializeField] protected CinemachineVirtualCamera [] thisSceneCine;
     [SerializeField] public int clearValue;
     [SerializeField] public int switchCount;
-    [SerializeField] protected bool bossSceneloader = false;
+    [SerializeField] public bool bossSceneloader = false;
     [SerializeField] protected CameraSwitch cam;
    
 

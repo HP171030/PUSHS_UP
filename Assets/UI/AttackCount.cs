@@ -23,15 +23,18 @@ public class AttackCount : MonoBehaviour
         Debug.Log(A);
         AttackText.text =A.ToString();
     }
+
     public void stepDecrease()
     {
 
         if(Manager.game.patternStep > 0)
         Manager.game.patternStep--;
+        Debug.Log("downCount");
     }
     private void OnDestroy()
     {
         // 스크립트가 파괴될 때 이벤트를 해제합니다.
         Manager.game.stepUpdate -= UpdateStepText;
+        Manager.game.stepUpdate -= stepDecrease;
     }
 }

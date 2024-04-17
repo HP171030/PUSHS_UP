@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public YHP_PlayerController playerController;
     public Player2Controller player2Controller;
     public UnityAction stepUpdate;
+    public UnityAction boomUpdate;
 
 
     [SerializeField] AudioClip player2DeadSound;
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
     bool gameOver = false;
 
 
-    public int boomAction { get { return boomCount; } set {  boomCount = value; Debug.Log(boomCount); } }
+    public int boomAction { get { return boomCount; } set {  boomCount = value; boomUpdate?.Invoke() ; } }
     public int StepAction { get { return stepCount; } set { stepCount = value; stepUpdate?.Invoke(); } }
 
     public int patternStep { get { return patternCounter; } set { patternCounter = value;} }

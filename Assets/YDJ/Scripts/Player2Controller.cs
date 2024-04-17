@@ -28,10 +28,11 @@ public class Player2Controller : MonoBehaviour
     [SerializeField] public bool onIce = false;
     [SerializeField] LayerMask isNotplayerLayer;
     [SerializeField] RaycastHit debug;
-    [SerializeField] ScoreDown scoreDown;
 
     Vector3 debugVec;
     Vector3 debugVec2;
+
+    [SerializeField] ParticleSystem boomEffect;
 
     [SerializeField] public CameraSwitch cameraSwitch;
 
@@ -109,9 +110,10 @@ public class Player2Controller : MonoBehaviour
             {
                 if ( obstacleLayer.Contain(BoomableHit.collider.gameObject.layer))
                 {
+                    Instantiate(boomEffect, BoomableHit.collider.gameObject.transform.position, Quaternion.identity);
                     Destroy(BoomableHit.collider.gameObject );
+
                     Manager.game.boomAction--;
-                    scoreDown.DecreaseScore();
                     Manager.sound.PlaySFX(boomSound);
                 }
             }
