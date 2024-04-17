@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.1729185, g: 0.21609974, b: 0.29806706, a: 1}
+  m_IndirectSpecularColor: {r: 0.17291898, g: 0.21610056, b: 0.29806814, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10906,6 +10906,10 @@ PrefabInstance:
       propertyPath: ontheBox
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7092120262034414423, guid: 46d43f6cd82b5f842a88371b83537c3f, type: 3}
+      propertyPath: scoreDown
+      value: 
+      objectReference: {fileID: 1749950452}
     - target: {fileID: 7092120262034414423, guid: 46d43f6cd82b5f842a88371b83537c3f, type: 3}
       propertyPath: cameraSwitch
       value: 
@@ -54742,6 +54746,74 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 446930, guid: 77ad9661321c6e84280c8fbe32492c06, type: 3}
   m_PrefabInstance: {fileID: 1749697347}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1749950451
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3190664640453586970, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_Name
+      value: Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.56109047
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 31.90345
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+--- !u!114 &1749950452 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3363858949834215769, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+  m_PrefabInstance: {fileID: 1749950451}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50534446fd25d224e9d7c04d797c68c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1750259610
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65438,3 +65510,4 @@ SceneRoots:
   - {fileID: 76873036}
   - {fileID: 2055662060}
   - {fileID: 474477125}
+  - {fileID: 1749950451}

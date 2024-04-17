@@ -15,7 +15,7 @@ public class ClearLoaderScript : MonoBehaviour
     // Start is called before the first frame update
    public void Start()
     {   
-        int SaveData = PlayerPrefs.GetInt("stageNumber"+stageNumber);
+        int SaveData = PlayerPrefs.GetInt("stageNumber"+stageNumber+1);
         print(stageNumber + "+" +SaveData);
 
         if (SaveData >= 3)

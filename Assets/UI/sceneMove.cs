@@ -6,7 +6,7 @@ public class SceneMover : MonoBehaviour
     public void NextSceneWithNum()
     {
         // 씬 번호를 이용해서 씬 이동
-        Manager.scene.LoadScene(sNumber);
+        Manager.scene.LoadScene(sNumber+1);
     }
     public void gotoRobby()
     {
