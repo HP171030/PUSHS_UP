@@ -1,6 +1,6 @@
 using System.Collections;
 using Unity.VisualScripting;
-using UnityEditor.PackageManager;
+//using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,10 +28,11 @@ public class Player2Controller : MonoBehaviour
     [SerializeField] public bool onIce = false;
     [SerializeField] LayerMask isNotplayerLayer;
     [SerializeField] RaycastHit debug;
-    [SerializeField] ScoreDown scoreDown;
 
     Vector3 debugVec;
     Vector3 debugVec2;
+
+    [SerializeField] ParticleSystem boomEffect;
 
     [SerializeField] public CameraSwitch cameraSwitch;
 
@@ -107,11 +108,12 @@ public class Player2Controller : MonoBehaviour
 
             if ( Physics.Raycast(transform.position + new Vector3 (0,1,0), transform.forward, out BoomableHit, 2f) )                          // 잘 안맞는 버그 잇음 오버랩으로 바꿀것
             {
-                if ( obstacleLayer.Contain(BoomableHit.collider.gameObject.layer))
+                if ( obstacleLayer.Contain(BoomableHit.collider.gameObject.layer) )
                 {
+                    Instantiate(boomEffect, BoomableHit.collider.gameObject.transform.position, Quaternion.identity);
                     Destroy(BoomableHit.collider.gameObject );
+
                     Manager.game.boomAction--;
-                    scoreDown.DecreaseScore();
                     Manager.sound.PlaySFX(boomSound);
                 }
             }
@@ -143,7 +145,13 @@ public class Player2Controller : MonoBehaviour
         }
     }
 
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(debugVec, 1f);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(debugVec2, 1f);
+    }
     private IEnumerator MoveRoutine( Vector3 moveDirValue )
     {
         LayerMask layer = obstacleLayer | wall;
@@ -159,7 +167,7 @@ public class Player2Controller : MonoBehaviour
                 if ( tileIns != null )
                 {
                     Collider [] isBlank = Physics.OverlapSphere(tileIns.middlePoint.transform.position+ new Vector3(0,1f,0), 0.1f, wall);
-                    debugVec = tileIns.middlePoint.transform.position ;
+                    debugVec2 = tileIns.middlePoint.transform.position + new Vector3(0, 1, 0);
                     if (isBlank.Length == 0 )
                     {
                         targetPos = tileIns.middlePoint.position;
@@ -230,6 +238,7 @@ public class Player2Controller : MonoBehaviour
 
                 moveOn = false;
                 onClimb = false;
+                hit.rigidbody.isKinematic = false ;
             }
 
         }
@@ -240,7 +249,7 @@ public class Player2Controller : MonoBehaviour
             {
                 Debug.Log($"올라가있던 박스 : {onBox.collider.gameObject.name}");
                 debug = onBox;
-                Vector3 onBoxPos = onBox.collider.transform.position + new Vector3(0, 1f, 0);
+                Vector3 onBoxPos = onBox.collider.transform.position + new Vector3(0, 3f, 0);
                 if(Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0),transform.forward,out RaycastHit isWall, 2f, wall))
                 {
                     if(wall.Contain(isWall.collider.gameObject.layer))
@@ -254,9 +263,8 @@ public class Player2Controller : MonoBehaviour
                 else
                 {
                     
-                    Collider [] colliders = Physics.OverlapSphere(onBoxPos + moveDirValue*2f, 0.1f, checkLayer);
-                    debugVec = onBoxPos;
-                    debugVec2 = moveDirValue;
+                    Collider [] colliders = Physics.OverlapSphere(onBoxPos + moveDirValue*2f, 0.5f, checkLayer);
+                    debugVec = onBoxPos + moveDirValue * 2f;
                     Debug.Log("벽은 없다");
                     Debug.Log(colliders.Length);
                     if ( colliders.Length > 0 )
@@ -267,13 +275,40 @@ public class Player2Controller : MonoBehaviour
                                 
                                 if ( collider.gameObject != onBox.collider.gameObject )
                                 {
+                                Debug.Log("isDone");
                                     if ( wall.Contain(collider.gameObject.layer) )
+                                      {
+                                    Debug.Log("벽 검출");
+                                    Collider [] isDoors = Physics.OverlapSphere(collider.transform.position + new Vector3(0,1.5f,0),1f, ground);
+                                    
+                                    foreach ( Collider col in isDoors )
                                     {
-                                        Debug.Log($"아래에 벽이 있다 {collider.gameObject.name}");
+                                        Debug.Log(  col.name);
+                                        if ( col.gameObject.CompareTag("Door") )
+                                        {
+                                            float time = 0;
+                                            Manager.sound.PlaySFX(WalkSound);
+                                            while ( time < 1 )
+                                            {
+                                                time += Time.deltaTime * moveSpeed;
+                                                rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
+                                                yield return null;
+                                            }
+                                            Manager.game.StepAction++;
+                                            moveOn = false;
+                                            yield break;
+                                        }
+                                        else
+                                        {
+                                            Debug.Log($"아래에 벽이 있다 {collider.gameObject.name}");
 
-                                        moveOn = false;
-                                        yield break;
+                                            moveOn = false;
+                                            yield break;
+                                        }
+
                                     }
+                                 }
+                                   
                                     else
                                     {
                                         Debug.Log(collider.gameObject.name);
@@ -290,21 +325,24 @@ public class Player2Controller : MonoBehaviour
                                     }
 
                                 }
+
                         }
+                        Debug.Log("isWhat");
+                        moveOn = false;
                     }
                     else
                     {
                         Debug.Log("없나?");
                         LayerMask GandObs = ground | obstacleLayer;
 
-                        if ( Physics.Raycast(transform.position + moveDirValue * 1.5f, Vector3.down, out RaycastHit isTile, 3f, GandObs) )
+                        if ( Physics.Raycast(transform.position + moveDirValue * 2f, Vector3.down, out RaycastHit isTile, 3f, GandObs) )
                         {
                             Debug.Log("올라간상태이고 앞에 뭐 없음 로직");
                             Tile Ank = isTile.collider.gameObject.GetComponent<Tile>();
                             if ( Ank != null )
                             {
                                     Collider [] isBlank = Physics.OverlapSphere(Ank.transform.position + new Vector3(0, 1f, 0), 1f, layer);
-                                    debugVec = Ank.transform.position + new Vector3(0, 1f, 0);
+                                    
                                     if ( isBlank.Length == 0 )
                                     {
                                         targetPos = Ank.middlePoint.position;
@@ -355,18 +393,46 @@ public class Player2Controller : MonoBehaviour
             float time = 0;
             while ( time < 1 )
             {
-                if(Physics.Raycast(transform.position + new Vector3(0,1,0),moveDirValue,out RaycastHit otherHit, 0.2f,layer) )
-                {
-                    Debug.Log(otherHit.collider.gameObject.name );
-                    moveOn = false;
-                    transform.position = transform.position;
-                    yield break;
-                    
-                }
                 time += Time.deltaTime * moveSpeed;
                 rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
                 yield return null;
 
+                if (Physics.Raycast(transform.position + new Vector3(0,1,0),moveDirValue,out RaycastHit otherHit, 0.2f,layer) )
+                {
+                    if ( wall.Contain(otherHit.collider.gameObject.layer) )
+                    {
+                        Debug.Log(otherHit.collider.gameObject.name);
+                        moveOn = false;
+                        transform.position = transform.position;
+                        yield break;
+                    }
+                    else
+                    {
+                        Vector3 onPos = transform.position;
+                        Vector3 ClimbPos = otherHit.collider.transform.position + new Vector3(0, 2, 0);
+                        otherHit.rigidbody.isKinematic = true;
+                        onClimb = true;
+                        animator.SetTrigger("ClimbStart");
+                        Manager.sound.PlaySFX(cubeJumpSound);
+                        while ( time < 1 )
+                        {
+                            time += Time.deltaTime;
+                            rb.MovePosition(Vector3.Lerp(onPos, ClimbPos, time));
+                            yield return null;
+                        }
+                        Manager.game.StepAction++;
+                        if ( hit.collider != null )
+                            //  hit.rigidbody.isKinematic = false;
+                            animator.SetFloat("MoveSpeed", 0f);
+                        yield return new WaitForSeconds(0.5f);
+
+                        moveOn = false;
+                        onClimb = false;
+                        otherHit.rigidbody.isKinematic = false;
+                        yield break;
+                    }
+
+                }
             }
             Manager.sound.PlaySFX(WalkSound);
             Manager.game.StepAction++;

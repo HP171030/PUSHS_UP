@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BossChap2 : Boss
 {
-   
 
+    [SerializeField] Transform effect1Pos;
     Tile [] frontRangeTile;
     Tile [] AllTile;
     [SerializeField] GameObject allTile;
@@ -59,6 +59,7 @@ public class BossChap2 : Boss
 
                         Renderer tilesRend = tiles.gameObject.GetComponent<Renderer>();
                         StartCoroutine(AlertTile(tilesRend, Color.red, 1));
+
                     }
                 }
                 isAlertP1 = true;
@@ -190,6 +191,11 @@ public class BossChap2 : Boss
             }
         }
 
+    }
+    public void Effect1()
+    {
+        Manager.sound.PlaySFX(bossAttack1Sound);
+        Instantiate(bossAttack1Effect, effect1Pos.position, Quaternion.identity);
     }
     private void SideAttack()
     {

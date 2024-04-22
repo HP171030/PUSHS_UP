@@ -3,16 +3,18 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class GameSceneLoader : BaseScene
 {
     [SerializeField] protected CinemachineVirtualCamera[] thisSceneCine;
     [SerializeField] public int clearValue;
     [SerializeField] public int switchCount;
-    [SerializeField] protected bool bossSceneloader = false;
+    [SerializeField] public bool bossSceneloader = false;
     [SerializeField] protected CameraSwitch cam;
     [SerializeField] GameObject CheckerBoss;
     [SerializeField] protected bool MainScene = false;
+    [SerializeField] GameObject video;
 
 
     public override IEnumerator LoadingRoutine()
@@ -21,7 +23,16 @@ public class GameSceneLoader : BaseScene
         cam.IsPlayer1Active = true;
         Manager.game.StepAction = 0;
         Manager.game.doorSwitch = switchCount;
-        Manager.game.isEnter = false;
+        if ( cam.player2Camera.Follow == null | cam.player1Camera.Follow == null )
+        {
+            Manager.game.isEnter = true;
+            Debug.Log("Only1Player");
+        }
+        else
+        {
+            Manager.game.isEnter = false;
+        }
+
         Manager.game.boomAction = 3;
         Manager.game.cines = thisSceneCine;
        Manager.game.clearValue = clearValue;
@@ -63,6 +74,19 @@ public class GameSceneLoader : BaseScene
         {
             CheckerBoss.SetActive(false);
         }
+        if ( video != null )
+        {
+            video.transform.SetParent(Manager.ui.canvas.transform, true);
+            RectTransform rect = video.gameObject.GetComponent<RectTransform>();
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.sizeDelta = Vector2.zero;
+            rect.anchoredPosition = Vector2.zero;
+
+
+        }
+
+       
 
     }
     private void Start()

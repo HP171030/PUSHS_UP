@@ -13,24 +13,25 @@ public class GameManager : MonoBehaviour
     public int doorSwitch;
     public bool bossScene;
     public bool mainScene;
-
+    
     public CinemachineVirtualCamera[] cines;
     public YHP_PlayerController playerController;
     public Player2Controller player2Controller;
     public UnityAction stepUpdate;
+    public UnityAction boomUpdate;
 
 
     [SerializeField] AudioClip player2DeadSound;
 
-    public Button restartButton;
+    public GameObject restartButton;
 
     public int clearValue;
     public bool isEnter = false;
 
-    bool gameOver = false;
+    public bool gameOver = false;
 
 
-    public int boomAction { get { return boomCount; } set {  boomCount = value; Debug.Log(boomCount); } }
+    public int boomAction { get { return boomCount; } set {  boomCount = value; boomUpdate?.Invoke() ; } }
     public int StepAction { get { return stepCount; } set { stepCount = value; stepUpdate?.Invoke(); } }
 
     public int patternStep { get { return patternCounter; } set { patternCounter = value;} }
@@ -45,10 +46,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator gameOverRoutine()
     {
+        restartButton.SetActive(true);
         player2Controller.animator.Play("GameOver");
-        yield return new WaitForSeconds(5f);
-        Time.timeScale = 0.01f;
-        restartButton.gameObject.SetActive(true);
+        yield return null;
+        Time.timeScale = 0.3f;
+        
     }
     public void PlayerControllStop()
     {

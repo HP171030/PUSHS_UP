@@ -17,16 +17,22 @@ public class CameraSwitch : MonoBehaviour
 
     void Start()
     {
-        // 초기에는 플레이어 1의 카메라가 활성화됩니다.
-        //player1Camera.Priority = 10;
-       // player2Camera.Priority = 0;
+        if ( player1Camera.Follow == null )
+        {
+            Change();
+            Manager.game.isEnter = true;
+        }
+        else
+        {
+
+        }
+
     }
 
     private void OnChange(InputValue value)
     {
-        if ( player2Camera.Follow != null&& !Manager.game.isEnter )
+        if (!Manager.game.isEnter )
         {
-            Debug.Log(player2Camera.Follow);
             Change();
         }
         else
@@ -37,31 +43,44 @@ public class CameraSwitch : MonoBehaviour
 
     public void Change()
     {
-
-
-        if ( player2Camera.Follow == null || player1Camera.Follow == null )
+        if (isPlayer1Active && player2Camera.Follow !=null )
         {
-            Debug.Log("isNotChange");
+            Debug.Log(player1Camera.Priority);
+            Debug.Log("p2On");
+            OnChangePlayer?.Invoke();
+            player1Camera.Priority = 0;
+            player2Camera.Priority = 10;
+            
+            isPlayer1Active = false;
+        }
+        // 그렇지 않으면 플레이어 1의 카메라로 전환합니다.
+        else if(!isPlayer1Active)
+        {
+            Debug.Log("p1On");
+            OnChangePlayer?.Invoke();
+            player1Camera.Priority = 10;
+            Debug.Log(player1Camera.Priority);
+            Debug.Log(player1Camera.name);
+            while ( player2Camera.Priority == 10 )
+            {
+                Debug.Log("왜 안바뀌냐");
+                player2Camera.Priority = 0;
+            }
+          
+            isPlayer1Active = true;
+            Debug.Log("왜 안바뀌냐1");
+            Debug.Log("왜 안바뀌냐2");
+            Debug.Log("왜 안바뀌냐3");
+            Debug.Log("왜 안바뀌냐4");
+            Debug.Log("왜 안바뀌냐5");
+            Debug.Log("왜 안바뀌냐6");
+            Debug.Log("왜 안바뀌냐7");
         }
         else
         {
-            // 플레이어 1의 카메라가 활성화되어 있으면 플레이어 2의 카메라로 전환합니다.
-            if ( isPlayer1Active )
-            {
-                OnChangePlayer?.Invoke();
-                player1Camera.Priority = 0;
-                player2Camera.Priority = 10;
-                isPlayer1Active = false;
-            }
-            // 그렇지 않으면 플레이어 1의 카메라로 전환합니다.
-            else
-            {
-                OnChangePlayer?.Invoke();
-                player1Camera.Priority = 10;
-                player2Camera.Priority = 0;
-                isPlayer1Active = true;
-            }
+            Debug.Log("?");
         }
+
         
     }
 }

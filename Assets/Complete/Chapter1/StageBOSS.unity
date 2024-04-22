@@ -14267,6 +14267,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6565127889697551480, guid: 10f9cee6cfdd7df43a5d805acd44763f, type: 3}
+      propertyPath: bossDead
+      value: 
+      objectReference: {fileID: 8300000, guid: 49633201f9c137a46a22d01b399b938f, type: 3}
+    - target: {fileID: 6565127889697551480, guid: 10f9cee6cfdd7df43a5d805acd44763f, type: 3}
       propertyPath: mapAtile
       value: 
       objectReference: {fileID: 1597670242}
@@ -14275,9 +14279,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 253695582}
     - target: {fileID: 6565127889697551480, guid: 10f9cee6cfdd7df43a5d805acd44763f, type: 3}
+      propertyPath: bossAttack2
+      value: 
+      objectReference: {fileID: 8300000, guid: d1f8d4165dfa79a4fa92289d2d83d58f, type: 3}
+    - target: {fileID: 6565127889697551480, guid: 10f9cee6cfdd7df43a5d805acd44763f, type: 3}
       propertyPath: stoneSpawner
       value: 
       objectReference: {fileID: 1086136705}
+    - target: {fileID: 6565127889697551480, guid: 10f9cee6cfdd7df43a5d805acd44763f, type: 3}
+      propertyPath: bossAttack1Sound
+      value: 
+      objectReference: {fileID: 8300000, guid: d55296892cffb044e99edae1e22bd456, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -41944,7 +41956,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2143058302
 Transform:
   m_ObjectHideFlags: 0

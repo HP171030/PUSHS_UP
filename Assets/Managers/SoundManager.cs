@@ -18,6 +18,7 @@ public class SoundManager : MonoBehaviour
             bgmSource.Play();
         }
         bgmSource.clip = clip;
+        bgmSource.loop = true;
         bgmSource.Play();
     }
 

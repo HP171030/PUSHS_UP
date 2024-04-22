@@ -8,7 +8,9 @@ using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 public class SceneManager : MonoBehaviour
 {
     [SerializeField] Image fade;
-    [SerializeField] Image loadingImage;
+    [SerializeField] Image loadingImage1;
+    [SerializeField] Image loadingImage2;
+    [SerializeField] Image loadingImage3;
     [SerializeField] Slider loadingBar;
     [SerializeField] float fadeTime;
 
@@ -52,7 +54,19 @@ public class SceneManager : MonoBehaviour
         */
 
         Time.timeScale = 0f;
-        loadingImage.gameObject.SetActive(true);
+        int ran = Random.Range(0, 3);
+        {
+            switch (ran)
+            {
+                case 0: loadingImage1.gameObject.SetActive(true);
+                    break;
+                case 1: loadingImage2.gameObject.SetActive(true);
+                    break;
+                case 2: loadingImage3.gameObject.SetActive(true);
+                    break;
+            }
+        }
+     
         loadingBar.gameObject.SetActive(true);
 
         AsyncOperation oper = UnitySceneManager.LoadSceneAsync(sceneNum);
@@ -67,7 +81,9 @@ public class SceneManager : MonoBehaviour
 
         loadingBar.gameObject.SetActive(false);
         Time.timeScale = 1f;
-        loadingImage.gameObject.SetActive(false);
+        loadingImage1.gameObject.SetActive(false);
+        loadingImage2.gameObject.SetActive(false);
+        loadingImage3.gameObject.SetActive(false);
 
         yield return FadeIn();
     }

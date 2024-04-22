@@ -29,8 +29,9 @@ public class DoorOpen : MonoBehaviour
                 StartCoroutine(OpenDoor());
                 if (Manager.game.bossScene )
                 {
-                   
+
                     thisBoss.curState = Boss.Pattern.Dead;
+
                     if(clearTile != null )
                     clearTile.SetActive(true);
                     thisBoss.alert = false;
@@ -75,6 +76,7 @@ public class DoorOpen : MonoBehaviour
 
     IEnumerator BossDead()
     {
+        
         yield return new WaitForSeconds(3f);
         Destroy(thisBoss.gameObject);
     }

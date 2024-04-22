@@ -5,6 +5,7 @@ using UnityEngine;
 public class ArrowTrap : MonoBehaviour
 {
     [SerializeField]LayerMask player;
+    [SerializeField] LayerMask obs;
     [SerializeField] Transform arrowStartPos;
     [SerializeField] GameObject arrow;
     [SerializeField] float distance;
@@ -61,29 +62,49 @@ public class ArrowTrap : MonoBehaviour
         float time = 0;
         Vector3 startPos = arrow.transform.position;
         Vector3 targetPos = arrow.transform.position + arrow.transform.forward* distance;
-        RaycastHit [] players = Physics.BoxCastAll(arrow.transform.position, new Vector3(1, 1, 1) / 2f, arrow.transform.forward,Quaternion.identity,distance,player);
-        
-            foreach(RaycastHit p in players )
+        if ( Physics.BoxCast(arrow.transform.position, new Vector3(1, 1, 1) / 2f, arrow.transform.forward, out RaycastHit obsOrPlayer, Quaternion.identity, distance, player | obs) )
         {
-            if(player.Contain(p.collider.gameObject.layer))
+            if ( obs.Contain(obsOrPlayer.collider.gameObject.layer) )
             {
-                Manager.game.GameOver();
+                targetPos = obsOrPlayer.collider.transform.position;   
+                while ( time < targetTime )
+                {
+                    time += Time.deltaTime;
+                    arrow.transform.position = Vector3.Lerp(startPos, targetPos, time / targetTime);
+                    yield return null;
+                }
+                Destroy(obsOrPlayer.collider.gameObject);
+                arrow.SetActive(false);
+                Destroy(arrow);
             }
             else
             {
-                Debug.Log("¾È¸ÂÀ½");
+                while ( time < targetTime )
+                {
+                    time += Time.deltaTime;
+                    arrow.transform.position = Vector3.Lerp(startPos, targetPos, time / targetTime);
+                    yield return null;
+                }
+                arrow.SetActive(false);
+                Destroy(arrow);
+                Manager.game.GameOver();
+
             }
         }
-            
-        
-        while ( time < targetTime )
+        else
         {
-            time += Time.deltaTime;
-            arrow.transform.position = Vector3.Lerp(startPos, targetPos, time/targetTime);
-        yield return null;
+            while ( time < targetTime )
+            {
+                time += Time.deltaTime;
+                arrow.transform.position = Vector3.Lerp(startPos, targetPos, time / targetTime);
+                yield return null;
+            }
+            arrow.SetActive(false);
+            Destroy(arrow);
         }
-        arrow.SetActive(false);
-        Destroy( arrow );
+
+
+
     }
     private void OnDrawGizmos()
     {
