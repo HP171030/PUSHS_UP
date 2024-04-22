@@ -9,5 +9,6 @@ public class Restart : MonoBehaviour
         Manager.scene.RestartScene();
         Manager.game.patternStep = 0;
         Manager.game.stepUpdate();
+        Manager.game.gameOver = false;
     }
 }

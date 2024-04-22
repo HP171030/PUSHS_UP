@@ -126,22 +126,22 @@ public class BossChap3 : Boss
                 }
                 if(!isAlertP3 )
                 {
-                foreach( Transform tiles in pattern3Range )
-                {
-                    Collider [] colliders = Physics.OverlapBox(tiles.position, new Vector3(2f, 1, 2f),Quaternion.identity,tile);
-                    
-                  foreach( Collider collider in colliders )
-                  {
-                     
-                     Tile tile = collider.GetComponent<Tile>();
-                        Renderer thisRends = tile.GetComponent<Renderer>(); 
+                           foreach( Transform tiles in pattern3Range )
+                           {
+                               Collider [] colliders = Physics.OverlapBox(tiles.position, new Vector3(2f, 1, 2f),Quaternion.identity,tile);
+                               
+                                  foreach( Collider collider in colliders )
+                                  {
+                                     
+                                     Tile tile = collider.GetComponent<Tile>();
+                                        Renderer thisRends = tile.GetComponent<Renderer>(); 
 
-                      if ( thisRends != null )
-                          StartCoroutine(AlertTile(thisRends, Color.red, 1));
-                  }
+                                      if ( thisRends != null )
+                                          StartCoroutine(AlertTile(thisRends, Color.red, 1));
+                                  }
                  
                     
-                }
+                              }
 
                 }
                 isAlertP3 = true;
@@ -251,25 +251,31 @@ public class BossChap3 : Boss
             }
             for(int i = 0; i < 10;i++ )
             {
+                Manager.sound.PlaySFX(bossAttack1Sound);
                
                 Collider [] isObjects = Physics.OverlapSphere(tiles [i].middlePoint.position, 0.5f, player | obstacle);
-                if( isObjects.Length > 0 )
+                if ( !pattern1Bool [i] )
                 {
-                    foreach(Collider isObj in isObjects )
+                    Instantiate(pattern1Effect, tiles [i].middlePoint.position + new Vector3(0, 1, 0), Quaternion.identity);
+                    Manager.game.ShakeCam();
+                    if ( isObjects.Length > 0 )
                     {
-                        pattern1Bool [i] = true;
-                        if ( player.Contain(isObj.gameObject.layer) )
+                        foreach ( Collider isObj in isObjects )
                         {
-                            Manager.game.GameOver();
-                        }
-                        else if (obstacle.Contain(isObj.gameObject.layer) )
-                        {
-                            Destroy( isObj.gameObject );
+                            pattern1Bool [i] = true;
+                            if ( player.Contain(isObj.gameObject.layer) )
+                            {
+                                Manager.game.GameOver();
+                            }
+                            else if ( obstacle.Contain(isObj.gameObject.layer) )
+                            {
+                                Destroy(isObj.gameObject);
+                            }
                         }
                     }
                 }
-                if ( !pattern1Bool [i] )    
-                Instantiate(pattern1Effect, tiles [i].middlePoint.position + new Vector3 (0,1,0),Quaternion.identity);
+                  
+              
             }
             yield return null;
         }
@@ -291,7 +297,7 @@ public class BossChap3 : Boss
             alert = false;
             targetTile = false;
             anim.Play("atack3");
-          
+            Manager.game.ShakeCam();
             foreach ( Tile tiles in AllTile )
             {
                 Transform tilePoint = tiles.middlePoint;
@@ -343,6 +349,8 @@ public class BossChap3 : Boss
                     {
                         foreach ( Collider col in isIn )
                         {
+                            Instantiate(bossAttack1Effect, tile.middlePoint.position,Quaternion.identity);
+                            Instantiate(bossAttack2Effect, tile.middlePoint.position, Quaternion.identity);
                             if ( player.Contain(col.gameObject.layer) )
                             {
                                 Manager.game.GameOver();

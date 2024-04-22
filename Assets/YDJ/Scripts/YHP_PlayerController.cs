@@ -225,13 +225,13 @@ public class YHP_PlayerController : MonoBehaviour
         Vector3 grabTargetPos = pullDir;
         if (X)
         {
-            Collider [] pullTarget = Physics.OverlapSphere(transform.position - transform.forward * 2, 0.5f, ground | wall);
+            Collider [] pullTarget = Physics.OverlapSphere(transform.position - transform.forward * 2, 0.5f, ground | wall|mirror);
             Tile tile;
             if (pullTarget.Length > 0)
             {
                 foreach ( Collider col in pullTarget )
                 {
-                    if ( wall.Contain(col.gameObject.layer) )
+                    if ( wall.Contain(col.gameObject.layer) | mirror.Contain(col.gameObject.layer) )
                     {
 
                         Debug.Log($"{col.name}");
@@ -251,13 +251,13 @@ public class YHP_PlayerController : MonoBehaviour
         }
         else if (!X)
         {
-            Collider [] pullTarget = Physics.OverlapSphere(transform.position - transform.forward * 2, 0.5f, ground | wall);
+            Collider [] pullTarget = Physics.OverlapSphere(transform.position - transform.forward * 2, 0.5f, ground | wall| mirror);
             Tile tile;
             if ( pullTarget.Length > 0 )
             {
                 foreach ( Collider col in pullTarget )
                 {
-                    if ( wall.Contain(col.gameObject.layer) )
+                    if ( wall.Contain(col.gameObject.layer) | mirror.Contain(col.gameObject.layer) )
                     {
 
                         yield break;
@@ -370,7 +370,7 @@ public class YHP_PlayerController : MonoBehaviour
             else
             {
                 // 3. 앞에 장애물을 확인
-                Collider [] isBlank = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0, 1, 0), 0.5f, WandObslayer);
+                Collider [] isBlank = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0, 1.5f, 0), 0.5f, WandObslayer);
 
                 // 3-1. 앞이 빈공간이라면
                 if ( isBlank.Length == 0 )
@@ -510,8 +510,9 @@ public class YHP_PlayerController : MonoBehaviour
                 yield return null;
             }
 
-                        else if ( mirror.Contain(isCollider.gameObject.layer) && !mirrorHolding && !mirror1.WallChecker )
+                        else if ( mirror.Contain(isCollider.gameObject.layer) && !mirrorHolding /*&& !mirror1.WallChecker */)
                         {
+                            Debug.Log(isCollider.name);
                             Debug.Log($"거울이 앞에 있어서 이동할 수 없습니다.");
                             moveOn = false;
                             yield return null;
@@ -556,12 +557,12 @@ public class YHP_PlayerController : MonoBehaviour
                         else
                         {
                             float time = 0;
-                            bool hitWall = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0, 0.5f, 0), 0.5f, wall).Length > 0;
+                            bool hitWall = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0, 0.5f, 0), 0.5f, wall|mirror).Length > 0;
                             Manager.sound.PlaySFX(WalkSound);
                             while ( time < 1 )
                             {
 
-                                if ( hitWall )
+                                if ( hitWall &&!mirrorHolding)
                                 {
                                     Debug.Log("Hit wall");
                                     transform.position = startPos;

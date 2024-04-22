@@ -70,7 +70,7 @@ MonoBehaviour:
   controller: {fileID: 7092120262034414423}
   ground:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 4608
   OnObs:
     serializedVersion: 2
     m_Bits: 64
@@ -693,6 +693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2062233306664198162, guid: 8dc6daba77bdef24199919b76b2fadf6, type: 3}
+    - {fileID: 2035733228339750292, guid: 8dc6daba77bdef24199919b76b2fadf6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1221,7 +1222,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4160
   obstacleUpperLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -1239,8 +1240,7 @@ MonoBehaviour:
   isNotplayerLayer:
     serializedVersion: 2
     m_Bits: 4087
-  scoreDown: {fileID: 5052229096420338632, guid: cc957fef587053044a0e041a71cf81bc, type: 3}
-  boomEffect: {fileID: 1960811480126827046, guid: 06800343d7c5dfa4c8063f5992643ac7, type: 3}
+  boomEffect: {fileID: 198000012942003240, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
   cameraSwitch: {fileID: 4767512493712979189, guid: 1acf185048e58a74d854c10a6f58d492, type: 3}
   WalkSound: {fileID: 8300000, guid: d349b36ad49ae2b4ea652b9562c3cca5, type: 3}
   cubeJumpSound: {fileID: 8300000, guid: 6a8684e63d9fe0346b9dfbb0f62b5138, type: 3}

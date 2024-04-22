@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17291898, g: 0.21610056, b: 0.29806814, a: 1}
+  m_IndirectSpecularColor: {r: 0.1729185, g: 0.21609974, b: 0.29806706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -455,6 +455,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -725,6 +729,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1926,6 +1934,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2158,6 +2170,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2224,6 +2240,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3232,6 +3252,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4207,6 +4231,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4580,6 +4608,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7889,6 +7921,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9071,6 +9107,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10013,6 +10053,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12005,6 +12049,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14631,6 +14679,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 3571450653554465179, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.07
@@ -15081,6 +15133,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16581,6 +16637,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16925,6 +16985,10 @@ PrefabInstance:
     - target: {fileID: 2073054482020513382, guid: 7ade26f05ab6798439941af3f64a8ecf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718262016956067913, guid: 7ade26f05ab6798439941af3f64a8ecf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.9
       objectReference: {fileID: 0}
     - target: {fileID: 6718262016956067913, guid: 7ade26f05ab6798439941af3f64a8ecf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17540,6 +17604,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18570,6 +18638,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18998,6 +19070,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19569,6 +19645,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20234,6 +20314,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21953,6 +22037,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23471,6 +23559,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23598,6 +23690,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23841,6 +23937,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23902,6 +24002,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -33227,6 +33331,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34274,6 +34382,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36245,6 +36357,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -37832,6 +37948,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39514,6 +39634,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -48949,6 +49073,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -49752,6 +49880,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -49880,6 +50012,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -54335,6 +54471,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -54396,6 +54536,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -58166,6 +58310,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6718262016956067913, guid: 7ade26f05ab6798439941af3f64a8ecf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718262016956067913, guid: 7ade26f05ab6798439941af3f64a8ecf, type: 3}
       propertyPath: m_LocalPosition.z
       value: -3.45
       objectReference: {fileID: 0}
@@ -59007,6 +59155,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -59473,6 +59625,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoveDisableKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -59688,6 +59844,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -60095,6 +60255,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -63200,6 +63364,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6718262016956067913, guid: 7ade26f05ab6798439941af3f64a8ecf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718262016956067913, guid: 7ade26f05ab6798439941af3f64a8ecf, type: 3}
       propertyPath: m_LocalPosition.z
       value: -1.45
       objectReference: {fileID: 0}
@@ -65024,6 +65192,10 @@ PrefabInstance:
     - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
       propertyPath: m_Name
       value: MoveDisableKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554033707907185298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

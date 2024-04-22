@@ -37,6 +37,10 @@ public class Boss : MonoBehaviour
     [SerializeField]protected AudioClip bossAttack3;
     [SerializeField]protected AudioClip bossDead;
 
+    [SerializeField] protected AudioClip bossAttack1Sound;
+    [SerializeField] protected ParticleSystem bossAttack1Effect;
+    [SerializeField] protected ParticleSystem bossAttack2Effect;
+
     protected virtual void Start()
     {
         curState = Pattern.Idle;
@@ -63,7 +67,7 @@ public class Boss : MonoBehaviour
     IEnumerator PatternStart()
     {if(curState == Pattern.Dead )
         {
-
+            Manager.sound.PlaySFX(bossDead);
             yield return null;
         }
         else
@@ -93,7 +97,7 @@ public class Boss : MonoBehaviour
     public IEnumerator AlertTile(Renderer tileRenderer,Color color,float endTime)
     {
 
-       
+        Debug.Log("AlertStart");
         float time = 0;
         
         Color startColor = Color.white;

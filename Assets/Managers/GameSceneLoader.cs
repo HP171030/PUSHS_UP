@@ -23,7 +23,16 @@ public class GameSceneLoader : BaseScene
         cam.IsPlayer1Active = true;
         Manager.game.StepAction = 0;
         Manager.game.doorSwitch = switchCount;
-        Manager.game.isEnter = false;
+        if ( cam.player2Camera.Follow == null | cam.player1Camera.Follow == null )
+        {
+            Manager.game.isEnter = true;
+            Debug.Log("Only1Player");
+        }
+        else
+        {
+            Manager.game.isEnter = false;
+        }
+
         Manager.game.boomAction = 3;
         Manager.game.cines = thisSceneCine;
        Manager.game.clearValue = clearValue;
@@ -68,8 +77,13 @@ public class GameSceneLoader : BaseScene
         if ( video != null )
         {
             video.transform.SetParent(Manager.ui.canvas.transform, true);
+            RectTransform rect = video.gameObject.GetComponent<RectTransform>();
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.sizeDelta = Vector2.zero;
+            rect.anchoredPosition = Vector2.zero;
 
-         
+
         }
 
        

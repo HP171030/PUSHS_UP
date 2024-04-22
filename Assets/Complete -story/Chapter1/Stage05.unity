@@ -3636,6 +3636,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   CheckerBoss: {fileID: 0}
   MainScene: 0
+  video: {fileID: 0}
 --- !u!4 &516842607
 Transform:
   m_ObjectHideFlags: 0
@@ -4164,6 +4165,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 657486531}
+    - target: {fileID: 1052285570019376402, guid: d6649e74f3dfa3c4a9abed1137984cf2, type: 3}
+      propertyPath: m_Priority
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1344927433959157852, guid: d6649e74f3dfa3c4a9abed1137984cf2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.2663804
@@ -12331,6 +12336,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 3571450653554465179, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3671770068480024722, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -18049,6 +18058,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 519637446}
+    - target: {fileID: 5851932153294393136, guid: 7d150b5ffa0f5fa45aad9b78de8091cf, type: 3}
+      propertyPath: m_Priority
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7531029053629432191, guid: 7d150b5ffa0f5fa45aad9b78de8091cf, type: 3}
       propertyPath: m_BoundingVolume
       value: 

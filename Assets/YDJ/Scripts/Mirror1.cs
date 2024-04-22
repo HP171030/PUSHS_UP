@@ -364,6 +364,7 @@ public class Mirror1 : MonoBehaviour
 
     IEnumerator MirrorInObstacleGround( GameObject obstacle ) //장애물 들어갈때
     {
+        Manager.game.PlayerControllStop();
         Debug.Log("코루틴 들어감");
         Rigidbody obstacleRigidbody = obstacle.GetComponent<Rigidbody>();
         Collider obstacleCollider = obstacle.GetComponent<Collider>();
@@ -448,8 +449,10 @@ public class Mirror1 : MonoBehaviour
                 {
                     Rigidbody rb = ray.collider.gameObject.GetComponent<Rigidbody>();
                     rb.isKinematic = true;
-
+                    rb.constraints |= RigidbodyConstraints.FreezePositionX;
+                    rb.constraints |= RigidbodyConstraints.FreezePositionZ;
                     ray.transform.SetParent(obstacle.transform, true);
+                    
                 }
             }
 
@@ -468,6 +471,8 @@ public class Mirror1 : MonoBehaviour
                 {
                     Rigidbody rb = ray.collider.gameObject.GetComponent<Rigidbody>();
                     rb.isKinematic = false;
+                    rb.constraints &= ~RigidbodyConstraints.FreezePositionX;
+                    rb.constraints &= ~RigidbodyConstraints.FreezePositionZ;
                     ray.transform.SetParent(null, true);
 
                 }
@@ -478,7 +483,7 @@ public class Mirror1 : MonoBehaviour
 
 
 
-
+        Manager.game.PlayerControllerOn();
     }
 
 }

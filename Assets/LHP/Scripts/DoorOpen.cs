@@ -76,6 +76,7 @@ public class DoorOpen : MonoBehaviour
 
     IEnumerator BossDead()
     {
+        
         yield return new WaitForSeconds(3f);
         Destroy(thisBoss.gameObject);
     }

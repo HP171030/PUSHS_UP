@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public int doorSwitch;
     public bool bossScene;
     public bool mainScene;
-
+    
     public CinemachineVirtualCamera[] cines;
     public YHP_PlayerController playerController;
     public Player2Controller player2Controller;
@@ -23,12 +23,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] AudioClip player2DeadSound;
 
-    public Button restartButton;
+    public GameObject restartButton;
 
     public int clearValue;
     public bool isEnter = false;
 
-    bool gameOver = false;
+    public bool gameOver = false;
 
 
     public int boomAction { get { return boomCount; } set {  boomCount = value; boomUpdate?.Invoke() ; } }
@@ -46,10 +46,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator gameOverRoutine()
     {
+        restartButton.SetActive(true);
         player2Controller.animator.Play("GameOver");
-        yield return new WaitForSeconds(5f);
-        Time.timeScale = 0.01f;
-        restartButton.gameObject.SetActive(true);
+        yield return null;
+        Time.timeScale = 0.3f;
+        
     }
     public void PlayerControllStop()
     {

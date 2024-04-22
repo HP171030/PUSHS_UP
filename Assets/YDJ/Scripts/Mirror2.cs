@@ -22,7 +22,7 @@ public class Mirror2 : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle") || (other.gameObject.CompareTag("MoveDisable")))
         {
-            Debug.Log("obstacleChecker = true;");
+           
             obstacleChecker = true;
 
         }

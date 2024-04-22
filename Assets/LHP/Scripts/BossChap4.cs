@@ -27,6 +27,7 @@ public class BossChap4 : Boss
 
     [SerializeField] Transform [] statues;
     [SerializeField] GameObject shine;
+    [SerializeField] Transform effect1Pos;
 
     RaycastHit [] tileAlert = null;
 
@@ -259,23 +260,25 @@ public class BossChap4 : Boss
             {
 
                 Collider [] isObjects = Physics.OverlapSphere(tiles [i].middlePoint.position, 0.5f, player | obstacle);
-                if ( isObjects.Length > 0 )
+                if ( !pattern1Bool [i] )
                 {
-                    foreach ( Collider isObj in isObjects )
+                    Instantiate(pattern1Effect, tiles [i].middlePoint.position + new Vector3(0, 1, 0), Quaternion.identity);
+                    if ( isObjects.Length > 0)
                     {
-                        pattern1Bool [i] = true;
-                        if ( player.Contain(isObj.gameObject.layer) )
+                        foreach ( Collider isObj in isObjects )
                         {
-                            Manager.game.GameOver();
-                        }
-                        else if ( obstacle.Contain(isObj.gameObject.layer) )
-                        {
-                            Destroy(isObj.gameObject);
+                            pattern1Bool [i] = true;
+                            if ( player.Contain(isObj.gameObject.layer) )
+                            {
+                                Manager.game.GameOver();
+                            }
+                            else if ( obstacle.Contain(isObj.gameObject.layer) )
+                            {
+                                Destroy(isObj.gameObject);
+                            }
                         }
                     }
                 }
-                if ( !pattern1Bool [i] )
-                    Instantiate(pattern1Effect, tiles [i].middlePoint.position + new Vector3(0, 1, 0), Quaternion.identity);
             }
             yield return null;
         }
@@ -316,6 +319,11 @@ public class BossChap4 : Boss
             onPattern = false;
             isAlertP2 = false;
         }
+    }
+    public void Effect1()
+    {
+        Manager.sound.PlaySFX(bossAttack1Sound);
+        Instantiate(bossAttack1Effect, effect1Pos.position + new Vector3 (0,2,0), Quaternion.identity);
     }
     private void Pattern3Attack()
     {

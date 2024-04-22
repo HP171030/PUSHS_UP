@@ -96,7 +96,7 @@ public class BossChap1 : Boss
                     targetTile = true;
 
                 }
-                if ( isAlertP2 )
+                if (!isAlertP2 )
                 {
                     foreach ( Tile tiles in sweapAllTile )
                     {
@@ -133,7 +133,7 @@ public class BossChap1 : Boss
                     targetTile = true;
 
                 }
-                if( isAlertP3 )
+                if(!isAlertP3 )
                 {
                     isTiles = new Tile [stoneFall.Length]; // tiles 배열 초기화
 
@@ -201,6 +201,7 @@ public class BossChap1 : Boss
             targetTile = false;
             anim.Play("Sweap");
             Manager.sound.PlaySFX(bossAttack2);
+            Manager.game.ShakeCam();
             foreach ( Tile tiles in sweapAllTile )
             {
                 Transform tilePoint = tiles.middlePoint;

@@ -1,81 +1,215 @@
 fileFormatVersion: 2
 guid: 9407fec50666b7546900a3898e0c472b
-timeCreated: 1531631116
-licenseType: Store
 ModelImporter:
-  serializedVersion: 22
-  fileIDToRecycleName:
-    100000: jtBn_body_01
-    100002: jtBn_body_02
-    100004: jtBn_head
-    100006: jtBn_l_leg01_
-    100008: jtBn_l_leg01_1
-    100010: jtBn_l_leg01_2
-    100012: jtBn_l_leg02_
-    100014: jtBn_l_leg02_1
-    100016: jtBn_l_leg02_2
-    100018: jtBn_l_leg03_
-    100020: jtBn_l_leg03_1
-    100022: jtBn_l_leg03_2
-    100024: jtBn_l_leg03_3
-    100026: jtBn_l_leg03_4
-    100028: jtBn_l_leg03_5
-    100030: jtBn_l_teeth_01
-    100032: jtBn_r_leg01_
-    100034: jtBn_r_leg01_1
-    100036: jtBn_r_leg01_2
-    100038: jtBn_r_leg02_
-    100040: jtBn_r_leg02_1
-    100042: jtBn_r_leg02_2
-    100044: jtBn_r_leg03_
-    100046: jtBn_r_leg03_1
-    100048: jtBn_r_leg03_2
-    100050: jtBn_r_leg03_3
-    100052: jtBn_r_leg03_4
-    100054: jtBn_r_leg03_5
-    100056: jtBn_r_teeth_01
-    100058: jtBn_spiderRoot
-    100060: //RootNode
-    100062: Spider
-    400000: jtBn_body_01
-    400002: jtBn_body_02
-    400004: jtBn_head
-    400006: jtBn_l_leg01_
-    400008: jtBn_l_leg01_1
-    400010: jtBn_l_leg01_2
-    400012: jtBn_l_leg02_
-    400014: jtBn_l_leg02_1
-    400016: jtBn_l_leg02_2
-    400018: jtBn_l_leg03_
-    400020: jtBn_l_leg03_1
-    400022: jtBn_l_leg03_2
-    400024: jtBn_l_leg03_3
-    400026: jtBn_l_leg03_4
-    400028: jtBn_l_leg03_5
-    400030: jtBn_l_teeth_01
-    400032: jtBn_r_leg01_
-    400034: jtBn_r_leg01_1
-    400036: jtBn_r_leg01_2
-    400038: jtBn_r_leg02_
-    400040: jtBn_r_leg02_1
-    400042: jtBn_r_leg02_2
-    400044: jtBn_r_leg03_
-    400046: jtBn_r_leg03_1
-    400048: jtBn_r_leg03_2
-    400050: jtBn_r_leg03_3
-    400052: jtBn_r_leg03_4
-    400054: jtBn_r_leg03_5
-    400056: jtBn_r_teeth_01
-    400058: jtBn_spiderRoot
-    400060: Spider
-    400062: //RootNode
-    2100000: Material
-    4300000: Spider
-    9500000: //RootNode
-    13700000: Spider
+  serializedVersion: 22200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: jtBn_body_01
+  - first:
+      1: 100002
+    second: jtBn_body_02
+  - first:
+      1: 100004
+    second: jtBn_head
+  - first:
+      1: 100006
+    second: jtBn_l_leg01_
+  - first:
+      1: 100008
+    second: jtBn_l_leg01_1
+  - first:
+      1: 100010
+    second: jtBn_l_leg01_2
+  - first:
+      1: 100012
+    second: jtBn_l_leg02_
+  - first:
+      1: 100014
+    second: jtBn_l_leg02_1
+  - first:
+      1: 100016
+    second: jtBn_l_leg02_2
+  - first:
+      1: 100018
+    second: jtBn_l_leg03_
+  - first:
+      1: 100020
+    second: jtBn_l_leg03_1
+  - first:
+      1: 100022
+    second: jtBn_l_leg03_2
+  - first:
+      1: 100024
+    second: jtBn_l_leg03_3
+  - first:
+      1: 100026
+    second: jtBn_l_leg03_4
+  - first:
+      1: 100028
+    second: jtBn_l_leg03_5
+  - first:
+      1: 100030
+    second: jtBn_l_teeth_01
+  - first:
+      1: 100032
+    second: jtBn_r_leg01_
+  - first:
+      1: 100034
+    second: jtBn_r_leg01_1
+  - first:
+      1: 100036
+    second: jtBn_r_leg01_2
+  - first:
+      1: 100038
+    second: jtBn_r_leg02_
+  - first:
+      1: 100040
+    second: jtBn_r_leg02_1
+  - first:
+      1: 100042
+    second: jtBn_r_leg02_2
+  - first:
+      1: 100044
+    second: jtBn_r_leg03_
+  - first:
+      1: 100046
+    second: jtBn_r_leg03_1
+  - first:
+      1: 100048
+    second: jtBn_r_leg03_2
+  - first:
+      1: 100050
+    second: jtBn_r_leg03_3
+  - first:
+      1: 100052
+    second: jtBn_r_leg03_4
+  - first:
+      1: 100054
+    second: jtBn_r_leg03_5
+  - first:
+      1: 100056
+    second: jtBn_r_teeth_01
+  - first:
+      1: 100058
+    second: jtBn_spiderRoot
+  - first:
+      1: 100060
+    second: //RootNode
+  - first:
+      1: 100062
+    second: Spider
+  - first:
+      4: 400000
+    second: jtBn_body_01
+  - first:
+      4: 400002
+    second: jtBn_body_02
+  - first:
+      4: 400004
+    second: jtBn_head
+  - first:
+      4: 400006
+    second: jtBn_l_leg01_
+  - first:
+      4: 400008
+    second: jtBn_l_leg01_1
+  - first:
+      4: 400010
+    second: jtBn_l_leg01_2
+  - first:
+      4: 400012
+    second: jtBn_l_leg02_
+  - first:
+      4: 400014
+    second: jtBn_l_leg02_1
+  - first:
+      4: 400016
+    second: jtBn_l_leg02_2
+  - first:
+      4: 400018
+    second: jtBn_l_leg03_
+  - first:
+      4: 400020
+    second: jtBn_l_leg03_1
+  - first:
+      4: 400022
+    second: jtBn_l_leg03_2
+  - first:
+      4: 400024
+    second: jtBn_l_leg03_3
+  - first:
+      4: 400026
+    second: jtBn_l_leg03_4
+  - first:
+      4: 400028
+    second: jtBn_l_leg03_5
+  - first:
+      4: 400030
+    second: jtBn_l_teeth_01
+  - first:
+      4: 400032
+    second: jtBn_r_leg01_
+  - first:
+      4: 400034
+    second: jtBn_r_leg01_1
+  - first:
+      4: 400036
+    second: jtBn_r_leg01_2
+  - first:
+      4: 400038
+    second: jtBn_r_leg02_
+  - first:
+      4: 400040
+    second: jtBn_r_leg02_1
+  - first:
+      4: 400042
+    second: jtBn_r_leg02_2
+  - first:
+      4: 400044
+    second: jtBn_r_leg03_
+  - first:
+      4: 400046
+    second: jtBn_r_leg03_1
+  - first:
+      4: 400048
+    second: jtBn_r_leg03_2
+  - first:
+      4: 400050
+    second: jtBn_r_leg03_3
+  - first:
+      4: 400052
+    second: jtBn_r_leg03_4
+  - first:
+      4: 400054
+    second: jtBn_r_leg03_5
+  - first:
+      4: 400056
+    second: jtBn_r_teeth_01
+  - first:
+      4: 400058
+    second: jtBn_spiderRoot
+  - first:
+      4: 400060
+    second: Spider
+  - first:
+      4: 400062
+    second: //RootNode
+  - first:
+      21: 2100000
+    second: Material
+  - first:
+      43: 4300000
+    second: Spider
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Spider
   externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -84,6 +218,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -92,6 +227,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -104,34 +240,51 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 10
-    meshCompression: 0
+    meshCompression: 3
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 0
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -141,14 +294,19 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 10
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

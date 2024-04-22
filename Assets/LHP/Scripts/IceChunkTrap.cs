@@ -7,7 +7,8 @@ using UnityEngine.InputSystem.XR;
 
 public class IceChunkTrap : MonoBehaviour
 {
-    [SerializeField] LayerMask player;
+    [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask wallAndObs;
     PlayerController controller;
     Player2Controller player2Controller;
     [SerializeField]LayerMask iceLayer;
@@ -18,7 +19,7 @@ public class IceChunkTrap : MonoBehaviour
     private void OnTriggerEnter( Collider other )
     {
         Debug.Log(other.gameObject.name);
-        if ( player.Contain(other.gameObject.layer) )
+        if ( playerLayer.Contain(other.gameObject.layer) )
         {
             Debug.Log("ENter");
             onIce = true;
@@ -54,7 +55,7 @@ public class IceChunkTrap : MonoBehaviour
                 yield return new WaitForFixedUpdate();
 
                 player.MovePosition(player.gameObject.transform.position + player.gameObject.transform.forward * slideSpeed/10);
-                if ( Physics.OverlapSphere(player.position, 1f, iceLayer).Length > 0 && !Physics.Raycast(player.position + new Vector3(0, 0.5f, 0), player.transform.forward, 1f) )
+                if ( Physics.OverlapSphere(player.position, 1f, iceLayer).Length > 0 && !Physics.Raycast(player.position + new Vector3(0, 0.5f, 0), player.transform.forward, 1f,wallAndObs) )
                 {
                     yield return null;
                 }
@@ -81,7 +82,7 @@ public class IceChunkTrap : MonoBehaviour
                 yield return new WaitForFixedUpdate();
                 
                 player.MovePosition(player.gameObject.transform.position + player.gameObject.transform.forward * 0.1f * slideSpeed / 10);
-                if(Physics.OverlapSphere(player.position,1f,iceLayer).Length > 0 && !Physics.Raycast(player.position + new Vector3(0,0.5f,0),player.transform.forward,1f))
+                if(Physics.OverlapSphere(player.position,1f,iceLayer).Length > 0 && !Physics.Raycast(player.position + new Vector3(0,0.5f,0),player.transform.forward,1f, wallAndObs) )
                 {
                     yield return null;
                 }

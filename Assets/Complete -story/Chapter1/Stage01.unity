@@ -7573,6 +7573,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 3571450653554465179, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3671770068480024722, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -7739,6 +7743,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   CheckerBoss: {fileID: 0}
   MainScene: 0
+  video: {fileID: 0}
 --- !u!4 &1571984194
 Transform:
   m_ObjectHideFlags: 0

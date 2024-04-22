@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: a61045dc60a60f74a9ab222901228881
+  m_OcclusionCullingData: {fileID: 36300000, guid: 2ecbc07933277d34ea8246ae94aa04ec, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -25741,6 +25741,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 3571450653554465179, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.07
@@ -42086,7 +42090,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1113092518
 Transform:
   m_ObjectHideFlags: 0
@@ -60139,6 +60143,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 387357508}
+    - target: {fileID: 1052285570019376402, guid: d6649e74f3dfa3c4a9abed1137984cf2, type: 3}
+      propertyPath: m_Lens.FarClipPlane
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1344927433959157852, guid: d6649e74f3dfa3c4a9abed1137984cf2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.0951285
@@ -63673,7 +63681,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 50
   field of view: 70
   orthographic: 0
   orthographic size: 5
@@ -74078,6 +74086,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 468635222}
+    - target: {fileID: 5851932153294393136, guid: 7d150b5ffa0f5fa45aad9b78de8091cf, type: 3}
+      propertyPath: m_Lens.FarClipPlane
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

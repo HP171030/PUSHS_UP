@@ -22,7 +22,13 @@ public class ChapterMover : MonoBehaviour
             Debug.Log("None1Loader");
             gameSceneLoaderOnly2Player = FindObjectOfType<GameSceneLoaderOnly2Player>();
         }
-        camSwitch = FindObjectOfType<CameraSwitch>();
+        while(camSwitch == null )
+        {
+            camSwitch = FindObjectOfType<CameraSwitch>();
+            Debug.Log("camSwitchf Searching");
+        }
+        
+        Debug.Log($"{camSwitch.gameObject.name} searching complete");
         // StepCountUI 객체를 찾아 할당
         stepCountUI = FindObjectOfType<StepCountUI>();
 
@@ -34,13 +40,14 @@ public class ChapterMover : MonoBehaviour
     {
         if (player.Contain(other.gameObject.layer))
         {
-            Destroy(other.gameObject);
+            
             if (Manager.game.clearValue > 1)
             {
                 Debug.Log("in1");
                 camSwitch.Change();
                 Manager.game.clearValue--;
                 Manager.game.isEnter = true;
+                
             }
             else
             {
@@ -87,6 +94,7 @@ public class ChapterMover : MonoBehaviour
 
                 Manager.game.isEnter = false;
             }
+            Destroy(other.gameObject);
         }
     }
 }
