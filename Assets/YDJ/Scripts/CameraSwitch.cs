@@ -9,6 +9,10 @@ public class CameraSwitch : MonoBehaviour
 {
     [SerializeField] public CinemachineVirtualCamera player1Camera;
     [SerializeField] public CinemachineVirtualCamera player2Camera;
+    [SerializeField] GameObject player1;
+    [SerializeField] GameObject player2;
+    [SerializeField] GameObject Mirror;
+    [SerializeField] GameObject Bomb;
 
     public UnityEvent OnChangePlayer;
 
@@ -52,6 +56,12 @@ public class CameraSwitch : MonoBehaviour
             player2Camera.Priority = 10;
             
             isPlayer1Active = false;
+
+            player2.SetActive(true);
+            Mirror.SetActive(false);
+            player1.SetActive(false);
+            Bomb.SetActive(true);
+
         }
         // 그렇지 않으면 플레이어 1의 카메라로 전환합니다.
         else if(!isPlayer1Active)
@@ -61,6 +71,15 @@ public class CameraSwitch : MonoBehaviour
             player1Camera.Priority = 10;
             Debug.Log(player1Camera.Priority);
             Debug.Log(player1Camera.name);
+
+
+
+
+            player1.SetActive(true);
+            Mirror.SetActive(true);
+            player2.SetActive(false);
+            Bomb.SetActive(false);
+
             while ( player2Camera.Priority == 10 )
             {
                 Debug.Log("왜 안바뀌냐");

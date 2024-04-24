@@ -100,6 +100,7 @@ public class Player2Controller : MonoBehaviour
 
     public void OnBoom( InputValue value )
     {
+        Debug.Log("ÆøÅº¹öÆ° Å¬¸¯");
         if ( value.isPressed&&!cameraSwitch.IsPlayer1Active&&Manager.game.boomAction > 0&&!onClimb)
         {
            
@@ -112,6 +113,32 @@ public class Player2Controller : MonoBehaviour
                 {
                     Instantiate(boomEffect, BoomableHit.collider.gameObject.transform.position, Quaternion.identity);
                     Destroy(BoomableHit.collider.gameObject );
+
+                    Manager.game.boomAction--;
+                    Manager.sound.PlaySFX(boomSound);
+                }
+            }
+            else
+            {
+                Debug.Log("¾ø´Ù");
+            }
+        }
+    }
+
+    public void BoomButton()
+    {
+        if (!cameraSwitch.IsPlayer1Active && Manager.game.boomAction > 0 && !onClimb)
+        {
+
+
+            // animator.SetTrigger("Boom");
+
+            if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.forward, out BoomableHit, 2f))                          // Àß ¾È¸Â´Â ¹ö±× ÀÕÀ½ ¿À¹ö·¦À¸·Î ¹Ù²Ü°Í
+            {
+                if (obstacleLayer.Contain(BoomableHit.collider.gameObject.layer))
+                {
+                    Instantiate(boomEffect, BoomableHit.collider.gameObject.transform.position, Quaternion.identity);
+                    Destroy(BoomableHit.collider.gameObject);
 
                     Manager.game.boomAction--;
                     Manager.sound.PlaySFX(boomSound);

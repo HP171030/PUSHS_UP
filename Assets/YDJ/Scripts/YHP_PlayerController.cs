@@ -135,6 +135,33 @@ public class YHP_PlayerController : MonoBehaviour
 
         }
     }
+
+    //public void PullButton()
+    //{
+    //    if (cameraSwitch.IsPlayer1Active)
+    //    {
+    //        grabOn = true;
+
+    //        animator.SetTrigger("PullStart");
+    //        if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.forward, out grabHit, 1.5f))
+    //        {
+    //            if (obstacleLayer.Contain(grabHit.collider.gameObject.layer))
+    //            {
+    //                animator.SetBool("Pull", true);
+
+    //            }
+    //        }
+    //    }
+    //    else
+    //    {
+    //        grabOn = false;
+    //        if (!pullOn)
+    //            moveOn = false;
+
+    //    }
+    //}
+
+
     public void OffPull()
     {
         if (!grabOn && !moveOn)
@@ -510,7 +537,7 @@ public class YHP_PlayerController : MonoBehaviour
                 yield return null;
             }
 
-                        else if ( mirror.Contain(isCollider.gameObject.layer) && !mirrorHolding /*&& !mirror1.WallChecker */)
+                        else if ( mirror.Contain(isCollider.gameObject.layer) && !mirrorHolding && !mirror1.WallChecker )
                         {
                             Debug.Log(isCollider.name);
                             Debug.Log($"거울이 앞에 있어서 이동할 수 없습니다.");
@@ -557,7 +584,7 @@ public class YHP_PlayerController : MonoBehaviour
                         else
                         {
                             float time = 0;
-                            bool hitWall = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0, 0.5f, 0), 0.5f, wall|mirror).Length > 0;
+                            bool hitWall = Physics.OverlapSphere(transform.position + transform.forward + new Vector3(0, 0.5f, 0), 0.5f, wall/*|mirror*/).Length > 0;
                             Manager.sound.PlaySFX(WalkSound);
                             while ( time < 1 )
                             {
@@ -610,6 +637,23 @@ public class YHP_PlayerController : MonoBehaviour
 
         }
     }
+
+    //public void HoldButton()
+    //{
+    //    if (cameraSwitch.IsPlayer1Active)
+    //    {
+    //        if (!mirrorHolding) // 거울이 확인되지 않았을 때
+    //        {
+    //            Hold();
+    //        }
+    //        //거울 놓기
+    //        else if (mirrorHolding && !holder.FrontObstacleLader() && !moveOn)
+    //        {
+    //            UnHold();
+    //        }
+
+    //    }
+    //}
 
     private void Hold()
     {
