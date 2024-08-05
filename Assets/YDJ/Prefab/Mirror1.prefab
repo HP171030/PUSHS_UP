@@ -215,8 +215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ca6dc3d9af5044c8653535e0ec7740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mirror2Transform: {fileID: 5411540827858291683}
-  Mirror2OffsetZ: 100
+  mirror2Transform: {fileID: 0}
+  Mirror2OffsetZ: 35
   ObstacleOffsetY: -2
   ObstacleOffsetX: 0
   ObstacleOffsetZ: 0
@@ -224,7 +224,8 @@ MonoBehaviour:
   WallMirror2Offset: -1
   XOffset: 2
   YHP_PlayerController: {fileID: 0}
-  mirror2: {fileID: 6945521089142229835}
+  mirror2: {fileID: 0}
+  holder: {fileID: 0}
   wallChecker: 0
   obstacleChecker: 1
   moveDisableChecker: 0
@@ -249,8 +250,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.6, y: 10, z: 0.6}
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Size: {x: 0.6, y: 7.72, z: 0.6}
+  m_Center: {x: 0, y: -0.79, z: 0}
 --- !u!1 &8750801361031927125
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,14 +412,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
   m_PrefabInstance: {fileID: 6650116401920202830}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6945521089142229835 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4335426040554672901, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-  m_PrefabInstance: {fileID: 6650116401920202830}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bf9a637c3d254a4a84a916e8db163ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

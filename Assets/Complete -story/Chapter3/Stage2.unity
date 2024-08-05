@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17291898, g: 0.21610056, b: 0.29806814, a: 1}
+  m_IndirectSpecularColor: {r: 0.17291863, g: 0.21610005, b: 0.29806742, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9665,6 +9665,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 415178, guid: a002656da6afcd3458186e57b083c403, type: 3}
   m_PrefabInstance: {fileID: 1146963154}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &432783425 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3091212605045378566, guid: 46d43f6cd82b5f842a88371b83537c3f, type: 3}
+  m_PrefabInstance: {fileID: 468635221}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &436066437
 PrefabInstance:
@@ -20568,7 +20573,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
   m_PrefabInstance: {fileID: 852479751}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1092706453}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63ca6dc3d9af5044c8653535e0ec7740, type: 3}
@@ -33217,6 +33222,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 480734, guid: b1ad8ef6890687249a641abef8e26baf, type: 3}
   m_PrefabInstance: {fileID: 1089464422}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1092706453 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7859368849662981344, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
+  m_PrefabInstance: {fileID: 852479751}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1095411959
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36094,7 +36104,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8792600851279776242, guid: 3e6dfa4ed1fd9904e86c8ead7b803e35, type: 3}
   m_PrefabInstance: {fileID: 1207171226}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1905986900}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf8b7ded5c6511c49ae0240928b590c7, type: 3}
@@ -53209,6 +53219,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4554033707906885298, guid: 6adc34da9a27dbf4aba9c0aec6fdbab2, type: 3}
   m_PrefabInstance: {fileID: 1679015476}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1679918194 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3862579338759608457, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+  m_PrefabInstance: {fileID: 1749950451}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1681089608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54757,6 +54772,10 @@ PrefabInstance:
     - target: {fileID: 3190664640453586970, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: m_Name
       value: Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3571450653554465179, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: m_LocalPosition.x
@@ -58927,6 +58946,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 491900, guid: 73bc14e443072aa4d99d7c246a51370d, type: 3}
   m_PrefabInstance: {fileID: 1905515206}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1905986900 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3092550884018470217, guid: 3e6dfa4ed1fd9904e86c8ead7b803e35, type: 3}
+  m_PrefabInstance: {fileID: 1207171226}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1910421017 stripped
 Transform:
@@ -64431,6 +64455,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: CamSwitch
       objectReference: {fileID: 0}
+    - target: {fileID: 4767512493712979189, guid: 1acf185048e58a74d854c10a6f58d492, type: 3}
+      propertyPath: Bomb
+      value: 
+      objectReference: {fileID: 1679918194}
+    - target: {fileID: 4767512493712979189, guid: 1acf185048e58a74d854c10a6f58d492, type: 3}
+      propertyPath: Mirror
+      value: 
+      objectReference: {fileID: 1092706453}
+    - target: {fileID: 4767512493712979189, guid: 1acf185048e58a74d854c10a6f58d492, type: 3}
+      propertyPath: player1
+      value: 
+      objectReference: {fileID: 1905986900}
+    - target: {fileID: 4767512493712979189, guid: 1acf185048e58a74d854c10a6f58d492, type: 3}
+      propertyPath: player2
+      value: 
+      objectReference: {fileID: 432783425}
     - target: {fileID: 4767512493712979189, guid: 1acf185048e58a74d854c10a6f58d492, type: 3}
       propertyPath: player1Camera
       value: 

@@ -14,13 +14,13 @@ public class Holder : MonoBehaviour
     public GameObject GrabMirror()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
-        foreach (Collider collider in colliders)
+        for (int i = 0; i < colliders.Length; i++)
         {
 
-            if (collider.gameObject.CompareTag("Mirror"))
+            if (colliders[i].gameObject.CompareTag("Mirror"))
             {
                 Debug.Log("거울 감지");
-                mirror = collider.gameObject;
+                mirror = colliders[i].gameObject;
                 return mirror;
             }
         }
@@ -46,9 +46,9 @@ public class Holder : MonoBehaviour
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
 
-        foreach (Collider collider in colliders)
+        for (int i = 0; i < colliders.Length; i++)
         {
-            if (collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
+            if (colliders[i].gameObject.layer == LayerMask.NameToLayer("Wall"))
             {
                 return true;
             }
@@ -60,9 +60,9 @@ public class Holder : MonoBehaviour
     public bool FrontObstacleLader()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
-        foreach (Collider collider in colliders)
+        for (int i = 0; i < colliders.Length; i++)
         {
-            if (collider.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+            if (colliders[i].gameObject.layer == LayerMask.NameToLayer("Obstacle"))
             {
                 return true;
             }
@@ -74,9 +74,9 @@ public class Holder : MonoBehaviour
     public bool FrontMirrorLader()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
-        foreach (Collider collider in colliders)
+        for (int i = 0; i < colliders.Length; i++)
         {
-            if (collider.gameObject.layer == LayerMask.NameToLayer("Mirror"))
+            if (colliders[i].gameObject.layer == LayerMask.NameToLayer("Mirror"))
             {
                 Debug.Log("mirrorLader");
                 return true;
@@ -89,9 +89,9 @@ public class Holder : MonoBehaviour
     public bool MoveDisableCheckerLader()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
-        foreach (Collider collider in colliders)
+        for (int i = 0; i < colliders.Length; i++)
         {
-            if (collider.gameObject.CompareTag("MoveDisable"))
+            if (colliders[i].gameObject.CompareTag("MoveDisable"))
             {
                 return true;
             }
