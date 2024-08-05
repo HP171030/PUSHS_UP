@@ -17,5 +17,4 @@ public class UIManager : MonoBehaviour
         menuClose.SetActive(false);
         confirmClose.SetActive(false);
     }
-   
 }

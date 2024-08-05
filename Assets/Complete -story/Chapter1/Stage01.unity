@@ -7510,6 +7510,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3092550884018233641, guid: 3e6dfa4ed1fd9904e86c8ead7b803e35, type: 3}
   m_PrefabInstance: {fileID: 1062046755}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1452609009 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8792600851279776242, guid: 3e6dfa4ed1fd9904e86c8ead7b803e35, type: 3}
+  m_PrefabInstance: {fileID: 1062046755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf8b7ded5c6511c49ae0240928b590c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1461820413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7636,7 +7647,11 @@ PrefabInstance:
     - target: {fileID: 7412637815352222031, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: restartButton
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2133982900}
+    - target: {fileID: 7412637815352222031, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1452609009}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9517,6 +9532,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &2133982900 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2597142163431069755, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+  m_PrefabInstance: {fileID: 1545609324}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2141624771
 GameObject:
   m_ObjectHideFlags: 0

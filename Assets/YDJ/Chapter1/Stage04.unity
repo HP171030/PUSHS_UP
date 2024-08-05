@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17291854, g: 0.21609978, b: 0.29806712, a: 1}
+  m_IndirectSpecularColor: {r: 0.17291868, g: 0.21610005, b: 0.29806745, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -471,6 +471,11 @@ MonoBehaviour:
   CheckerBoss: {fileID: 0}
   MainScene: 0
   video: {fileID: 0}
+--- !u!1 &206945955 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8691479244558054353, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+  m_PrefabInstance: {fileID: 1386913249}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &247772172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1575,6 +1580,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4556344701294957155, guid: 28541a4c8ea036e4f8c7a652c9f25628, type: 3}
   m_PrefabInstance: {fileID: 461267120}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &463021138 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7323800789504726718, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+  m_PrefabInstance: {fileID: 1386913249}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &464405594 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5041297879499615133, guid: fd0eca869d79cc44d826cc40825710a7, type: 3}
@@ -2294,6 +2304,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &636740626 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6875124809588476750, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+  m_PrefabInstance: {fileID: 1386913249}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &637761060
 Mesh:
   m_ObjectHideFlags: 0
@@ -2775,6 +2790,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20a13c06b825d3b418d5fb50b96eb38e, type: 3}
+--- !u!1 &717753015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 133623898005771883, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+  m_PrefabInstance: {fileID: 1386913249}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &723457735
 GameObject:
   m_ObjectHideFlags: 0
@@ -6264,7 +6284,7 @@ PrefabInstance:
     - target: {fileID: 7092120262034414423, guid: 46d43f6cd82b5f842a88371b83537c3f, type: 3}
       propertyPath: scoreDown
       value: 
-      objectReference: {fileID: 1386913250}
+      objectReference: {fileID: 0}
     - target: {fileID: 7092120262034414423, guid: 46d43f6cd82b5f842a88371b83537c3f, type: 3}
       propertyPath: cameraSwitch
       value: 
@@ -6480,17 +6500,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
---- !u!114 &1386913250 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3363858949834215769, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
-  m_PrefabInstance: {fileID: 1386913249}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50534446fd25d224e9d7c04d797c68c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &1389484568
 Mesh:
   m_ObjectHideFlags: 0
@@ -7510,6 +7519,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: CamSwitch
       objectReference: {fileID: 0}
+    - target: {fileID: 4767512493712979189, guid: 1acf185048e58a74d854c10a6f58d492, type: 3}
+      propertyPath: Bomb
+      value: 
+      objectReference: {fileID: 206945955}
+    - target: {fileID: 4767512493712979189, guid: 1acf185048e58a74d854c10a6f58d492, type: 3}
+      propertyPath: Mirror
+      value: 
+      objectReference: {fileID: 463021138}
+    - target: {fileID: 4767512493712979189, guid: 1acf185048e58a74d854c10a6f58d492, type: 3}
+      propertyPath: player1
+      value: 
+      objectReference: {fileID: 636740626}
+    - target: {fileID: 4767512493712979189, guid: 1acf185048e58a74d854c10a6f58d492, type: 3}
+      propertyPath: player2
+      value: 
+      objectReference: {fileID: 717753015}
     - target: {fileID: 4767512493712979189, guid: 1acf185048e58a74d854c10a6f58d492, type: 3}
       propertyPath: player2Camera
       value: 

@@ -16,7 +16,7 @@ public class CameraSwitch : MonoBehaviour
 
     public UnityEvent OnChangePlayer;
 
-    [SerializeField] private bool isPlayer1Active = true;
+    [SerializeField] bool isPlayer1Active;
     public bool IsPlayer1Active { get { return isPlayer1Active; } set { isPlayer1Active = value; } }
 
     void Start()

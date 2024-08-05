@@ -7,6 +7,11 @@ public class ScoreDown : MonoBehaviour
 {
     public Text scoreText; // UI Text 객체를 저장할 변수
 
+    private void Start()
+    {
+        Manager.game.boomUpdate += UpdateScoreText;
+    }
+
     private void OnEnable()
     {
         Manager.game.boomUpdate += UpdateScoreText;

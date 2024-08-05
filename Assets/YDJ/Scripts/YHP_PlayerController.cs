@@ -743,18 +743,18 @@ public class YHP_PlayerController : MonoBehaviour
 
                 Debug.Log("벽에 가까이 둬기");
                 // 거울을 벽에 놓을 때 mirror1Image를 플립합니다.
-                //if (mirror1WallAttachedDir == 1 || mirror1WallAttachedDir == 2) // 오른쪽 , 왼쪽
-                //{
-                //    mirror1Image.transform.localPosition = Vector3.zero;
-                //    Vector3 newPosition = mirror1Image.transform.localPosition;
-                //    newPosition.y -= unHoldwallMirrorOffset;
-                //    mirror1Image.transform.localPosition = newPosition;
+                if (mirror1WallAttachedDir == 1 || mirror1WallAttachedDir == 2) // 오른쪽 , 왼쪽
+                {
+                    mirror1Image.transform.localPosition = Vector3.zero;
+                    Vector3 newPosition = mirror1Image.transform.localPosition;
+                    newPosition.y -= unHoldwallMirrorOffset;
+                    mirror1Image.transform.localPosition = newPosition;
 
 
-                //    //Vector3 newPosition1 = mirror1Image.transform.localPosition;
-                //    //newPosition1.y -= unHoldwallMirrorOffset;
-                //    //mirror1.transform.localPosition = newPosition1;
-                //}
+                    //Vector3 newPosition1 = mirror1Image.transform.localPosition;
+                    //newPosition1.y -= unHoldwallMirrorOffset;
+                    //mirror1.transform.localPosition = newPosition1;
+                }
                 //else if (mirror1WallAttachedDir == 2) // 왼쪽
                 //{
                 //    Vector3 newPosition = mirror1Image.transform.localPosition;
