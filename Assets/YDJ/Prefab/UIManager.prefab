@@ -1225,6 +1225,7 @@ GameObject:
   - component: {fileID: 6114395830464537596}
   - component: {fileID: 4737340672032965706}
   - component: {fileID: 5077133702086570885}
+  - component: {fileID: 7253706287841019970}
   m_Layer: 0
   m_Name: OutRing
   m_TagString: Untagged
@@ -1358,6 +1359,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7253706287841019970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3469812676605226915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50534446fd25d224e9d7c04d797c68c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 1682032536994213939}
 --- !u!1 &3598425506050917137
 GameObject:
   m_ObjectHideFlags: 0
@@ -2360,7 +2374,6 @@ GameObject:
   - component: {fileID: 3309577512831154369}
   - component: {fileID: 7521153133015105086}
   - component: {fileID: 1273385540443154081}
-  - component: {fileID: 4210352640681150041}
   m_Layer: 0
   m_Name: BombCount
   m_TagString: Untagged
@@ -2428,19 +2441,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4210352640681150041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4273441051297475343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50534446fd25d224e9d7c04d797c68c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 1682032536994213939}
 --- !u!1 &4352541778184678118
 GameObject:
   m_ObjectHideFlags: 0

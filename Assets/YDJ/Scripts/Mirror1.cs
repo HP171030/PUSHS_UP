@@ -85,7 +85,7 @@ public class Mirror1 : MonoBehaviour
 
     void Update()
     {
-        if (!holder.WallLader())
+        if (!holder.WallLader() && !wallChecker)
         {
             Vector3 newPosition = transform.position;
             newPosition.z += Mirror2OffsetZ;
