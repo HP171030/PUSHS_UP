@@ -85,35 +85,17 @@ public class Mirror1 : MonoBehaviour
 
     void Update()
     {
-        if (!holder.WallLader() && !wallChecker)
+        if ( !wallChecker)
         {
             Vector3 newPosition = transform.position;
             newPosition.z += Mirror2OffsetZ;
             mirror2Transform.position = newPosition;
         }
-        //else // 벽에 붙어있는 경우 거울2를 바로 앞 바닥에 위치시킵니다.
-        //{
-        //    Vector3 newPosition = transform.position;
-        //    newPosition.z += Mirror2OffsetX;
-        //    mirror2Transform.position = newPosition;
-        //}
-
-        //if (!YDJ_PlayerController.mirrorHolding)
-        //{
-        //    // 레이어를 변경합니다.
-        //    gameObject.layer = 7;
-        //}
-        //else
-        //{
-        //    gameObject.layer = 31;
-        //}
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-
-
         // && IsWallExit
         if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
@@ -188,8 +170,6 @@ public class Mirror1 : MonoBehaviour
         {
             if (wallChecker && !mirror2.ObstacleChecker) //벽거울
             {
-                Debug.Log("벽거울에 닿음");
-
                 //if (mirror2.obstacleChecker)
                 //{
                 //    YDJ_PlayerController.AlreadyMap2Obstacle = true;
@@ -198,7 +178,6 @@ public class Mirror1 : MonoBehaviour
 
                 if (YHP_PlayerController.wallMirrorBumpChecker)
                 {
-                    Debug.Log("범프 ---------------------------------------------");
                     obstacleChecker = false;
                     StartCoroutine(MirrorInObstacleWall(other.gameObject));
                 }
@@ -350,10 +329,9 @@ public class Mirror1 : MonoBehaviour
     }
 
 
-    IEnumerator MirrorInObstacleGround(GameObject obstacle) //장애물 들어갈때
+    IEnumerator MirrorInObstacleGround(GameObject obstacle) //바닥 거울에 장애물이 들어갈때
     {
         Manager.game.PlayerControllStop();
-        Debug.Log("코루틴 들어감");
         Rigidbody obstacleRigidbody = obstacle.GetComponent<Rigidbody>();
         Collider obstacleCollider = obstacle.GetComponent<Collider>();
         obstacleRigidbody.isKinematic = false;
@@ -362,32 +340,18 @@ public class Mirror1 : MonoBehaviour
         float time = 0;
         float targetTime = 1f;
         Vector3 startPosition = transform.position;
-        //Vector3 startPosition = Mirror1WallPoint.transform.position;
         startPosition.y = 0;
-
-
-
-        Debug.Log("땅거울");
-
         endPosition = transform.position + new Vector3(0f, ObstacleOffsetY, 0f);
 
         while (time < targetTime)
         {
             time += Time.deltaTime;
-            //Debug.Log($"obstacle in{obstacle.transform.position}");
             obstacle.transform.position = Vector3.Lerp(startPosition, endPosition, time / targetTime);
             yield return null;
         }
-
         yield return new WaitForSeconds(ObstacleInMinrrorCoroutineTime);
-
         StartCoroutine(MirrorOutObstacle(obstacle));
-
     }
-
-
-
-
 
 
 

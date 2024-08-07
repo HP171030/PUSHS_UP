@@ -350,21 +350,9 @@ public class YHP_PlayerController : MonoBehaviour
 
     private IEnumerator BumpTimer()
     {
-        Debug.Log("1초 지나면 범프폴스");
         yield return new WaitForSeconds(2f);
         wallMirrorBumpChecker = false;
-    }        //if (mirror1.wallChecker)
-             //{
-             //    mirror &= ~(1 << 31);
-             //}
-             //else
-             //{
-             //    mirror &= ~(30 << 1);
-             //}
-
-
-
-
+    }     
     private IEnumerator MoveRoutine(Vector3 moveDirValue)
     {
         Vector3 startPos = transform.position;
@@ -625,10 +613,12 @@ public class YHP_PlayerController : MonoBehaviour
     {
         if (cameraSwitch.IsPlayer1Active)
         {
-            if (!mirrorHolding) // 거울이 확인되지 않았을 때
+            //거울 들기
+            if (!mirrorHolding) // 거울을 들고 있지 않았을 때
             {
                 Hold();
             }
+
             //거울 놓기
             else if (mirrorHolding && !holder.FrontObstacleLader() && !moveOn)
             {
@@ -657,12 +647,10 @@ public class YHP_PlayerController : MonoBehaviour
 
     private void Hold()
     {
-        Debug.Log("잡기 시도");
         GameObject mirrorObject = holder.GrabMirror();
 
         if (mirrorObject != null && !holder.FrontObstacleLader())
         {
-            Debug.Log("잡았음");
             Manager.sound.PlaySFX(mirrorGrab);
             // 거울 오브젝트를 홀더 포인트의 자식으로 설정합니다.
             mirrorObject.transform.parent = holderPoint.transform;
@@ -687,9 +675,7 @@ public class YHP_PlayerController : MonoBehaviour
 
     private void UnHold()
     {
-
         GameObject mirrorObject = holder.GetMirror();
-
 
         if (mirrorObject != null)
         {
@@ -740,21 +726,16 @@ public class YHP_PlayerController : MonoBehaviour
                 mirrorObject.transform.forward = forwardDirection;
                 mirror1.SetForwardDirection(forwardDirection); // forwardDirection 값을 Mirror1 스크립트에 전달합니다.
 
-
-                Debug.Log("벽에 가까이 둬기");
                 // 거울을 벽에 놓을 때 mirror1Image를 플립합니다.
-                if (mirror1WallAttachedDir == 1 || mirror1WallAttachedDir == 2) // 오른쪽 , 왼쪽
+                // 오른쪽 , 왼쪽
+                if (mirror1WallAttachedDir == 1 || mirror1WallAttachedDir == 2)
                 {
                     mirror1Image.transform.localPosition = Vector3.zero;
                     Vector3 newPosition = mirror1Image.transform.localPosition;
                     newPosition.y -= unHoldwallMirrorOffset;
                     mirror1Image.transform.localPosition = newPosition;
-
-
-                    //Vector3 newPosition1 = mirror1Image.transform.localPosition;
-                    //newPosition1.y -= unHoldwallMirrorOffset;
-                    //mirror1.transform.localPosition = newPosition1;
                 }
+
                 //else if (mirror1WallAttachedDir == 2) // 왼쪽
                 //{
                 //    Vector3 newPosition = mirror1Image.transform.localPosition;
