@@ -368,7 +368,7 @@ public class Mirror1 : MonoBehaviour
         Debug.Log("코루틴 들어감");
         Rigidbody obstacleRigidbody = obstacle.GetComponent<Rigidbody>();
         Collider obstacleCollider = obstacle.GetComponent<Collider>();
-        obstacleRigidbody.isKinematic = false;
+       // obstacleRigidbody.isKinematic = false;
 
         Vector3 endPosition;
         float time = 0;
@@ -463,14 +463,14 @@ public class Mirror1 : MonoBehaviour
                 obstacle.transform.position = Vector3.Lerp(startPosition, endPosition, time / targetTime);
                 yield return null;
                 Rigidbody obstacleRigidbody = obstacle.GetComponent<Rigidbody>();
-                obstacleRigidbody.isKinematic = false;
+            //    obstacleRigidbody.isKinematic = false;
             }
             foreach ( RaycastHit ray in rays )
             {
                 if ( ray.collider.gameObject.layer == LayerMask.NameToLayer("Obstacle") || ray.collider.gameObject.CompareTag("Player") && ray.collider.gameObject != obstacle )
                 {
                     Rigidbody rb = ray.collider.gameObject.GetComponent<Rigidbody>();
-                    rb.isKinematic = false;
+                 //   rb.isKinematic = false;
                     rb.constraints &= ~RigidbodyConstraints.FreezePositionX;
                     rb.constraints &= ~RigidbodyConstraints.FreezePositionZ;
                     ray.transform.SetParent(null, true);

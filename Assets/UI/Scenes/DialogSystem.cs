@@ -19,7 +19,7 @@ public class DialogSystem : MonoBehaviour
 
 	private void Awake()
 	{
-		Setup();
+	//	Setup();
 	}
 
 	private void Setup()

@@ -116,7 +116,7 @@ public class YHP_PlayerController : MonoBehaviour
         if (value.isPressed && cameraSwitch.IsPlayer1Active)
         {
             grabOn = true;
-
+            Manager.ui.ChangePushPull(grabOn);
             animator.SetTrigger("PullStart");
             if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.forward, out grabHit, 1.5f))
             {
@@ -130,6 +130,7 @@ public class YHP_PlayerController : MonoBehaviour
         else
         {
             grabOn = false;
+            Manager.ui.ChangePushPull(grabOn);
             if (!pullOn)
                 moveOn = false;
 
@@ -438,11 +439,8 @@ public class YHP_PlayerController : MonoBehaviour
                     {
                         animator.SetBool("Push", false);
                     }
-
-
-                                wallMirrorBumpChecker = true;
-                                StartCoroutine(BumpTimer());
-
+                      wallMirrorBumpChecker = true;
+                      StartCoroutine(BumpTimer());
                 }
                 else
                 {
@@ -510,7 +508,7 @@ public class YHP_PlayerController : MonoBehaviour
                 yield return null;
             }
 
-                        else if ( mirror.Contain(isCollider.gameObject.layer) && !mirrorHolding /*&& !mirror1.WallChecker */)
+                        else if ( mirror.Contain(isCollider.gameObject.layer) && !mirrorHolding && !mirror1.WallChecker )
                         {
                             Debug.Log(isCollider.name);
                             Debug.Log($"거울이 앞에 있어서 이동할 수 없습니다.");

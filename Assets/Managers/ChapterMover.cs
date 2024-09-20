@@ -28,7 +28,7 @@ public class ChapterMover : MonoBehaviour
             Debug.Log("camSwitchf Searching");
         }
         
-        Debug.Log($"{camSwitch.gameObject.name} searching complete");
+
         // StepCountUI 객체를 찾아 할당
         stepCountUI = FindObjectOfType<StepCountUI>();
 

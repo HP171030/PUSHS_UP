@@ -1,6 +1,5 @@
 using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameSceneLoaderOnly2Player : BaseScene
@@ -10,7 +9,7 @@ public class GameSceneLoaderOnly2Player : BaseScene
     [SerializeField] public int switchCount;
     [SerializeField] public bool bossSceneloader = false;
     [SerializeField] protected CameraSwitch cam;
-   
+
 
 
     public override IEnumerator LoadingRoutine()
@@ -23,7 +22,7 @@ public class GameSceneLoaderOnly2Player : BaseScene
         Manager.game.clearValue = clearValue;
         Manager.game.playerController = FindObjectOfType<YHP_PlayerController>();
         Manager.game.player2Controller = FindObjectOfType<Player2Controller>();
-        
+
         Manager.game.bossScene = bossSceneloader;
         cam = FindObjectOfType<CameraSwitch>();
         if ( thisSceneCine [0] != null )
@@ -35,11 +34,11 @@ public class GameSceneLoaderOnly2Player : BaseScene
         if ( thisSceneCine [0] == null )
         {
             cam.IsPlayer1Active = false;
-yield return null;
+            yield return null;
         }
 
         Manager.game.player2Controller.cameraSwitch = cam;
-            
+
     }
     private void Start()
     {
