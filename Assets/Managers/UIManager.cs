@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +12,10 @@ public class UIManager : MonoBehaviour
     public Canvas canvas;
     [SerializeField] GameObject boomUi;
     [SerializeField] GameObject pushPullUi;
+    [SerializeField] List<Image> iconImages;
     [SerializeField] Image pushIconImage;
     [SerializeField] Image pullIconImage;
+    [SerializeField] Image mirrorImage;
     public void UiClose()
     {
 
@@ -24,9 +27,22 @@ public class UIManager : MonoBehaviour
         boomUi.SetActive(!p1On);
         pushPullUi.SetActive(p1On);    
     }
-    public void ChangePushPull(bool pull )
+    public void ChangeIcon(string iconName )
     {
-        pushIconImage.enabled = !pull;
-        pullIconImage.enabled = pull;
+        Debug.Log(iconName);
+        foreach(var item in iconImages )
+        {
+            if( item.name != iconName )
+            {
+                item.enabled = false;
+            }
+            else
+            {
+                item.enabled = true;
+            }
+            
+        }
+
+
     }
 }

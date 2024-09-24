@@ -14,9 +14,10 @@ public class Holder : MonoBehaviour
     public GameObject GrabMirror()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
+        
         foreach (Collider collider in colliders)
         {
-
+            Debug.Log(collider.name);
             if (collider.gameObject.CompareTag("Mirror"))
             {
                 Debug.Log("거울 감지");
@@ -48,6 +49,7 @@ public class Holder : MonoBehaviour
 
         foreach (Collider collider in colliders)
         {
+            Debug.Log($"Wall Check : {collider}"    );
             if (collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
             {
                 return true;
@@ -76,7 +78,7 @@ public class Holder : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
         foreach (Collider collider in colliders)
         {
-            if (collider.gameObject.layer == LayerMask.NameToLayer("Mirror"))
+            if (collider.gameObject.layer == LayerMask.GetMask("Mirror"))
             {
                 Debug.Log("mirrorLader");
                 return true;
@@ -85,6 +87,7 @@ public class Holder : MonoBehaviour
        
         return false;
     }
+
 
     public bool MoveDisableCheckerLader()
     {

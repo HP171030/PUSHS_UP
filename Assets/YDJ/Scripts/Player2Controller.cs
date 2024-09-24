@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 //using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -46,19 +45,19 @@ public class Player2Controller : MonoBehaviour
 
 
     RaycastHit BoomableHit;
-    
+
 
     private void FixedUpdate()
     {
-        if(onGround&&!downingBox)
+        if ( onGround && !downingBox )
             MoveFunc();
-        
+
     }
     private void OnTriggerStay( Collider other )
     {
         if ( obstacleUpperLayer.Contain(other.gameObject.layer) )
         {
-            
+
             ontheBox = true;
         }
     }
@@ -80,17 +79,17 @@ public class Player2Controller : MonoBehaviour
     }
     private void Start()
     {
-        
-        
+
+
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         inputKey = true;
 
     }
-    private void OnMove(InputValue value)
+    private void OnMove( InputValue value )
     {
-       
-        if (!cameraSwitch.IsPlayer1Active && !onIce&&inputKey )
+
+        if ( !cameraSwitch.IsPlayer1Active && !onIce && inputKey )
         {
             Vector2 input = value.Get<Vector2>();
             moveDir = new Vector3(input.x, 0, input.y);
@@ -100,18 +99,18 @@ public class Player2Controller : MonoBehaviour
 
     public void OnBoom( InputValue value )
     {
-        if ( value.isPressed&&!cameraSwitch.IsPlayer1Active&&Manager.game.boomAction > 0&&!onClimb)
+        if ( value.isPressed && !cameraSwitch.IsPlayer1Active && Manager.game.boomAction > 0 && !onClimb )
         {
-           
-           
-           // animator.SetTrigger("Boom");
 
-            if ( Physics.Raycast(transform.position + new Vector3 (0,1,0), transform.forward, out BoomableHit, 2f) )                          // 잘 안맞는 버그 잇음 오버랩으로 바꿀것
+
+            // animator.SetTrigger("Boom");
+
+            if ( Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.forward, out BoomableHit, 2f) )                          // 잘 안맞는 버그 잇음 오버랩으로 바꿀것
             {
                 if ( obstacleLayer.Contain(BoomableHit.collider.gameObject.layer) )
                 {
                     Instantiate(boomEffect, BoomableHit.collider.gameObject.transform.position, Quaternion.identity);
-                    Destroy(BoomableHit.collider.gameObject );
+                    Destroy(BoomableHit.collider.gameObject);
 
                     Manager.game.boomAction--;
                     Manager.sound.PlaySFX(boomSound);
@@ -138,13 +137,17 @@ public class Player2Controller : MonoBehaviour
                 moveOn = true;
 
                 StartCoroutine(MoveRoutine(moveDir));
-                
+
                 transform.forward = moveDir;
 
             }
         }
     }
-
+    public void MoveExit()
+    {
+        moveOn = false;
+        animator.SetFloat("MoveSpeed", 0f);
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -166,24 +169,24 @@ public class Player2Controller : MonoBehaviour
                 Tile tileIns = tile.GetComponent<Tile>();
                 if ( tileIns != null )
                 {
-                    Collider [] isBlank = Physics.OverlapSphere(tileIns.middlePoint.transform.position+ new Vector3(0,1f,0), 0.1f, wall);
+                    Collider [] isBlank = Physics.OverlapSphere(tileIns.middlePoint.transform.position + new Vector3(0, 1f, 0), 0.1f, wall);
                     debugVec2 = tileIns.middlePoint.transform.position + new Vector3(0, 1, 0);
-                    if (isBlank.Length == 0 )
+                    if ( isBlank.Length == 0 )
                     {
                         targetPos = tileIns.middlePoint.position;
 
-                       
+
                     }
                     else
                     {
-                        foreach(Collider col in  isBlank )
+                        foreach ( Collider col in isBlank )
                         {
-                            Debug.Log($"앞에 장애물이 있어 { col.name}");
+                            Debug.Log($"앞에 벽이 있어 {col.name}");
                             transform.position = transform.position;
                             moveOn = false;
                             yield break;
                         }
-                        
+
                     }
                 }
 
@@ -191,31 +194,35 @@ public class Player2Controller : MonoBehaviour
         }
         RaycastHit hit;
         Vector3 PreMoveDir = moveDir;
-        
+
         if ( Physics.BoxCast(transform.position + new Vector3(0, 1f, 0), new Vector3(0.1f, 0.1f, 0.1f), moveDirValue, out hit, Quaternion.identity, 1f, layer) )
         {
-            if ( !obstacleLayer.Contain(hit.collider.gameObject.layer) )                                   
+            if ( !obstacleLayer.Contain(hit.collider.gameObject.layer) )
             {
-                Debug.Log("장애물이나 벽이 아님");
+                Debug.Log("장애물이 아님");
                 Debug.Log(hit.collider.gameObject.name);
                 moveOn = false;
                 yield break;
             }
             else
             {
-                RaycastHit [] raycastHits = Physics.RaycastAll(hit.collider.transform.position, hit.collider.transform.up, 3f,obstacleLayer);
-
-
-                foreach ( RaycastHit other in raycastHits )
+                RaycastHit [] raycastHits = Physics.RaycastAll(hit.collider.transform.position, hit.collider.transform.up, 3f, obstacleLayer);
+                if(raycastHits.Length > 1 )
                 {
+                    Debug.Log($"위에 장애물이 있습니다");
+                    moveOn = false;
+                    yield break;
+                }
+
+               /* foreach ( RaycastHit other in raycastHits )
+                {
+                    Debug.Log(other.collider.name);
                     if ( other.collider.gameObject != hit.collider.gameObject && !obstacleUpperLayer.Contain(other.collider.gameObject.layer) )
                     {
-                        Debug.Log($"위에 장애물이 있습니다: {other.collider.gameObject.name}");
-                        moveOn = false;
-                        yield break;
+                       
                     }
 
-                }
+                }*/
 
                 float time = 0;
 
@@ -231,28 +238,28 @@ public class Player2Controller : MonoBehaviour
                     yield return null;
                 }
                 Manager.game.StepAction++;
-                if(hit.collider !=null)
-              //  hit.rigidbody.isKinematic = false;
-                animator.SetFloat("MoveSpeed", 0f);
+                if ( hit.collider != null )
+                    //  hit.rigidbody.isKinematic = false;
+                    animator.SetFloat("MoveSpeed", 0f);
                 yield return new WaitForSeconds(0.5f);
 
                 moveOn = false;
                 onClimb = false;
-                hit.rigidbody.isKinematic = false ;
+                hit.rigidbody.isKinematic = false;
             }
 
         }
-        else if ( ontheBox )
+        else if ( ontheBox )            //박스에 올라가 있는 경우
         {
             LayerMask checkLayer = ground | obstacleLayer | wall;
-            if ( Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), -transform.up, out RaycastHit onBox, 2f, obstacleLayer) )
+            if ( Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), -transform.up, out RaycastHit onBox, 2f, obstacleLayer) )    // 박스를 검출하기 위한 레이캐스트
             {
                 Debug.Log($"올라가있던 박스 : {onBox.collider.gameObject.name}");
                 debug = onBox;
                 Vector3 onBoxPos = onBox.collider.transform.position + new Vector3(0, 3f, 0);
-                if(Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0),transform.forward,out RaycastHit isWall, 2f, wall))
+                if ( Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), transform.forward, out RaycastHit isWall, 2f, wall) )         // 벽을 검출하기 위한 레이캐스트
                 {
-                    if(wall.Contain(isWall.collider.gameObject.layer))
+                    if ( wall.Contain(isWall.collider.gameObject.layer) )
                     {
                         Debug.Log("앞에 벽");
                         moveOn = false;
@@ -262,8 +269,8 @@ public class Player2Controller : MonoBehaviour
                 }
                 else
                 {
-                    
-                    Collider [] colliders = Physics.OverlapSphere(onBoxPos + moveDirValue*2f, 0.5f, checkLayer);
+
+                    Collider [] colliders = Physics.OverlapSphere(onBoxPos + moveDirValue * 2f, 0.5f, checkLayer);         // 박스에 올라가 있는 상태에서 앞에 무엇이 있는지 확인하기 위한 오버랩
                     debugVec = onBoxPos + moveDirValue * 2f;
                     Debug.Log("벽은 없다");
                     Debug.Log(colliders.Length);
@@ -272,18 +279,18 @@ public class Player2Controller : MonoBehaviour
                         foreach ( Collider collider in colliders )
                         {
                             Debug.Log($"서있는 박스 앞에 {collider.gameObject.name}");
-                                
-                                if ( collider.gameObject != onBox.collider.gameObject )
-                                {
+
+                            if ( collider.gameObject != onBox.collider.gameObject )
+                            {
                                 Debug.Log("isDone");
-                                    if ( wall.Contain(collider.gameObject.layer) )
-                                      {
+                                if ( wall.Contain(collider.gameObject.layer) )
+                                {
                                     Debug.Log("벽 검출");
-                                    Collider [] isDoors = Physics.OverlapSphere(collider.transform.position + new Vector3(0,1.5f,0),1f, ground);
-                                    
+                                    Collider [] isDoors = Physics.OverlapSphere(collider.transform.position + new Vector3(0, 1.5f, 0), 1f, ground);
+
                                     foreach ( Collider col in isDoors )
                                     {
-                                        Debug.Log(  col.name);
+                                        Debug.Log(col.name);
                                         if ( col.gameObject.CompareTag("Door") )
                                         {
                                             float time = 0;
@@ -307,50 +314,57 @@ public class Player2Controller : MonoBehaviour
                                         }
 
                                     }
-                                 }
-                                   
-                                    else
-                                    {
-                                        Debug.Log(collider.gameObject.name);
-                                        float time = 0;
+                                }
+
+                                else
+                                {
+                                    Debug.Log(collider.gameObject.name);
+                                    float time = 0;
                                     Manager.sound.PlaySFX(WalkSound);
                                     while ( time < 1 )
-                                        {
-                                            time += Time.deltaTime * moveSpeed;
-                                            rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
-                                            yield return null;
-                                        }
-                                    Manager.game.StepAction++;
-                                        moveOn = false;
+                                    {
+                                        time += Time.deltaTime * moveSpeed;
+                                        rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
+                                        yield return null;
                                     }
-
+                                    Manager.game.StepAction++;
+                                    moveOn = false;
                                 }
+
+                            }
 
                         }
                         Debug.Log("isWhat");
                         moveOn = false;
                     }
-                    else
+                    else                                        // 박스에 올라가있는 상태에서 앞에 아무것도 없는 경우
                     {
                         Debug.Log("없나?");
-                        LayerMask GandObs = ground | obstacleLayer;
-
-                        if ( Physics.Raycast(transform.position + moveDirValue * 2f, Vector3.down, out RaycastHit isTile, 3f, GandObs) )
+                        LayerMask GOW = ground | obstacleLayer | wall;
+                        
+                        if ( Physics.Raycast(transform.position + moveDirValue * 2f, Vector3.down, out RaycastHit isTile, 3f, GOW) )        // 박스에 올라가있는 상태에서 움직임 방향에 무엇이 있는지 확인
                         {
-                            Debug.Log("올라간상태이고 앞에 뭐 없음 로직");
+                            Debug.Log($"{isTile.collider.gameObject.name}");
                             Tile Ank = isTile.collider.gameObject.GetComponent<Tile>();
                             if ( Ank != null )
                             {
-                                    Collider [] isBlank = Physics.OverlapSphere(Ank.transform.position + new Vector3(0, 1f, 0), 1f, layer);
-                                    
-                                    if ( isBlank.Length == 0 )
-                                    {
-                                        targetPos = Ank.middlePoint.position;
-                                        Debug.Log(Ank.gameObject.name);
-                                    }
+                                Collider [] isBlank = Physics.OverlapSphere(Ank.transform.position + new Vector3(0, 1f, 0), 1f, layer);
+
+                                if ( isBlank.Length == 0 )
+                                {
+                                    targetPos = Ank.middlePoint.position;
+                                    Debug.Log(Ank.gameObject.name);
+                                }
                             }
                             else
                             {
+
+                                if ( wall.Contain(isTile.collider.gameObject.layer) )
+                                {
+                                    Debug.Log("못가는 블럭임");
+                                    MoveExit();
+                                    yield break;
+                                }
                                 targetPos = isTile.collider.gameObject.transform.position + new Vector3(0, 2, 0);
                             }
                             float time = 0;
@@ -363,42 +377,49 @@ public class Player2Controller : MonoBehaviour
                             }
                             Manager.sound.PlaySFX(jumpDownSound);
                             Manager.game.StepAction++;
-                            moveOn = false;
+                            MoveExit();
                             yield return null;
                         }
                         else
                         {
                             Debug.Log("너무 높다");
-                            moveOn = false;
+                            MoveExit();
                             yield break;
                         }
                     }
-                  
-                   
-                }
-                   
+
 
                 }
+
+
+            }
             else
             {
                 Debug.Log("없을수는 없어");
                 ontheBox = false;
-                moveOn = false;
+                MoveExit();
                 yield break;
             }
 
         }
         else // 앞에 아무것도 없음 && 평지임
         {
+            Debug.Log("Walk 2 Player");
             float time = 0;
+
             while ( time < 1 )
             {
-                time += Time.deltaTime * moveSpeed;
-                rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
-                yield return null;
 
-                if (Physics.Raycast(transform.position + new Vector3(0,1,0),moveDirValue,out RaycastHit otherHit, 0.2f,layer) )
+
+                if ( Physics.Raycast(transform.position + new Vector3(0, 1, 0), moveDirValue*1.5f, out RaycastHit otherHit, 1f, layer) )
                 {
+                    RaycastHit [] raycastHits = Physics.RaycastAll(otherHit.collider.transform.position, otherHit.collider.transform.up, 3f, obstacleLayer);
+                    if ( raycastHits.Length > 1 )
+                    {
+                        Debug.Log($"위에 장애물이 있습니다");
+                        moveOn = false;
+                        yield break;
+                    }
                     if ( wall.Contain(otherHit.collider.gameObject.layer) )
                     {
                         Debug.Log(otherHit.collider.gameObject.name);
@@ -408,6 +429,7 @@ public class Player2Controller : MonoBehaviour
                     }
                     else
                     {
+
                         Vector3 onPos = transform.position;
                         Vector3 ClimbPos = otherHit.collider.transform.position + new Vector3(0, 2, 0);
                         otherHit.rigidbody.isKinematic = true;
@@ -433,11 +455,14 @@ public class Player2Controller : MonoBehaviour
                     }
 
                 }
+                time += Time.deltaTime * moveSpeed;
+                rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
+                yield return null;
             }
             Manager.sound.PlaySFX(WalkSound);
             Manager.game.StepAction++;
             moveOn = false;
         }
-       
+
     }
 }

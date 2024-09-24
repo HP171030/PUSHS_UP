@@ -83,7 +83,8 @@ public class GameSceneLoader : BaseScene
         Debug.Log($"result => {cam.IsPlayer1Active}");
         Manager.game.StepAction = 0;
         Manager.game.doorSwitch = switchCount;
-        if ( cam.player2Camera.Follow == null | cam.player1Camera.Follow == null )
+        if ( ( cam.player2Camera != null && cam.player2Camera.Follow == null ) ||
+            ( cam.player1Camera != null && cam.player1Camera.Follow == null ) )
         {
             Manager.game.isEnter = true;
         }

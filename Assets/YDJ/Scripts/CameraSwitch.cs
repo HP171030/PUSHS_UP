@@ -17,13 +17,10 @@ public class CameraSwitch : MonoBehaviour
     {
         if ( player1Camera.Follow == null )
         {
-            Change();
+            CharacterChange();
             Manager.game.isEnter = true;
         }
-        else
-        {
 
-        }
 
     }
     void IconSwitch(bool isP1)
@@ -35,7 +32,7 @@ public class CameraSwitch : MonoBehaviour
     {
         if (!Manager.game.isEnter )
         {
-            Change();
+            TryChange();
         }
         else
         {
@@ -43,24 +40,28 @@ public class CameraSwitch : MonoBehaviour
         }
     }
 
-    public void Change()
+    public void TryChange()
     {
         if( player1Camera.Follow == null || player2Camera.Follow == null )
         {
             return;
         }
-        if (isPlayer1Active)
+        CharacterChange();
+    }
+    public void CharacterChange()
+    {
+        if ( isPlayer1Active )
         {
             Debug.Log(player1Camera.Priority);
             Debug.Log("p2On");
             player1Camera.Priority = 0;
             player2Camera.Priority = 10;
-            
+
             IsPlayer1Active = false;
             Manager.game.boomUpdate();
         }
         // 그렇지 않으면 플레이어 1의 카메라로 전환합니다.
-        else if(!isPlayer1Active)
+        else if ( !isPlayer1Active )
         {
             Debug.Log("p1On");
             player1Camera.Priority = 10;
@@ -71,7 +72,7 @@ public class CameraSwitch : MonoBehaviour
 
                 player2Camera.Priority = 0;
             }
-          
+
             IsPlayer1Active = true;
 
         }
@@ -79,7 +80,5 @@ public class CameraSwitch : MonoBehaviour
         {
             Debug.Log("?");
         }
-
-        
     }
 }

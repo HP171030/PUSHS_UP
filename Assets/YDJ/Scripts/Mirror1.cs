@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UIElements;
 
 
 public class Mirror1 : MonoBehaviour
@@ -15,6 +16,14 @@ public class Mirror1 : MonoBehaviour
     [SerializeField] float WallMirror2Offset;
 
     [SerializeField] float XOffset;
+    [SerializeField] Transform MapA;
+    [SerializeField] Transform MapB;
+    
+    Vector3 mirrorZPos;
+    [SerializeField] Transform transmissionPos;
+    public Mirror2 Mirror2 { get { return mirror2; } }
+    public GameObject mirrorImage;
+    public bool attached;
 
     [Header("Config")]
 
@@ -82,12 +91,17 @@ public class Mirror1 : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Debug.Log(Vector3.Distance(MapA.transform.position, MapB.transform.position) );
+        Mirror2OffsetZ = Vector3.Distance(MapA.transform.position, MapB.transform.position);
+    }
     void Update()
     {
+        mirrorZPos.z = Mirror2OffsetZ;
         if ( !wallChecker )
         {
-            Vector3 newPosition = transform.position;
-            newPosition.z += Mirror2OffsetZ;
+            Vector3 newPosition = transform.position + mirrorZPos;
             mirror2Transform.position = newPosition;
         }
         //else // 벽에 붙어있는 경우 거울2를 바로 앞 바닥에 위치시킵니다.
@@ -215,7 +229,7 @@ public class Mirror1 : MonoBehaviour
                     StartCoroutine(MirrorInObstacleWall(other.gameObject));
                 }
             }
-            else if ( !wallChecker )
+            else if ( !wallChecker && !attached )
             {
                 Debug.Log("바닥거울");
                 StartCoroutine(MirrorInObstacleGround(other.gameObject));
@@ -297,7 +311,7 @@ public class Mirror1 : MonoBehaviour
     }
 
 
-    IEnumerator MirrorInObstacleWall( GameObject obstacle ) //장애물 들어갈때
+    public IEnumerator MirrorInObstacleWall( GameObject obstacle ) //장애물 들어갈때
     {
         Debug.Log("코루틴 들어감");
         //Rigidbody obstacleRigidbody = obstacle.GetComponent<Rigidbody>();
@@ -362,7 +376,7 @@ public class Mirror1 : MonoBehaviour
     }
 
 
-    IEnumerator MirrorInObstacleGround( GameObject obstacle ) //장애물 들어갈때
+    public IEnumerator MirrorInObstacleGround( GameObject obstacle ) //장애물 들어갈때
     {
         Manager.game.PlayerControllStop();
         Debug.Log("코루틴 들어감");

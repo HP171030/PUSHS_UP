@@ -44,7 +44,7 @@ public class ChapterMover : MonoBehaviour
             if (Manager.game.clearValue > 1)
             {
                 Debug.Log("in1");
-                camSwitch.Change();
+                camSwitch.TryChange();
                 Manager.game.clearValue--;
                 Manager.game.isEnter = true;
                 
