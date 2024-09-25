@@ -361,6 +361,18 @@ PrefabInstance:
       propertyPath: m_ControlPath
       value: <Keyboard>/s
       objectReference: {fileID: 0}
+    - target: {fileID: 7412637815352222031, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: MainScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7412637815352222031, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: bossScene
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8232724271068974674, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8232724271068974674, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: isPlayer1Active
       value: 0

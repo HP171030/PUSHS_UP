@@ -6,34 +6,27 @@ public class ChapterMover : MonoBehaviour
 {
     [SerializeField] LayerMask player;
     [SerializeField] CameraSwitch camSwitch;
-    [SerializeField] StepCountUI stepCountUI; // StepCountUI 참조 변수 추가
     [SerializeField] GameSceneLoader gameSceneLoader;
     [SerializeField] GameSceneLoaderOnly2Player gameSceneLoaderOnly2Player;
 
     private int previousMissionCount; // 이전 MissionCount 값을 저장할 변수
+    int curSceneNum;
 
     public void Start()
     {
-        int curSceneNum = Manager.scene.GetSceneNumber();
+        curSceneNum = Manager.scene.GetSceneNumber();
         Debug.Log($"ScnenNum{curSceneNum}");
         gameSceneLoader = FindObjectOfType<GameSceneLoader>();
-        if ( gameSceneLoader != null )
-        {
-            Debug.Log("None1Loader");
             gameSceneLoaderOnly2Player = FindObjectOfType<GameSceneLoaderOnly2Player>();
-        }
-        while(camSwitch == null )
-        {
+       
+
             camSwitch = FindObjectOfType<CameraSwitch>();
-            Debug.Log("camSwitchf Searching");
-        }
+            Debug.Log($"camSwitch : {camSwitch}");
+
         
-
-        // StepCountUI 객체를 찾아 할당
-        stepCountUI = FindObjectOfType<StepCountUI>();
-
         // 이전 MissionCount 값을 로드합니다.
-        previousMissionCount = PlayerPrefs.GetInt("PreviousMissionCount", stepCountUI.MissionCount);
+        previousMissionCount = PlayerPrefs.GetInt($"PreviousMissionCount {curSceneNum}");
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,29 +37,25 @@ public class ChapterMover : MonoBehaviour
             if (Manager.game.clearValue > 1)
             {
                 Debug.Log("in1");
-                camSwitch.TryChange();
+                camSwitch.CharacterChange();
                 Manager.game.clearValue--;
                 Manager.game.isEnter = true;
                 
             }
             else
             {
+               
                 
-                // 씬 넘버 확인 및 저장
-                int curSceneNum = Manager.scene.GetSceneNumber();
-                
-                // 새로운 MissionCount 값이 이전 값보다 큰 경우에만 저장합니다.
-                if (stepCountUI.MissionCount >= previousMissionCount)
+
+                if (Manager.game.StepAction < previousMissionCount || previousMissionCount == 0)
                 {
-                    PlayerPrefs.SetInt("stageNumber" + curSceneNum, stepCountUI.MissionCount);
-                    // 이전 MissionCount 값을 업데이트합니다.
-                    previousMissionCount = stepCountUI.MissionCount;
-                    PlayerPrefs.SetInt("PreviousMissionCount", previousMissionCount);
+                    PlayerPrefs.SetInt($"stageNumber {curSceneNum}", Manager.game.StepAction);
+                    PlayerPrefs.SetInt($"PreviousMissionCount {curSceneNum}", Manager.game.StepAction);
                 }
 
                 // 잘 저장되었는지 확인
-                int savedMissionCount = PlayerPrefs.GetInt("stageNumber" + curSceneNum);
-                print("저장된 MissionCount: " + savedMissionCount);
+                int savedStepCount = PlayerPrefs.GetInt($"stageNumber {curSceneNum}");
+                Debug.Log($"저장된 StepCount:{savedStepCount}");
                 if ( gameSceneLoader != null )
                 {
                     if ( !gameSceneLoader.bossSceneloader )

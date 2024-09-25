@@ -88,7 +88,6 @@ public class Player2Controller : MonoBehaviour
     }
     private void OnMove( InputValue value )
     {
-
         if ( !cameraSwitch.IsPlayer1Active && !onIce && inputKey )
         {
             Vector2 input = value.Get<Vector2>();
@@ -181,7 +180,6 @@ public class Player2Controller : MonoBehaviour
                     {
                         foreach ( Collider col in isBlank )
                         {
-                            Debug.Log($"앞에 벽이 있어 {col.name}");
                             transform.position = transform.position;
                             moveOn = false;
                             yield break;
@@ -404,14 +402,13 @@ public class Player2Controller : MonoBehaviour
         }
         else // 앞에 아무것도 없음 && 평지임
         {
-            Debug.Log("Walk 2 Player");
             float time = 0;
 
             while ( time < 1 )
             {
 
 
-                if ( Physics.Raycast(transform.position + new Vector3(0, 1, 0), moveDirValue*1.5f, out RaycastHit otherHit, 1f, layer) )
+                if ( Physics.Raycast(transform.position + new Vector3(0, 1, 0), moveDirValue*0.12f, out RaycastHit otherHit, 1f, layer) )
                 {
                     RaycastHit [] raycastHits = Physics.RaycastAll(otherHit.collider.transform.position, otherHit.collider.transform.up, 3f, obstacleLayer);
                     if ( raycastHits.Length > 1 )

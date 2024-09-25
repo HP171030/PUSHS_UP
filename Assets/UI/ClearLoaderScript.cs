@@ -10,31 +10,30 @@ public class ClearLoaderScript : MonoBehaviour
     public GameObject show3Stars;
     public GameObject show2Stars;
     public GameObject show1Stars;
-    public string stageNumber;
+    public int stageSceneNumber;
 
     // Start is called before the first frame update
    public void Start()
     {   
-        int SaveData = PlayerPrefs.GetInt("stageNumber"+stageNumber+1);
-        print(stageNumber + "+" +SaveData);
+        int SaveData = PlayerPrefs.GetInt($"stageNumber {stageSceneNumber}");
+        if( SaveData == 0 )
+        {
+            return;
+        }
+        Debug.Log($"{stageSceneNumber}Stage Score: {SaveData}");
 
-        if (SaveData >= 3)
-        {
-            show3Stars.SetActive(true);
-        }
-        if (SaveData >= 2)
-        {
-            show2Stars.SetActive(true);
-        }
-        if (SaveData >= 1)
+        if (SaveData < 150)
         {
             show1Stars.SetActive(true);
         }
+        if (SaveData < 100)
+        {
+            show2Stars.SetActive(true);
+        }
+        if (SaveData < 50)
+        {
+            show3Stars.SetActive(true);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

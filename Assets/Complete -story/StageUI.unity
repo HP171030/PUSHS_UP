@@ -170,7 +170,7 @@ MonoBehaviour:
   show3Stars: {fileID: 1547446737}
   show2Stars: {fileID: 1567838791}
   show1Stars: {fileID: 1732512648}
-  stageNumber: 2
+  stageSceneNumber: 3
 --- !u!1 &4357614
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,6 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 7
 --- !u!1 &20801168
 GameObject:
@@ -598,7 +599,7 @@ MonoBehaviour:
   show3Stars: {fileID: 1602832384}
   show2Stars: {fileID: 1395024641}
   show1Stars: {fileID: 1328508771}
-  stageNumber: 24
+  stageSceneNumber: 25
 --- !u!1 &49580727
 GameObject:
   m_ObjectHideFlags: 0
@@ -979,6 +980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 15
 --- !u!1 &65924329
 GameObject:
@@ -1208,6 +1210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 18
 --- !u!1 &86832180
 GameObject:
@@ -1497,6 +1500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 4
 --- !u!1 &97630907
 GameObject:
@@ -1953,6 +1957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 19
 --- !u!1 &130179009
 GameObject:
@@ -3298,7 +3303,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: -0.3118841, y: 0.8924132}
   m_AnchorMax: {x: 0.33873913, y: 1.46969}
-  m_AnchoredPosition: {x: 25.339844, y: -3.0222778}
+  m_AnchoredPosition: {x: 25.339844, y: -2.020691}
   m_SizeDelta: {x: 1.5059814, y: -0.48651123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &251204936
@@ -4076,6 +4081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 24
 --- !u!1 &345504305
 GameObject:
@@ -4351,7 +4357,7 @@ MonoBehaviour:
   show3Stars: {fileID: 2125497592}
   show2Stars: {fileID: 138025898}
   show1Stars: {fileID: 1700406984}
-  stageNumber: 22
+  stageSceneNumber: 23
 --- !u!1 &387929928
 GameObject:
   m_ObjectHideFlags: 0
@@ -4386,7 +4392,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: -0.3118841, y: 0.8924132}
   m_AnchorMax: {x: 0.33873913, y: 1.46969}
-  m_AnchoredPosition: {x: 25.339844, y: -3.246109}
+  m_AnchoredPosition: {x: 25.339844, y: -3.0282288}
   m_SizeDelta: {x: 1.5059814, y: -0.48651123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &387929930
@@ -5004,7 +5010,7 @@ MonoBehaviour:
   show3Stars: {fileID: 1443221383}
   show2Stars: {fileID: 813789133}
   show1Stars: {fileID: 1303037269}
-  stageNumber: 3
+  stageSceneNumber: 4
 --- !u!1 &435997329
 GameObject:
   m_ObjectHideFlags: 0
@@ -5281,7 +5287,7 @@ MonoBehaviour:
   show3Stars: {fileID: 65924329}
   show2Stars: {fileID: 1721407514}
   show1Stars: {fileID: 1680343744}
-  stageNumber: 7
+  stageSceneNumber: 8
 --- !u!1 &460258444
 GameObject:
   m_ObjectHideFlags: 0
@@ -5749,7 +5755,7 @@ MonoBehaviour:
   show3Stars: {fileID: 1136718409}
   show2Stars: {fileID: 1596451963}
   show1Stars: {fileID: 1439422585}
-  stageNumber: 16
+  stageSceneNumber: 17
 --- !u!1 &504209896
 GameObject:
   m_ObjectHideFlags: 0
@@ -6101,7 +6107,7 @@ MonoBehaviour:
   show3Stars: {fileID: 1726453980}
   show2Stars: {fileID: 1866016300}
   show1Stars: {fileID: 1860753987}
-  stageNumber: 9
+  stageSceneNumber: 10
 --- !u!1 &523762143
 GameObject:
   m_ObjectHideFlags: 0
@@ -6433,7 +6439,7 @@ MonoBehaviour:
   show3Stars: {fileID: 1814220090}
   show2Stars: {fileID: 1257411754}
   show1Stars: {fileID: 761846907}
-  stageNumber: 10
+  stageSceneNumber: 11
 --- !u!1 &574856859
 GameObject:
   m_ObjectHideFlags: 0
@@ -6587,6 +6593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 2
 --- !u!1 &575454343
 GameObject:
@@ -7043,6 +7050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 5
 --- !u!1 &614998474
 GameObject:
@@ -7318,7 +7326,7 @@ MonoBehaviour:
   show3Stars: {fileID: 1430401942}
   show2Stars: {fileID: 1446311999}
   show1Stars: {fileID: 910789701}
-  stageNumber: 0
+  stageSceneNumber: 1
 --- !u!1 &648225128
 GameObject:
   m_ObjectHideFlags: 0
@@ -7472,6 +7480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 12
 --- !u!1 &648933869
 GameObject:
@@ -7704,6 +7713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 21
 --- !u!1 &674515462
 GameObject:
@@ -8252,6 +8262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 0
 --- !u!1 &737902053
 GameObject:
@@ -8375,7 +8386,7 @@ MonoBehaviour:
   show3Stars: {fileID: 946669562}
   show2Stars: {fileID: 394184337}
   show1Stars: {fileID: 474097206}
-  stageNumber: 12
+  stageSceneNumber: 13
 --- !u!1 &761846907
 GameObject:
   m_ObjectHideFlags: 0
@@ -8632,7 +8643,7 @@ MonoBehaviour:
   show3Stars: {fileID: 1021368995}
   show2Stars: {fileID: 492062209}
   show1Stars: {fileID: 2013675419}
-  stageNumber: 4
+  stageSceneNumber: 5
 --- !u!1 &813789133
 GameObject:
   m_ObjectHideFlags: 0
@@ -8861,6 +8872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 23
 --- !u!1 &824509690
 GameObject:
@@ -8909,7 +8921,7 @@ MonoBehaviour:
   show3Stars: {fileID: 850870355}
   show2Stars: {fileID: 1932314478}
   show1Stars: {fileID: 251204934}
-  stageNumber: 6
+  stageSceneNumber: 7
 --- !u!1 &836249882
 GameObject:
   m_ObjectHideFlags: 0
@@ -10004,7 +10016,7 @@ MonoBehaviour:
   show3Stars: {fileID: 1867472635}
   show2Stars: {fileID: 582340113}
   show1Stars: {fileID: 1920132686}
-  stageNumber: 17
+  stageSceneNumber: 18
 --- !u!1 &937859620
 GameObject:
   m_ObjectHideFlags: 0
@@ -10628,6 +10640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 16
 --- !u!1 &982701529
 GameObject:
@@ -10857,6 +10870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 6
 --- !u!1 &991864309
 GameObject:
@@ -11730,6 +11744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 10
 --- !u!1 &1060495351
 GameObject:
@@ -11928,7 +11943,7 @@ MonoBehaviour:
   show3Stars: {fileID: 1397582504}
   show2Stars: {fileID: 1551266678}
   show1Stars: {fileID: 1232263991}
-  stageNumber: 11
+  stageSceneNumber: 12
 --- !u!1 &1086588232
 GameObject:
   m_ObjectHideFlags: 0
@@ -12487,7 +12502,7 @@ MonoBehaviour:
   show3Stars: {fileID: 614998474}
   show2Stars: {fileID: 575454343}
   show1Stars: {fileID: 1963860183}
-  stageNumber: 23
+  stageSceneNumber: 24
 --- !u!1 &1136718409
 GameObject:
   m_ObjectHideFlags: 0
@@ -12685,7 +12700,7 @@ MonoBehaviour:
   show3Stars: {fileID: 395501815}
   show2Stars: {fileID: 221355795}
   show1Stars: {fileID: 1773519279}
-  stageNumber: 13
+  stageSceneNumber: 14
 --- !u!1 &1181295507
 GameObject:
   m_ObjectHideFlags: 0
@@ -12733,7 +12748,7 @@ MonoBehaviour:
   show3Stars: {fileID: 270569540}
   show2Stars: {fileID: 1432240919}
   show1Stars: {fileID: 1190236187}
-  stageNumber: 15
+  stageSceneNumber: 16
 --- !u!1 &1188971421
 GameObject:
   m_ObjectHideFlags: 0
@@ -12887,6 +12902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 13
 --- !u!1 &1190236187
 GameObject:
@@ -13475,6 +13491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 14
 --- !u!1 &1225220468
 GameObject:
@@ -13735,7 +13752,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: -0.3118841, y: 0.8924132}
   m_AnchorMax: {x: 0.33873913, y: 1.46969}
-  m_AnchoredPosition: {x: 29.523987, y: -4.900528}
+  m_AnchoredPosition: {x: 29.52399, y: -4.6826477}
   m_SizeDelta: {x: -1.4008484, y: -0.48660278}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1232263993
@@ -14408,7 +14425,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: -0.3118841, y: 0.8924132}
   m_AnchorMax: {x: 0.33873913, y: 1.46969}
-  m_AnchoredPosition: {x: 29.523987, y: -4.6640015}
+  m_AnchoredPosition: {x: 29.52399, y: -3.6617737}
   m_SizeDelta: {x: -1.4008484, y: -0.48660278}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1303037271
@@ -15857,7 +15874,7 @@ MonoBehaviour:
   show3Stars: {fileID: 1731375286}
   show2Stars: {fileID: 1741287411}
   show1Stars: {fileID: 856748654}
-  stageNumber: 20
+  stageSceneNumber: 21
 --- !u!1 &1411018541
 GameObject:
   m_ObjectHideFlags: 0
@@ -15905,7 +15922,7 @@ MonoBehaviour:
   show3Stars: {fileID: 152990705}
   show2Stars: {fileID: 1742277702}
   show1Stars: {fileID: 1289300501}
-  stageNumber: 1
+  stageSceneNumber: 2
 --- !u!1 &1413483602
 GameObject:
   m_ObjectHideFlags: 0
@@ -16059,6 +16076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 17
 --- !u!1 &1429068081
 GameObject:
@@ -16290,6 +16308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 8
 --- !u!1 &1430401942
 GameObject:
@@ -16488,7 +16507,7 @@ MonoBehaviour:
   show3Stars: {fileID: 1092034574}
   show2Stars: {fileID: 1220053900}
   show1Stars: {fileID: 122861898}
-  stageNumber: 21
+  stageSceneNumber: 22
 --- !u!1 &1439422585
 GameObject:
   m_ObjectHideFlags: 0
@@ -16911,7 +16930,7 @@ MonoBehaviour:
   show3Stars: {fileID: 905775972}
   show2Stars: {fileID: 1893860039}
   show1Stars: {fileID: 1757367515}
-  stageNumber: 5
+  stageSceneNumber: 6
 --- !u!1001 &1488996438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17304,7 +17323,7 @@ MonoBehaviour:
   show3Stars: {fileID: 1673247574}
   show2Stars: {fileID: 1231203615}
   show1Stars: {fileID: 387929928}
-  stageNumber: 14
+  stageSceneNumber: 15
 --- !u!1 &1539287636
 GameObject:
   m_ObjectHideFlags: 0
@@ -17458,6 +17477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 3
 --- !u!1 &1544781318
 GameObject:
@@ -17764,9 +17784,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7412637815352222031, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: MainScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7412637815352222031, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: bossScene
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7964524774842190390, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8232724271068974674, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17926,6 +17958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 22
 --- !u!1 &1567388678
 GameObject:
@@ -18080,6 +18113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 1
 --- !u!1 &1567838791
 GameObject:
@@ -19931,7 +19965,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: -0.3118841, y: 0.8924132}
   m_AnchorMax: {x: 0.33873913, y: 1.46969}
-  m_AnchoredPosition: {x: 25.339844, y: -3.2453308}
+  m_AnchoredPosition: {x: 25.339844, y: -3.0269012}
   m_SizeDelta: {x: 1.5059814, y: -0.48651123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1700406986
@@ -21236,6 +21270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 9
 --- !u!1 &1773519279
 GameObject:
@@ -22671,7 +22706,7 @@ MonoBehaviour:
   show3Stars: {fileID: 460258444}
   show2Stars: {fileID: 1077935682}
   show1Stars: {fileID: 1718170826}
-  stageNumber: 8
+  stageSceneNumber: 9
 --- !u!1 &1932314478
 GameObject:
   m_ObjectHideFlags: 0
@@ -22975,6 +23010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 11
 --- !u!1 &1963860183
 GameObject:
@@ -23248,7 +23284,7 @@ MonoBehaviour:
   show3Stars: {fileID: 1116225837}
   show2Stars: {fileID: 937859620}
   show1Stars: {fileID: 1544781318}
-  stageNumber: 18
+  stageSceneNumber: 19
 --- !u!1 &1992684461
 GameObject:
   m_ObjectHideFlags: 0
@@ -23973,7 +24009,7 @@ MonoBehaviour:
   show3Stars: {fileID: 1026289728}
   show2Stars: {fileID: 2132125544}
   show1Stars: {fileID: 2146728709}
-  stageNumber: 19
+  stageSceneNumber: 20
 --- !u!1 &2056274013
 GameObject:
   m_ObjectHideFlags: 0
@@ -24630,6 +24666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiClose: {fileID: 0}
+  isRobby: 0
   sNumber: 20
 --- !u!1 &2125497592
 GameObject:
@@ -24890,7 +24927,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: -0.3118841, y: 0.8924132}
   m_AnchorMax: {x: 0.33873913, y: 1.46969}
-  m_AnchoredPosition: {x: 29.523987, y: -4.8997498}
+  m_AnchoredPosition: {x: 29.52399, y: -4.6818695}
   m_SizeDelta: {x: -1.4008484, y: -0.48660278}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2146728711

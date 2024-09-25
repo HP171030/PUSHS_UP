@@ -25,18 +25,18 @@ public class GameSceneLoaderOnly2Player : BaseScene
 
         Manager.game.bossScene = bossSceneloader;
         cam = FindObjectOfType<CameraSwitch>();
-        if ( thisSceneCine [0] != null )
-            cam.player1Camera = thisSceneCine [0];
-        if ( thisSceneCine [1] != null )
-            cam.player2Camera = thisSceneCine [1];
+        /* if ( thisSceneCine [0] != null )
+             cam.player1Camera = thisSceneCine [0];
+         if ( thisSceneCine [1] != null )
+             cam.player2Camera = thisSceneCine [1];
+         yield return null;
+
+         if ( thisSceneCine [0] == null )
+         {
+             cam.IsPlayer1Active = false;
+             yield return null;
+         }*/
         yield return null;
-
-        if ( thisSceneCine [0] == null )
-        {
-            cam.IsPlayer1Active = false;
-            yield return null;
-        }
-
         Manager.game.player2Controller.cameraSwitch = cam;
 
     }

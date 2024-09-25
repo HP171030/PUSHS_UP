@@ -8,7 +8,6 @@ public class StepCountUI : MonoBehaviour
     public Image strikethroughImage3;
     public Image strikethroughImage2;
     public Image strikethroughImage1;
-    public int MissionCount = 3;
 
 
     private void Start()
@@ -27,25 +26,27 @@ public class StepCountUI : MonoBehaviour
         {
             // 텍스트에 취소선 이미지를 표시합니다.
             strikethroughImage3.gameObject.SetActive(true);
-            MissionCount = 2;
         }
 
         if (Manager.game.StepAction >= 100)
         {
             // 텍스트에 취소선 이미지를 표시합니다.
             strikethroughImage2.gameObject.SetActive(true);
-            MissionCount = 1;
         }
 
         if (Manager.game.StepAction >= 150)
         {
             // 텍스트에 취소선 이미지를 표시합니다.
             strikethroughImage1.gameObject.SetActive(true);
-            MissionCount = 1;
         }
 
     }
-
+    public void StepImageInit()
+    {
+        strikethroughImage1.gameObject.SetActive(false);
+        strikethroughImage2.gameObject.SetActive(false);
+        strikethroughImage3.gameObject.SetActive(false);
+    }
     private void OnDestroy()
     {
         // 스크립트가 파괴될 때 이벤트를 해제합니다.

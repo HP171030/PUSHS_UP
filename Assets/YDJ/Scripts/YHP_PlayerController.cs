@@ -179,11 +179,11 @@ public class YHP_PlayerController : MonoBehaviour
             {
 
                 Vector3 grabDir = ( grabHit.collider.gameObject.transform.position - transform.position ).normalized;
-                if ( Physics.Raycast(transform.position + new Vector3(0, 1, 0), -transform.forward, out RaycastHit hit, 1.5f) )
+                if ( Physics.Raycast(transform.position + new Vector3(0, 1, 0), -transform.forward, out RaycastHit hit, 1.5f, wall| obstacleLayer|mirror) )
                 {
                     if ( hit.collider != null )
                     {
-
+                        Debug.Log($"Can't Pull {hit.collider.name}");
                         moveOn = false;
                         return;
                     }
@@ -218,6 +218,10 @@ public class YHP_PlayerController : MonoBehaviour
                     moveOn = false;
                     pullOn = false;
                 }
+            }
+            else
+            {
+                Debug.Log("Grap Didn't");
             }
         }
     }
@@ -409,13 +413,10 @@ public class YHP_PlayerController : MonoBehaviour
                         //    yield return null;
                         //}
 
-                        Debug.Log($"{isCollider.name}이 앞에 있다");
                         if ( obstacleLayer.Contain(isCollider.gameObject.layer) && !mirrorHolding )
                         {
                             moveSpeed = 2;
 
-                            Debug.Log("장애물 밀기");
-                            Debug.Log(isCollider.name);
 
                             Vector3 obsStartPos = isCollider.gameObject.transform.position;
                             Vector3 obsTargetPos = isCollider.gameObject.transform.position + moveDirValue * 2f;
@@ -467,9 +468,14 @@ public class YHP_PlayerController : MonoBehaviour
                                     yield break;
                                 Vector3 startObs = obsStartPos;
                                 Vector3 obsTPos = obsTargetPos;
-                                List<RaycastHit> pushHitArray = new List<RaycastHit>(Physics.RaycastAll(isCollider.transform.position, isCollider.transform.up, 10f, obstacleLayer));
+                                List<RaycastHit> pushHitArray = new List<RaycastHit>(Physics.RaycastAll(isCollider.transform.position, isCollider.transform.up, 10f, obstacleLayer|wall));
                                 foreach ( RaycastHit hits in pushHitArray )
                                 {
+                                    if ( wall.Contain(hits.collider.gameObject.layer) )
+                                    {
+                                        Debug.Log("전송할 곳에 방해물이 있음");
+                                        yield break;
+                                    }
                                     hits.collider.gameObject.transform.SetParent(isCollider.transform, true);
                                     hits.rigidbody.isKinematic = true;
                                     Debug.Log(hits.collider.gameObject.name);

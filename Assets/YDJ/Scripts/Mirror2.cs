@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Mirror2 : MonoBehaviour
 {
-    [SerializeField] Mirror1 Mirror1;
-    [SerializeField] YHP_PlayerController YHP_PlayerController;
+
     public bool obstacleChecker;
     public bool ObstacleChecker { get { return obstacleChecker; } }
 

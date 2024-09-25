@@ -31,6 +31,7 @@ public class Mirror1 : MonoBehaviour
 
     [SerializeField] YHP_PlayerController YHP_PlayerController;
     [SerializeField] Mirror2 mirror2;
+    [SerializeField] Mirror2 mirror2Instance;
     //[SerializeField] Obstacle obstacleScript;
 
     public bool wallChecker;
@@ -54,7 +55,10 @@ public class Mirror1 : MonoBehaviour
     //private bool wallMirrorAttachedChecker = false;
 
     private Vector3 forwardDirection;
-
+    private void OnDisable()
+    {
+        Debug.Log("disable");
+    }
     public void SetForwardDirection( Vector3 direction )
     {
         forwardDirection = direction;
@@ -91,35 +95,38 @@ public class Mirror1 : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
+        YHP_PlayerController = FindObjectOfType<YHP_PlayerController>();
         Debug.Log(Vector3.Distance(MapA.transform.position, MapB.transform.position) );
         Mirror2OffsetZ = Vector3.Distance(MapA.transform.position, MapB.transform.position);
+        mirror2 = Instantiate(mirror2Instance, transform.position, Quaternion.identity) ;
+        mirror2Transform = mirror2.transform;
+
     }
-    void Update()
+
+   public Vector3 endPosition;
+   void Update()
     {
         mirrorZPos.z = Mirror2OffsetZ;
-        if ( !wallChecker )
-        {
-            Vector3 newPosition = transform.position + mirrorZPos;
-            mirror2Transform.position = newPosition;
-        }
-        //else // 벽에 붙어있는 경우 거울2를 바로 앞 바닥에 위치시킵니다.
-        //{
-        //    Vector3 newPosition = transform.position;
-        //    newPosition.z += Mirror2OffsetX;
-        //    mirror2Transform.position = newPosition;
-        //}
+       
 
-        //if (!YDJ_PlayerController.mirrorHolding)
-        //{
-        //    // 레이어를 변경합니다.
-        //    gameObject.layer = 7;
-        //}
-        //else
-        //{
-        //    gameObject.layer = 31;
-        //}
+        RaycastHit [] tiles = Physics.RaycastAll(transform.position + mirrorZPos, Vector3.down,2f,LayerMask.GetMask("Ground"));
+        if ( tiles.Length > 0 )
+        {
+            foreach ( RaycastHit tile in tiles )
+            {
+                Tile t = tile.collider.GetComponent<Tile>();
+                if ( t != null )
+                {
+                    endPosition = t.middlePoint.position;
+                    Debug.DrawLine(transform.position + mirrorZPos, transform.position + mirrorZPos + new Vector3(0, 2, 0));
+                }
+            }
+        }
+
+            mirror2Transform.position = endPosition;
+
     }
 
 
@@ -225,8 +232,8 @@ public class Mirror1 : MonoBehaviour
                 if ( YHP_PlayerController.wallMirrorBumpChecker )
                 {
                     Debug.Log("범프 ---------------------------------------------");
-                    obstacleChecker = false;
-                    StartCoroutine(MirrorInObstacleWall(other.gameObject));
+                 //   obstacleChecker = false;
+                 //   StartCoroutine(MirrorInObstacleWall(other.gameObject));
                 }
             }
             else if ( !wallChecker && !attached )
@@ -419,7 +426,8 @@ public class Mirror1 : MonoBehaviour
 
     IEnumerator MirrorOutObstacle( GameObject obstacle ) // 장애물 나갈때
     {
-        Vector3 endPosition = mirror2Transform.position;
+
+       
         float time = 0;
         float targetTime = 1f;
         Vector3 startPosition;
@@ -474,17 +482,20 @@ public class Mirror1 : MonoBehaviour
             {
                 time += Time.deltaTime;
                 //Debug.Log($"obstacle out{obstacle.transform.position}");
-                obstacle.transform.position = Vector3.Lerp(startPosition, endPosition, time / targetTime);
+                foreach( RaycastHit ray in rays )
+                {
+                    obstacle.transform.position = Vector3.Lerp(startPosition, endPosition, time / targetTime);
+                }
+
                 yield return null;
-                Rigidbody obstacleRigidbody = obstacle.GetComponent<Rigidbody>();
-            //    obstacleRigidbody.isKinematic = false;
+
             }
             foreach ( RaycastHit ray in rays )
             {
                 if ( ray.collider.gameObject.layer == LayerMask.NameToLayer("Obstacle") || ray.collider.gameObject.CompareTag("Player") && ray.collider.gameObject != obstacle )
                 {
                     Rigidbody rb = ray.collider.gameObject.GetComponent<Rigidbody>();
-                 //   rb.isKinematic = false;
+                    rb.isKinematic = false;
                     rb.constraints &= ~RigidbodyConstraints.FreezePositionX;
                     rb.constraints &= ~RigidbodyConstraints.FreezePositionZ;
                     ray.transform.SetParent(null, true);

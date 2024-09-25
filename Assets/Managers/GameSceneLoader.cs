@@ -12,6 +12,7 @@ public class GameSceneLoader : BaseScene
     [SerializeField] protected CameraSwitch cam;
     [SerializeField] GameObject CheckerBoss;
     [SerializeField] protected bool MainScene = false;
+
     [SerializeField] GameObject video;
 
 
@@ -33,6 +34,7 @@ public class GameSceneLoader : BaseScene
             Manager.game.playerController = FindObjectOfType<YHP_PlayerController>();
             Manager.game.player2Controller = FindObjectOfType<Player2Controller>();
             Manager.game.bossScene = bossSceneloader;
+            Manager.game.MainScene = MainScene;
 
             Manager.game.cines = thisSceneCine;
             Manager.game.clearValue = clearValue;
@@ -71,16 +73,14 @@ public class GameSceneLoader : BaseScene
 
             }
         }
-        Debug.Log(cam);
-        if ( thisSceneCine [0] != null )
+       /* if ( thisSceneCine [0] != null )
         {
             cam.IsPlayer1Active = true;
         }
         else
         {
             cam.IsPlayer1Active = false;
-        }
-        Debug.Log($"result => {cam.IsPlayer1Active}");
+        }*/
         Manager.game.StepAction = 0;
         Manager.game.doorSwitch = switchCount;
         if ( ( cam.player2Camera != null && cam.player2Camera.Follow == null ) ||
@@ -92,8 +92,8 @@ public class GameSceneLoader : BaseScene
         {
             Manager.game.isEnter = false;
         }
-
-
+        cam.Init();
+        Manager.ui.StepCountInit();
 
 
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17291898, g: 0.21610056, b: 0.29806814, a: 1}
+  m_IndirectSpecularColor: {r: 0.1729185, g: 0.21609974, b: 0.29806706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -569,9 +569,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
+      propertyPath: MapA
+      value: 
+      objectReference: {fileID: 1657046263}
+    - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
+      propertyPath: MapB
+      value: 
+      objectReference: {fileID: 15621269}
+    - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
       propertyPath: mirror2
       value: 
-      objectReference: {fileID: 857995315}
+      objectReference: {fileID: 0}
     - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
       propertyPath: Mirror2OffsetZ
       value: 100
@@ -579,7 +587,7 @@ PrefabInstance:
     - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
       propertyPath: mirror2Transform
       value: 
-      objectReference: {fileID: 857995316}
+      objectReference: {fileID: 0}
     - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
       propertyPath: YHP_PlayerController
       value: 
@@ -6219,6 +6227,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 3571450653554465179, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5600276076356614370, guid: 9e2d61d3412d79e488ebead098b29c93, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.07
@@ -8162,87 +8174,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4023261917270213476, guid: 7ecfc3a1f7a19af45851658e0601fc69, type: 3}
   m_PrefabInstance: {fileID: 854770565}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &857995314
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.8899302
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0948658
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 100.14121
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3039326178655866126, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_Name
-      value: Mirror2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4335426040554672901, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: Mirror1
-      value: 
-      objectReference: {fileID: 75266724}
-    - target: {fileID: 4335426040554672901, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: YHP_PlayerController
-      value: 
-      objectReference: {fileID: 1018917201}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
---- !u!114 &857995315 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4335426040554672901, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-  m_PrefabInstance: {fileID: 857995314}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bf9a637c3d254a4a84a916e8db163ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &857995316 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-  m_PrefabInstance: {fileID: 857995314}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &866157537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9221,7 +9152,7 @@ PrefabInstance:
     - target: {fileID: 8792600851279776242, guid: 3e6dfa4ed1fd9904e86c8ead7b803e35, type: 3}
       propertyPath: mirror2
       value: 
-      objectReference: {fileID: 857995315}
+      objectReference: {fileID: 0}
     - target: {fileID: 8792600851279776242, guid: 3e6dfa4ed1fd9904e86c8ead7b803e35, type: 3}
       propertyPath: cameraSwitch
       value: 
@@ -34307,7 +34238,6 @@ SceneRoots:
   - {fileID: 1150658105}
   - {fileID: 957820578}
   - {fileID: 489606546}
-  - {fileID: 857995314}
   - {fileID: 1018917200}
   - {fileID: 75266723}
   - {fileID: 1080030901}

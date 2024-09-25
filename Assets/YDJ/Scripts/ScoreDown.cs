@@ -10,6 +10,7 @@ public class ScoreDown : MonoBehaviour
     private void OnEnable()
     {
         Manager.game.boomUpdate += UpdateScoreText;
+        Debug.Log("Score update");
     }
     private void OnDisable()
     {

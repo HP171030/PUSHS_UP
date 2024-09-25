@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     private int patternCounter = 0;
     public int doorSwitch;
     public bool bossScene;
-    public bool mainScene;
+    public bool MainScene;
     
     public CinemachineVirtualCamera[] cines;
     public YHP_PlayerController playerController;

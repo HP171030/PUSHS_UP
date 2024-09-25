@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] Image pushIconImage;
     [SerializeField] Image pullIconImage;
     [SerializeField] Image mirrorImage;
+    [SerializeField] StepCountUI stepCountUI;
     public void UiClose()
     {
 
@@ -42,7 +43,9 @@ public class UIManager : MonoBehaviour
             }
             
         }
-
-
+    }
+    public void StepCountInit()
+    {
+        stepCountUI.StepImageInit();
     }
 }

@@ -505,7 +505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorSwitch: 1
   bossScene: 1
-  mainScene: 0
+  MainScene: 0
   cines: []
   playerController: {fileID: 0}
   player2Controller: {fileID: 0}
@@ -1964,6 +1964,7 @@ MonoBehaviour:
   pushIconImage: {fileID: 8862832926499894905}
   pullIconImage: {fileID: 2794401847986742600}
   mirrorImage: {fileID: 5915785873006371080}
+  stepCountUI: {fileID: 1622489573985741272}
 --- !u!1 &8694409774136192831
 GameObject:
   m_ObjectHideFlags: 0
@@ -2229,7 +2230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4549909801227503373, guid: 07067957f8dd2814c920845405333d56, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4549909801227503373, guid: 07067957f8dd2814c920845405333d56, type: 3}
       propertyPath: m_ControlPath
@@ -2307,6 +2308,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6980933307065237547, guid: 07067957f8dd2814c920845405333d56, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7263467980214588001, guid: 07067957f8dd2814c920845405333d56, type: 3}
       propertyPath: m_SortingOrder
       value: 100
@@ -2374,6 +2379,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea37dbd4da94e264192b63d96f3d4f1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1622489573985741272 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2932108921568162190, guid: 07067957f8dd2814c920845405333d56, type: 3}
+  m_PrefabInstance: {fileID: 4482432021408454742}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0be1caf08be599543974be955ea91d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &2053017967791998144 stripped
@@ -2474,7 +2490,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8232724271068974674}
         m_TargetAssemblyTypeName: CameraSwitch, Assembly-CSharp
-        m_MethodName: Change
+        m_MethodName: TryChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

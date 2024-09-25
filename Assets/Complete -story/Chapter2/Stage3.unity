@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.1729185, g: 0.21609974, b: 0.29806706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1660,91 +1660,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2826644496431450126, guid: 44294728dd58ac8408b37b41a8ddb121, type: 3}
   m_PrefabInstance: {fileID: 231094877}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &234969016
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.8899302
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0948658
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 100.14121
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3039326178655866126, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_Name
-      value: Mirror2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4335426040554672901, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: Mirror1
-      value: 
-      objectReference: {fileID: 1107464829}
-    - target: {fileID: 4335426040554672901, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: YHP_PlayerController
-      value: 
-      objectReference: {fileID: 1787453418}
-    - target: {fileID: 8718898932336161288, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 2147491647
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
---- !u!114 &234969017 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4335426040554672901, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-  m_PrefabInstance: {fileID: 234969016}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bf9a637c3d254a4a84a916e8db163ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &234969018 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1679932907524166573, guid: 768968367c14df74393521a5de7ca5c1, type: 3}
-  m_PrefabInstance: {fileID: 234969016}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &235546808 stripped
 Transform:
@@ -7895,9 +7810,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
+      propertyPath: MapA
+      value: 
+      objectReference: {fileID: 1657046263}
+    - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
+      propertyPath: MapB
+      value: 
+      objectReference: {fileID: 1012873365}
+    - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
       propertyPath: mirror2
       value: 
-      objectReference: {fileID: 234969017}
+      objectReference: {fileID: 0}
     - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
       propertyPath: Mirror2OffsetZ
       value: 100
@@ -7905,7 +7828,7 @@ PrefabInstance:
     - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
       propertyPath: mirror2Transform
       value: 
-      objectReference: {fileID: 234969018}
+      objectReference: {fileID: 1107464831}
     - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
       propertyPath: YHP_PlayerController
       value: 
@@ -7973,6 +7896,11 @@ MonoBehaviour:
 --- !u!1 &1107464830 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3196421325174341246, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
+  m_PrefabInstance: {fileID: 1107464828}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1107464831 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5411540827858291683, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
   m_PrefabInstance: {fileID: 1107464828}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1129233184
@@ -18654,7 +18582,7 @@ Transform:
   m_GameObject: {fileID: 1587599197}
   serializedVersion: 2
   m_LocalRotation: {x: 0.57600427, y: 0, z: 0, w: 0.8174467}
-  m_LocalPosition: {x: 8.001304, y: 9.511922, z: -4.4443817}
+  m_LocalPosition: {x: 7.88, y: 9.417054, z: 95.63562}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20563,7 +20491,7 @@ PrefabInstance:
     - target: {fileID: 8792600851279776242, guid: 3e6dfa4ed1fd9904e86c8ead7b803e35, type: 3}
       propertyPath: mirror2
       value: 
-      objectReference: {fileID: 234969017}
+      objectReference: {fileID: 0}
     - target: {fileID: 8792600851279776242, guid: 3e6dfa4ed1fd9904e86c8ead7b803e35, type: 3}
       propertyPath: cameraSwitch
       value: 
@@ -30661,7 +30589,6 @@ SceneRoots:
   - {fileID: 42609693}
   - {fileID: 878855673}
   - {fileID: 563871132}
-  - {fileID: 234969016}
   - {fileID: 1787453417}
   - {fileID: 1107464828}
   - {fileID: 20747059}

@@ -9,7 +9,13 @@ public class Holder : MonoBehaviour
     private GameObject mirror; // 거울을 저장할 변수
 
 
-
+    private void Start()
+    {
+        if(range != 0.8f )
+        {
+            range = 0.8f;
+        }
+    }
     // 거울을 반환하는 메서드
     public GameObject GrabMirror()
     {
@@ -17,7 +23,6 @@ public class Holder : MonoBehaviour
         
         foreach (Collider collider in colliders)
         {
-            Debug.Log(collider.name);
             if (collider.gameObject.CompareTag("Mirror"))
             {
                 Debug.Log("거울 감지");
