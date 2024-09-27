@@ -32,7 +32,12 @@ public class Stone : MonoBehaviour
             Destroy(gameObject);
             if ( destroyObs.Contain(collision.gameObject.layer) )
             {
-                Destroy(collision.gameObject);
+               RaycastHit[] rays = Physics.RaycastAll(transform.position, Vector3.down, 10f, LayerMask.GetMask("Wall"));
+                if(rays.Length == 0 )
+                {
+                    Destroy(collision.gameObject);
+                }
+
             }
         }
     }

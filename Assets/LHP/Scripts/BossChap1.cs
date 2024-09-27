@@ -57,8 +57,8 @@ public class BossChap1 : Boss
                     patternCount = pattern1Count;
                     Manager.game.patternStep = pattern1Count;
                     getStartSpawner = stoneSpawnerChildren [RandomLocation];
-
-                    tileAlert = Physics.BoxCastAll(getStartSpawner.position, new Vector3(1, 1, 1), Vector3.back,Quaternion.identity,15f,tile);
+                        tileAlert = Physics.BoxCastAll(getStartSpawner.position, new Vector3(1f, 1f, 1f), Vector3.back, Quaternion.identity, 15f, tile);
+                    
                     targetTile = true;
                     
                 }
@@ -176,13 +176,17 @@ public class BossChap1 : Boss
         }
 
     }
+    /// <summary>
+    /// 보스의 애니메이션에서 호출됨
+    /// </summary>
     public void RollingAnim()
     {
         Manager.game.ShakeCam();
         GameObject stone = Instantiate(stonePrefab, getStartSpawner.position + new Vector3(0,spawnHeight,0) , Quaternion.identity);
         foreach(RaycastHit onAttack in tileAlert )
         {
-            Collider [] collider = Physics.OverlapSphere(onAttack.collider.transform.position + new Vector3(0, 1, 0), 1f, player);
+           Tile tile = onAttack.collider.gameObject.GetComponent<Tile>();
+            Collider [] collider = Physics.OverlapSphere(tile.middlePoint.transform.position + new Vector3(0, 1, 0), 1f, player);
             if(collider.Length > 0 )
             {
                 Manager.game.GameOver();

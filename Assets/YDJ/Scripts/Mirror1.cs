@@ -217,7 +217,6 @@ public class Mirror1 : MonoBehaviour
 
         if ( other.gameObject.layer == LayerMask.NameToLayer("Obstacle") && !YHP_PlayerController.mirrorHolding )
         {
-            Debug.Log($"wallCheck{wallChecker}, mirror2.obs {mirror2.ObstacleChecker} ");
 
             if ( wallChecker && !mirror2.ObstacleChecker ) //벽거울
             {
@@ -245,9 +244,6 @@ public class Mirror1 : MonoBehaviour
             //{
             //    YDJ_PlayerController.wallMirrorBumpChecker = false;
             //    obstacleChecker = false;
-            //    mirrorObstacleAttachedChecker = false;
-            //}
-            Debug.Log("아무것도 안뜸");
         }
 
 

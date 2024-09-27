@@ -18272,8 +18272,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5760041, y: -0.0006920283, z: 0.00048762964, w: 0.8174464}
-  m_LocalPosition: {x: -30.164303, y: 9.417056, z: 26.065624}
+  m_LocalRotation: {x: 0.57600427, y: 0, z: 0, w: 0.8174467}
+  m_LocalPosition: {x: -30.244, y: 9.417056, z: -14.830382}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20771,7 +20771,7 @@ Transform:
   m_GameObject: {fileID: 1086136705}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.97, y: -0.07589245, z: 42.634388}
+  m_LocalPosition: {x: -21.82, y: -0.07589245, z: 42.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -36733,7 +36733,7 @@ PrefabInstance:
     - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
       propertyPath: mirror2Transform
       value: 
-      objectReference: {fileID: 1952595129}
+      objectReference: {fileID: 0}
     - target: {fileID: 6262435270401872955, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
       propertyPath: YHP_PlayerController
       value: 
@@ -36801,11 +36801,6 @@ MonoBehaviour:
 --- !u!1 &1952595128 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3196421325174341246, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
-  m_PrefabInstance: {fileID: 1952595126}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1952595129 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5411540827858291683, guid: 73106a48ab4618d42adf3d7a3c2cef23, type: 3}
   m_PrefabInstance: {fileID: 1952595126}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1958539067
