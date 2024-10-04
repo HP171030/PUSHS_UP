@@ -1,8 +1,9 @@
 using System.Collections;
+using System.Linq;
+
 //using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class Player2Controller : MonoBehaviour
 {
@@ -105,7 +106,7 @@ public class Player2Controller : MonoBehaviour
             moveOn = true;
             // animator.SetTrigger("Boom");
 
-            if ( Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.forward, out BoomableHit, 2f) )                          // Àß ¾È¸Â´Â ¹ö±× ÀÕÀ½ ¿À¹ö·¦À¸·Î ¹Ù²Ü°Í
+            if ( Physics.Raycast(transform.position + new Vector3(0, 1, 0), transform.forward, out BoomableHit, 2f) )                          // ì˜ ì•ˆë§ëŠ” ë²„ê·¸ ì‡ìŒ ì˜¤ë²„ë©ìœ¼ë¡œ ë°”ê¿€ê²ƒ
             {
                 if ( obstacleLayer.Contain(BoomableHit.collider.gameObject.layer) )
                 {
@@ -118,7 +119,7 @@ public class Player2Controller : MonoBehaviour
             }
             else
             {
-                Debug.Log("¾ø´Ù");
+                Debug.Log("ì—†ë‹¤");
             }
         }
     }
@@ -160,13 +161,34 @@ public class Player2Controller : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(debugVec2, 1f);
     }
-    private IEnumerator MoveRoutine( Vector3 moveDirValue )
+    IEnumerator ClimbRoutine( Transform target )
     {
-        LayerMask layer = obstacleLayer | wall;
-        Vector3 targetPos = transform.position + moveDirValue * moveDistance;
+        float time = 0;
         Vector3 startPos = transform.position;
+        Vector3 ClimbPos = target.position + new Vector3(0, 2, 0);
+        Rigidbody targetRb = target.GetComponent<Rigidbody>();
+        targetRb.isKinematic = true;
+        onClimb = true;
+        animator.SetTrigger("ClimbStart");
+        Manager.sound.PlaySFX(cubeJumpSound);
+        while ( time < 1 )
+        {
+            time += Time.deltaTime;
+            rb.MovePosition(Vector3.Lerp(startPos, ClimbPos, time));
+            yield return null;
+        }
+        Manager.game.StepAction++;
+        animator.SetFloat("MoveSpeed", 0f);
+        yield return new WaitForSeconds(0.5f);
 
-        Collider [] tiles = Physics.OverlapSphere(targetPos, 0.3f, ground);
+        moveOn = false;
+        onClimb = false;
+  //     targetRb.isKinematic = false;
+    }
+    Vector3? TileCheck( Vector3 targetPos )
+    {
+        Vector3 tilePosition;
+        Collider [] tiles = Physics.OverlapSphere(targetPos, 0.5f, ground);
         if ( tiles.Length > 0 )
         {
             foreach ( Collider tile in tiles )
@@ -178,118 +200,220 @@ public class Player2Controller : MonoBehaviour
                     debugVec2 = tileIns.middlePoint.transform.position + new Vector3(0, 1, 0);
                     if ( isBlank.Length == 0 )
                     {
-                        targetPos = tileIns.middlePoint.position;
-
-
-                    }
-                    else
-                    {
-                        foreach ( Collider col in isBlank )
-                        {
-                            transform.position = transform.position;
-                            moveOn = false;
-                            yield break;
-                        }
-
+                        return tilePosition = tileIns.middlePoint.position;
                     }
                 }
-
             }
         }
-        RaycastHit hit;
-        Vector3 PreMoveDir = moveDir;
-
-        if ( Physics.BoxCast(transform.position + new Vector3(0, 1f, 0), new Vector3(0.3f, 0.3f, 0.3f), moveDirValue, out hit, Quaternion.identity, 1f, layer) )
+        return null;
+    }
+    LayerMask FrontCheck( Vector3 targetPos )
+    {
+        Collider [] cols = Physics.OverlapSphere(targetPos, 0.3f);
+        LayerMask layer = 0;
+        foreach ( Collider col in cols )
         {
-            if ( !obstacleLayer.Contain(hit.collider.gameObject.layer) )
-            {
-                Debug.Log("Àå¾Ö¹°ÀÌ ¾Æ´Ô");
-                Debug.Log(hit.collider.gameObject.name);
-                moveOn = false;
-                yield break;
-            }
-            else
-            {
-                RaycastHit [] raycastHits = Physics.RaycastAll(hit.collider.transform.position, hit.collider.transform.up, 3f, obstacleLayer);
-                if(raycastHits.Length > 1 )
-                {
-                    Debug.Log($"À§¿¡ Àå¾Ö¹°ÀÌ ÀÖ½À´Ï´Ù");
-                    moveOn = false;
-                    yield break;
-                }
-
-               /* foreach ( RaycastHit other in raycastHits )
-                {
-                    Debug.Log(other.collider.name);
-                    if ( other.collider.gameObject != hit.collider.gameObject && !obstacleUpperLayer.Contain(other.collider.gameObject.layer) )
-                    {
-                       
-                    }
-
-                }*/
-
-                float time = 0;
-
-                Vector3 ClimbPos = hit.collider.transform.position + new Vector3(0, 2, 0);
-                hit.rigidbody.isKinematic = true;
-                onClimb = true;
-                animator.SetTrigger("ClimbStart");
-                Manager.sound.PlaySFX(cubeJumpSound);
-                while ( time < 1 )
-                {
-                    time += Time.deltaTime;
-                    rb.MovePosition(Vector3.Lerp(startPos, ClimbPos, time));
-                    yield return null;
-                }
-                Manager.game.StepAction++;
-                if ( hit.collider != null )
-                    //  hit.rigidbody.isKinematic = false;
-                    animator.SetFloat("MoveSpeed", 0f);
-                yield return new WaitForSeconds(0.5f);
-
-                moveOn = false;
-                onClimb = false;
-                hit.rigidbody.isKinematic = false;
-            }
-
+            layer |= 1 << col.gameObject.layer;
         }
-        else if ( ontheBox )            //¹Ú½º¿¡ ¿Ã¶ó°¡ ÀÖ´Â °æ¿ì
+        return layer;
+    }
+    LayerMask FrontCheck( Vector3 targetPosition, out Collider [] frontColliders )
+    {
+        frontColliders = Physics.OverlapSphere(targetPosition, 0.5f);
+        LayerMask layer = 0;
+        foreach ( Collider col in frontColliders )
         {
-            LayerMask checkLayer = ground | obstacleLayer | wall;
-            if ( Physics.Raycast(transform.position + new Vector3(0, 1f, 0), -transform.up, out RaycastHit onBox, 2f, obstacleLayer) )    // ¹Ú½º¸¦ °ËÃâÇÏ±â À§ÇÑ ·¹ÀÌÄ³½ºÆ®
+            layer |= 1 << col.gameObject.layer;
+        }
+        return (int)layer;
+    }
+    LayerMask FrontCheck( Vector3 targetPosition, out Collider [] frontColliders,int layerCondition )
+    {
+        frontColliders = Physics.OverlapSphere(targetPosition, 0.5f, layerCondition);
+        LayerMask layer = 0;
+        foreach ( Collider col in frontColliders )
+        {
+            layer |= 1 << col.gameObject.layer;
+        }
+        return layer;
+    }
+    bool UpperCheck( Transform target )
+    {
+        RaycastHit [] raycastHits = Physics.RaycastAll(target.position, target.up, 3f, obstacleLayer);
+        return raycastHits.Length > 1;
+    }
+
+
+    private IEnumerator MoveRoutine( Vector3 moveDirValue )
+    {
+        Vector3 targetPos = transform.position + moveDirValue * moveDistance;
+        Vector3 startPos = transform.position;
+
+        Vector3? result = TileCheck(targetPos);
+        moveOn = true;
+        targetPos = result ?? targetPos;
+
+
+        if ( !ontheBox )              //í‰ì§€ì¸ ê²½ìš°
+        {
+            if ( FrontCheck(targetPos, out Collider [] cols,obstacleLayer | wall).Contain(obstacleLayer|wall) )        //ì•ì— ë­ ìˆëŠ”ì§€ ì²´í¬
             {
-                Debug.Log($"¿Ã¶ó°¡ÀÖ´ø ¹Ú½º : {onBox.collider.gameObject.name}");
-                debug = onBox;
-                Vector3 onBoxPos = onBox.collider.transform.position + new Vector3(0, 3f, 0);
-                if ( Physics.Raycast(transform.position + new Vector3(0, 1f, 0), transform.forward, out RaycastHit isWall, 2f, wall) )         // º®À» °ËÃâÇÏ±â À§ÇÑ ·¹ÀÌÄ³½ºÆ®
+                if ( cols.Any(col => obstacleLayer.Contain(col.gameObject.layer)) )        //ë§Œì•½ ì¥ì• ë¬¼ì´ë¼ë©´
                 {
-                    if ( wall.Contain(isWall.collider.gameObject.layer) )
+                    Collider col = cols.FirstOrDefault();
+                    if ( UpperCheck(col.transform) )           //ì¥ì• ë¬¼ì¸ë° ì˜¬ë¼ê°ˆ ìˆ˜ ì—†ê²Œ ë­”ê°€ ìˆë‹¤ë©´
                     {
-                        Debug.Log("¾Õ¿¡ º®");
                         moveOn = false;
                         yield break;
                     }
+                    StartCoroutine(ClimbRoutine(col.transform));
+                }
+                else                            //ë²½ì¸ ê²½ìš°
+                {
+                    if ( cols.Any(collider => wall.Contain(collider.gameObject.layer)) )
+                    {
+                        Debug.Log("ë²½ì´ ìˆìŠµë‹ˆë‹¤.");
+                        moveOn = false;
+                        yield break;
+                    }
+                    else
+                    {
+                        foreach(Collider collider in cols )
+                        {
+                            Debug.Log(collider.gameObject.name);
+                        }
+                        moveOn = false;
+                        yield break;
+                    }
+                }
+            }
+            else
+            {
 
+                float time = 0;
+                Collider [] colliders;
+                if(result == null )
+                {
+                    MoveExit();
+                    yield break;
+                }
+                while ( time < 1 )
+                {
+                    colliders = Physics.OverlapSphere(transform.position + new Vector3(0, 1, 0) + moveDirValue * 0.2f, 0.3f, obstacleLayer|wall);
+                    if ( colliders.Length > 0 )
+                    {
+                        foreach ( Collider col in colliders )
+                        {
+                            Debug.Log(col);
+                            if ( obstacleLayer.Contain(col.gameObject.layer) )
+                            {
+                                if ( UpperCheck(col.transform) )
+                                {
+                                    Debug.Log("UpperCheck");
+                                    MoveExit();
+                                    yield break;
+                                }
+                                else
+                                {
+                                    StartCoroutine(ClimbRoutine(col.transform));
+                                    yield break;
+                                }
+                            }
+                            if ( wall.Contain(col.gameObject.layer) )
+                            {
+                                Debug.Log("Wall Check");
+                                MoveExit();
+                                yield break;
+                            }
+                        }
+                    }
+                    time += Time.deltaTime * moveSpeed;
+                    rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
+                    yield return null;
+                }
+                Manager.sound.PlaySFX(WalkSound);
+                Manager.game.StepAction++;
+                moveOn = false;
+            }
+        }
+        else            //ë°•ìŠ¤ì— ì˜¬ë¼ê°€ ìˆëŠ” ê²½ìš°
+        {
+            LayerMask checkLayer = ground | obstacleLayer | wall;
+            if ( Physics.Raycast(transform.position + new Vector3(0, 1f, 0), -transform.up, out RaycastHit onBox, 2f, obstacleLayer) )    // ë°•ìŠ¤ë¥¼ ê²€ì¶œí•˜ê¸° ìœ„í•œ ë ˆì´ìºìŠ¤íŠ¸
+            {
+                Debug.Log($"ì˜¬ë¼ê°€ìˆë˜ ë°•ìŠ¤ : {onBox.collider.gameObject.name}");
+                debug = onBox;
+                Vector3 onBoxPos = onBox.collider.transform.position + new Vector3(0, 3f, 0);
+                debugVec = targetPos + Vector3.up;
+                LayerMask targetLayer = FrontCheck(targetPos + Vector3.up, out Collider [] colliders, obstacleLayer | wall);
+                Debug.Log("Target Layer: " + ( int )targetLayer);
+                Debug.Log("Obstacle Layer Mask: " + LayerMask.GetMask("Obstacle"));
+                Debug.Log("Wall Layer Mask: " + LayerMask.GetMask("Wall"));
+                if ( targetLayer.Contain(LayerMask.GetMask("Obstacle")) ||targetLayer.Contain(LayerMask.GetMask("Wall")))        //ì•ì— ë­ ìˆëŠ”ì§€ ì²´í¬
+                {
+                    Debug.Log("ì•ì— ë­”ê°€ ìˆê¸´ ìˆìŒ");
+                    if ( colliders.Any(col => obstacleLayer.Contain(col.gameObject.layer)) )        //ë§Œì•½ ì¥ì• ë¬¼ì´ë¼ë©´
+                    {
+                        Debug.Log("ì•ì— ë­”ê°€ê°€ ì¥ì• ë¬¼ì´ì—ˆìŒ");
+                        Collider col = colliders.FirstOrDefault();
+                        if ( UpperCheck(col.transform) )           //ì¥ì• ë¬¼ì¸ë° ì˜¬ë¼ê°ˆ ìˆ˜ ì—†ê²Œ ë­”ê°€ ìˆë‹¤ë©´
+                        {
+                            moveOn = false;
+                            yield break;
+                        }
+                        StartCoroutine(ClimbRoutine(col.transform));
+                    }
+                    else                            //ë²½ì¸ ê²½ìš°
+                    {
+                        Debug.Log("ì•ì— ë­”ê°€ê°€ ìˆê¸´ìˆëŠ”ë° ì¥ì• ë¬¼ì´ ì•„ë‹ˆì—ˆìŒ");
+                        if ( colliders.Any(collider => wall.Contain(collider.gameObject.layer)) )
+                        {
+                            Debug.Log("ë²½ì´ ìˆìŠµë‹ˆë‹¤.");
+                            moveOn = false;
+                            yield break;
+                        }
+                        else
+                        {
+                            Debug.Log("ë²½ì´ ì•„ë‹˜ ì¶©ê²©");
+                            foreach ( Collider collider in colliders )
+                            {
+                                Debug.Log(collider.gameObject.name);
+                            }
+                            moveOn = false;
+                            yield break;
+                        }
+                    }
                 }
                 else
                 {
+                        Debug.Log("What");
 
-                    Collider [] colliders = Physics.OverlapSphere(onBoxPos + moveDirValue * 2f, 1f, checkLayer);         // ¹Ú½º¿¡ ¿Ã¶ó°¡ ÀÖ´Â »óÅÂ¿¡¼­ ¾Õ¿¡ ¹«¾ùÀÌ ÀÖ´ÂÁö È®ÀÎÇÏ±â À§ÇÑ ¿À¹ö·¦
+                }
+               /* if ( FrontCheck(targetPos).Contain(LayerMask.GetMask("Wall")) )         // ë²½ì„ ê²€ì¶œí•˜ê¸° ìœ„í•œ ë ˆì´ìºìŠ¤íŠ¸
+                {
+                    Debug.Log("ì•ì— ë²½");
+                    MoveExit();
+                    yield break;
+                }*/
+               /* else
+                {
+
+                    Collider [] colliders = Physics.OverlapSphere(onBoxPos + moveDirValue * 2f, 0.3f, checkLayer);         // ë°•ìŠ¤ì— ì˜¬ë¼ê°€ ìˆëŠ” ìƒíƒœì—ì„œ ì•ì— ë¬´ì—‡ì´ ìˆëŠ”ì§€ í™•ì¸í•˜ê¸° ìœ„í•œ ì˜¤ë²„ë©
                     debugVec = onBoxPos + moveDirValue * 2f;
-                    Debug.Log("º®Àº ¾ø´Ù");
+                    Debug.Log("ë²½ì€ ì—†ë‹¤");
                     Debug.Log(colliders.Length);
                     if ( colliders.Length > 0 )
                     {
                         foreach ( Collider collider in colliders )
                         {
-                            Debug.Log($"¼­ÀÖ´Â ¹Ú½º ¾Õ¿¡ {collider.gameObject.name}");
+                            Debug.Log($"ì„œìˆëŠ” ë°•ìŠ¤ ì•ì— {collider.gameObject.name}");
 
                             if ( collider.gameObject != onBox.collider.gameObject )
                             {
                                 Debug.Log("isDone");
                                 if ( wall.Contain(collider.gameObject.layer) )
                                 {
-                                    Debug.Log("º® °ËÃâ");
+                                    Debug.Log("ë²½ ê²€ì¶œ");
                                     Collider [] isDoors = Physics.OverlapSphere(collider.transform.position + new Vector3(0, 1.5f, 0), 1f, ground);
 
                                     foreach ( Collider col in isDoors )
@@ -306,14 +430,13 @@ public class Player2Controller : MonoBehaviour
                                                 yield return null;
                                             }
                                             Manager.game.StepAction++;
-                                            moveOn = false;
+                                            MoveExit();
                                             yield break;
                                         }
                                         else
                                         {
-                                            Debug.Log($"¾Æ·¡¿¡ º®ÀÌ ÀÖ´Ù {collider.gameObject.name}");
-
-                                            moveOn = false;
+                                            Debug.Log($"ì•„ë˜ì— ë²½ì´ ìˆë‹¤ {collider.gameObject.name}");
+                                            MoveExit();
                                             yield break;
                                         }
 
@@ -325,8 +448,8 @@ public class Player2Controller : MonoBehaviour
                                     RaycastHit [] raycastHits = Physics.RaycastAll(collider.transform.position, collider.transform.up, 3f, obstacleLayer);
                                     if ( raycastHits.Length > 1 )
                                     {
-                                        Debug.Log($"À§¿¡ Àå¾Ö¹°ÀÌ ÀÖ½À´Ï´Ù");
-                                        moveOn = false;
+                                        Debug.Log($"ìœ„ì— ì¥ì• ë¬¼ì´ ìˆìŠµë‹ˆë‹¤");
+                                        MoveExit();
                                         yield break;
                                     }
                                     Debug.Log(collider.gameObject.name);
@@ -348,12 +471,13 @@ public class Player2Controller : MonoBehaviour
                         Debug.Log("isWhat");
                         moveOn = false;
                     }
-                    else                                        // ¹Ú½º¿¡ ¿Ã¶ó°¡ÀÖ´Â »óÅÂ¿¡¼­ ¾Õ¿¡ ¾Æ¹«°Íµµ ¾ø´Â °æ¿ì
+                    else                                        // ë°•ìŠ¤ì— ì˜¬ë¼ê°€ìˆëŠ” ìƒíƒœì—ì„œ ì•ì— ì•„ë¬´ê²ƒë„ ì—†ëŠ” ê²½ìš°
                     {
-                        Debug.Log("¾ø³ª?");
+                        Debug.Log("ì—†ë‚˜?");
                         LayerMask GOW = ground | obstacleLayer | wall;
-                        
-                        if ( Physics.Raycast(transform.position + moveDirValue * 2f, Vector3.down, out RaycastHit isTile, 2.5f, GOW) )        // ¹Ú½º¿¡ ¿Ã¶ó°¡ÀÖ´Â »óÅÂ¿¡¼­ ¿òÁ÷ÀÓ ¹æÇâ¿¡ ¹«¾ùÀÌ ÀÖ´ÂÁö È®ÀÎ
+                        Collider [] targetPositionObstacle = Physics.OverlapSphere(onBox.collider.transform.position + moveDirValue, 0.3f, obstacleLayer);
+
+                        if ( Physics.Raycast(transform.position + moveDirValue * 2f, Vector3.down, out RaycastHit isTile, 2.5f, GOW) )        // ë°•ìŠ¤ì— ì˜¬ë¼ê°€ìˆëŠ” ìƒíƒœì—ì„œ ì›€ì§ì„ ë°©í–¥ì— ë¬´ì—‡ì´ ìˆëŠ”ì§€ í™•ì¸
                         {
                             Debug.Log($"{isTile.collider.gameObject.name}");
                             Tile Ank = isTile.collider.gameObject.GetComponent<Tile>();
@@ -369,16 +493,16 @@ public class Player2Controller : MonoBehaviour
                             }
                             else
                             {
-
                                 if ( wall.Contain(isTile.collider.gameObject.layer) )
                                 {
-                                    Debug.Log("¸ø°¡´Â ºí·°ÀÓ");
+                                    Debug.Log("ëª»ê°€ëŠ” ë¸”ëŸ­ì„");
                                     MoveExit();
                                     yield break;
                                 }
                                 targetPos = isTile.collider.gameObject.transform.position + new Vector3(0, 2, 0);
                             }
                             float time = 0;
+                            if(targetPositionObstacle.Length > 0)
                             StartCoroutine(DownAnim());
                             while ( time < 1 )
                             {
@@ -393,7 +517,7 @@ public class Player2Controller : MonoBehaviour
                         }
                         else
                         {
-                            Debug.Log("³Ê¹« ³ô´Ù");
+                            Debug.Log("ë„ˆë¬´ ë†’ë‹¤");
                             MoveExit();
                             yield break;
                         }
@@ -402,84 +526,8 @@ public class Player2Controller : MonoBehaviour
 
                 }
 
-
+                */
             }
-            else
-            {
-                Debug.Log("¾øÀ»¼ö´Â ¾ø¾î");
-                ontheBox = false;
-                MoveExit();
-                yield break;
-            }
-
-        }
-        else // ¾Õ¿¡ ¾Æ¹«°Íµµ ¾øÀ½ && ÆòÁöÀÓ
-        {
-            float time = 0;
-            Collider [] cols;
-            while ( time < 1 )
-            {
-                cols = Physics.OverlapSphere(transform.position + new Vector3(0, 1, 0) + moveDirValue *0.2f,0.3f, layer);
-                Debug.DrawLine(transform.position + new Vector3(0, 1, 0) + moveDirValue * 0.2f, transform.position + new Vector3(0, 1, 0) + moveDirValue * 1f, Color.red);
-                if ( cols.Length > 0)
-                {
-                    foreach( Collider col in cols )
-                    {
-                        if ( obstacleLayer.Contain(col.gameObject.layer) )
-                        {
-                            RaycastHit [] raycastHits = Physics.RaycastAll(col.transform.position, col.transform.up, 3f, obstacleLayer);
-                            if ( raycastHits.Length > 1 )
-                            {
-                                Debug.Log($"À§¿¡ Àå¾Ö¹°ÀÌ ÀÖ½À´Ï´Ù");
-                                moveOn = false;
-                                yield break;
-                            }
-                            else
-                            {
-
-                                Vector3 onPos = transform.position;
-                                Vector3 ClimbPos = col.transform.position + new Vector3(0, 2, 0);
-                                Rigidbody obsRb = col.gameObject.GetComponent<Rigidbody>();
-                                obsRb.isKinematic = true;
-                                onClimb = true;
-                                animator.SetTrigger("ClimbStart");
-                                Manager.sound.PlaySFX(cubeJumpSound);
-                                while ( time < 1 )
-                                {
-                                    time += Time.deltaTime;
-                                    rb.MovePosition(Vector3.Lerp(onPos, ClimbPos, time));
-                                    yield return null;
-                                }
-                                Manager.game.StepAction++;
-                                if ( hit.collider != null )
-                                    //  hit.rigidbody.isKinematic = false;
-                                    animator.SetFloat("MoveSpeed", 0f);
-                                yield return new WaitForSeconds(0.5f);
-
-                                moveOn = false;
-                                onClimb = false;
-                                obsRb.isKinematic = false;
-                                yield break;
-                            }
-                        }
-                        if ( wall.Contain(col.gameObject.layer) )
-                        {
-                            Debug.Log(col.gameObject.name);
-                            moveOn = false;
-                            transform.position = transform.position;
-                            yield break;
-                        }
-                    }
-
-
-                }
-                time += Time.deltaTime * moveSpeed;
-                rb.MovePosition(Vector3.Lerp(startPos, targetPos, time));
-                yield return null;
-            }
-            Manager.sound.PlaySFX(WalkSound);
-            Manager.game.StepAction++;
-            moveOn = false;
         }
 
     }
