@@ -109,16 +109,18 @@ public class Player2Controller : MonoBehaviour
             {
                 if ( obstacleLayer.Contain(BoomableHit.collider.gameObject.layer) )
                 {
+                    if(Physics.Raycast(BoomableHit.collider.transform.position,-BoomableHit.collider.transform.up * 2f, wall) )
+                    {
+                        Debug.Log("아래 디시블 오브젝트 있음");
+                        StartCoroutine(MoveReturn());
+                        return;
+                    }
                     Instantiate(boomEffect, BoomableHit.collider.gameObject.transform.position, Quaternion.identity);
                     Destroy(BoomableHit.collider.gameObject);
                     StartCoroutine(MoveReturn());
                     Manager.game.boomAction--;
                     Manager.sound.PlaySFX(boomSound);
                 }
-            }
-            else
-            {
-                Debug.Log("없다");
             }
         }
     }

@@ -396,7 +396,7 @@ public class YHP_PlayerController : MonoBehaviour
             yield break;
         }
         //바닥거울이 있는 경우에 충돌체 판정으로 해당 방향으로 이동 불가능
-        if ( !mirror1.attached )
+        if (mirror1 != null &&  !mirror1.attached )
         {
             Collider [] mirrors = Physics.OverlapSphere(targetPos, 0.5f, mirror);
             if ( mirrors.Length > 0 )
